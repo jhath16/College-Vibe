@@ -63,10 +63,11 @@ var IndexView = Backbone.View.extend({
       var dataArray = collegeCollection;
 			//Define the filter callback
 			function filterFunction (i) {
-				return i.get('Name').slice(0,qLength).toLowerCase() == queryString ? true : false;
+				return i.get('schoolname').slice(0,qLength).toLowerCase() == queryString ? true : false;
 			};
 			//filter through the data provided
 			var matchedQuery = dataArray.filter(filterFunction);
+      console.log(matchedQuery);
 			//matchedQuery now has the array of matching objects
 
 			//clear the search options
@@ -84,7 +85,7 @@ var IndexView = Backbone.View.extend({
 						var newDiv = document.createElement('div');
 						newDiv.style.color = 'white';
 						newDiv.style.padding = '5px 0';
-						newDiv.textContent = i.get('Name');
+						newDiv.textContent = i.get('schoolname');
 						$('.college-search').append(newDiv);
 				});
 			}
@@ -96,6 +97,8 @@ var IndexView = Backbone.View.extend({
 //interactive map and will link them all to their respective routes
 
 var SchoolMapView = Parse.View.extend({
+  tagName: 'li',
+
   template: _.template($('#map-school-view').text()),
 
   initialize:function () {
@@ -103,14 +106,14 @@ var SchoolMapView = Parse.View.extend({
   },
 
   render: function () {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(this.model));
     $('.map-school-list ul').append(this.el);
   }
 });
 
 var CollegeCollection = Parse.Collection.extend({
   model:College,
-  query:new Parse.Query("College").limit(1000),
+  query:new Parse.Query("testCollege").limit(1000),
 
   initialize: function () {
     console.log('collegeCollection has been created');
@@ -120,6 +123,14 @@ var CollegeCollection = Parse.Collection.extend({
 var Router = Backbone.Router.extend({
   routes: {
     '' : 'home',
+    'schools/:id' : 'schoolRoute'
+  },
+
+  schoolRoute: function (id) {
+    //1.Match the id in the collection
+    //2.Pass the correlated model to the view and render();
+    //new SchoolView({model:matchedModel}).render();
+    console.log(id);
   },
 
   home: function () {
