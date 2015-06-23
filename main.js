@@ -57,9 +57,9 @@ var IndexView = Backbone.View.extend({
     var self = this,
 				queryString = e.currentTarget.value.toLowerCase(),
         qLength = queryString.length;
+		$('.college-search').empty();
 
-    console.log(queryString);
-		if (e.keyCode != 16) { //excludes the shift key, might not be necessary
+		if (e.keyCode != 16 && queryString != '') { //excludes the shift key, might not be necessary
       var dataArray = collegeCollection;
 			//Define the filter callback
 			function filterFunction (i) {
@@ -67,31 +67,32 @@ var IndexView = Backbone.View.extend({
 			};
 			//filter through the data provided
 			var matchedQuery = dataArray.filter(filterFunction);
-      console.log(matchedQuery);
 			//matchedQuery now has the array of matching objects
 
-			//clear the search options
-			$('.college-search').empty();
+			//only run this if the input isn't empty so we avoid matching all the data
 
-			//only run this is the input isn't empty so we avoid matching all the data
-			if (qLength != '') {
-
-			//append the new search options
-				matchedQuery.forEach(
-					//will be changed to a simple class instead of applying style w/ jQuery
-          //Make all of these independent views that will link to the
-          //pages for each of them.
-					function (i) {
-						var newDiv = document.createElement('div');
-						newDiv.style.color = 'white';
-						newDiv.style.padding = '5px 0';
-						newDiv.textContent = i.get('schoolname');
-						$('.college-search').append(newDiv);
-				});
-			}
+		//append the new search options
+			matchedQuery.forEach(
+				function (i) {
+          new SchoolDropdownView({model:i}).render();
+			});
 		}
   }
 });
+
+var SchoolDropdownView = Parse.View.extend({
+  tagName:'div',
+
+  template: _.template($('#school-dropdown-view').text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    this.el.style.padding = '5px 0'; //temporary
+    this.el.style.color = 'white'; //temporary
+    $('.college-search').append(this.el);
+    return this;
+  }
+})
 
 //This View will be used to render each of the school names next to the
 //interactive map and will link them all to their respective routes
@@ -108,6 +109,7 @@ var SchoolMapView = Parse.View.extend({
   render: function () {
     this.$el.html(this.template(this.model));
     $('.map-school-list ul').append(this.el);
+    return this;
   }
 });
 

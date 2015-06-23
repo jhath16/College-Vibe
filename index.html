@@ -53,7 +53,16 @@
   </script>
 
   <script type="text/template" id="map-school-view">
-    <a href="#scools/<%= id %>"<span><i class="fa fa-angle-right"></i></span><%= attributes.schoolname %></a>
+    <!-- Didn't want to touch the CSS but need to remove anchor and pseudo
+    classes of anchor tag colors off (a, a:visited, etc.)-->
+    <a href="#schools/<%= id %>">
+      <span><i class="fa fa-angle-right"></i></span>
+      <%= attributes.schoolname %>
+    </a>
+  </script>
+
+  <script type="text/template" id="school-dropdown-view">
+    <a href="#schools/<%= id %>"><%= attributes.schoolname %></a>
   </script>
 
   <!-- Map Area -->
