@@ -59,8 +59,9 @@ var IndexView = Backbone.View.extend({
         qLength = queryString.length;
 		$('.college-search').empty();
 
-    //excludes the shift key and empty string queries
+    //excludes the shift key and empty query
 		if (e.keyCode != 16 && queryString != '') {
+      var dataArray = collegeCollection;
 			//Define the filter callback
 			function filterFunction (i) {
 				return i.get('schoolname').slice(0,qLength).toLowerCase() == queryString ? true : false;
@@ -69,8 +70,7 @@ var IndexView = Backbone.View.extend({
 			var matchedQuery = collegeCollection.filter(filterFunction);
 			//matchedQuery now has the array of matching objects
 
-
-		//append the new search options
+      //append the new search options
 			matchedQuery.forEach(
 				function (i) {
           new SchoolDropdownView({model:i}).render();
@@ -184,3 +184,92 @@ Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
 */
+
+// FullPage.js
+
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+        //Navigation
+        menu: false,
+        anchors:['home', 'projects', 'services'],
+        navigation: false,
+        navigationPosition: 'right',
+        navigationTooltips: ['firstSlide', 'secondSlide', 'thirdSlide'],
+        showActiveTooltips: false,
+        slidesNavigation: true,
+        slidesNavPosition: 'bottom',
+
+        //Scrolling
+        css3: true,
+        scrollingSpeed: 1500,
+        autoScrolling: true,
+        fitToSection: true,
+        scrollBar: false,
+        easing: 'easeInOutCubic',
+        easingcss3: 'ease',
+        loopBottom: false,
+        loopTop: false,
+        loopHorizontal: true,
+        continuousVertical: false,
+        scrollOverflow: false,
+        touchSensitivity: 15,
+        normalScrollElementTouchThreshold: 5,
+
+        //Accessibility
+        keyboardScrolling: true,
+        animateAnchor: true,
+        recordHistory: true,
+
+        //Design
+        controlArrows: true,
+        verticalCentered: false,
+        resize : false,
+        sectionsColor : ['#263238', '#fff', '#263238'],
+        fixedElements: '#header, .footer',
+        responsive: 1080,
+
+        //Custom selectors
+        sectionSelector: '.section',
+        slideSelector: '.slide',
+
+        //events
+        onLeave: function(index, nextIndex, direction){},
+        afterLoad: function(anchorLink, index){},
+        afterRender: function(){},
+        afterResize: function(){},
+        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+        onSlideLeave: function(anchorLink, index, slideIndex, direction){}
+    });
+});
+
+// Login Expand
+
+$('.register-btn').on('click', function(){
+event.preventDefault();
+
+  $('.login-container').toggleClass('close-login');
+  setTimeout(function(){
+      $('.register-container').toggleClass('open-register');
+   }, 250);
+
+});
+
+$('.login-btn').on('click', function(){
+event.preventDefault();
+
+  $('.register-container').toggleClass('open-register');
+
+  setTimeout(function(){
+      $('.login-container').toggleClass('close-login');
+   }, 250);
+});
+
+$('.login-slideout-btn').on('click', function(){
+event.preventDefault();
+
+  $('.slideout-container').toggleClass('toggle-slideout');
+  $('.login-slideout-btn').toggleClass('toggle-slideout-dark');
+
+
+
+});

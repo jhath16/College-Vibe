@@ -1,10 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,300italic,400italic);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,800,900,300italic,400italic);
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	font-family: 'Lato', sans-serif;
+	font-size:0;
 }
 
 a {
@@ -24,21 +25,23 @@ body {
 	z-index: 1;
 }
 
+
 /* HEADER */
 
 .header {
-	width: 1080px;
+	width: 100%;
 	margin: 0 auto;
-	padding-top: 25px;
+	height: 60px;
+	background: #263238;
+	padding-top:8px;
 }
 
 .header-wrap {
 	width: 100%;
-	height: 75px;
-	background: rgba(0,0,0,.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 100;
+	background:#263238;
 }
 
 .logo {
@@ -51,22 +54,46 @@ body {
 
 .header-nav {
 	display: inline-block;
-	float:right;
-	padding-top: 5px;
+	float: right;
+	position: fixed;
+	z-index: 1000;
+	right: 10px;
+	top: 5px;
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	li {
+		display: inline-block;
+	}
+
+	span {
+		font-weight: 500;
+		font-size: 24px;
+		height: 45px;
+		width: 45px;
+		padding-top: 13px;
+		text-align: center;
+		cursor: pointer;
+		transition:250ms;
+	}
+
+.login-slideout-btn {
+	color:#f8f8f8;
+}
+.toggle-slideout-dark {
+	color:#000;
 }
 
-.header-nav ul {
-	list-style: none;
-	padding-left: 0;
-}
+/*	li:first-child span {
+		background: #455A64;
+	}
 
-.header-nav li {
-	display: inline-block;
-	text-transform: uppercase;
-	color: #f8f8f8;
-	font-weight: lighter;
-	font-size: 12px;
-	padding-left:15px;
+	li:nth-child(2) span{
+		background: #37474F;
+	}*/
 }
 
 .header-buttons {
@@ -122,57 +149,226 @@ body {
 /* HOMEPAGE BANNER */
 
 .homepage-banner {
-	background: url('assets/images/campus-1.jpg') center center;
+	background: transparent;
+	/* background: url('assets/images/campus-1.jpg') center center; */
 	background-size: cover;
-	width: 100%;
-	height: 100vh;
-	top:0;
-	padding-top: 200px;
-	z-index:10;
-	position:relative;
+	/* height: 100vh; */
+	top: 0;
+	z-index: 400;
+	position: fixed;
+	padding-top: 8px;
+  	left: 15px;
 }
 
 .banner {
-	margin: 0 auto;
 }
 
-/* LOGIN CONTAINER */
-
-.login-container,
-.register-container {
-	margin:0 auto;
+.banner-container {
+	width: 1080px;
+	position:relative;
+	margin: 0 auto;
+	top:100px;
 	text-align: center;
+
+	img {
+		margin-bottom: 0px;
+	}
 }
 
-.login-form {
-	margin-top: 5px;
+.banner-slogan {
+	width: 600px;
+	position: absolute;
+	top: 300px;
+
+	p {
+		font-size: 24px;
+		font-weight: 300;
+		font-style: italic;
+	}
+
+	h1 {
+		font-size: 48px;
+		font-weight: 300;
+		font-style: italic;
+		text-transform: uppercase;
+	}
 }
 
-.login-input {
-	width: 300px;
-	height: 45px;
-	padding: 15px;
+/* SEARCH CONTAINER */
+
+.search-container {
+	display: inline-block;
+
+	span {
+		position: absolute;
+		width: 45px;
+		height: 45px;
+		margin-left: 0px;
+		color: #ECEFF1;
+		background: transparent;
+		padding: 15px 0 15px;
+		text-align: center;
+		width: 45px;
+		font-size: 16px;
+		display: inline-block;
+	}
+
+}
+
+.college-search {
+	height: auto;
+	width:320px;
+	max-height:400px;
 	background: #f8f8f8;
-	margin: 0 auto;
-	margin-top: 1px;
-	font-size: 16px;
-	border: 0;
-	outline: 0;
-	display: block;
+	font-weight: 300;
+	transition: 250ms;
+	overflow: scroll;
+	margin-left: -15px;
+	margin-top: 7px;
+	z-index: 800;
+	position: fixed;
+
+	div {
+		font-size: 16px;
+	}
+	
+	p span {
+		position:absolute;
+		padding:0;
+		height:auto;
+		width: auto;
+	}
 }
 
-.login-submit button,
-.register-submit button {
-	width: 300px;
+.search-input {
+	width: 275px;
 	height: 45px;
-	background: #4EAE8F;
+	padding: 15px 0;
+	background: transparent;
+	margin: 0 auto;
+	color:#f8f8f8;
+	font-size: 16px;
 	border: 0;
 	outline: 0;
-	border-radius: 0;
-	margin-top: 5px;
-	color: #fff;
-	font-size: 16px;
-	font-weight: lighter;
+	display: inline-block;
+	transition: 250ms;
+	font-weight: 300;
+	margin-left: 45px;
+}
+
+/* Login Container */
+
+.slideout-container {
+	right:-320px;
+	width:320px;
+	position:fixed;
+	height:100vh;
+	background:#ECEFF1;
+	z-index:700;
+	transition: 250ms;
+	padding-top:30px;
+}
+
+.toggle-slideout {
+	right:0;
+}
+
+
+
+.login-container {
+	width: 100%;
+	margin: 0 auto;
+	padding: 30px;
+	position: absolute;
+	right: 0;
+	transition:250ms;
+
+	input {
+		height: 45px;
+		width: 100%;
+		margin-bottom: 10px;
+		margin-top: 5px;
+		background: #f8f8f8; 
+		border: 1px solid #dfdfdf;
+		outline: 0;
+		font-size: 16px;
+		font-weight: 300;
+		text-indent: 15px;
+		border-radius: 3px;
+	}
+
+	button {
+		background: #EF5350;
+		height: 45px;
+		width: 100%;
+		border: 0;
+		outline: 0;
+		font-size: 16px;
+		color:#f8f8f8;
+		border-radius:3px;
+	}
+
+	label {
+		font-size: 16px;
+		text-align:left;
+	}
+}
+
+.close-login {
+	right:-320px;
+}
+
+
+
+.register-container {
+	width: 100%;
+	margin: 0 auto;
+	padding: 30px;
+	position: absolute;
+	right: -320px;
+	transition:250ms;
+
+	input {
+		height: 45px;
+		width: 100%;
+		margin-bottom: 10px;
+		margin-top:5px;
+		background: #f8f8f8; 
+		border: 1px solid #dfdfdf;
+		outline: 0;
+		font-size: 16px;
+		font-weight: 300;
+		text-indent: 15px;
+		border-radius: 3px;
+	}
+
+	button {
+		background: #EF5350;
+		height: 45px;
+		width: 100%;
+		border: 0;
+		outline: 0;
+		font-size: 16px;
+		color:#f8f8f8;
+		border-radius:3px;
+	}
+
+	label {
+		font-size: 16px;
+		text-align:left;
+	}
+
+}
+
+.open-register {
+	right:0;
+}
+
+.register-btn, 
+.login-btn {
+	font-size:14px;
+	padding-top:10px;
+	font-weight:300;
 }
 
 .input-label {
@@ -215,19 +411,7 @@ body {
 
 /* Search */
 
-.search-input {
-	width: 350px;
-	height: 45px;
-	padding: 15px;
-	background: #f8f8f8;
-	margin: 0 auto;
-	margin-top: 10px;
-	font-size: 16px;
-	border: 0;
-	border-radius: 3px;
-	outline: 0;
-	display: block;
-}
+
 
 /* Interactive Map */
 
@@ -427,20 +611,6 @@ body {
 	font-weight: normal;
 }
 
-/* College Search Container */
-
-.college-search {
-	width: 320px;
-	height: 50px;
-	margin: 0 auto;
-	background:#000;
-	transition:250ms;
-}
-
-.college-search-expand {
-	height:200px;
-
-}
 
 /* Next Steps Page */
 
@@ -773,7 +943,7 @@ body {
 
 .footer-wrap {
 	width: 100%;
-	background: #222;
+  	position: relative;
 }
 
 .footer-container {
@@ -782,38 +952,34 @@ body {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	font-size: 0;
-}
 
-.footer-container ul {
-	list-style: none;
-	padding-left: 0;
-}
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
 
-.footer-container li {
-	display: inline-block;
-	width: 25%;
-	vertical-align: top;
-	padding: 30px;
-	font-size: 0;
-	height: 300px;
+	li {
+		display: inline-block;
+		width: 25%;
+		vertical-align: top;
+		padding: 30px;
+		font-size: 0;
+		height: 300px;
+	}
 }
 
 .footer-container li:nth-child(2) {
 	width: 50%;
-	border-right: 1px solid #333;
-	border-left: 1px solid #333;
 	text-align: center;
 	padding-bottom: 70px;
 	height: 300px;
 }
 
 .footer-container li:first-child {
-	border-right: 1px solid #000;
 }
 
 .footer-container li:nth-child(3) {
 	text-align: right;
-	border-left: 1px solid #000;
 }
 
 .footer-container li h1 {
@@ -873,7 +1039,7 @@ body {
 .footer-copyright-wrap {
 	width: 100%;
 	height: 70px;
-	background: #333;
+	position: relative;
 }
 
 .footer-copyright {
@@ -889,4 +1055,30 @@ body {
 	font-weight: 700;
 	color: #555;
 	letter-spacing: 1px;
+}
+
+/* Media Queries */
+
+@media screen and (min-width : 320px) and (max-width : 500px) {
+	.slideout-container {
+		width: 100%;
+		right:-100%;
+	}
+
+	.toggle-slideout {
+		right: 0;
+	}
+
+	.register-container {
+		width: 100%;
+		right:-100%;
+	}
+
+	.open-register {
+		right: 0;
+	}
+
+	.close-login {
+		right:-100%;
+	}
 }
