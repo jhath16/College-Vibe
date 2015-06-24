@@ -28,18 +28,19 @@ function renderToApplication(template, model) {
 //Defining the College Model and giving some defaults
 
 var College = Backbone.Model.extend({
-  initialize: function () {
-
-  },
-
   defaults : {
     name:'',
     address:'',
+    monkeys:'none',
     //more to come
   }
 });
 
 var IndexView = Backbone.View.extend({
+  initialize: function () {
+    this.render();
+  },
+
   template: _.template($('#index-route').text()),
 
   render : function () {
@@ -56,44 +57,81 @@ var IndexView = Backbone.View.extend({
     var self = this,
 				queryString = e.currentTarget.value.toLowerCase(),
         qLength = queryString.length;
+		$('.college-search').empty();
 
-    console.log(queryString);
-		if (e.keyCode != 16) { //excludes the shift key, might not be necessary
-      var dataArray = this.model;
+    //excludes the shift key and empty query
+		if (e.keyCode != 16 && queryString != '') {
+      var dataArray = collegeCollection;
 			//Define the filter callback
 			function filterFunction (i) {
-				return i.get('Name').slice(0,qLength).toLowerCase() == queryString ? true : false;
+				return i.get('schoolname').slice(0,qLength).toLowerCase() == queryString ? true : false;
 			};
 			//filter through the data provided
 			var matchedQuery = dataArray.filter(filterFunction);
 			//matchedQuery now has the array of matching objects
 
-			//clear the search options
-			$('.college-search').empty();
-
-			//only run this is the input isn't empty so we avoid matching all the data
-			if (qLength != '') {
-
-			//append the new search options
-				matchedQuery.forEach(
-					//will be changed to a simple class instead of applying style w/ jQuery
-					function (i) {
-						var newDiv = document.createElement('div');
-						newDiv.style.color = '#333';
-						newDiv.style.padding = '15px';
-						newDiv.textContent = i.get('Name');
-						$('.college-search').append(newDiv);
-				});
-			}
+		//append the new search options
+			matchedQuery.forEach(
+				function (i) {
+          new SchoolDropdownView({model:i}).render();
+			});
 		}
   }
 });
 
-var CollegeCollection = Parse.Collection  //Does Parse have a collection?
+var SchoolDropdownView = Parse.View.extend({
+  tagName:'div',
+
+  template: _.template($('#school-dropdown-view').text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    this.el.style.padding = '5px 0'; //temporary
+    this.el.style.color = 'white'; //temporary
+    $('.college-search').append(this.el);
+    return this;
+  }
+})
+
+//This View will be used to render each of the school names next to the
+//interactive map and will link them all to their respective routes
+
+var SchoolMapView = Parse.View.extend({
+  tagName: 'li',
+
+  template: _.template($('#map-school-view').text()),
+
+  initialize:function () {
+    this.render();
+  },
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    $('.map-school-list ul').append(this.el);
+    return this;
+  }
+});
+
+var CollegeCollection = Parse.Collection.extend({
+  model:College,
+  query:new Parse.Query("testCollege").limit(1000),
+
+  initialize: function () {
+    console.log('collegeCollection has been created');
+  }
+});
 
 var Router = Backbone.Router.extend({
   routes: {
     '' : 'home',
+    'schools/:id' : 'schoolRoute'
+  },
+
+  schoolRoute: function (id) {
+    //1.Match the id in the collection
+    //2.Pass the correlated model to the view and render();
+    //new SchoolView({model:matchedModel}).render();
+    console.log(id);
   },
 
   home: function () {
@@ -101,25 +139,33 @@ var Router = Backbone.Router.extend({
   },
 });
 
-var router = new Router();
+
+
+//Glue Code
 
 $(document).ready(function () {
-  Backbone.history.start();
-
-  var query = new Parse.Query("College");
-  query.find().then(function (e){
-    var indexView = new IndexView({model:e});
-    indexView.render();
+  var router = new Router(); //instantiate the router
+  Backbone.history.start(); //start watching hash changes
+  window.collegeCollection = new CollegeCollection(); //Make the collection global
+  collegeCollection.fetch().then(function (c) {
+    c.each(function (m) {
+      new SchoolMapView({model:m});
+    })
   })
+  var indexView = new IndexView();
 });
 /*
 
-********  To Do  **************
+********  To Do / Questions  **************
 
 1. Writing out a render function that will take a template from the dom and
 render it to a specified container (exactly like we did in TIY I guess).
 
-2.Map Out the Router and organize the rendering of templates accordingly ISH
+Done but not sure if it's necessary/useful. Could be altered to .remove()
+views from the dom and create new ones which would call render in their
+initialize methods. Would work better that way.
+
+2.Map Out the Router and organize the rendering of views accordingly ISH
 
 3.Leave the Header and Footer and create an Application div to render
 all dynamic templates to.
@@ -133,7 +179,9 @@ all dynamic templates to.
 -Router should control the rendering of routes... Just instantiate/.remove() items?
 -^ This sounds like the best method of doing so.
 
-
+6.Find a way to keep Backbone.Model defaults in a Parse.Collection
+Possibly query parse, then add that array as new 'College' models to the
+collegeCollection to maintain the model defaults?
 
 */
 
@@ -200,10 +248,10 @@ $('.register-btn').on('click', function(){
 event.preventDefault();
 
   $('.login-container').toggleClass('close-login');
-  setTimeout(function(){ 
+  setTimeout(function(){
       $('.register-container').toggleClass('open-register');
    }, 250);
-  
+
 });
 
 $('.login-btn').on('click', function(){
@@ -211,7 +259,7 @@ event.preventDefault();
 
   $('.register-container').toggleClass('open-register');
 
-  setTimeout(function(){ 
+  setTimeout(function(){
       $('.login-container').toggleClass('close-login');
    }, 250);
 });
@@ -223,9 +271,5 @@ event.preventDefault();
   $('.login-slideout-btn').toggleClass('toggle-slideout-dark');
 
 
-  
+
 });
-
-
-
-
