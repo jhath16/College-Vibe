@@ -24,7 +24,7 @@ body {
 .header {
   width: 100%;
   margin: 0 auto;
-  height: 60px;
+  height: 75px;
   background: #263238;
   padding-top: 8px; }
 
@@ -47,15 +47,8 @@ body {
   float: right;
   position: fixed;
   z-index: 1000;
-  right: 10px;
-  top: 5px;
-  /*	li:first-child span {
-  		background: #455A64;
-  	}
-  
-  	li:nth-child(2) span{
-  		background: #37474F;
-  	}*/ }
+  right: 15px;
+  top: 13px; }
   .header-nav ul {
     list-style: none;
     padding-left: 0; }
@@ -70,10 +63,19 @@ body {
     text-align: center;
     cursor: pointer;
     transition: 250ms; }
-  .header-nav .login-slideout-btn {
-    color: #f8f8f8; }
-  .header-nav .toggle-slideout-dark {
-    color: #000; }
+  .header-nav img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    right: 10px;
+    position: absolute;
+    top: 5px; }
+
+.login-slideout-btn {
+  color: #f8f8f8; }
+
+.toggle-slideout-dark {
+  color: #000; }
 
 .header-buttons {
   position: fixed;
@@ -127,7 +129,7 @@ body {
   top: 0;
   z-index: 400;
   position: fixed;
-  padding-top: 8px;
+  padding-top: 15px;
   left: 15px; }
 
 .banner-container {
@@ -142,16 +144,31 @@ body {
 .banner-slogan {
   width: 600px;
   position: absolute;
-  top: 300px; }
+  top: 250px;
+  text-align: left; }
   .banner-slogan p {
-    font-size: 24px;
-    font-weight: 300;
-    font-style: italic; }
+    font-size: 28px;
+    line-height: 42px;
+    font-weight: 100;
+    color: #f8f8f8;
+    display: inline-block;
+    width: 450px;
+    padding-left: 20px;
+    vertical-align: top; }
   .banner-slogan h1 {
     font-size: 48px;
-    font-weight: 300;
+    font-weight: 700;
     font-style: italic;
-    text-transform: uppercase; }
+    color: #f8f8f8;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 0px;
+    padding-left: 10px; }
+  .banner-slogan img {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    vertical-align: top; }
 
 /* SEARCH CONTAINER */
 .search-container {
@@ -177,10 +194,11 @@ body {
   font-weight: 300;
   transition: 250ms;
   overflow: scroll;
-  margin-left: -15px;
-  margin-top: 7px;
+  margin-left: 29px;
+  margin-top: 15px;
   z-index: 800;
-  position: fixed; }
+  position: fixed;
+  border-radius: 0 3px 3px 3px; }
   .college-search div {
     font-size: 16px; }
   .college-search p span {
@@ -196,7 +214,7 @@ body {
   background: transparent;
   margin: 0 auto;
   color: #f8f8f8;
-  font-size: 16px;
+  font-size: 18px;
   border: 0;
   outline: 0;
   display: inline-block;
