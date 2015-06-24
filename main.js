@@ -79,8 +79,8 @@ var IndexView = Backbone.View.extend({
 					//will be changed to a simple class instead of applying style w/ jQuery
 					function (i) {
 						var newDiv = document.createElement('div');
-						newDiv.style.color = 'white';
-						newDiv.style.padding = '5px 0';
+						newDiv.style.color = '#333';
+						newDiv.style.padding = '15px';
 						newDiv.textContent = i.get('Name');
 						$('.college-search').append(newDiv);
 				});
@@ -136,3 +136,96 @@ all dynamic templates to.
 
 
 */
+
+// FullPage.js
+
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+        //Navigation
+        menu: false,
+        anchors:['home', 'projects', 'services'],
+        navigation: false,
+        navigationPosition: 'right',
+        navigationTooltips: ['firstSlide', 'secondSlide', 'thirdSlide'],
+        showActiveTooltips: false,
+        slidesNavigation: true,
+        slidesNavPosition: 'bottom',
+
+        //Scrolling
+        css3: true,
+        scrollingSpeed: 1500,
+        autoScrolling: true,
+        fitToSection: true,
+        scrollBar: false,
+        easing: 'easeInOutCubic',
+        easingcss3: 'ease',
+        loopBottom: false,
+        loopTop: false,
+        loopHorizontal: true,
+        continuousVertical: false,
+        scrollOverflow: false,
+        touchSensitivity: 15,
+        normalScrollElementTouchThreshold: 5,
+
+        //Accessibility
+        keyboardScrolling: true,
+        animateAnchor: true,
+        recordHistory: true,
+
+        //Design
+        controlArrows: true,
+        verticalCentered: false,
+        resize : false,
+        sectionsColor : ['#263238', '#fff', '#263238'],
+        fixedElements: '#header, .footer',
+        responsive: 1080,
+
+        //Custom selectors
+        sectionSelector: '.section',
+        slideSelector: '.slide',
+
+        //events
+        onLeave: function(index, nextIndex, direction){},
+        afterLoad: function(anchorLink, index){},
+        afterRender: function(){},
+        afterResize: function(){},
+        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+        onSlideLeave: function(anchorLink, index, slideIndex, direction){}
+    });
+});
+
+// Login Expand
+
+$('.register-btn').on('click', function(){
+event.preventDefault();
+
+  $('.login-container').toggleClass('close-login');
+  setTimeout(function(){ 
+      $('.register-container').toggleClass('open-register');
+   }, 250);
+  
+});
+
+$('.login-btn').on('click', function(){
+event.preventDefault();
+
+  $('.register-container').toggleClass('open-register');
+
+  setTimeout(function(){ 
+      $('.login-container').toggleClass('close-login');
+   }, 250);
+});
+
+$('.login-slideout-btn').on('click', function(){
+event.preventDefault();
+
+  $('.slideout-container').toggleClass('toggle-slideout');
+  $('.login-slideout-btn').toggleClass('toggle-slideout-dark');
+
+
+  
+});
+
+
+
+
