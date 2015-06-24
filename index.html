@@ -52,11 +52,24 @@
     </div>
   </script>
 
+  <script type="text/template" id="map-school-view">
+    <!-- Didn't want to touch the CSS but need to remove anchor and pseudo
+    classes of anchor tag colors off (a, a:visited, etc.)-->
+    <a href="#schools/<%= id %>">
+      <span><i class="fa fa-angle-right"></i></span>
+      <%= attributes.schoolname %>
+    </a>
+  </script>
+
+  <script type="text/template" id="school-dropdown-view">
+    <a href="#schools/<%= id %>"><%= attributes.schoolname %></a>
+  </script>
+
   <!-- Map Area -->
   <div class="map-container">
     <div class="map-school-list">
       <ul>
-        <li><span><i class="fa fa-angle-right"></i></span>Harvard</li>
+        <!-- This is where the list of schools is appended by the map -->
       </ul>
     </div>
   </div>
