@@ -59,17 +59,16 @@ var IndexView = Backbone.View.extend({
         qLength = queryString.length;
 		$('.college-search').empty();
 
-		if (e.keyCode != 16 && queryString != '') { //excludes the shift key, might not be necessary
-      var dataArray = collegeCollection;
+    //excludes the shift key and empty string queries
+		if (e.keyCode != 16 && queryString != '') {
 			//Define the filter callback
 			function filterFunction (i) {
 				return i.get('schoolname').slice(0,qLength).toLowerCase() == queryString ? true : false;
 			};
 			//filter through the data provided
-			var matchedQuery = dataArray.filter(filterFunction);
+			var matchedQuery = collegeCollection.filter(filterFunction);
 			//matchedQuery now has the array of matching objects
 
-			//only run this if the input isn't empty so we avoid matching all the data
 
 		//append the new search options
 			matchedQuery.forEach(
@@ -125,10 +124,12 @@ var CollegeCollection = Parse.Collection.extend({
 var Router = Backbone.Router.extend({
   routes: {
     '' : 'home',
-    'schools/:id' : 'schoolRoute'
+    'schools/:id' : 'schoolRoute',
+    'schools/*': 'schoolRoute'
   },
 
   schoolRoute: function (id) {
+    console.log('schoolRoute fired');
     //1.Match the id in the collection
     //2.Pass the correlated model to the view and render();
     //new SchoolView({model:matchedModel}).render();
@@ -139,8 +140,6 @@ var Router = Backbone.Router.extend({
     console.log('index route function fired');
   },
 });
-
-
 
 //Glue Code
 
