@@ -40,7 +40,6 @@ var College = Parse.Object.extend({
 
 var IndexView = Backbone.View.extend({
   initialize: function () {
-    this.render();
     this.subViews = new Array();
   },
 
@@ -155,7 +154,7 @@ var CollegeCollection = Parse.Collection.extend({
 
 var Router = Backbone.Router.extend({
   routes: {
-    '' : 'home',
+    '' : 'indexRoute',
     'schools/:id' : 'schoolRoute',
   },
 
@@ -168,8 +167,9 @@ var Router = Backbone.Router.extend({
     //new SchoolView({model:matchedModel}).render();
   },
 
-  home: function () {
+  indexRoute: function () {
     console.log('index route function fired');
+    var indexView = new IndexView().render();
   },
 });
 
@@ -179,7 +179,6 @@ $(document).ready(function () {
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
   window.collegeCollection = new CollegeCollection(); //Make the collection global
-  var indexView = new IndexView();
 });
 /*
 
