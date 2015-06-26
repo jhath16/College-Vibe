@@ -41,6 +41,7 @@ var College = Parse.Object.extend({
 var IndexView = Backbone.View.extend({
   initialize: function () {
     this.render();
+    this.subViews = new Array();
   },
 
   template: _.template($('#index-route').text()),
@@ -59,9 +60,16 @@ var IndexView = Backbone.View.extend({
     var self = this,
 				queryString = e.currentTarget.value.toLowerCase(),
         qLength = queryString.length;
-    $('.college-search').empty();
 
-    //excludes the shift key and empty query
+    //This loops through the subViews and properly calls .remove() on each
+    //  instead of calling $.empty() and potentially leaking memory
+
+    _.each(this.subViews, function (i) {
+      i.remove();
+    });
+    this.subViews = [];
+
+    //this entire conditional only has the overall job of appending to the dropdown
 		if (queryString != '') {
       var dataArray = collegeCollection;
 			//Define the filter callback
@@ -94,7 +102,8 @@ var IndexView = Backbone.View.extend({
       _.each(matchedQuery, function (i) {
         index++;
         if (index < 7) {
-        new SchoolDropdownView({model:i}).render();
+          var newView = new SchoolDropdownView({model:i}).render();
+          self.subViews.push(newView);
         }
       });
 		}
