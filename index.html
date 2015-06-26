@@ -171,7 +171,7 @@
   </script>
 
   <script type="text/template" id="school-dropdown-view">
-    <a href="#schools/<%= attributes.schoolname %>"><%= attributes.schoolname %></a>
+    <a href="#schools/<%= attributes.schoolname.replace(/ /g, '-') %>"><%= attributes.schoolname %></a>
   </script>
 
 

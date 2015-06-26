@@ -27,7 +27,9 @@ function renderToApplication(template, model) {
 
 //Defining the College Model and giving some defaults
 
-var College = Backbone.Model.extend({
+var College = Parse.Object.extend({
+  className: 'testCollege',
+
   defaults : {
     name:'',
     address:'',
@@ -73,18 +75,20 @@ var IndexView = Backbone.View.extend({
 
         //returns true if it matched anywhere so that can be passed
         // to the matchedQuery array through the .filter() method
-        
+
         return searchIndex != -1 ? true : false;
 			};
 
 			//filter through the data provided
+
 			var matchedQuery = collegeCollection.filter(filterFunction);
+
 			//matchedQuery now has the array of matching objects
 
       //Only render the first 6 (subject to change)
-      //  -right now, doesn't resort the array before looping through
-      //  > this means that only the first six in array are appended now
-      //maybe for the future, we could add a sorting rule before rendering views
+      //  - right now, doesn't resort the array before looping through
+      //  - this means that only the first six in array are appended now
+      //maybe in the future, we could add a sorting rule before rendering views
 
       var index = 0;
       _.each(matchedQuery, function (i) {
@@ -148,10 +152,11 @@ var Router = Backbone.Router.extend({
 
   schoolRoute: function (schoolname) {
     console.log('schoolRoute fired');
+    var modelName = schoolname.replace(/-/g, ' ');
+    console.log(modelName);
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
     //new SchoolView({model:matchedModel}).render();
-    console.log(schoolname);
   },
 
   home: function () {
