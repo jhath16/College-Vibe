@@ -27,7 +27,9 @@ function renderToApplication(template, model) {
 
 //Defining the College Model and giving some defaults
 
-var College = Backbone.Model.extend({
+var College = Parse.Object.extend({
+  className: 'testCollege',
+
   defaults : {
     name:'',
     address:'',
@@ -38,7 +40,7 @@ var College = Backbone.Model.extend({
 
 var IndexView = Backbone.View.extend({
   initialize: function () {
-    this.render();
+    this.subViews = new Array();
   },
 
   template: _.template($('#index-route').text()),
@@ -57,9 +59,16 @@ var IndexView = Backbone.View.extend({
     var self = this,
 				queryString = e.currentTarget.value.toLowerCase(),
         qLength = queryString.length;
-    $('.college-search').empty();
 
-    //excludes the shift key and empty query
+    //This loops through the subViews and properly calls .remove() on each
+    //  instead of calling $.empty() and potentially leaking memory
+
+    _.each(this.subViews, function (i) {
+      i.remove();
+    });
+    this.subViews = [];
+
+    //this entire conditional only has the overall job of appending to the dropdown
 		if (queryString != '') {
       var dataArray = collegeCollection;
 			//Define the filter callback
@@ -73,24 +82,27 @@ var IndexView = Backbone.View.extend({
 
         //returns true if it matched anywhere so that can be passed
         // to the matchedQuery array through the .filter() method
-        
+
         return searchIndex != -1 ? true : false;
 			};
 
 			//filter through the data provided
+
 			var matchedQuery = collegeCollection.filter(filterFunction);
+
 			//matchedQuery now has the array of matching objects
 
       //Only render the first 6 (subject to change)
-      //  -right now, doesn't resort the array before looping through
-      //  > this means that only the first six in array are appended now
-      //maybe for the future, we could add a sorting rule before rendering views
+      //  - right now, doesn't resort the array before looping through
+      //  - this means that only the first six in array are appended now
+      //maybe in the future, we could add a sorting rule before rendering views
 
       var index = 0;
       _.each(matchedQuery, function (i) {
         index++;
         if (index < 7) {
-        new SchoolDropdownView({model:i}).render();
+          var newView = new SchoolDropdownView({model:i}).render();
+          self.subViews.push(newView);
         }
       });
 		}
@@ -142,20 +154,22 @@ var CollegeCollection = Parse.Collection.extend({
 
 var Router = Backbone.Router.extend({
   routes: {
-    '' : 'home',
+    '' : 'indexRoute',
     'schools/:id' : 'schoolRoute',
   },
 
   schoolRoute: function (schoolname) {
     console.log('schoolRoute fired');
+    var modelName = schoolname.replace(/-/g, ' ');
+    console.log(modelName);
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
     //new SchoolView({model:matchedModel}).render();
-    console.log(schoolname);
   },
 
-  home: function () {
+  indexRoute: function () {
     console.log('index route function fired');
+    var indexView = new IndexView().render();
   },
 });
 
@@ -165,7 +179,6 @@ $(document).ready(function () {
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
   window.collegeCollection = new CollegeCollection(); //Make the collection global
-  var indexView = new IndexView();
 });
 /*
 
