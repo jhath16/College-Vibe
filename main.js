@@ -155,7 +155,9 @@ var CollegeCollection = Parse.Collection.extend({
 var Router = Backbone.Router.extend({
   routes: {
     '' : 'indexRoute',
-    'schools/:id' : 'schoolRoute',
+    'schools/:schoolName' : 'schoolRoute',
+    'businesses/:id' : 'businessRoute',
+    'businesses/*' : 'businessThing'
   },
 
   schoolRoute: function (schoolname) {
@@ -171,6 +173,16 @@ var Router = Backbone.Router.extend({
     console.log('index route function fired');
     var indexView = new IndexView().render();
   },
+
+  businessRoute : function (id) {
+    console.log('business route fired with id: ' + id);
+    //we may have to do businesses by :id instead of name in url
+    //not all business names may be unique(chains, hotels, etc...)
+  },
+
+  businessThing: function () {
+    console.log('business thing fired');
+  }
 });
 
 //Glue Code
