@@ -150,12 +150,26 @@ var CollegeCollection = Parse.Collection.extend({
   }
 });
 
+var ProfileView = Parse.View.extend({
+  initialize:function () {
+    console.log('profileView rendered');
+  },
+
+  template: _.template($('#profile-view').text()),
+
+  render:function () {
+    this.$el.html(this.template(this.model));
+    $('body').html(this.el);
+  }
+})
+
 var Router = Backbone.Router.extend({
   routes: {
     '' : 'indexRoute',
     'schools/:schoolName' : 'schoolRoute',
     'businesses/:id' : 'businessRoute',
-    'businesses/*' : 'businessThing'
+    'profile'/* /:username */ : 'profileRoute',
+
   },
 
   schoolRoute: function (schoolname) {
@@ -178,9 +192,11 @@ var Router = Backbone.Router.extend({
     //not all business names may be unique(chains, hotels, etc...)
   },
 
-  businessThing: function () {
-    console.log('business thing fired');
+  profileRoute: function (username) {
+    console.log("Profile Route Fired");
+    var profileView = new ProfileView().render();
   }
+
 });
 
 //Glue Code
