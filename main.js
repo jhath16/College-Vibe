@@ -116,8 +116,6 @@ var SchoolDropdownView = Parse.View.extend({
 
   render: function () {
     this.$el.html(this.template(this.model));
-    this.el.style.padding = '5px 0'; //temporary
-    this.el.style.color = 'white'; //temporary
     $('.college-search').append(this.el);
     return this;
   }
