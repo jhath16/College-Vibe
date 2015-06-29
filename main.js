@@ -224,7 +224,7 @@ collegeCollection to maintain the model defaults?
         controlArrows: true,
         verticalCentered: false,
         resize : false,
-        sectionsColor : ['#263238', '#fff', '#263238'],
+        sectionsColor : ['#263238', '#ECEFF1', '#263238'],
         fixedElements: '#header, .footer',
         responsive: 1080,
 
@@ -270,6 +270,10 @@ event.preventDefault();
   $('.slideout-container').toggleClass('toggle-slideout');
   $('.login-slideout-btn').toggleClass('toggle-slideout-dark');
 
-
-
 });
+
+// Focus on Search input
+
+// $('.search-input').focus(function () {
+//     $('.banner').parent().addClass('search-focus');
+// });
