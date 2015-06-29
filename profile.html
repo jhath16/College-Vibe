@@ -5,15 +5,45 @@
   <title>CollegeVibe</title>
   <meta name="description" content="CollegeVibe is your one-stop guide to the college town. Whether you're looking for information on the college or the town itself, we've got you covered!">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="favicon" href="assets/images/collegevibe-logo-white.png">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="bower_components/fullpage.js/jquery.fullPage.css" />
   <link rel="stylesheet" type='text/css' href="styles/main.css">
 </head>
 <body>
 
+
+
+      <!-- Nav Bars -->
+
+      <div id="application"></div>
+
+      <!-- Index Route -->
+      <script type='text/template' id='index-route'>
+        <div class="header-search-wrap">
+          <div class="header-search">
+            <input placeholder="College or University" type='text'>
+            <span class="fa fa-search search-span"></span>
+
+            <div class="college-search">
+            </div>
+          </div>
+        </div>
+      </script>
+
       <div class="header-wrap">
-        <div class="header">
+        <div class="header-container">
+          <div class="header">
+            <ul>
+              <li><img src="assets/images/collegevibe-logo-green.png"></li>
+              <li><p>College Vibe</p></li>
+            </ul>
+          </div>
+          <div class="header-nav">
+            <ul>
+              <li><span class="fa fa-bars login-slideout-btn"></span></li>
+            </ul>
+          </div>
+
         </div>
       </div>
 
@@ -49,66 +79,27 @@
 
 
 
+
+
   <div id="fullpage">
 
     <div class="section">
 
-<!--       <div class="banner-footer">
-        <span class="fa fa-caret-up"></span>
-      </div> -->
-
       <div class="banner-container">
 
-
         <div class="banner-slogan">
-          <img src="assets/images/collegevibe-logo-green.png">
+          <!-- <h1>College Vibe</h1> -->
+          <!-- <p>Providing a one-stop hub for events and establishments in college towns across America.</p> -->
         </div>
-
-        <div class="homepage-banner">
-
-          <div id="application"></div>
-
-          <!-- Index Route -->
-          <script type='text/template' id='index-route'>
-            <div class="homepage-search">
-              <input placeholder="College or University" type='text'>
-              <span class="fa fa-search search-span"></span>
-              <div class="college-search homepage-college-search">
-              </div>
-            </div>
-          </script>
-          <div class="homepage-toggle">
-            <ul>
-              <li><span class="fa fa-bars login-slideout-btn"></span></li>
-            </ul>
-          </div>
-        </div>
-
       </div>
 
     </div><!-- Close Section -->
 
-    <div class="section">
-    </div><!-- Close Section -->
 
     <div class="section">
     </div><!-- Close Section -->
 
   </div><!-- Close Full Page -->
-
-
-  <script type="text/template" id="map-school-view">
-    <!-- Didn't want to touch the CSS but need to remove anchor and pseudo
-    classes of anchor tag colors off (a, a:visited, etc.)-->
-    <a href="#schools/<%= id %>">
-      <span><i class="fa fa-angle-right"></i></span>
-      <%= attributes.schoolname %>
-    </a>
-  </script>
-
-  <script type="text/template" id="school-dropdown-view">
-    <a href="#schools/<%= attributes.schoolname.replace(/ /g, '-') %>"><%= attributes.schoolname %></a>
-  </script>
 
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
