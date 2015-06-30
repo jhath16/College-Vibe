@@ -110,7 +110,8 @@ body {
 
 .login-slideout-btn {
   color: #ECEFF1;
-  background: #37474F; }
+  background: #37474F;
+  cursor:pointer; }
 
 .toggle-slideout-dark {
   color: #263238;
@@ -383,6 +384,7 @@ svg rect {
 /* Login Container */
 .slideout-container {
   right: -320px;
+  top:0;
   width: 320px;
   position: fixed;
   height: 100vh;
@@ -511,7 +513,6 @@ svg rect {
   top: 50%; }
 
 #nav-toggle {
-  cursor: pointer;
   margin-left: -13px;
   margin-top: -2px; }
 

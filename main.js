@@ -38,6 +38,40 @@ var College = Parse.Object.extend({
   }
 });
 
+var LoginView = Parse.View.extend({
+  tagName: 'div',
+
+  className: 'slideout-container',
+
+  template: _.template($('#login-view').text()),
+
+  render: function () {
+    this.$el.html(this.template());
+    $('#application').append(this.el);
+    return this;
+  },
+
+  events: {
+    'click .register-btn' : 'swapLogin',
+    'click .login-btn' : 'swapRegister'//can be refactored(maybe)
+  },
+
+  swapLogin: function () {
+    $('.login-container').toggleClass('close-login');
+    setTimeout(function(){
+        $('.register-container').toggleClass('open-register');
+     }, 250);
+  },
+
+  swapRegister : function () {
+    $('.register-container').toggleClass('open-register');
+
+    setTimeout(function(){
+        $('.login-container').toggleClass('close-login');
+     }, 250);
+  }
+});
+
 var IndexView = Backbone.View.extend({
   initialize: function () {
     this.subViews = new Array();
@@ -52,7 +86,13 @@ var IndexView = Backbone.View.extend({
   },
 
   events: {
-    'keyup input' : 'searchDropdown'
+    'keyup input' : 'searchDropdown',
+    'click .login-slideout-btn' : 'toggleSlideout'
+  },
+
+  toggleSlideout: function () {
+    $('.slideout-container').toggleClass('toggle-slideout');
+    $('#nav-toggle').toggleClass('active');
   },
 
   searchDropdown: function (e) {
@@ -183,7 +223,8 @@ var Router = Backbone.Router.extend({
 
   indexRoute: function () {
     console.log('index route function fired');
-    var indexView = new IndexView().render();
+    new IndexView().render();
+    new LoginView().render();
   },
 
   businessRoute : function (id) {
@@ -265,7 +306,7 @@ $('.login-slideout-btn').on('click', function(){
 
 // Animated Hamburger Toggle
 
-document.querySelector( "#nav-toggle" )
-  .addEventListener( "click", function() {
-    this.classList.toggle( "active" );
-  });
+// document.querySelector( "#nav-toggle" )
+//   .addEventListener( "click", function() {
+//     this.classList.toggle( "active" );
+//   });
