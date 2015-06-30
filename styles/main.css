@@ -7,11 +7,10 @@
   font-size: 0; }
 
 a {
-  text-decoration: none;
-  font-size: 20px;}
+  text-decoration: none; }
 
 body {
-  background: #f8f8f8;
+  background: #263238;
   z-index: 1;
   position: relative; }
 
@@ -101,13 +100,10 @@ body {
     list-style: none;
     padding-left: 0; }
   .homepage-toggle li {
-    display: inline-block; }
-  .homepage-toggle span {
-    font-weight: 500;
-    font-size: 28px;
+    display: inline-block;
     height: 60px;
-    width: 60px;
-    padding-top: 16px;
+    width: 60px; }
+  .homepage-toggle span {
     text-align: center;
     cursor: pointer;
     transition: 250ms; }
@@ -509,7 +505,48 @@ svg rect {
   outline: 0;
   border: 0; }
 
-/* Search */
+/* Animated Hamburger Toggle */
+#nav-toggle {
+  position: absolute;
+  left: 50%;
+  top: 50%; }
+
+#nav-toggle {
+  cursor: pointer;
+  margin-left: -13px;
+  margin-top: -2px; }
+
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 25px;
+  background: white;
+  position: absolute;
+  display: block;
+  content: ''; }
+
+#nav-toggle span:before {
+  top: -10px; }
+
+#nav-toggle span:after {
+  bottom: -10px; }
+
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+  transition: all 500ms ease-in-out; }
+
+#nav-toggle.active span {
+  background-color: transparent; }
+
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+  top: 0; }
+
+#nav-toggle.active span:before {
+  transform: rotate(45deg); }
+
+#nav-toggle.active span:after {
+  transform: rotate(-45deg); }
+
 /* Home Sidebar */
 .home-sidebar {
   position: fixed;

@@ -237,63 +237,6 @@ collegeCollection to maintain the model defaults?
 
 */
 
-// FullPage.js
-
-  $(document).ready(function() {
-    $('#fullpage').fullpage({
-        //Navigation
-        menu: false,
-        anchors:['home', 'projects', 'services'],
-        navigation: false,
-        navigationPosition: 'right',
-        navigationTooltips: ['firstSlide', 'secondSlide', 'thirdSlide'],
-        showActiveTooltips: false,
-        slidesNavigation: true,
-        slidesNavPosition: 'bottom',
-
-        //Scrolling
-        css3: true,
-        scrollingSpeed: 1500,
-        autoScrolling: true,
-        fitToSection: true,
-        scrollBar: false,
-        easing: 'easeInOutCubic',
-        easingcss3: 'ease',
-        loopBottom: false,
-        loopTop: false,
-        loopHorizontal: true,
-        continuousVertical: false,
-        scrollOverflow: false,
-        touchSensitivity: 15,
-        normalScrollElementTouchThreshold: 5,
-
-        //Accessibility
-        keyboardScrolling: true,
-        animateAnchor: true,
-        recordHistory: true,
-
-        //Design
-        controlArrows: true,
-        verticalCentered: false,
-        resize : false,
-        sectionsColor : ['#263238', '#ECEFF1', '#263238'],
-        fixedElements: '#header, .footer',
-        responsive: 1080,
-
-        //Custom selectors
-        sectionSelector: '.section',
-        slideSelector: '.slide',
-
-        //events
-        onLeave: function(index, nextIndex, direction){},
-        afterLoad: function(anchorLink, index){},
-        afterRender: function(){},
-        afterResize: function(){},
-        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
-        onSlideLeave: function(anchorLink, index, slideIndex, direction){}
-    });
-});
-
 // Login Expand
 
 $('.register-btn').on('click', function(){
@@ -317,12 +260,12 @@ $('.login-btn').on('click', function(){
 $('.login-slideout-btn').on('click', function(){
 
   $('.slideout-container').toggleClass('toggle-slideout');
-  $('.login-slideout-btn').toggleClass('toggle-slideout-dark');
 
 });
 
-// Focus on Search input
+// Animated Hamburger Toggle
 
-// $('.search-input').focus(function () {
-//     $('.banner').parent().addClass('search-focus');
-// });
+document.querySelector( "#nav-toggle" )
+  .addEventListener( "click", function() {
+    this.classList.toggle( "active" );
+  });
