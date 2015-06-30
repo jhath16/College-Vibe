@@ -25,54 +25,9 @@ function renderToApplication(template, model) {
   renderTemplate(template, $('#application'), model);
 };
 
-//Defining the College Model and giving some defaults
+/* * * * * * *           VIEWS            * * * * * * * * * * * */
 
-var College = Parse.Object.extend({
-  className: 'testCollege',
-
-  defaults : {
-    name:'',
-    address:'',
-    monkeys:'none',
-    //more to come
-  }
-});
-
-var LoginView = Parse.View.extend({
-  tagName: 'div',
-
-  className: 'slideout-container',
-
-  template: _.template($('#login-view').text()),
-
-  render: function () {
-    this.$el.html(this.template());
-    $('#application').append(this.el);
-    return this;
-  },
-
-  events: {
-    'click .register-btn' : 'swapLogin',
-    'click .login-btn' : 'swapRegister'//can be refactored(maybe)
-  },
-
-  swapLogin: function () {
-    $('.login-container').toggleClass('close-login');
-    setTimeout(function(){
-        $('.register-container').toggleClass('open-register');
-     }, 250);
-  },
-
-  swapRegister : function () {
-    $('.register-container').toggleClass('open-register');
-
-    setTimeout(function(){
-        $('.login-container').toggleClass('close-login');
-     }, 250);
-  }
-});
-
-var IndexView = Backbone.View.extend({
+var IndexView = Parse.View.extend({
   initialize: function () {
     this.subViews = new Array();
   },
@@ -159,10 +114,54 @@ var SchoolDropdownView = Parse.View.extend({
     $('.college-search').append(this.el);
     return this;
   }
-})
+});
 
-//This View will be used to render each of the school names next to the
-//interactive map and will link them all to their respective routes
+var LoginView = Parse.View.extend({
+  tagName: 'div',
+
+  className: 'slideout-container',
+
+  template: _.template($('#login-view').text()),
+
+  render: function () {
+    this.$el.html(this.template());
+    $('#application').append(this.el);
+    return this;
+  },
+
+  events: {
+    'click .register-btn' : 'swapLogin',
+    'click .login-btn' : 'swapRegister'//can be refactored(maybe)
+  },
+
+  swapLogin: function () {
+    $('.login-container').toggleClass('close-login');
+    setTimeout(function(){
+        $('.register-container').toggleClass('open-register');
+     }, 250);
+  },
+
+  swapRegister : function () {
+    $('.register-container').toggleClass('open-register');
+
+    setTimeout(function(){
+        $('.login-container').toggleClass('close-login');
+     }, 250);
+  }
+});
+
+var ProfileView = Parse.View.extend({
+  initialize:function () {
+    console.log('profileView rendered');
+  },
+
+  template: _.template($('#profile-view').text()),
+
+  render:function () {
+    this.$el.html(this.template(this.model));
+    $('body').html(this.el);
+  }
+});
 
 var SchoolMapView = Parse.View.extend({
   tagName: 'li',
@@ -180,6 +179,14 @@ var SchoolMapView = Parse.View.extend({
   }
 });
 
+/* * * * * * * * *     MODELS       * * * * * * * * * * * * * */
+
+var College = Parse.Object.extend({
+  className: 'testCollege',
+});
+
+/* * * * * * * *         COLLECTIONS        * * * * * * * * */
+
 var CollegeCollection = Parse.Collection.extend({
   model:College,
   query:new Parse.Query("testCollege").limit(1000),
@@ -190,18 +197,7 @@ var CollegeCollection = Parse.Collection.extend({
   }
 });
 
-var ProfileView = Parse.View.extend({
-  initialize:function () {
-    console.log('profileView rendered');
-  },
-
-  template: _.template($('#profile-view').text()),
-
-  render:function () {
-    this.$el.html(this.template(this.model));
-    $('body').html(this.el);
-  }
-})
+/* * * * * * * * * *    ROUTER     * * * * * * * * * * * * */
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -237,7 +233,6 @@ var Router = Backbone.Router.extend({
     console.log("Profile Route Fired");
     var profileView = new ProfileView().render();
   }
-
 });
 
 //Glue Code
@@ -277,36 +272,3 @@ Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
 */
-
-// Login Expand
-
-$('.register-btn').on('click', function(){
-
-  $('.login-container').toggleClass('close-login');
-  setTimeout(function(){
-      $('.register-container').toggleClass('open-register');
-   }, 250);
-
-});
-
-$('.login-btn').on('click', function(){
-
-  $('.register-container').toggleClass('open-register');
-
-  setTimeout(function(){
-      $('.login-container').toggleClass('close-login');
-   }, 250);
-});
-
-$('.login-slideout-btn').on('click', function(){
-
-  $('.slideout-container').toggleClass('toggle-slideout');
-
-});
-
-// Animated Hamburger Toggle
-
-// document.querySelector( "#nav-toggle" )
-//   .addEventListener( "click", function() {
-//     this.classList.toggle( "active" );
-//   });
