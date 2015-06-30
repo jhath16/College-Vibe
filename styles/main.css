@@ -355,7 +355,6 @@ svg rect {
 .college-search {
   height: auto;
   width: 380px;
-  max-height: 244px;
   background: #ECEFF1;
   font-weight: 300;
   transition: 250ms;
