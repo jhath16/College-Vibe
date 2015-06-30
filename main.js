@@ -52,8 +52,7 @@ var IndexView = Backbone.View.extend({
   },
 
   events: {
-    'keyup input' : 'searchDropdown';
-    
+    'keyup input' : 'searchDropdown'
   },
 
   searchDropdown: function (e) {
