@@ -11,11 +11,6 @@
 </head>
 <body>
 
-      <div class="header-wrap">
-        <div class="header">
-        </div>
-      </div>
-
       <div class="slideout-container">
         <div class="login-container">
           <label>Email Address</label>
@@ -29,13 +24,10 @@
         <div class="register-container">
           <label>Full Name</label>
           <input placeholder="Enter your full name" type='text'>
-
           <label>Email Address</label>
           <input placeholder="Enter your email" type='text'>
-
           <label>Enter password</label>
           <input placeholder="Password" type='password'>
-
           <label>Confirm your password</label>
           <input placeholder="Confirm Password" type='password'>
           <button>Sign Up</button>
@@ -43,33 +35,36 @@
         </div>
       </div>
 
-      <div class="banner-container">
 
-        <div class="banner-slogan">
-          <img src="assets/images/collegevibe-logo-green.png">
-        </div>
 
-        <div class="homepage-banner">
+        <div id="application"></div>
 
-          <div id="application"></div>
+        <!-- Index Route -->
+        <script type='text/template' id='index-route'>
 
-          <!-- Index Route -->
-          <script type='text/template' id='index-route'>
+        <div class="banner-container">
+
+          <div class="banner-slogan">
+            <img src="assets/images/collegevibe-logo-green.png">
+          </div>
+
+          <div class="homepage-banner">
             <div class="homepage-search">
               <input placeholder="College or University" type='text'>
               <span class="fa fa-search search-span"></span>
               <div class="college-search homepage-college-search">
               </div>
             </div>
-          </script>
-          <div class="homepage-toggle">
-            <ul>
-              <li class="login-slideout-btn"><a id="nav-toggle" href="#"><span></span></a></li>
-            </ul>
+            <div class="homepage-toggle">
+              <ul>
+                <li class="login-slideout-btn"><a id="nav-toggle" href="#"><span></span></a></li>
+              </ul>
+            </div>
           </div>
         </div>
 
-      </div>
+        </script>
+
 
 
   <script type="text/template" id="map-school-view">
