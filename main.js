@@ -11,6 +11,7 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
 var IndexView = Parse.View.extend({
   initialize: function () {
     this.subViews = new Array();
+    renderedViews.push(this);
     this.render();
   },
 
@@ -90,6 +91,7 @@ var SchoolDropdownView = Parse.View.extend({
   tagName:'div',
 
   initialize: function () {
+    renderedViews.push(this);
     this.render();
   },
 
@@ -108,6 +110,7 @@ var LoginView = Parse.View.extend({
   className: 'slideout-container',
 
   initialize: function () {
+    renderedViews.push(this);
     this.render();
   },
 
@@ -143,7 +146,8 @@ var LoginView = Parse.View.extend({
 var ProfileView = Parse.View.extend({
   initialize:function () {
     console.log('profileView rendered');
-      this.render();
+    renderedViews.push(this);
+    this.render();
   },
 
   template: _.template($('#profile-view').text()),
@@ -160,6 +164,7 @@ var SchoolMapView = Parse.View.extend({
   template: _.template($('#map-school-view').text()),
 
   initialize:function () {
+    renderedViews.push(this);
     this.render();
   },
 
@@ -233,7 +238,7 @@ var Router = Backbone.Router.extend({
 //Glue Code
 
 $(document).ready(function () {
-  var renderedViews = [];
+  window.renderedViews = [];
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
   window.collegeCollection = new CollegeCollection(); //Make the collection global
