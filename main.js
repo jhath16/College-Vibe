@@ -11,13 +11,13 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
 var IndexView = Parse.View.extend({
   initialize: function () {
     this.subViews = new Array();
-    renderedViews.push(this);
     this.render();
   },
 
   template: _.template($('#index-route').text()),
 
   render : function () {
+    renderedViews.push(this);
     this.$el.html(this.template());
     $('#application').append(this.el);
     return this;
@@ -91,13 +91,13 @@ var SchoolDropdownView = Parse.View.extend({
   tagName:'div',
 
   initialize: function () {
-    renderedViews.push(this);
     this.render();
   },
 
   template: _.template($('#school-dropdown-view').text()),
 
   render: function () {
+    renderedViews.push(this);
     this.$el.html(this.template(this.model));
     $('.college-search').append(this.el);
     return this;
@@ -110,13 +110,13 @@ var LoginView = Parse.View.extend({
   className: 'slideout-container',
 
   initialize: function () {
-    renderedViews.push(this);
     this.render();
   },
 
   template: _.template($('#login-view').text()),
 
   render: function () {
+    renderedViews.push(this);
     this.$el.html(this.template());
     $('#application').append(this.el);
     return this;
@@ -146,13 +146,13 @@ var LoginView = Parse.View.extend({
 var ProfileView = Parse.View.extend({
   initialize:function () {
     console.log('profileView rendered');
-    renderedViews.push(this);
     this.render();
   },
 
   template: _.template($('#profile-view').text()),
 
   render:function () {
+    renderedViews.push(this);
     this.$el.html(this.template(this.model));
     $('body').html(this.el);
   }
@@ -164,11 +164,11 @@ var SchoolMapView = Parse.View.extend({
   template: _.template($('#map-school-view').text()),
 
   initialize:function () {
-    renderedViews.push(this);
     this.render();
   },
 
   render: function () {
+    renderedViews.push(this);
     this.$el.html(this.template(this.model));
     $('.map-school-list ul').append(this.el);
     return this;
