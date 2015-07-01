@@ -4,26 +4,9 @@
 
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
 
-//Takes a template from the DOM and compiles it to a given model's data.
-//Then renders that compiled template to the given destination in the DOM.
-
-function renderTemplate(template, destination, model) {
-  var template = _.template(template.text());
-  var compiled = template(model);
-  destination.append(compiled);
-};
 
 
-//Takes a template and renders directly to the application container.
-//Removes the previous template/HTML when changing to it.
-// This will be userful for when we want to just change the route to look like
-//    a different page in the application rather than internally loading some
-//    dynamic content.
 
-function renderToApplication(template, model) {
-  $('#application').empty();
-  renderTemplate(template, $('#application'), model);
-};
 
 /* * * * * * *           VIEWS            * * * * * * * * * * * */
 
@@ -185,6 +168,10 @@ var College = Parse.Object.extend({
   className: 'testCollege',
 });
 
+var User = Parse.Object.extend({
+  className: 'User',
+})
+
 /* * * * * * * *         COLLECTIONS        * * * * * * * * */
 
 var CollegeCollection = Parse.Collection.extend({
@@ -238,6 +225,7 @@ var Router = Backbone.Router.extend({
 //Glue Code
 
 $(document).ready(function () {
+  var renderedViews = [];
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
   window.collegeCollection = new CollegeCollection(); //Make the collection global
