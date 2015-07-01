@@ -6,13 +6,12 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
 
 
 
-
-
 /* * * * * * *           VIEWS            * * * * * * * * * * * */
 
 var IndexView = Parse.View.extend({
   initialize: function () {
     this.subViews = new Array();
+    this.render();
   },
 
   template: _.template($('#index-route').text()),
@@ -79,7 +78,7 @@ var IndexView = Parse.View.extend({
       _.each(matchedQuery, function (i) {
         index++;
         if (index < 7) {
-          var newView = new SchoolDropdownView({model:i}).render();
+          var newView = new SchoolDropdownView({model:i});
           self.subViews.push(newView);
         }
       });
@@ -89,6 +88,10 @@ var IndexView = Parse.View.extend({
 
 var SchoolDropdownView = Parse.View.extend({
   tagName:'div',
+
+  initialize: function () {
+    this.render();
+  },
 
   template: _.template($('#school-dropdown-view').text()),
 
@@ -103,6 +106,10 @@ var LoginView = Parse.View.extend({
   tagName: 'div',
 
   className: 'slideout-container',
+
+  initialize: function () {
+    this.render();
+  },
 
   template: _.template($('#login-view').text()),
 
@@ -136,6 +143,7 @@ var LoginView = Parse.View.extend({
 var ProfileView = Parse.View.extend({
   initialize:function () {
     console.log('profileView rendered');
+      this.render();
   },
 
   template: _.template($('#profile-view').text()),
@@ -201,13 +209,13 @@ var Router = Backbone.Router.extend({
     console.log(modelName);
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
-    //new SchoolView({model:matchedModel}).render();
+    //new SchoolView({model:matchedModel});
   },
 
   indexRoute: function () {
     console.log('index route function fired');
-    new IndexView().render();
-    new LoginView().render();
+    new IndexView();
+    new LoginView();
   },
 
   businessRoute : function (id) {
@@ -218,7 +226,7 @@ var Router = Backbone.Router.extend({
 
   profileRoute: function (username) {
     console.log("Profile Route Fired");
-    var profileView = new ProfileView().render();
+    var profileView = new ProfileView();
   }
 });
 
