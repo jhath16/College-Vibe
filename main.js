@@ -124,7 +124,9 @@ var LoginView = Parse.View.extend({
 
   events: {
     'click .register-btn' : 'swapLogin',
-    'click .login-btn' : 'swapRegister'//can be refactored(maybe)
+    'click .login-btn' : 'swapRegister', //can be refactored(maybe)
+    'click .login-container button' : 'login', //will need to work on 'enter' too
+    'click .register-container button' : 'register'
   },
 
   swapLogin: function () {
@@ -134,12 +136,46 @@ var LoginView = Parse.View.extend({
      }, 250);
   },
 
-  swapRegister : function () {
+  swapRegister: function () {
     $('.register-container').toggleClass('open-register');
 
     setTimeout(function(){
         $('.login-container').toggleClass('close-login');
      }, 250);
+  },
+
+  login: function () {
+    var email = $('.login-container input')[0].value;
+    var password = $('.login-container input')[1].value;
+    Parse.User.logIn(email, password, {
+      success: function (data) {
+        //Successfully logged in! Go do things
+      },
+      error: function (user, error) {
+        alert(error.message);
+      }
+    });
+  },
+
+  register: function () {
+    var name = $('.register-container input')[0].value;
+    var email = $('.register-container input')[1].value;
+    var password = $('.register-container input')[2].value;
+    var confirmPassword = $('.register-container input')[3].value;
+
+    if (password === confirmPassword) {
+      Parse.User.signUp(email, password, {email: email, name: name},
+      {
+        success: function (data) {
+          //successfully registered new user, now go about the app.
+        },
+        error: function (user, error) {
+          alert(error.message);
+        }
+      })
+    } else {
+      alert('The two passwords do not match');
+    }
   }
 });
 
