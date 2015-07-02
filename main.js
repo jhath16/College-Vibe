@@ -104,7 +104,7 @@ var IndexView = Parse.View.extend({
         index++;
         if (index < 7) {
           var newView = new SchoolDropdownView({model:i});
-          self.subViewsrenderedViews.add(newView);
+          self.subViews.push(newView);
         }
       });
 		}
