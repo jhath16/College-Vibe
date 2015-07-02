@@ -4,7 +4,26 @@
 
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
 
+//Removes views from the global renderedViews array
 
+function removeView (view) {
+  var cid = view.cid;
+  var index = _.findIndex(renderedViews, function (n) {return n.cid == cid});
+  renderedViews.splice(index,1);
+}
+
+/* * * * * * * * * * *   Prototype Overrides   * * * * * * * * * * * * * * */
+
+//View.remove()
+//takes the view out of the renderedViews array
+
+Parse.View.prototype.remove = _.wrap(
+  Parse.View.prototype.remove,
+  function (originalFunction) {
+    originalFunction.apply(this);
+    removeView(this);
+  }
+)
 
 /* * * * * * *           VIEWS            * * * * * * * * * * * */
 
@@ -126,7 +145,7 @@ var LoginView = Parse.View.extend({
     'click .register-btn' : 'swapLogin',
     'click .login-btn' : 'swapRegister', //can be refactored(maybe)
     'click .login-container button' : 'login', //will need to work on 'enter' too
-    'click .register-container button' : 'register'
+    'click .register-container button' : 'register',
   },
 
   swapLogin: function () {
@@ -191,6 +210,7 @@ var ProfileView = Parse.View.extend({
     renderedViews.push(this);
     this.$el.html(this.template(this.model));
     $('body').html(this.el);
+    return this;
   }
 });
 
@@ -300,11 +320,7 @@ all dynamic templates to.
 -Probably not at least for the moment but still an option.
 -How would you go about working with external templates?...
 
-5. Should we make it so that each view renders itself on instantiation?
--Router should control the rendering of routes... Just instantiate/.remove() items?
--^ This sounds like the best method of doing so.
-
-6.Find a way to keep Backbone.Model defaults in a Parse.Collection
+5.Find a way to keep Backbone.Model defaults in a Parse.Collection
 Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
