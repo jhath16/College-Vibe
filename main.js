@@ -8,8 +8,13 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
 
 function removeView (view) {
   var cid = view.cid;
-  var index = _.findIndex(renderedViews, function (n) {return n.cid == cid});
+  var index = _.findIndex(renderedViews, function (n) {return n.cid === cid});
   renderedViews.splice(index,1);
+  if (view.subviews) {
+    _.each(subviews, function (i) {
+      i.remove();
+    });
+  }
 }
 
 /* * * * * * * * * * *   Prototype Overrides   * * * * * * * * * * * * * * */
@@ -99,7 +104,7 @@ var IndexView = Parse.View.extend({
         index++;
         if (index < 7) {
           var newView = new SchoolDropdownView({model:i});
-          self.subViews.push(newView);
+          self.subViewsrenderedViews.add(newView);
         }
       });
 		}
@@ -303,24 +308,22 @@ $(document).ready(function () {
 
 ********  To Do / Questions  **************
 
-1. Writing out a render function that will take a template from the dom and
-render it to a specified container (exactly like we did in TIY I guess).
+1.Map Out the Router and organize the rendering of views accordingly
 
-Done but not sure if it's necessary/useful. Could be altered to .remove()
-views from the dom and create new ones which would call render in their
-initialize methods. Would work better that way.
+  -the new renderedViews array will hold and organize the rendered views.
+  -the router will handle removing and determining what views get rendered/removed
+    -(subviews are still handled by the parent views)
 
-2.Map Out the Router and organize the rendering of views accordingly ISH
-
-3.Leave the Header and Footer and create an Application div to render
+2.Leave the Header and Footer and create an Application div to render
 all dynamic templates to.
-*Question for Taylor : Will the header and footer be present on all Routes?
 
-4. External templates for ease in development?
+- Done but will the header/footer be available on all routes?
+
+3. External templates for ease in development?
 -Probably not at least for the moment but still an option.
 -How would you go about working with external templates?...
 
-5.Find a way to keep Backbone.Model defaults in a Parse.Collection
+4.Find a way to keep Backbone.Model defaults in a Parse.Collection
 Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
