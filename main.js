@@ -216,7 +216,55 @@ var ProfileView = Parse.View.extend({
     this.$el.html(this.template(this.model));
     $('body').html(this.el);
     return this;
-  }
+  } 
+});
+
+var SchoolView = Parse.View.extend({
+  initialize:function () {
+    console.log('schoolView rendered');
+    this.render();
+  },
+
+  template: _.template($('#school-view').text()),
+
+  render:function () {
+    renderedViews.push(this);
+    this.$el.html(this.template(this.model));
+    $('body').html(this.el);
+    return this;
+  }, 
+
+   pieChart: function() {
+      // pie chart data
+      var pieData = [
+          {
+              value: 20,
+              color:"#878BB6"
+          },
+          {
+              value : 40,
+              color : "#4ACAB4"
+          },
+          {
+              value : 10,
+              color : "#FF8153"
+          },
+          {
+              value : 30,
+              color : "#FFEA88"
+          }
+      ];
+      // pie chart options
+      var pieOptions = {
+           segmentShowStroke : false,
+           animateScale : true
+      }
+      // get pie chart canvas
+      var countries= document.getElementById("countries").getContext("2d");
+      // draw pie chart
+      new Chart(countries).Pie(pieData, pieOptions);
+    }
+
 });
 
 var SchoolMapView = Parse.View.extend({
@@ -328,3 +376,5 @@ Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
 */
+
+

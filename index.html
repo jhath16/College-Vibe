@@ -65,13 +65,116 @@
     </div>
   </script>
 
+
+
   <script type="text/template" id="school-dropdown-view">
     <a href="#schools/<%= attributes.schoolname.replace(/ /g, '-') %>"><%= attributes.schoolname %></a>
   </script>
 
-  <script type="text/template" id="profile-view">
+
+
+  <script type="text/template" id="school-view">
+    <header>
+      <div class="header-container">
+
+        <div class="header-banner">
+          <div class="header-search">
+            <input placeholder="College or University" type='text'>
+            <span class="fa fa-search search-span"></span>
+            <div class="college-search header-college-search">
+            </div>
+          </div>
+          <div class="header-toggle">
+            <ul>
+              <li class="login-slideout-btn"><a id="nav-toggle" href="#"><span></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="school-body">
+
+      <div class="school-left-col">
+        <div class="school-heading">
+          <img src="assets/images/clemson-logo.png">
+          <h1>Clemson University</h1>
+          <p>555 Sample Street, Clemson, SC 29601</p>
+        </div>
+        <div class="school-info">
+          <span class="fa fa-caret-up"></span>
+
+          <div class="school-info-evenrow">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="school-right-col">
+        <p>Photos of Clemson University</p>
+        <div class="school-photos">
+          <ul>
+            <li><img src="assets/images/campus-1.jpg"></li>
+            <li><img src="assets/images/campus-2.jpg"></li>
+            <li><img src="assets/images/campus-3.jpg"></li>
+            <li><img src="assets/images/campus-2.jpg"></li>
+            <li><img src="assets/images/campus-3.jpg"></li>
+            <li><img src="assets/images/campus-1.jpg"></li>
+          </ul>
+        </div>
+        <a>View All</a>
+      </div>
+
+    </div>
 
   </script>
+
+    <script type="text/template" id="profile-view">
+    <header>
+      <div class="header-container">
+
+        <div class="header-banner">
+          <div class="header-search">
+            <input placeholder="College or University" type='text'>
+            <span class="fa fa-search search-span"></span>
+            <div class="college-search header-college-search">
+            </div>
+          </div>
+          <div class="header-toggle">
+            <ul>
+              <li class="login-slideout-btn"><a id="nav-toggle" href="#"><span></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="profile-body">
+
+      <div class="profile-left-col">
+        <div class="profile-heading">
+          <img src="assets/images/collegevibe-logo-green.png">
+          <h1>Kevin Ruck</h1>
+          <p>Prospective Student</p>
+
+        </div>
+        <div class="profile-info">
+          <span class="fa fa-caret-up"></span>
+
+          <div class="profile-info-evenrow">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="profile-right-col">
+      </div>
+
+    </div>
+
+  </script>
+
+
 
   <script type="text/template" id="map-school-view">
     <!-- Didn't want to touch the CSS but need to remove anchor and pseudo
@@ -85,6 +188,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js'></script>
+
+<script src='bower_components/chart.js/chart.js'></script>
+
 <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <script src='main.js'></script>
 </body>

@@ -28,12 +28,11 @@ body {
 
 /* HEADER */
 
-.header {
-	width: 40%;
+header {
+	width: 100%;
 	height: 80px;
 	/*background: #263238;*/
 	padding-top:18px;
-	padding-left:30px;
 
 	ul {
 		list-style: none;
@@ -47,22 +46,63 @@ body {
 	}
 
 	img {
-		width: 45px;
-		height: 45px;
+		width: 50px;
+		height: 50px;
+		display: inline-block;
 	}
 
-	p {
-		color:#f8f8f8;
+	h1 {
+		color: #ECEFF1;
 		font-size: 30px;
 		font-weight: 300;
-		padding-top:5px;
-		padding-left: 10px;
+		padding-top: 5px;
+		padding-left: 2px;
+		display: inline-block;
+		vertical-align: top;
+	}
+	p {
+		color: #ECEFF1;
+		font-size: 14px;
+		font-weight: 100;
+		display: block;
+		vertical-align: top;
+		padding-left: 54px;
+		margin-top: -6px;
 	}
 }
 
+.school-info  {
+
+	img {
+		width: 50px;
+		height: 50px;
+		display: inline-block;
+	}
+
+	h1 {
+		color: #ECEFF1;
+		font-size: 30px;
+		font-weight: 300;
+		padding-top: 5px;
+		padding-left: 2px;
+		display: inline-block;
+		vertical-align: top;
+	}
+	p {
+		color: #ECEFF1;
+		font-size: 14px;
+		font-weight: 100;
+		display: block;
+		vertical-align: top;
+		padding-left: 54px;
+		margin-top: -6px;
+	}
+}
+
+
 .header-wrap {
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	z-index: 100;
 	/*background:#263238;*/
@@ -72,6 +112,7 @@ body {
 	width: 1080px;
 	margin: 0 auto;
 	position: relative;
+	top:25px;
 }
 
 .logo {
@@ -119,7 +160,8 @@ body {
 	}
 }
 
-.homepage-toggle {
+.homepage-toggle, 
+.header-toggle {
 	display: inline-block;
 	z-index: 1000;
 	position: absolute;
@@ -199,7 +241,7 @@ body {
 	text-decoration: none;
 	color: #FFF;
 	margin-top: 10px;
-	text-shadow: 1px 1px 7px #000;
+	text-shadow: 1px 1px 7px #263238;
 	font-size: 12px;
 	font-weight: lighter;
 }
@@ -217,66 +259,20 @@ body {
 	position: fixed;
 }
 
-.header-search {
-	position: relative;
-	width: 1080px;
-	top: 21px;
-	margin: 0 auto;
-	text-align: right;
-
-	span {
-		position: absolute;
-		width: 60px;
-		height: 60px;
-		margin-left: 0px;
-		color: #ECEFF1;
-		background: #455A64;
-		padding-top: 21px;
-		text-align: center;
-		font-size: 16px;
-		display: inline-block;
-		transition: 250ms;
-		right: 320px;
-	}
-
-	img {
-		display: inline-block;
-		width: 50px;
-		height: 50px;
-	}
-
-	input {
-		width: 260px;
-		height: 60px;
-		padding: 15px 0;
-		background: #37474F;
-		position: absolute;
-		margin: 0 auto;
-		color: #ECEFF1;
-		font-size: 18px;
-		border: 0;
-		outline: 0;
-		display: inline-block;
-		transition: 250ms;
-		font-weight: 300;
-		/* margin-left: 45px; */
-		text-indent: 15px;
-		/* margin-right: 60px; */
-		right: 60px;
-	}
-
-	input::-webkit-input-placeholder {
-		color: #B0BEC5;
-	}
-}
-
-.homepage-banner {
+.homepage-banner, 
+.header-banner {
 	width: 380px;
 	margin: 0 auto;
 	position: relative;
 }
 
-.homepage-search {
+.header-banner {
+	position: absolute;
+  	right: 0;
+  	top: 0px;}
+
+.homepage-search, 
+.header-search {
 	position: absolute;
 	width: 320px;
 	margin: 0 auto;
@@ -328,7 +324,8 @@ body {
 	}
 }
 
-.homepage-college-search {
+.homepage-college-search, 
+.header-college-search {
 	width: 380px;
 	left:0;
 }
@@ -336,7 +333,7 @@ body {
 
 .search-span {
 	background:#fff;
-	color:#000;
+	color:#263238;
 }
 
 .banner-container {
@@ -492,6 +489,7 @@ svg rect{
 	z-index:700;
 	transition: 250ms;
 	padding-top:30px;
+	top:0;
 }
 
 .toggle-slideout {
@@ -604,7 +602,7 @@ svg rect{
 	margin-top: 10px;
 	font-size: 12px;
 	color: #fff;
-	text-shadow: 1px 1px 9px #000;
+	text-shadow: 1px 1px 9px #263238;
 }
 
 .select-user-type {
@@ -623,7 +621,7 @@ svg rect{
     background: #f8f8f8;
     border-radius: 0;
     font-size: 16px;
-    color: #000;
+    color: #263238;
     text-indent: 15px;
     margin-top: 4px;
 }
@@ -806,6 +804,183 @@ svg rect{
 
 .image-rating {
 	padding-top: 5px;
+}
+
+.profile-body, 
+.school-body {
+	width: 1080px;
+	margin: 0 auto;
+	position: relative;
+	top: 50px;
+}
+
+.profile-right-col, 
+.school-right-col {
+	display: inline-block;
+	width: 380px;
+	position: relative;
+	right: 0;
+	vertical-align: top;
+	padding-top:90px;
+
+	p {
+		color:#ECEFF1;
+		font-size: 16px;
+		font-weight: 300;
+		text-align: left;
+		padding-bottom:10px;
+	}
+
+	a {
+		font-size: 14px;
+		color:#f8f8f8;
+		float:right;
+	}
+}
+
+.profile-left-col, 
+.school-left-col {
+	display: inline-block;
+	width: 670px;
+	background: transparent;
+	margin-right: 30px;
+	margin-top:-86px;
+}
+
+.profile-info, 
+.school-info {
+	background: rgba(255,255,255,.05);
+	width: 100%;
+	margin-top: -24px;
+	text-align:center;
+
+	span {
+		font-size: 36px;
+		color: #ECEFF1;
+		position: relative;
+		left: 0;
+		margin: 0 auto;
+		top: 0;
+		z-index: 1000000;
+  		vertical-align: bottom;
+  		margin-bottom:-12px;
+	}
+}
+
+
+
+.profile-info-evenrow, 
+.profile-info-oddrow, 
+.school-info-evenrow, 
+.school-info-oddrow {
+	background:#ECEFF1;
+	width: 100%;
+	height: 200px;
+	position:relative;
+
+
+
+}
+
+
+.profile-heading {
+
+	width: 100%;
+	padding: 25px 30px 6px;
+  	background:#37474F;
+  	display: inline-block;
+  	height:130px;
+
+	img {
+		width: 60px;
+		height: 60px;
+		display: inline-block;
+		margin-top:12px;
+	}
+
+	h1 {
+		color: #ECEFF1;
+		font-size: 30px;
+		font-weight: 300;
+		padding-top: 14px;
+		padding-left: 10px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	p {
+		color: #ECEFF1;
+		font-size: 14px;
+		font-weight: 300;
+		display: block;
+		vertical-align: top;
+		padding-left: 72px;
+		margin-top: -25px;
+	}
+
+}
+
+.school-heading {
+
+	width: 100%;
+  	padding: 15px 15px 6px;
+  	background:#37474F;
+  	display: inline-block;
+  	height:130px;
+
+	img {
+		width: 110px;
+		height: 110px;
+		display: inline-block;
+	}
+
+	h1 {
+		color: #ECEFF1;
+		font-size: 30px;
+		font-weight: 300;
+		padding-top: 14px;
+		padding-left: 2px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	p {
+		color: #ECEFF1;
+		font-size: 14px;
+		font-weight: 300;
+		display: block;
+		vertical-align: top;
+		padding-left: 114px;
+		margin-top: -59px;
+	}
+
+}
+
+.school-photos {
+	width: 380px;
+	right: 0;
+	position: relative;
+	background:#263238;
+
+
+	li {
+		width: 33.33333%;
+		height: 90px;
+		background:#37474F;
+		display: inline-block;
+		border-right:5px solid #263238;
+		border-bottom: 5px solid #263238;
+		margin-bottom: 5px;
+	}
+
+	li:nth-child(3n) {
+		border-right: 0;
+	}
+	img {
+		width: 100%;
+		height: 90px;
+
+	}
 }
 
 /* Footer */
