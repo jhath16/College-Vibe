@@ -214,9 +214,9 @@ var ProfileView = Parse.View.extend({
   render:function () {
     renderedViews.push(this);
     this.$el.html(this.template(this.model));
-    $('body').html(this.el);
+    $('#application').html(this.el);
     return this;
-  } 
+  }
 });
 
 var SchoolView = Parse.View.extend({
@@ -230,9 +230,9 @@ var SchoolView = Parse.View.extend({
   render:function () {
     renderedViews.push(this);
     this.$el.html(this.template(this.model));
-    $('body').html(this.el);
+    $('#application').html(this.el);
     return this;
-  }, 
+  },
 
    pieChart: function() {
       // pie chart data
@@ -321,6 +321,7 @@ var Router = Backbone.Router.extend({
     console.log('schoolRoute fired');
     var modelName = schoolname.replace(/-/g, ' ');
     console.log(modelName);
+    new SchoolView();
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
     //new SchoolView({model:matchedModel});
@@ -376,5 +377,3 @@ Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
 */
-
-
