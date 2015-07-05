@@ -15,7 +15,17 @@ function removeView (view) {
       i.remove();
     });
   }
-}
+};
+
+function organizeByRoute() {
+  organizedRenderedViews = _.groupBy(renderedViews, function (v) {return v.routeName});
+};
+
+function removeAllViews () {
+  for (var i = renderedViews.length - 1; i >= 0; i--) {
+    renderedViews[i].remove();
+  }
+};
 
 /* * * * * * * * * * *   Prototype Overrides   * * * * * * * * * * * * * * */
 
@@ -37,6 +47,8 @@ var IndexView = Parse.View.extend({
     this.subViews = new Array();
     this.render();
   },
+
+  routeName:'index',
 
   template: _.template($('#index-route').text()),
 
@@ -114,6 +126,8 @@ var IndexView = Parse.View.extend({
 var SchoolDropdownView = Parse.View.extend({
   tagName:'div',
 
+  routeName:'independent',
+
   initialize: function () {
     this.render();
   },
@@ -121,7 +135,6 @@ var SchoolDropdownView = Parse.View.extend({
   template: _.template($('#school-dropdown-view').text()),
 
   render: function () {
-    renderedViews.push(this);
     this.$el.html(this.template(this.model));
     $('.college-search').append(this.el);
     return this;
@@ -130,6 +143,8 @@ var SchoolDropdownView = Parse.View.extend({
 
 var LoginView = Parse.View.extend({
   tagName: 'div',
+
+  routeName:'independent',
 
   className: 'slideout-container',
 
@@ -209,12 +224,14 @@ var ProfileView = Parse.View.extend({
     this.render();
   },
 
+  routeName:'profile',
+
   template: _.template($('#profile-view').text()),
 
   render:function () {
     renderedViews.push(this);
     this.$el.html(this.template(this.model));
-    $('#application').html(this.el);
+    $('#application').append(this.el);
     return this;
   }
 });
@@ -225,12 +242,14 @@ var SchoolView = Parse.View.extend({
     this.render();
   },
 
+  routeName:'schools',
+
   template: _.template($('#school-view').text()),
 
   render:function () {
     renderedViews.push(this);
     this.$el.html(this.template(this.model));
-    $('#application').html(this.el);
+    $('#application').append(this.el);
     return this;
   },
 
@@ -271,6 +290,8 @@ var SchoolMapView = Parse.View.extend({
   tagName: 'li',
 
   template: _.template($('#map-school-view').text()),
+
+  routeName:'independent',
 
   initialize:function () {
     this.render();
@@ -318,9 +339,9 @@ var Router = Backbone.Router.extend({
   },
 
   schoolRoute: function (schoolname) {
-    console.log('schoolRoute fired');
+    removeAllViews();
     var modelName = schoolname.replace(/-/g, ' ');
-    console.log(modelName);
+    console.log('schoolRoute fired with the model: ' + modelName);
     new SchoolView();
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
@@ -328,18 +349,21 @@ var Router = Backbone.Router.extend({
   },
 
   indexRoute: function () {
+    removeAllViews();
     console.log('index route function fired');
     new IndexView();
     new LoginView();
   },
 
   businessRoute : function (id) {
+    removeAllViews();
     console.log('business route fired with id: ' + id);
     //we may have to do businesses by :id instead of name in url
     //not all business names may be unique(chains, hotels, etc...)
   },
 
   profileRoute: function (username) {
+    removeAllViews();
     console.log("Profile Route Fired");
     var profileView = new ProfileView();
   }
@@ -348,6 +372,7 @@ var Router = Backbone.Router.extend({
 //Glue Code
 
 $(document).ready(function () {
+  window.organizedRenderedViews = {};
   window.renderedViews = [];
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
