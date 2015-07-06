@@ -50,22 +50,24 @@
       </div>
 
       <div class="homepage-banner">
-        <div class="homepage-search">
-          <input placeholder="College or University" type='text'>
-          <span class="fa fa-search search-span"></span>
-          <div class="college-search homepage-college-search">
-          </div>
-        </div>
-        <div class="homepage-toggle">
-          <ul>
-            <li class="login-slideout-btn"><a id="nav-toggle" href="#"><span></span></a></li>
-          </ul>
-        </div>
+
       </div>
     </div>
   </script>
 
-
+  <script type="text/template" id='search-box-view'>
+    <div class="homepage-search">
+      <input placeholder="College or University" type='text'>
+      <span class="fa fa-search search-span"></span>
+      <div class="college-search homepage-college-search">
+      </div>
+    </div>
+    <div class="homepage-toggle">
+      <ul>
+        <li class="login-slideout-btn"><a id="nav-toggle" href="#"><span></span></a></li>
+      </ul>
+    </div>
+  </script>
 
   <script type="text/template" id="school-dropdown-view">
     <a href="#schools/<%= attributes.schoolname.replace(/ /g, '-') %>"><%= attributes.schoolname %></a>

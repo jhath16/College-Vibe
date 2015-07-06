@@ -17,22 +17,23 @@ function removeView (view) {
   }
 };
 
+// Deprecated as of 7/5
+
 function organizeByRoute() {
   organizedRenderedViews = _.groupBy(renderedViews, function (v) {return v.routeName});
 };
 
 function removeAllViews () {
   for (var i = renderedViews.length - 1; i >= 0; i--) {
-    renderedViews[i].remove();
+    renderedViews[i].removeRenderedView();
   }
 };
 
 /* * * * * * * * * * *   Prototype Overrides   * * * * * * * * * * * * * * */
 
-//View.remove()
+//removeRenderedView()
 //takes the view out of the renderedViews array
-
-Parse.View.prototype.remove = _.wrap(
+Parse.View.prototype.removeRenderedView = _.wrap(
   Parse.View.prototype.remove,
   function (originalFunction) {
     originalFunction.apply(this);
@@ -44,7 +45,6 @@ Parse.View.prototype.remove = _.wrap(
 
 var IndexView = Parse.View.extend({
   initialize: function () {
-    this.subViews = new Array();
     this.render();
   },
 
@@ -56,6 +56,25 @@ var IndexView = Parse.View.extend({
     renderedViews.push(this);
     this.$el.html(this.template());
     $('#application').append(this.el);
+    return this;
+  }
+});
+
+// When instantiating a new search box,
+//make sure to pass it a jquery-styled container
+
+var SearchBoxView = Parse.View.extend({
+  template: _.template($('#search-box-view').text()),
+
+  initialize:function (container) {
+    this.render(container);
+    this.subViews = [];
+  },
+
+  render: function (container) {
+    renderedViews.push(this);
+    this.$el.html(this.template);
+    $(container).append(this.el);
     return this;
   },
 
@@ -352,12 +371,14 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     console.log('index route function fired');
     new IndexView();
+    new SearchBoxView(".homepage-banner");
     new LoginView();
   },
 
   businessRoute : function (id) {
     removeAllViews();
-    console.log('business route fired with id: ' + id);
+    var model = id.replace(/-/g, ' ')
+    console.log('business route fired with id: ' + model);
     //we may have to do businesses by :id instead of name in url
     //not all business names may be unique(chains, hotels, etc...)
   },
@@ -372,6 +393,8 @@ var Router = Backbone.Router.extend({
 //Glue Code
 
 $(document).ready(function () {
+  // organizedrenderedViews is deprecated as of 7/5 but leaving
+  //for potential future use
   window.organizedRenderedViews = {};
   window.renderedViews = [];
   var router = new Router(); //instantiate the router
