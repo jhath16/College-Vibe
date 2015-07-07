@@ -17,7 +17,7 @@ body {
 .body-container {
   width: 100%;
   position: relative;
-  background: #f8f8f8;
+  background: #ECEFF1;
   z-index: 1; }
 
 /* HEADER */
@@ -291,14 +291,14 @@ header {
     font-size: 18px;
     line-height: 30px;
     font-weight: 100;
-    color: #f8f8f8;
+    color: #ECEFF1;
     display: block;
     vertical-align: top; }
   .banner-slogan h1 {
     font-size: 28px;
     font-weight: 300;
     font-style: italic;
-    color: #f8f8f8;
+    color: #ECEFF1;
     display: block;
     vertical-align: top;
     padding-bottom: 15px;
@@ -412,7 +412,7 @@ svg rect {
     width: 100%;
     margin-bottom: 10px;
     margin-top: 5px;
-    background: #f8f8f8;
+    background: #ECEFF1;
     border: 1px solid #dfdfdf;
     outline: 0;
     font-size: 16px;
@@ -426,7 +426,7 @@ svg rect {
     border: 0;
     outline: 0;
     font-size: 16px;
-    color: #f8f8f8;
+    color: #ECEFF1;
     border-radius: 3px; }
   .login-container label {
     font-size: 16px;
@@ -447,7 +447,7 @@ svg rect {
     width: 100%;
     margin-bottom: 10px;
     margin-top: 5px;
-    background: #f8f8f8;
+    background: #ECEFF1;
     border: 1px solid #dfdfdf;
     outline: 0;
     font-size: 16px;
@@ -461,7 +461,7 @@ svg rect {
     border: 0;
     outline: 0;
     font-size: 16px;
-    color: #f8f8f8;
+    color: #ECEFF1;
     border-radius: 3px; }
   .register-container label {
     font-size: 16px;
@@ -499,7 +499,7 @@ svg rect {
   z-index: 20;
   text-align: center;
   border: none;
-  background: #f8f8f8;
+  background: #ECEFF1;
   border-radius: 0;
   font-size: 16px;
   color: #263238;
@@ -519,12 +519,12 @@ svg rect {
 #nav-toggle {
   cursor: pointer;
   margin-left: -13px;
-  margin-top: -2px; }
+  margin-top: 0px; }
 
 #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
   cursor: pointer;
   border-radius: 1px;
-  height: 5px;
+  height: 3px;
   width: 25px;
   background: white;
   position: absolute;
@@ -538,7 +538,7 @@ svg rect {
   bottom: -10px; }
 
 #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
-  transition: all 500ms ease-in-out; }
+  transition: all 250ms ease-in-out; }
 
 #nav-toggle.active span {
   background-color: transparent; }
@@ -655,12 +655,14 @@ svg rect {
 .image-rating {
   padding-top: 5px; }
 
+/* Profile and School Templates */
 .profile-body,
 .school-body {
   width: 1080px;
   margin: 0 auto;
   position: relative;
-  top: 50px; }
+  top: 50px;
+  margin-bottom: 50px; }
 
 .profile-right-col,
 .school-right-col {
@@ -668,8 +670,7 @@ svg rect {
   width: 380px;
   position: relative;
   right: 0;
-  vertical-align: top;
-  padding-top: 90px; }
+  vertical-align: top; }
   .profile-right-col p,
   .school-right-col p {
     color: #ECEFF1;
@@ -680,20 +681,19 @@ svg rect {
   .profile-right-col a,
   .school-right-col a {
     font-size: 14px;
-    color: #f8f8f8;
-    float: right; }
+    color: #ECEFF1;
+    float: right;
+    font-weight: 300; }
 
 .profile-left-col,
 .school-left-col {
   display: inline-block;
   width: 670px;
   background: transparent;
-  margin-right: 30px;
-  margin-top: -86px; }
+  margin-right: 30px; }
 
 .profile-info,
 .school-info {
-  background: rgba(255, 255, 255, 0.05);
   width: 100%;
   margin-top: -24px;
   text-align: center; }
@@ -715,7 +715,7 @@ svg rect {
 .school-info-oddrow {
   background: #ECEFF1;
   width: 100%;
-  height: 200px;
+  height: 500px;
   position: relative; }
 
 .profile-heading {
@@ -751,7 +751,8 @@ svg rect {
   padding: 15px 15px 6px;
   background: #37474F;
   display: inline-block;
-  height: 130px; }
+  height: 130px;
+  margin-bottom: 1px; }
   .school-heading img {
     width: 110px;
     height: 110px;
@@ -772,25 +773,81 @@ svg rect {
     vertical-align: top;
     padding-left: 114px;
     margin-top: -59px; }
+  .school-heading span {
+    display: none; }
+
+.school-options {
+  width: 100%;
+  background: #37474F; }
+  .school-options li {
+    width: 33.3333%;
+    display: inline-block;
+    color: #ECEFF1;
+    font-size: 16px;
+    text-align: center;
+    padding: 30px 0;
+    font-weight: 300;
+    border-right: 1px solid #263238;
+    border-left: 1px solid #455A64;
+    border-bottom: 1px solid #263238;
+    border-top: 1px solid #455A64; }
+  .school-options li:nth-child(1),
+  .school-options li:nth-child(4) {
+    border-left: 0; }
+  .school-options li:nth-child(1),
+  .school-options li:nth-child(2),
+  .school-options li:nth-child(3) {
+    border-top: 0; }
+  .school-options li:nth-child(4),
+  .school-options li:nth-child(5),
+  .school-options li:nth-child(6) {
+    border-bottom: 0; }
+  .school-options li:nth-child(3n) {
+    border-right: 0; }
+  .school-options span {
+    display: block;
+    font-size: 24px;
+    padding-bottom: 10px; }
+
+.school-options-mobile {
+  display: none; }
+
+.school-ad {
+  width: 100%;
+  background: #455A64;
+  height: 200px;
+  margin-bottom: 30px;
+  text-align: center; }
+  .school-ad p {
+    font-size: 36px;
+    text-align: center;
+    color: #333; }
+  .school-ad span {
+    font-size: 36px;
+    color: #455A64;
+    position: relative;
+    /* left: 0; */
+    margin: 0 auto;
+    top: 0;
+    z-index: 1000000;
+    /* vertical-align: bottom; */
+    margin-top: -23px; }
 
 .school-photos {
-  width: 380px;
-  right: 0;
+  width: 100%;
   position: relative;
   background: #263238; }
   .school-photos li {
-    width: 33.33333%;
-    height: 90px;
-    background: #37474F;
+    width: 100%;
+    height: auto;
+    /*background:#37474F;*/
     display: inline-block;
-    border-right: 5px solid #263238;
-    border-bottom: 5px solid #263238;
-    margin-bottom: 5px; }
+    /*padding:15px;*/ }
   .school-photos li:nth-child(3n) {
     border-right: 0; }
   .school-photos img {
     width: 100%;
-    height: 90px; }
+    height: auto; }
 
 /* Footer */
 /* Media Queries */
@@ -817,10 +874,99 @@ svg rect {
     background: #263238;
     height: 500px; }
 
-  .banner-slogan img {
+  .section {
+    height: auto !important; }
+
+  /* Search Bar */
+  header {
+    padding-top: 0;
+    height: 60px; }
+
+  .header-banner {
+    width: 100%; }
+
+  .homepage-banner {
+    width: 90%; }
+
+  .header-container {
+    width: 100%;
+    top: 0; }
+
+  .header-search,
+  .homepage-search {
+    width: 100%; }
+
+  .header-search span,
+  .homepage-search span {
+    width: 15%;
+    right: 85%; }
+
+  .header-search input,
+  .homepage-search input {
+    width: 85%; }
+
+  .header-toggle {
+    width: 20%; }
+    .header-toggle li {
+      width: 100%; }
+
+  /* Profile and School Template */
+  .profile-body,
+  .school-body {
+    width: 100%; }
+
+  .profile-left-col,
+  .school-left-col,
+  .school-right-col,
+  .profile-right-col {
+    display: block;
+    width: 100%; }
+
+  .school-body {
+    top: 0; }
+
+  .school-options {
     display: none; }
 
-  .section {
-    height: auto !important; } }
+  .school-options-mobile {
+    display: block;
+    margin-bottom: 1px;
+    background: #37474F;
+    border-top: 1px solid #455A64;
+    border-bottom: 1px solid #455A64; }
+    .school-options-mobile li {
+      /*			border-right: 1px solid #455A64;
+      			border-left: 1px solid #607D8B;
+      			border-bottom: 1px solid #455A64;
+      			border-top: 1px solid #607D8B;*/ }
+
+  .school-heading {
+    padding: 29px 15px 6px;
+    background: #263238;
+    border-top: 1px solid #455A64; }
+    .school-heading img {
+      width: 60px;
+      height: 60px;
+      text-align: left; }
+    .school-heading p {
+      padding-left: 64px;
+      margin-top: -20px;
+      color: #ECEFF1;
+      text-align: left; }
+    .school-heading h1 {
+      padding-top: 4px;
+      color: #ECEFF1;
+      text-align: left; }
+    .school-heading span {
+      font-size: 36px;
+      color: #263238;
+      position: relative;
+      display: block;
+      z-index: 1000000;
+      vertical-align: bottom;
+      margin-bottom: -23px;
+      padding-top: 15px;
+      text-align: center;
+      display: none; } }
 
 /*# sourceMappingURL=main.css.map */
