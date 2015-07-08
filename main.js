@@ -17,6 +17,18 @@ function removeView (view) {
   }
 };
 
+// _.partialHelper(template,model)
+// Used in *templates* to render html as a partial
+// Accepts an optional model to render the model's data
+//ISSUE: Does not handle events properly 
+
+_.mixin({
+  partialHelper: function (partialTemplate, model) {
+    var tmp1 = $('#' + partialTemplate).text();
+    return _.template(tmp1)(model);
+  }
+});
+
 // Deprecated as of 7/5
 
 function organizeByRoute() {
@@ -31,8 +43,8 @@ function removeAllViews () {
 
 /* * * * * * * * * * *   Prototype Overrides   * * * * * * * * * * * * * * */
 
-//removeRenderedView()
-//takes the view out of the renderedViews array
+//view.removeRenderedView()
+//takes the view out of the renderedViews array as well as removing it
 Parse.View.prototype.removeRenderedView = _.wrap(
   Parse.View.prototype.remove,
   function (originalFunction) {
@@ -371,7 +383,6 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     console.log('index route function fired');
     new IndexView();
-    new SearchBoxView(".homepage-banner");
     new LoginView();
   },
 
@@ -393,9 +404,6 @@ var Router = Backbone.Router.extend({
 //Glue Code
 
 $(document).ready(function () {
-  // organizedrenderedViews is deprecated as of 7/5 but leaving
-  //for potential future use
-  window.organizedRenderedViews = {};
   window.renderedViews = [];
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
