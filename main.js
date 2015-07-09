@@ -80,12 +80,12 @@ var SearchBoxView = Parse.View.extend({
 
   events: {
     'keyup input' : 'searchDropdown',
-    'click .login-slideout-btn' : 'toggleSlideout'
+    'click #nav-toggle' : 'toggleSlideout'
   },
 
   toggleSlideout: function () {
     $('.slideout-container').toggleClass('toggle-slideout');
-    $('#nav-toggle').toggleClass('active');
+    $('#nav-icon1').toggleClass('open');
   },
 
   searchDropdown: function (e) {
