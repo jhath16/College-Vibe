@@ -14,26 +14,12 @@ function removeView (view) {
     _.each(subviews, function (i) {
       i.remove();
     });
+    view.subviews = [];
   }
 };
 
-// _.partialHelper(template,model)
-// Used in *templates* to render html as a partial
-// Accepts an optional model to render the model's data
-//ISSUE: Does not handle events properly 
-
-_.mixin({
-  partialHelper: function (partialTemplate, model) {
-    var tmp1 = $('#' + partialTemplate).text();
-    return _.template(tmp1)(model);
-  }
-});
-
-// Deprecated as of 7/5
-
-function organizeByRoute() {
-  organizedRenderedViews = _.groupBy(renderedViews, function (v) {return v.routeName});
-};
+// Goes through all of the views in renderedViews and
+// removes them in reverse order (to avoid collapsing errors)
 
 function removeAllViews () {
   for (var i = renderedViews.length - 1; i >= 0; i--) {
@@ -41,10 +27,9 @@ function removeAllViews () {
   }
 };
 
-/* * * * * * * * * * *   Prototype Overrides   * * * * * * * * * * * * * * */
-
 //view.removeRenderedView()
 //takes the view out of the renderedViews array as well as removing it
+
 Parse.View.prototype.removeRenderedView = _.wrap(
   Parse.View.prototype.remove,
   function (originalFunction) {
@@ -66,108 +51,8 @@ var IndexView = Parse.View.extend({
 
   render : function () {
     renderedViews.push(this);
-    this.$el.html(this.template());
-    $('#application').append(this.el);
-    return this;
-  }
-});
-
-// When instantiating a new search box,
-//make sure to pass it a jquery-styled container
-
-var SearchBoxView = Parse.View.extend({
-  template: _.template($('#search-box-view').text()),
-
-  initialize:function (container) {
-    this.render(container);
-    this.subViews = [];
-  },
-
-  render: function (container) {
-    renderedViews.push(this);
-    this.$el.html(this.template);
-    $(container).append(this.el);
-    return this;
-  },
-
-  events: {
-    'keyup input' : 'searchDropdown',
-    'click .login-slideout-btn' : 'toggleSlideout'
-  },
-
-  toggleSlideout: function () {
-    $('.slideout-container').toggleClass('toggle-slideout');
-    $('#nav-toggle').toggleClass('active');
-  },
-
-  searchDropdown: function (e) {
-    var self = this,
-				queryString = e.currentTarget.value.toLowerCase(),
-        qLength = queryString.length;
-
-    //This loops through the subViews and properly calls .remove() on each
-    //  instead of calling $.empty() and potentially leaking memory
-
-    _.each(this.subViews, function (i) {
-      i.remove();
-    });
-    this.subViews = [];
-
-    //this entire conditional only has the overall job of appending to the dropdown
-		if (queryString != '') {
-      var dataArray = collegeCollection;
-			//Define the filter callback
-
-			function filterFunction (i) {
-        var schoolName = i.get('schoolname');
-        var abbreviation = i.get('abbreviation');
-
-        var concatString = schoolName.concat(abbreviation).toLowerCase();
-        var searchIndex = concatString.search(queryString);
-
-        //returns true if it matched anywhere so that can be passed
-        // to the matchedQuery array through the .filter() method
-
-        return searchIndex != -1 ? true : false;
-			};
-
-			//filter through the data provided
-
-			var matchedQuery = collegeCollection.filter(filterFunction);
-
-			//matchedQuery now has the array of matching objects
-
-      //Only render the first 6 (subject to change)
-      //  - right now, doesn't resort the array before looping through
-      //  - this means that only the first six in array are appended now
-      //maybe in the future, we could add a sorting rule before rendering views
-
-      var index = 0;
-      _.each(matchedQuery, function (i) {
-        index++;
-        if (index < 7) {
-          var newView = new SchoolDropdownView({model:i});
-          self.subViews.push(newView);
-        }
-      });
-		}
-  }
-});
-
-var SchoolDropdownView = Parse.View.extend({
-  tagName:'div',
-
-  routeName:'independent',
-
-  initialize: function () {
-    this.render();
-  },
-
-  template: _.template($('#school-dropdown-view').text()),
-
-  render: function () {
     this.$el.html(this.template(this.model));
-    $('.college-search').append(this.el);
+    $('#application').append(this.el);
     return this;
   }
 });
@@ -181,6 +66,7 @@ var LoginView = Parse.View.extend({
 
   initialize: function () {
     this.render();
+    //conditional rendering of the view will go in the template. Easy
   },
 
   template: _.template($('#login-view').text()),
@@ -336,6 +222,105 @@ var SchoolMapView = Parse.View.extend({
   }
 });
 
+/* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
+
+var SearchDropdownPartial = Parse.View.extend({
+  el: '.search-box-partial',
+
+  template: _.template($('#search-box-view').text()),
+
+  initialize:function () {
+    this.render();
+    this.subViews = [];
+  },
+
+  render: function () {
+    renderedViews.push(this);
+    this.$el.html(this.template);
+    return this;
+  },
+
+  events: {
+    'keyup input' : 'searchDropdown',
+    'click .login-slideout-btn' : 'toggleSlideout'
+  },
+
+  toggleSlideout: function () {
+    $('.slideout-container').toggleClass('toggle-slideout');
+    $('#nav-toggle').toggleClass('active');
+  },
+
+  searchDropdown: function (e) {
+    var self = this,
+				queryString = e.currentTarget.value.toLowerCase(),
+        qLength = queryString.length;
+
+    //This loops through the subViews and properly calls .remove() on each
+    //  instead of calling $.empty() and potentially leaking memory
+
+    _.each(this.subViews, function (i) {
+      i.remove();
+    });
+    this.subViews = [];
+
+    //this entire conditional only has the overall job of appending to the dropdown
+		if (queryString != '') {
+      var dataArray = collegeCollection;
+			//Define the filter callback
+
+			function filterFunction (i) {
+        var schoolName = i.get('schoolname');
+        var abbreviation = i.get('abbreviation');
+
+        var concatString = schoolName.concat(abbreviation).toLowerCase();
+        var searchIndex = concatString.search(queryString);
+
+        //returns true if it matched anywhere so that can be passed
+        // to the matchedQuery array through the .filter() method
+
+        return searchIndex != -1 ? true : false;
+			};
+
+			//filter through the data provided
+
+			var matchedQuery = collegeCollection.filter(filterFunction);
+
+			//matchedQuery now has the array of matching objects
+
+      //Only render the first 6 (subject to change)
+      //  - right now, doesn't resort the array before looping through
+      //  - this means that only the first six in array are appended now
+      //maybe in the future, we could add a sorting rule before rendering views
+
+      var index = 0;
+      _.each(matchedQuery, function (i) {
+        index++;
+        if (index < 7) {
+          var newView = new SchoolDropdownView({model:i});
+          self.subViews.push(newView);
+        }
+      });
+		}
+  }
+});
+
+var SchoolDropdownView = Parse.View.extend({
+  tagName:'div',
+
+  routeName:'independent',
+
+  initialize: function () {
+    this.render();
+  },
+
+  template: _.template($('#school-dropdown-view').text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    $('.college-search').append(this.el);
+    return this;
+  }
+});
 /* * * * * * * * *     MODELS       * * * * * * * * * * * * * */
 
 var College = Parse.Object.extend({
@@ -350,6 +335,7 @@ var User = Parse.Object.extend({
 
 var CollegeCollection = Parse.Collection.extend({
   model:College,
+
   query:new Parse.Query("testCollege").limit(1000),
 
   initialize: function () {
@@ -383,6 +369,7 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     console.log('index route function fired');
     new IndexView();
+    new SearchDropdownPartial();
     new LoginView();
   },
 
@@ -428,8 +415,10 @@ all dynamic templates to.
 -Probably not at least for the moment but still an option.
 -How would you go about working with external templates?...
 
-4.Find a way to keep Backbone.Model defaults in a Parse.Collection
+4.Find a way to keep Backbone.Model defaults in a Parse.Collection for missing data
 Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 
+5. NAMESPACING
+- Don't leave anything in the global scope
 */
