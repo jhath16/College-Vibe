@@ -14,27 +14,31 @@
   <div id="application"></div>
 
   <script type="text/template" id='login-view'>
-    <div class="login-container">
-      <label>Email Address</label>
-      <input placeholder="Enter your email" type='text'>
-      <label>Password</label>
-      <input placeholder="Enter your password" type='password'>
-      <button>Log In</button>
-      <p class="register-btn">Register an account?</p>
-    </div>
+    <% if (!Parse.User.current()) { %>
+      <div class="login-container">
+        <label>Email Address</label>
+        <input placeholder="Enter your email" type='text'>
+        <label>Password</label>
+        <input placeholder="Enter your password" type='password'>
+        <button>Log In</button>
+        <p class="register-btn">Register an account?</p>
+      </div>
 
-    <div class="register-container">
-      <label>Full Name</label>
-      <input placeholder="Enter your full name" type='text'>
-      <label>Email Address</label>
-      <input placeholder="Enter your email" type='text'>
-      <label>Enter password</label>
-      <input placeholder="Password" type='password'>
-      <label>Confirm your password</label>
-      <input placeholder="Confirm Password" type='password'>
-      <button>Sign Up</button>
-      <p class="login-btn">Go back to login</p>
-    </div>
+      <div class="register-container">
+        <label>Full Name</label>
+        <input placeholder="Enter your full name" type='text'>
+        <label>Email Address</label>
+        <input placeholder="Enter your email" type='text'>
+        <label>Enter password</label>
+        <input placeholder="Password" type='password'>
+        <label>Confirm your password</label>
+        <input placeholder="Confirm Password" type='password'>
+        <button>Sign Up</button>
+        <p class="login-btn">Go back to login</p>
+      </div>
+    <% } else { %>
+      <h1 style='font-size:20px'><%= Parse.User.current().get('name') %></h1>
+    <% } %>
   </script>
 
 
