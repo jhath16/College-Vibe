@@ -460,6 +460,7 @@ var Router = Backbone.Router.extend({
     var modelName = schoolname.replace(/-/g, ' ');
     console.log('schoolRoute fired with the model: ' + modelName);
     new SchoolView();
+    new SearchDropdownPartial();
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
     //new SchoolView({model:matchedModel});
