@@ -1,5 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,800,900,300italic,400italic);
 
+
+/* Colors */
+
+$primary-color-light: #ECEFF1;
+
+
+/* Global Variables */
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -21,7 +29,7 @@ body {
 .body-container {
 	width: 100%;
 	position: relative;
-	background: #f8f8f8;
+	background: $primary-color-light;
 	z-index: 1;
 }
 
@@ -41,7 +49,6 @@ header {
 
 	li {
 		display: inline-block;
-		padding-top:12px;
 		vertical-align: top;
 	}
 
@@ -52,7 +59,7 @@ header {
 	}
 
 	h1 {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 30px;
 		font-weight: 300;
 		padding-top: 5px;
@@ -61,7 +68,7 @@ header {
 		vertical-align: top;
 	}
 	p {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 14px;
 		font-weight: 100;
 		display: block;
@@ -80,7 +87,7 @@ header {
 	}
 
 	h1 {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 30px;
 		font-weight: 300;
 		padding-top: 5px;
@@ -89,7 +96,7 @@ header {
 		vertical-align: top;
 	}
 	p {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 14px;
 		font-weight: 100;
 		display: block;
@@ -105,11 +112,10 @@ header {
 	position: absolute;
 	top: 0;
 	z-index: 100;
-	/*background:#263238;*/
 }
 
 .header-container {
-	width: 1080px;
+	width: 960px;
 	margin: 0 auto;
 	position: relative;
 	top:25px;
@@ -123,74 +129,103 @@ header {
 	display: inline-block;
 }
 
-.header-nav {
+/* Animated Hamburger Toggle */
+
+/* Icon 1 */
+
+#nav-toggle {
 	display: inline-block;
-	position: absolute;
-	z-index: 1000;
-	right: 0px;
-	top: 21px;
-
-	ul {
-		list-style: none;
-		padding-left: 0;
-	}
-
-	li {
-		display: inline-block;
-	}
-
-	span {
-	  font-weight: 500;
-	  font-size: 28px;
-	  height: 60px;
-	  width: 60px;
-	  padding-top: 16px;
-	  text-align: center;
-	  cursor: pointer;
-	  transition: 250ms;
-	}
-
-	img {
-		width: 40px;
-		height: 40px;
-		cursor: pointer;
-		right: 10px;
-		position: absolute;
-		top: 5px;
-	}
+	vertical-align: top;
+	/* float: right; */
+	width: 15%;
+	height: 60px;
+	cursor: pointer;
+	/* padding-top: 19px; */
+	/* margin-top: -15px; */
+	position: relative;
 }
 
-.homepage-toggle, 
-.header-toggle {
-	display: inline-block;
-	z-index: 1000;
+#nav-icon1 {
+	width: 15%;
+	height: 42px;
 	position: absolute;
-	right: 0;
-
-
-	ul {
-		list-style: none;
-		padding-left: 0;
-	}
-
-	li {
-		display: inline-block;
-		height: 60px;
-	  	width: 60px;
-	}
-
-	span {
-	  text-align: center;
-	  cursor: pointer;
-	  transition: 250ms;
-	}
+	display: inline-block;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;
+	-o-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+	cursor: pointer;
+	margin-left: -50px;
+	margin-top: 20px;
 }
+
+#nav-icon1 span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 25px;
+  background: $primary-color-light;
+  border-radius: 1px;
+  opacity: 1;
+  left: 10px;
+  top:10px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+
+#nav-icon1 span:nth-child(1) {
+  top: 0px;
+}
+
+#nav-icon1 span:nth-child(2) {
+  top: 9px;
+}
+
+#nav-icon1 span:nth-child(3) {
+  top: 18px;
+}
+
+#nav-icon1.open span {
+	background:#F44336;
+}
+
+#nav-icon1.open span:nth-child(1) {
+  top: 9px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+#nav-icon1.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+#nav-icon1.open span:nth-child(3) {
+  top: 9px;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
 
 .login-slideout-btn {
-	color:#ECEFF1;
-	background: #37474F;
-
+	color:$primary-color-light;
+	background: #455A64;
 }
+
 .toggle-slideout-dark {
 	color:#263238;
 	background:#CFD8DC;
@@ -261,7 +296,7 @@ header {
 
 .homepage-banner, 
 .header-banner {
-	width: 380px;
+	width: 360px;
 	margin: 0 auto;
 	position: relative;
 }
@@ -271,44 +306,35 @@ header {
   	right: 0;
   	top: 0px;}
 
-.homepage-search, 
-.header-search {
+.search-container {
 	position: absolute;
-	width: 320px;
+	width: 100%;
 	margin: 0 auto;
 	text-align: right;
 	display: inline-block;
 	vertical-align: top;
+	background:#455A64;
 	left: 0;
 
-	span {
-		position: absolute;
-		width: 60px;
+	i {
+		width: 15%;
 		height: 60px;
-		margin-left: 0px;
-		color: #ECEFF1;
+		color: $primary-color-light;
 		background: #455A64;
 		padding-top: 21px;
 		text-align: center;
 		font-size: 16px;
 		display: inline-block;
 		transition: 250ms;
-		right: 260px;
-	}
-
-	img {
-		display: inline-block;
-		width: 50px;
-		height: 50px;
+		border-right: 1px solid #37474F;
 	}
 
 	input {
-		width: 260px;
+		width: 70%;
 		height: 60px;
 		padding: 15px 0;
-		background: #37474F;
-		position: absolute;
-		color: #ECEFF1;
+		background: #455A64;
+		color: $primary-color-light;
 		font-size: 18px;
 		border: 0;
 		outline: 0;
@@ -316,16 +342,24 @@ header {
 		transition: 250ms;
 		font-weight: 300;
 		text-indent: 15px;
-		right: 0;
+		border-left: 1px solid #546E7A;
+		vertical-align:top;
 	}
 
 	input::-webkit-input-placeholder {
 		color: #B0BEC5;
 	}
+
+	li {
+		display: inline-block;
+		width: 15%;
+		vertical-align: top;
+	}
 }
 
-.homepage-college-search, 
-.header-college-search {
+/* Search Dropdown */
+
+.search-dropdown {
 	width: 380px;
 	left:0;
 }
@@ -358,7 +392,7 @@ header {
 		font-size:18px;
 		line-height: 30px;
 		font-weight: 100;
-		color: #f8f8f8;
+		color: $primary-color-light;
 		display: block;
 		vertical-align: top;
 	}
@@ -367,7 +401,7 @@ header {
 		font-size: 28px;
 		font-weight: 300;
 		font-style: italic;
-		color:#f8f8f8;
+		color:$primary-color-light;
 		display: block;
 		vertical-align: top;
 		padding-bottom: 15px;
@@ -421,30 +455,11 @@ svg rect{
 
 /* SEARCH CONTAINER */
 
-.search-container {
-	display: inline-block;
-
-	span {
-		position: absolute;
-		width: 60px;
-		height: 60px;
-		margin-left: 0px;
-		color: #ECEFF1;
-		background: #455A64;
-		padding-top:21px;
-		text-align: center;
-		width: 45px;
-		font-size: 16px;
-		display: inline-block;
-	}
-
-}
-
 .college-search {
 	height: auto;
 	width: 380px;
 	max-height: 244px;
-	background: #ECEFF1;
+	background: $primary-color-light;
 	font-weight: 300;
 	transition: 250ms;
 	overflow: scroll;
@@ -485,7 +500,7 @@ svg rect{
 	width:320px;
 	position:fixed;
 	height:100vh;
-	background:#ECEFF1;
+	background:$primary-color-light;
 	z-index:700;
 	transition: 250ms;
 	padding-top:30px;
@@ -511,7 +526,7 @@ svg rect{
 		width: 100%;
 		margin-bottom: 10px;
 		margin-top: 5px;
-		background: #f8f8f8; 
+		background: #FFF; 
 		border: 1px solid #dfdfdf;
 		outline: 0;
 		font-size: 16px;
@@ -527,7 +542,7 @@ svg rect{
 		border: 0;
 		outline: 0;
 		font-size: 16px;
-		color:#f8f8f8;
+		color:$primary-color-light;
 		border-radius:3px;
 	}
 
@@ -556,7 +571,7 @@ svg rect{
 		width: 100%;
 		margin-bottom: 10px;
 		margin-top:5px;
-		background: #f8f8f8; 
+		background: #FFF; 
 		border: 1px solid #dfdfdf;
 		outline: 0;
 		font-size: 16px;
@@ -572,7 +587,7 @@ svg rect{
 		border: 0;
 		outline: 0;
 		font-size: 16px;
-		color:#f8f8f8;
+		color:$primary-color-light;
 		border-radius:3px;
 	}
 
@@ -618,7 +633,7 @@ svg rect{
     z-index: 20;
     text-align: center;
     border: none;
-    background: #f8f8f8;
+    background: $primary-color-light;
     border-radius: 0;
     font-size: 16px;
     color: #263238;
@@ -634,17 +649,17 @@ svg rect{
 
 /* Animated Hamburger Toggle */
 
-#nav-toggle { position: absolute; left: 50%; top: 50%; }
+/*#nav-toggle { position: absolute; left: 50%; top: 50%; }
 
 #nav-toggle { 
 	cursor: pointer;
 	margin-left: -13px;
-	margin-top: -2px;
+	margin-top: 0px;
 }
 #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
   cursor: pointer;
   border-radius: 1px;
-  height: 5px;
+  height: 3px;
   width: 25px;
   background: white;
   position: absolute;
@@ -659,7 +674,7 @@ svg rect{
 }
 
 #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
-  transition: all 500ms ease-in-out;
+  transition: all 250ms ease-in-out;
 }
 #nav-toggle.active span {
   background-color: transparent;
@@ -673,6 +688,7 @@ svg rect{
 #nav-toggle.active span:after {
   transform: rotate(-45deg);
 }
+*/
 
 /* Home Sidebar */
 
@@ -806,25 +822,27 @@ svg rect{
 	padding-top: 5px;
 }
 
+/* Profile and School Templates */
+
 .profile-body, 
 .school-body {
-	width: 1080px;
+	width: 960px;
 	margin: 0 auto;
 	position: relative;
 	top: 50px;
+	margin-bottom: 50px;
 }
 
 .profile-right-col, 
 .school-right-col {
 	display: inline-block;
-	width: 380px;
+	width: 360px;
 	position: relative;
 	right: 0;
 	vertical-align: top;
-	padding-top:90px;
 
 	p {
-		color:#ECEFF1;
+		color:$primary-color-light;
 		font-size: 16px;
 		font-weight: 300;
 		text-align: left;
@@ -833,30 +851,29 @@ svg rect{
 
 	a {
 		font-size: 14px;
-		color:#f8f8f8;
+		color:$primary-color-light;
 		float:right;
+		font-weight: 300;
 	}
 }
 
 .profile-left-col, 
 .school-left-col {
 	display: inline-block;
-	width: 670px;
+	width: 575px;
 	background: transparent;
-	margin-right: 30px;
-	margin-top:-86px;
+	margin-right: 25px;
 }
 
 .profile-info, 
 .school-info {
-	background: rgba(255,255,255,.05);
 	width: 100%;
 	margin-top: -24px;
 	text-align:center;
 
 	span {
 		font-size: 36px;
-		color: #ECEFF1;
+		color: $primary-color-light;
 		position: relative;
 		left: 0;
 		margin: 0 auto;
@@ -873,15 +890,11 @@ svg rect{
 .profile-info-oddrow, 
 .school-info-evenrow, 
 .school-info-oddrow {
-	background:#ECEFF1;
+	background:$primary-color-light;
 	width: 100%;
-	height: 200px;
+	height: 500px;
 	position:relative;
-
-
-
 }
-
 
 .profile-heading {
 
@@ -899,7 +912,7 @@ svg rect{
 	}
 
 	h1 {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 30px;
 		font-weight: 300;
 		padding-top: 14px;
@@ -909,7 +922,7 @@ svg rect{
 	}
 
 	p {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 14px;
 		font-weight: 300;
 		display: block;
@@ -921,12 +934,12 @@ svg rect{
 }
 
 .school-heading {
-
 	width: 100%;
   	padding: 15px 15px 6px;
   	background:#37474F;
   	display: inline-block;
   	height:130px;
+  	margin-bottom:1px;
 
 	img {
 		width: 110px;
@@ -935,7 +948,7 @@ svg rect{
 	}
 
 	h1 {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 30px;
 		font-weight: 300;
 		padding-top: 14px;
@@ -945,7 +958,7 @@ svg rect{
 	}
 
 	p {
-		color: #ECEFF1;
+		color: $primary-color-light;
 		font-size: 14px;
 		font-weight: 300;
 		display: block;
@@ -954,23 +967,99 @@ svg rect{
 		margin-top: -59px;
 	}
 
+	span {
+		display:none;
+	}
+}
+
+.school-options {
+	width: 100%;
+	background:#37474F;
+
+	li {
+		width: 33.3333%;
+		display: inline-block;
+		color:$primary-color-light;
+		font-size: 16px;
+		text-align: center;
+		padding: 30px 0;
+		font-weight: 300;
+		border-right: 1px solid #263238;
+		border-left: 1px solid #455A64;
+		border-bottom: 1px solid #263238;
+		border-top: 1px solid #455A64;
+	}
+
+	li:nth-child(1), 
+	li:nth-child(4) {
+		border-left: 0;
+	}
+
+	li:nth-child(1), 
+	li:nth-child(2),
+	li:nth-child(3) {
+		border-top:0;
+	}
+
+	li:nth-child(4), 
+	li:nth-child(5),
+	li:nth-child(6) {
+		border-bottom:0;
+	}
+
+	li:nth-child(3n) {
+		border-right: 0;
+	}
+
+	span {
+		display: block;
+		font-size:24px;
+		padding-bottom:10px;
+	}
+}
+
+.school-options-mobile {
+	display: none;
+}
+
+.school-ad {
+	width: 100%;
+	background: $primary-color-light;
+	height: 200px;
+	margin-bottom: 30px;
+	text-align: center;
+
+	p {
+		font-size: 36px;
+		text-align: center;
+		color:#333;
+	}
+
+	span {
+		font-size: 36px;
+		color: $primary-color-light;
+		position: relative;
+		/* left: 0; */
+		margin: 0 auto;
+		top: 0;
+		z-index: 1000000;
+		/* vertical-align: bottom; */
+		margin-top: -23px;
+	}
+	
 }
 
 .school-photos {
-	width: 380px;
-	right: 0;
+	width: 100%;
 	position: relative;
 	background:#263238;
 
-
 	li {
-		width: 33.33333%;
-		height: 90px;
-		background:#37474F;
+		width: 100%;
+		height: auto;
+		/*background:#37474F;*/
 		display: inline-block;
-		border-right:5px solid #263238;
-		border-bottom: 5px solid #263238;
-		margin-bottom: 5px;
+		/*padding:15px;*/
 	}
 
 	li:nth-child(3n) {
@@ -978,7 +1067,7 @@ svg rect{
 	}
 	img {
 		width: 100%;
-		height: 90px;
+		height: auto;
 
 	}
 }
@@ -1018,10 +1107,134 @@ svg rect{
 	}
 
 	.banner-slogan img {
-		display: none;
 	}
 
 	.section {
 		height: auto !important;
+	}
+
+	/* Search Bar */
+
+	header {
+		padding-top:0;
+		height: 60px;
+	}
+
+	.header-banner {
+		width: 100%;
+	}
+
+	.homepage-banner {
+		width: 90%;
+	}
+
+	.header-container {
+		width: 100%;
+		top: 0;
+	}
+
+	.header-search, 
+	.homepage-search {
+		width: 100%;
+	}
+
+	.header-search span, 
+	.homepage-search span {
+		width: 15%;
+		right: 85%;
+	}
+
+	.header-search input, 
+	.homepage-search input {
+		width: 85%;
+	}
+
+	.header-toggle {
+		width: 20%;
+
+		li {
+			width: 100%;
+		}
+	}
+
+	/* Profile and School Template */
+
+	.profile-body, 
+	.school-body {
+		width: 100%;
+		margin-top: 50px;
+	}
+
+	.profile-left-col, 
+	.school-left-col, 
+	.school-right-col,
+	.profile-right-col {
+		display: block;
+		width: 100%;
+		margin-top:-50px;
+	}
+
+	.school-body {
+		top: 0;
+	}
+
+	.school-options {
+		display: none;
+
+	}
+
+	.school-options-mobile {
+		display: block;
+		margin-bottom:1px;
+		background:#37474F;
+		border-top: 1px solid #455A64;
+		border-bottom: 1px solid #455A64;
+
+		li {
+/*			border-right: 1px solid #455A64;
+			border-left: 1px solid #607D8B;
+			border-bottom: 1px solid #455A64;
+			border-top: 1px solid #607D8B;*/
+		}
+	}
+
+	.school-heading {
+  		padding: 29px 15px 6px;
+  		background:#263238;
+  		border-top:1px solid #455A64;
+
+  		img {
+  			width:60px;
+  			height:60px;
+  			text-align:left;
+  		}
+
+  		p {
+  			padding-left: 64px;
+  			margin-top: -20px;
+  			color:$primary-color-light;
+  			text-align:left;
+
+  		}
+
+  		h1 {
+  			padding-top: 4px;
+  			color:$primary-color-light;
+  			text-align:left;
+
+  		}
+
+  		span {
+			font-size: 36px;
+			color: #263238;
+			position: relative;
+			display:block;
+			z-index: 1000000;
+			vertical-align: bottom;
+			margin-bottom: -23px;
+			padding-top: 15px;
+			text-align:center;
+			display:none;
+  		}
 	}
 }
