@@ -768,9 +768,8 @@ svg rect {
     vertical-align: top;
     overflow: hidden;
     margin-right: 4%;
-    background: #ECEFF1;
-    padding: 2px;
-    border-radius: 0px; }
+    background: #455A64;
+    padding: 2px; }
   .school-instagram-gallery li:last-child {
     margin-right: 0; }
   .school-instagram-gallery img {
