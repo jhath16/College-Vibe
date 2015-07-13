@@ -4,7 +4,17 @@
 
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
 
-//Removes views from the global renderedViews array
+//Establish the namespacing
+(function () {
+  window.CollegeVibe = {};
+  CollegeVibe.Models = {};
+  CollegeVibe.Views = {};
+  CollegeVibe.Collections = {};
+  CollegeVibe.Partials = {};
+  CollegeVibe.Helpers = {};
+})();
+
+//Removes a view and its subviews from the global renderedViews array
 
 function removeView (view) {
   var cid = view.cid;
@@ -19,7 +29,7 @@ function removeView (view) {
 };
 
 // Goes through all of the views in renderedViews and
-// removes them in reverse order (to avoid collapsing errors)
+// removes them in reverse order (to avoid collapsing array errors)
 
 function removeAllViews () {
   for (var i = renderedViews.length - 1; i >= 0; i--) {
@@ -40,7 +50,7 @@ Parse.View.prototype.removeRenderedView = _.wrap(
 
 /* * * * * * *           VIEWS            * * * * * * * * * * * */
 
-var IndexView = Parse.View.extend({
+CollegeVibe.Views.Index = Parse.View.extend({
   initialize: function () {
     this.render();
   },
@@ -57,7 +67,7 @@ var IndexView = Parse.View.extend({
   }
 });
 
-var SchoolDropdownView = Parse.View.extend({
+CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
   tagName:'div',
 
   routeName:'independent',
@@ -70,12 +80,12 @@ var SchoolDropdownView = Parse.View.extend({
 
   render: function () {
     this.$el.html(this.template(this.model));
-    $('#application').append(this.el);
+    $('.college-search').append(this.el);
     return this;
   }
 });
 
-var LoginView = Parse.View.extend({
+CollegeVibe.Views.Login = Parse.View.extend({
   tagName: 'div',
 
   routeName:'independent',
@@ -153,9 +163,9 @@ var LoginView = Parse.View.extend({
   }
 });
 
-var ProfileView = Parse.View.extend({
+CollegeVibe.Views.Profile = Parse.View.extend({
   initialize:function () {
-    console.log('profileView rendered');
+    console.log('Profile View rendered');
     this.render();
   },
 
@@ -171,9 +181,9 @@ var ProfileView = Parse.View.extend({
   }
 });
 
-var SchoolView = Parse.View.extend({
+CollegeVibe.Views.School = Parse.View.extend({
   initialize:function () {
-    console.log('schoolView rendered');
+    console.log('School View rendered');
     this.render();
   },
 
@@ -221,7 +231,7 @@ var SchoolView = Parse.View.extend({
 
 });
 
-var SchoolMapView = Parse.View.extend({
+CollegeVibe.Views.SchoolMap = Parse.View.extend({
   tagName: 'li',
 
   template: _.template($('#map-school-view').text()),
@@ -242,7 +252,7 @@ var SchoolMapView = Parse.View.extend({
 
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
 
-var SearchDropdownPartial = Parse.View.extend({
+CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
   el: '.search-box-partial',
 
   template: _.template($('#search-box-view').text()),
@@ -315,7 +325,7 @@ var SearchDropdownPartial = Parse.View.extend({
       _.each(matchedQuery, function (i) {
         index++;
         if (index < 5) {
-          var newView = new SchoolDropdownView({model:i});
+          var newView = new CollegeVibe.Views.SchoolDropdown({model:i});
           self.subViews.push(newView);
         }
       });
@@ -323,42 +333,26 @@ var SearchDropdownPartial = Parse.View.extend({
   }
 });
 
-var SchoolDropdownView = Parse.View.extend({
-  tagName:'div',
 
-  routeName:'independent',
-
-  initialize: function () {
-    this.render();
-  },
-
-  template: _.template($('#school-dropdown-view').text()),
-
-  render: function () {
-    this.$el.html(this.template(this.model));
-    $('.college-search').append(this.el);
-    return this;
-  }
-});
 /* * * * * * * * *     MODELS       * * * * * * * * * * * * * */
 
-var College = Parse.Object.extend({
+CollegeVibe.Models.College = Parse.Object.extend({
   className: 'testCollege',
 });
 
-var User = Parse.Object.extend({
+CollegeVibe.Models.User = Parse.Object.extend({
   className: 'User',
 })
 
 /* * * * * * * *         COLLECTIONS        * * * * * * * * */
 
-var CollegeCollection = Parse.Collection.extend({
-  model:College,
+CollegeVibe.Collections.Colleges = Parse.Collection.extend({
+  model:CollegeVibe.Models.College,
 
   query:new Parse.Query("testCollege").limit(1000),
 
   initialize: function () {
-    console.log('collegeCollection has been created and fetched');
+    console.log('Colleges Collection has been created and fetched');
     this.fetch();
   }
 });
@@ -378,19 +372,19 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     var modelName = schoolname.replace(/-/g, ' ');
     console.log('schoolRoute fired with the model: ' + modelName);
-    new SchoolView();
-    new SearchDropdownPartial();
+    new CollegeVibe.Views.School();
+    new CollegeVibe.Partials.SearchDropdown();
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
-    //new SchoolView({model:matchedModel});
+    //new CollegeVibe.Views.School({model:matchedModel});
   },
 
   indexRoute: function () {
     removeAllViews();
     console.log('index route function fired');
-    new IndexView();
-    new SearchDropdownPartial();
-    new LoginView();
+    new CollegeVibe.Views.Index();
+    new CollegeVibe.Partials.SearchDropdown();
+    new CollegeVibe.Views.Login();
   },
 
   businessRoute : function (id) {
@@ -404,7 +398,7 @@ var Router = Backbone.Router.extend({
   profileRoute: function (username) {
     removeAllViews();
     console.log("Profile Route Fired");
-    var profileView = new ProfileView();
+    new CollegeVibe.Views.Profile();
   }
 });
 
@@ -414,7 +408,7 @@ $(document).ready(function () {
   window.renderedViews = [];
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
-  window.collegeCollection = new CollegeCollection(); //Make the collection global
+  window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Make the collection global
 });
 /*
 
