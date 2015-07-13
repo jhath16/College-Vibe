@@ -350,18 +350,19 @@ var SearchDropdownPartial = Parse.View.extend({
     $('#nav-toggle').toggleClass('active');
   },
 
+  clearDropdown: function () {
+    _.each(this.subViews, function (i) {
+      i.remove();
+    });
+    this.subViews = [];
+  },
+
   searchDropdown: function (e) {
     var self = this,
 				queryString = e.currentTarget.value.toLowerCase(),
         qLength = queryString.length;
 
-    //This loops through the subViews and properly calls .remove() on each
-    //  instead of calling $.empty() and potentially leaking memory
-
-    _.each(this.subViews, function (i) {
-      i.remove();
-    });
-    this.subViews = [];
+    this.clearDropdown();
 
     //this entire conditional only has the overall job of appending to the dropdown
 		if (queryString != '') {
@@ -395,7 +396,7 @@ var SearchDropdownPartial = Parse.View.extend({
       var index = 0;
       _.each(matchedQuery, function (i) {
         index++;
-        if (index < 7) {
+        if (index < 5) {
           var newView = new SchoolDropdownView({model:i});
           self.subViews.push(newView);
         }
