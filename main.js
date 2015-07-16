@@ -194,8 +194,8 @@ CollegeVibe.Views.SchoolMap = Parse.View.extend({
 CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.currentTemplate = _.template($('#food-view').text()); //initial template
-    this.render(); //needs to be before isActive               v
-    this.isRenderedToPage = true; //needs to be after render() ^
+    this.render(); //needs to be before isActive
+    this.isRenderedToPage = true; //needs to be after render()
   },
 
   events: {
@@ -208,15 +208,14 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   render: function () {
-    if (this.partial) {
-      this.partial.removeRenderedView(); //if there's a partial, remove it
+    if (this.partial) {  //if there's a partial,
+      this.partial.removeRenderedView();  //remove it
     }
-    this.$el.html(this.currentTemplate()); //render the html with the new template
-    if (!this.isRenderedToPage) {
-      renderedViews.push(this);
-      $('#application').append(this.el);
+    this.$el.html(this.currentTemplate()); //render the html with the new template to this.$el
+    if (!this.isRenderedToPage) { //if it's not already on the page
+      renderedViews.push(this); //put it in the renderedViews array
+      $('#application').append(this.el); //and put it on the page
     }
-    console.log(renderedViews);
     this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
     return this;
   },
@@ -409,7 +408,4 @@ all dynamic templates to.
 4.Find a way to keep Backbone.Model defaults in a Parse.Collection for missing data
 Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
-
-5. NAMESPACING
-- Don't leave anything in the global scope
 */
