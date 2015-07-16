@@ -14,9 +14,10 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
   CollegeVibe.Helpers = {}; //global functions
 })();
 
-//Removes a view and its subviews from the global renderedViews array
+//Removes a view from the global renderedViews array
+//Also removes all subviews
 
-function removeView (view) {
+function removeViewFromRenderedViews (view) {
   var cid = view.cid;
   var index = _.findIndex(renderedViews, function (n) {return n.cid === cid});
   renderedViews.splice(index,1);
@@ -29,7 +30,7 @@ function removeView (view) {
 };
 
 // Goes through all of the views in renderedViews and
-// removes them in reverse order (to avoid collapsing array errors)
+// *removes them in reverse order (to avoid collapsing array errors)
 
 function removeAllViews () {
   for (var i = renderedViews.length - 1; i >= 0; i--) {
@@ -44,7 +45,7 @@ Parse.View.prototype.removeRenderedView = _.wrap(
   Parse.View.prototype.remove,
   function (originalFunction) {
     originalFunction.apply(this);
-    removeView(this);
+    removeViewFromRenderedViews(this);
   }
 )
 
@@ -54,8 +55,6 @@ CollegeVibe.Views.Index = Parse.View.extend({
   initialize: function () {
     this.render();
   },
-
-  routeName:'index',
 
   template: _.template($('#index-route').text()),
 
@@ -69,8 +68,6 @@ CollegeVibe.Views.Index = Parse.View.extend({
 
 CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
   tagName:'div',
-
-  routeName:'independent',
 
   initialize: function () {
     this.render();
@@ -87,8 +84,6 @@ CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
 
 CollegeVibe.Views.Login = Parse.View.extend({
   tagName: 'div',
-
-  routeName:'independent',
 
   className: 'slideout-container',
 
@@ -169,8 +164,6 @@ CollegeVibe.Views.Profile = Parse.View.extend({
     this.render();
   },
 
-  routeName:'profile',
-
   template: _.template($('#profile-view').text()),
 
   render:function () {
@@ -181,62 +174,10 @@ CollegeVibe.Views.Profile = Parse.View.extend({
   }
 });
 
-CollegeVibe.Views.School = Parse.View.extend({
-  initialize:function () {
-    console.log('School View rendered');
-    this.render();
-  },
-
-  routeName:'schools',
-
-  template: _.template($('#school-view').text()),
-
-  render:function () {
-    renderedViews.push(this);
-    this.$el.html(this.template(this.model));
-    $('#application').append(this.el);
-    return this;
-  },
-
-   pieChart: function() {
-      // pie chart data
-      var pieData = [
-          {
-              value: 20,
-              color:"#878BB6"
-          },
-          {
-              value : 40,
-              color : "#4ACAB4"
-          },
-          {
-              value : 10,
-              color : "#FF8153"
-          },
-          {
-              value : 30,
-              color : "#FFEA88"
-          }
-      ];
-      // pie chart options
-      var pieOptions = {
-           segmentShowStroke : false,
-           animateScale : true
-      }
-      // get pie chart canvas
-      var countries= document.getElementById("countries").getContext("2d");
-      // draw pie chart
-      new Chart(countries).Pie(pieData, pieOptions);
-    }
-
-});
-
 CollegeVibe.Views.SchoolMap = Parse.View.extend({
   tagName: 'li',
 
   template: _.template($('#map-school-view').text()),
-
-  routeName:'independent',
 
   initialize:function () {
     this.render();
@@ -250,11 +191,11 @@ CollegeVibe.Views.SchoolMap = Parse.View.extend({
   }
 });
 
-CollegeVibe.Views.SchoolInfoContainer = Parse.View.extend({
+CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.currentTemplate = _.template($('#food-view').text()); //initial template
-    this.render();
-    this.templates = {};
+    this.render(); //needs to be before isActive               v
+    this.isRenderedToPage = true; //needs to be after render() ^
   },
 
   events: {
@@ -262,20 +203,29 @@ CollegeVibe.Views.SchoolInfoContainer = Parse.View.extend({
   },
 
   tabSwitch: function (e) {
-    console.log(e.currentTarget.id); //need to make it so we can click the tabs to make this TypeError go away
     this.currentTemplate = _.template($('#' + e.currentTarget.id + '-view').text());
     this.render();
   },
 
   render: function () {
-    if (window.partial) window.partial.removeRenderedView();
-    this.$el.html(this.currentTemplate());
-    window.partial = new CollegeVibe.Partials.SearchDropdown();
-    if (!window.school) {
+    if (this.partial) {
+      this.partial.removeRenderedView(); //if there's a partial, remove it
+    }
+    this.$el.html(this.currentTemplate()); //render the html with the new template
+    if (!this.isRenderedToPage) {
       renderedViews.push(this);
       $('#application').append(this.el);
     }
-  }
+    console.log(renderedViews);
+    this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
+    return this;
+  },
+
+  remove: _.wrap(Parse.View.prototype.removeRenderedView,
+    function (originalFunction) {
+      originalFunction.apply(this);
+      this.isRenderedToPage = false;
+    })
 });
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
 
@@ -395,24 +345,23 @@ var Router = Backbone.Router.extend({
 
   },
 
-  schoolRoute: function (schoolname) {
-    removeAllViews();
-    var modelName = schoolname.replace(/-/g, ' ');
-    console.log('schoolRoute fired with the model: ' + modelName);
-    // new CollegeVibe.Views.School();
-    window.school = new CollegeVibe.Views.SchoolInfoContainer();
-    window.partial = new CollegeVibe.Partials.SearchDropdown();
-    //1.Match the schoolname in the collection
-    //2.Pass the correlated model to the view and render();
-    //new CollegeVibe.Views.School({model:matchedModel});
-  },
-
   indexRoute: function () {
     removeAllViews();
     console.log('index route function fired');
     new CollegeVibe.Views.Index();
     new CollegeVibe.Partials.SearchDropdown();
     new CollegeVibe.Views.Login();
+  },
+
+  schoolRoute: function (schoolname) {
+    removeAllViews();
+    var modelName = schoolname.replace(/-/g, ' ');
+    console.log('schoolRoute fired with the model: ' + modelName);
+    // new CollegeVibe.Views.School();
+    new CollegeVibe.Views.School();
+    //1.Match the schoolname in the collection
+    //2.Pass the correlated model to the view and render();
+    //new CollegeVibe.Views.School({model:matchedModel});
   },
 
   businessRoute : function (id) {
