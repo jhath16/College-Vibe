@@ -252,24 +252,27 @@ CollegeVibe.Views.SchoolMap = Parse.View.extend({
 
 CollegeVibe.Views.SchoolInfoContainer = Parse.View.extend({
   initialize: function () {
-    this.currentTemplate = _.template($('#hello').text()); //switch between the five modules that will be provided.
+    this.currentTemplate = _.template($('#food-view').text()); //initial template
     this.render();
     this.templates = {};
   },
 
   events: {
-    'click h1': 'tabSwitch'
+    'click .school-options li': 'tabSwitch'
   },
 
   tabSwitch: function (e) {
     console.log(e.currentTarget.id); //need to make it so we can click the tabs to make this TypeError go away
-    this.currentTemplate = _.template($('#' + e.currentTarget.id + '-template').text());
+    this.currentTemplate = _.template($('#' + e.currentTarget.id + '-view').text());
     this.render();
   },
 
   render: function () {
+    if (window.partial) window.partial.removeRenderedView();
     this.$el.html(this.currentTemplate());
-    if (!window.something) {
+    window.partial = new CollegeVibe.Partials.SearchDropdown();
+    if (!window.school) {
+      renderedViews.push(this);
       $('#application').append(this.el);
     }
   }
@@ -396,9 +399,9 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     var modelName = schoolname.replace(/-/g, ' ');
     console.log('schoolRoute fired with the model: ' + modelName);
-    new CollegeVibe.Views.School();
-    new CollegeVibe.Partials.SearchDropdown();
-    window.something = new CollegeVibe.Views.SchoolInfoContainer();
+    // new CollegeVibe.Views.School();
+    window.school = new CollegeVibe.Views.SchoolInfoContainer();
+    window.partial = new CollegeVibe.Partials.SearchDropdown();
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
     //new CollegeVibe.Views.School({model:matchedModel});
