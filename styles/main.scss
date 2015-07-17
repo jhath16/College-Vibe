@@ -97,7 +97,7 @@ header {
 }
 
 .header-container {
-	width: 960px;
+	width: 1080px;
 	margin: 0 auto;
 	position: relative;
 	top:25px;
@@ -278,7 +278,7 @@ header {
 
 .homepage-banner, 
 .header-banner {
-	width: 360px;
+	width: 320px;
 	margin: 0 auto;
 	position: relative;
 }
@@ -808,28 +808,51 @@ svg rect{
 
 .profile-body, 
 .school-body {
-	width: 960px;
+	width: 1080px;
 	margin: 0 auto;
 	position: relative;
-	top: 50px;
+	top: 45px;
 	margin-bottom: 50px;
 }
 
 .profile-right-col, 
 .school-right-col {
 	display: inline-block;
-	width: 360px;
+	width: 320px;
 	position: relative;
 	vertical-align: top;
 }
 
+.profile-small-col, 
+.school-small-col {
+	display: inline-block;
+	width: 240px;
+	position: relative;
+	vertical-align: top;
+	background:#fff;
+	margin-right:20px;
+}
+
+.featured-image {
+	width: 100%;
+	height: 200px;
+	overflow: hidden;
+	border:0px solid $primary-color-medium;
+
+	img {
+		height: 100%;
+	}
+}
+
+
+
 .profile-left-col, 
 .school-left-col {
 	display: inline-block;
-	width: 575px;
+	width: 480px;
 	background: transparent;
-	margin-right: 25px;
-	margin-top:-86px;
+	margin-right: 20px;
+	vertical-align: top;
 }
 
 
@@ -911,12 +934,24 @@ svg rect{
 	}
 }
 
+.food-avatar, 
+.hotel-avatar {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+
+	img {
+		width: 100%;
+		height: 40px;
+	}
+}
+
 .food-name, 
 .hotel-name {
-	width: 75%;
+	width: 60%;
 	display: inline-block;
 	vertical-align: top;
-	padding-left:5px;
+	padding-left:10px;
 
 	h1 {
 		font-size: 14px;
@@ -933,10 +968,11 @@ svg rect{
 
 .food-radius, 
 .hotel-radius {
-	width: 20%;
+	width: 25%;
 	display: inline-block;
 	vertical-align: top;
 	text-align: right;
+
 
 	p {
 		font-size: 12px;
@@ -1022,7 +1058,7 @@ svg rect{
 		width: 20%;
 		display: inline-block;
 		color:$primary-color-light;
-		font-size: 12px;
+		font-size: 0px;
 		text-align: center;
 		padding: 15px 0;
 		font-weight: 300;
@@ -1200,7 +1236,7 @@ svg rect{
 	width: 100%;
 	background: $primary-color-light;
 	height: 200px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	text-align: center;
 
 	p {
@@ -1345,7 +1381,7 @@ svg rect{
 	.profile-right-col {
 		display: block;
 		width: 100%;
-		margin-top:-50px;
+		margin-top:-40px;
 	}
 
 	.school-body {
