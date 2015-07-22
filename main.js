@@ -223,7 +223,6 @@ CollegeVibe.Views.School = Parse.View.extend({
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
     function (originalFunction) {
       originalFunction.apply(this);
-      this.partial.removeView();
       this.isRenderedToPage = false;
     })
 });
