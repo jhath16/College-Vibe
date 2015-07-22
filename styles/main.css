@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,800,900,300italic,400italic);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
 /* Colors */
 /* Global Variables */
 * {
@@ -12,7 +13,7 @@ a {
   text-decoration: none; }
 
 body {
-  background: #263238;
+  background: #CFD8DC;
   z-index: 1;
   position: relative; }
 
@@ -26,8 +27,26 @@ body {
 header {
   width: 100%;
   height: 80px;
-  /*background: #263238;*/
-  padding-top: 18px; }
+  padding-top: 20px;
+  /*background: $primary-color-medium;*/
+  /*	h1 {
+  		color: $primary-color-light;
+  		font-size: 30px;
+  		font-weight: 300;
+  		padding-top: 5px;
+  		padding-left: 2px;
+  		display: inline-block;
+  		vertical-align: top;
+  	}
+  	p {
+  		color: $primary-color-light;
+  		font-size: 14px;
+  		font-weight: 100;
+  		display: block;
+  		vertical-align: top;
+  		padding-left: 54px;
+  		margin-top: -6px;
+  	}*/ }
   header ul {
     list-style: none;
     padding-left: 0; }
@@ -38,22 +57,6 @@ header {
     width: 50px;
     height: 50px;
     display: inline-block; }
-  header h1 {
-    color: #ECEFF1;
-    font-size: 30px;
-    font-weight: 300;
-    padding-top: 5px;
-    padding-left: 2px;
-    display: inline-block;
-    vertical-align: top; }
-  header p {
-    color: #ECEFF1;
-    font-size: 14px;
-    font-weight: 100;
-    display: block;
-    vertical-align: top;
-    padding-left: 54px;
-    margin-top: -6px; }
 
 .header-wrap {
   width: 100%;
@@ -61,11 +64,60 @@ header {
   top: 0;
   z-index: 100; }
 
+.header-top {
+  width: 960px;
+  height: 50px;
+  margin: 0 auto; }
+
+.header-top-left {
+  display: inline-block; }
+  .header-top-left img {
+    width: 40px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top; }
+  .header-top-left h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 28px;
+    color: #37474F;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5px;
+    padding-top: 2px; }
+
+.header-top-right {
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+  text-align: right; }
+  .header-top-right ul {
+    list-style: none;
+    padding-left: 0; }
+  .header-top-right li {
+    display: inline-block;
+    vertical-align: top;
+    width: 40px;
+    text-align: center; }
+  .header-top-right span {
+    font-size: 24px;
+    color: #37474F; }
+  .header-top-right p {
+    font-size: 14px;
+    font-weight: 300;
+    color: #37474F;
+    display: block;
+    vertical-align: top; }
+  .header-top-right h1 {
+    font-size: 14px;
+    color: #37474F;
+    display: block;
+    vertical-align: top; }
+
 .header-container {
-  width: 1080px;
+  width: 960px;
+  height: 60px;
   margin: 0 auto;
-  position: relative;
-  top: 25px; }
+  position: relative; }
 
 .logo {
   background: url("assets/images/logo_white_background.svg");
@@ -214,11 +266,21 @@ header {
   z-index: 400;
   position: fixed; }
 
-.homepage-banner,
-.header-banner {
-  width: 320px;
+.homepage-right,
+.header-right {
+  width: 350px;
   margin: 0 auto;
-  position: relative; }
+  position: relative;
+  display: inline-block;
+  vertical-align: top; }
+
+.header-left {
+  width: 600px;
+  height: 60px;
+  display: inline-block;
+  vertical-align: top;
+  background: #37474F;
+  margin-right: 10px; }
 
 .header-banner {
   position: absolute;
@@ -372,8 +434,8 @@ svg rect {
 
 /* Login Container */
 .slideout-container {
-  right: -320px;
-  width: 320px;
+  right: -350px;
+  width: 350px;
   position: fixed;
   height: 100vh;
   background: #ECEFF1;
@@ -420,14 +482,14 @@ svg rect {
     text-align: left; }
 
 .close-login {
-  right: -320px; }
+  right: -350px; }
 
 .register-container {
   width: 100%;
   margin: 0 auto;
   padding: 30px;
   position: absolute;
-  right: -320px;
+  right: -350px;
   transition: 250ms; }
   .register-container input {
     height: 45px;
@@ -585,7 +647,7 @@ svg rect {
 
 /*Homepage Gallery*/
 .homepage-gallery {
-  width: 1080px;
+  width: 960px;
   margin: 0 auto;
   padding-top: 150px; }
   .homepage-gallery ul {
@@ -644,16 +706,16 @@ svg rect {
 /* Profile and School Templates */
 .profile-body,
 .school-body {
-  width: 1080px;
+  width: 960px;
   margin: 0 auto;
   position: relative;
-  top: 45px;
+  top: 60px;
   margin-bottom: 50px; }
 
 .profile-right-col,
 .school-right-col {
   display: inline-block;
-  width: 320px;
+  width: 350px;
   position: relative;
   vertical-align: top; }
 
@@ -664,7 +726,7 @@ svg rect {
   position: relative;
   vertical-align: top;
   background: #fff;
-  margin-right: 20px; }
+  margin-right: 10px; }
 
 .featured-image {
   width: 100%;
@@ -677,10 +739,11 @@ svg rect {
 .profile-left-col,
 .school-left-col {
   display: inline-block;
-  width: 480px;
+  width: 600px;
   background: transparent;
-  margin-right: 20px;
-  vertical-align: top; }
+  vertical-align: top;
+  margin-right: 10px;
+  margin-top: -70px; }
 
 .profile-info-evenrow,
 .profile-info-oddrow,
@@ -805,14 +868,13 @@ svg rect {
 
 .school-heading {
   width: 100%;
-  padding: 15px 15px 6px;
   background: #37474F;
   display: inline-block;
   height: 130px;
-  margin-bottom: 1px; }
+  border-bottom: 1px solid #263238; }
   .school-heading img {
-    width: 110px;
-    height: 110px;
+    width: 100%;
+    height: auto;
     display: inline-block; }
   .school-heading h1 {
     color: #ECEFF1;
@@ -892,7 +954,8 @@ svg rect {
   width: 100%;
   background: #37474F;
   padding: 15px 15px;
-  border-bottom: 1px solid #263238; }
+  border-bottom: 1px solid #263238;
+  margin-top: 10px; }
   .module-header img {
     height: 25px;
     width: auto;
@@ -975,8 +1038,8 @@ svg rect {
 .school-ad {
   width: 100%;
   background: #ECEFF1;
-  height: 200px;
-  margin-bottom: 20px;
+  height: 100px;
+  margin-top: 10px;
   text-align: center; }
   .school-ad p {
     font-size: 36px;
@@ -1011,7 +1074,7 @@ svg rect {
 
 /* Footer */
 /* Media Queries */
-@media screen and (min-width: 320px) and (max-width: 500px) {
+@media screen and (min-width: 350px) and (max-width: 500px) {
   .slideout-container {
     width: 100%;
     right: -100%; }
