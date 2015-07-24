@@ -370,6 +370,12 @@ header {
   	top: 0px;
 }
 
+.homepage-banner {
+	width: 360px;
+	margin: 0 auto;
+	position:relative;
+}
+
 .search-container {
 	position: absolute;
 	width: 100%;
@@ -1131,22 +1137,26 @@ svg rect{
 }
 
 .school-options {
-	width: 100%;
-	background:#37474F;
+	width: 75%;
+	background:$primary-color-dark;
 	border-bottom:1px solid #455A64;
+	margin-top:-70px;
+	z-index: 1000;
+	padding: 0 20px;
 
 	li {
 		width: 20%;
 		display: inline-block;
+		background: $primary-color-dark;
 		color:$primary-color-light;
 		font-size: 0px;
 		text-align: center;
-		padding: 15px 0;
+		padding: 10px 0;
 		font-weight: 300;
-		border-right: 1px solid #263238;
-		border-left: 1px solid #455A64;
-		border-bottom: 1px solid #263238;
-		border-top: 1px solid #455A64;
+		border-right: 1px solid #000;
+		border-left: 1px solid $primary-color-medium;
+/*		border-bottom: 1px solid #263238;
+		border-top: 1px solid #455A64;*/
 	}
 
 	img {
