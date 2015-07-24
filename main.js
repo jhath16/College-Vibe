@@ -332,7 +332,7 @@ CollegeVibe.Models.User = Parse.Object.extend({
 CollegeVibe.Collections.Colleges = Parse.Collection.extend({
   model:CollegeVibe.Models.College,
 
-  query:new Parse.Query("testCollege").limit(1000),
+  query:new Parse.Query("Colleges").limit(1000),
 
   initialize: function () {
     console.log('Colleges Collection has been created and fetched');
