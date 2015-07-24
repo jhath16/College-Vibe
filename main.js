@@ -20,12 +20,15 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
 function removeViewFromRenderedViews (view) {
   var cid = view.cid;
   var index = _.findIndex(renderedViews, function (n) {return n.cid === cid});
-  renderedViews.splice(index,1);
+  renderedViews.splice(index,1); //remove from the array
   if (view.subviews) {
-    _.each(subviews, function (i) {
+    _.each(view.subviews, function (i) { //remove the subviews
       i.remove();
     });
     view.subviews = [];
+  }
+  if (view.partial) {
+    view.partial.removeRenderedView(); //remove the partial(s);
   }
 };
 
@@ -195,7 +198,6 @@ CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.currentTemplate = _.template($('#statistics-view').text()); //initial template
     this.render(); //needs to be before isRenderedToPage
-    this.isRenderedToPage = true; //needs to be after render()
   },
 
   events: {
@@ -204,20 +206,24 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   tabSwitch: function (e) {
     this.currentTemplate = _.template($('#' + e.currentTarget.id + '-view').text());
-    this.render();
+    this.update();
   },
 
   render: function () {
-    if (this.partial) {  //if there's a partial,
-      this.partial.removeRenderedView();  //remove it
-    }
-    this.$el.html(this.currentTemplate()); //render the html with the new template to this.$el
-    if (!this.isRenderedToPage) { //if it's not already on the page
-      renderedViews.push(this); //put it in the renderedViews array
-      $('#application').append(this.el); //and put it on the page
-    }
+    this.$el.html(this.currentTemplate(this.model)); //render the html with the new template to this.$el
+    renderedViews.push(this); //put it in the renderedViews array
+    $('#application').append(this.el); //and put it on the page
     this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
     return this;
+  },
+
+  update: function () {
+    //basically separate the functionality between render and update
+    //render will render it onto the page
+    //update will just be called on a tab switch
+    this.$el.html(this.currentTemplate(this.model));
+    this.partial.removeRenderedView();
+    this.partial = new CollegeVibe.Partials.SearchDropdown();
   },
 
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
@@ -357,8 +363,11 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     var modelName = schoolname.replace(/-/g, ' ');
     console.log('schoolRoute fired with the model: ' + modelName);
-    // new CollegeVibe.Views.School();
-    new CollegeVibe.Views.School();
+    var matchedModel = _.filter(collegeCollection.models,function (model) {
+      return model.attributes.schoolname === modelName ? true : false;
+    });
+    var newModel = matchedModel[0];
+    new CollegeVibe.Views.School({model:newModel});
     //1.Match the schoolname in the collection
     //2.Pass the correlated model to the view and render();
     //new CollegeVibe.Views.School({model:matchedModel});
@@ -383,9 +392,9 @@ var Router = Backbone.Router.extend({
 
 $(document).ready(function () {
   window.renderedViews = [];
+  window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Make the collection global
   var router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
-  window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Make the collection global
 });
 /*
 
