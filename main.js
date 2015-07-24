@@ -193,8 +193,8 @@ CollegeVibe.Views.SchoolMap = Parse.View.extend({
 
 CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
-    this.currentTemplate = _.template($('#food-view').text()); //initial template
-    this.render(); //needs to be before isActive
+    this.currentTemplate = _.template($('#statistics-view').text()); //initial template
+    this.render(); //needs to be before isRenderedToPage
     this.isRenderedToPage = true; //needs to be after render()
   },
 
