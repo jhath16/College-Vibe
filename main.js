@@ -11,7 +11,7 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
   CollegeVibe.Views = {};
   CollegeVibe.Collections = {};
   CollegeVibe.Partials = {};
-  CollegeVibe.Helpers = {}; //global functions
+  CollegeVibe.Router = {}; //global functions
 })();
 
 //Removes a view from the global renderedViews array
@@ -332,11 +332,11 @@ CollegeVibe.Models.User = Parse.Object.extend({
 CollegeVibe.Collections.Colleges = Parse.Collection.extend({
   model:CollegeVibe.Models.College,
 
-  query:new Parse.Query("Colleges").limit(1000),
+  query: new Parse.Query("Colleges").select('schoolname').limit(1000), //only bring the list of schoolnames back
 
   initialize: function () {
     console.log('Colleges Collection has been created and fetched');
-    this.fetch();
+    this.fetch(this.query);
   }
 });
 
@@ -363,14 +363,15 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     var modelName = schoolname.replace(/-/g, ' ');
     console.log('schoolRoute fired with the model: ' + modelName);
-    var matchedModel = _.filter(collegeCollection.models,function (model) {
-      return model.attributes.schoolname === modelName ? true : false;
+    // var matchedModel = _.filter(collegeCollection.models,function (model) {
+    //   return model.attributes.schoolname === modelName ? true : false;
+    // });
+    // var newModel = matchedModel[0];
+    var query = new Parse.Query("Colleges").equalTo("schoolname",modelName);
+    query.first().then(function (e) {
+      console.log(e);
+      new CollegeVibe.Views.School({model:e});
     });
-    var newModel = matchedModel[0];
-    new CollegeVibe.Views.School({model:newModel});
-    //1.Match the schoolname in the collection
-    //2.Pass the correlated model to the view and render();
-    //new CollegeVibe.Views.School({model:matchedModel});
   },
 
   businessRoute : function (id) {
@@ -393,7 +394,7 @@ var Router = Backbone.Router.extend({
 $(document).ready(function () {
   window.renderedViews = [];
   window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Make the collection global
-  var router = new Router(); //instantiate the router
+  CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
 });
 /*
