@@ -363,10 +363,9 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     var modelName = schoolname.replace(/-/g, ' ');
     console.log('schoolRoute fired with the model: ' + modelName);
-    // var matchedModel = _.filter(collegeCollection.models,function (model) {
-    //   return model.attributes.schoolname === modelName ? true : false;
-    // });
-    // var newModel = matchedModel[0];
+    /* This will take the modelName and query parse for the first object
+       that matches its name. Doesn't depend on the global collection of
+       collegeCollection to be fetched beforehand */
     var query = new Parse.Query("Colleges").equalTo("schoolname",modelName);
     query.first().then(function (e) {
       console.log(e);
