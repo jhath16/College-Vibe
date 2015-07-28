@@ -200,8 +200,8 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.render(); //needs to be before isRenderedToPage
     $(function(){
       $("#slides").slidesjs({
-        width: 320,
-        height: 420,
+        // width: 320,
+        // height: 420,
 
             play: {
               active: true,
@@ -219,7 +219,7 @@ CollegeVibe.Views.School = Parse.View.extend({
                 // [boolean] pause a playing slideshow on hover
               restartDelay: 2500
                 // [number] restart delay on inactive slideshow
-            }, 
+            },
       });
     });
   },
@@ -249,19 +249,36 @@ CollegeVibe.Views.School = Parse.View.extend({
     if(this.currentTemplate = _.template($('#statistics-view').text())) {
       $(function(){
         $("#slides").slidesjs({
-          width: 940,
-          height: 528
+          // width: 320,
+          // height: 420,
+          play: {
+            active: true,
+              // [boolean] Generate the play and stop buttons.
+              // You cannot use your own buttons. Sorry.
+            effect: "fade",
+              // [string] Can be either "slide" or "fade".
+            interval: 5000,
+              // [number] Time spent on each slide in milliseconds.
+            auto: true,
+              // [boolean] Start playing the slideshow on load.
+            swap: true,
+              // [boolean] show/hide stop and play buttons
+            pauseOnHover: true,
+              // [boolean] pause a playing slideshow on hover
+            restartDelay: 2500
+              // [number] restart delay on inactive slideshow
+          },
         });
       });
     }
-    this.partial.removeRenderedView();
+    this.partial.remove();//re-instantiate the partial
     this.partial = new CollegeVibe.Partials.SearchDropdown();
   },
 
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
     function (originalFunction) {
       originalFunction.apply(this);
-      this.partial.removeView();
+      this.partial.remove();
       this.isRenderedToPage = false;
     })
 });
