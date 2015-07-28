@@ -198,12 +198,12 @@ CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.currentTemplate = _.template($('#statistics-view').text()); //initial template
     this.render(); //needs to be before isRenderedToPage
-    // $(function(){
-    //   $("#slides").slidesjs({
-    //     width: 940,
-    //     height: 528
-    //   });
-    // });
+    $(function(){
+      $("#slides").slidesjs({
+        width: 940,
+        height: 528
+      });
+    });
   },
 
   events: {
