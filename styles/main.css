@@ -299,13 +299,13 @@ header {
   text-align: right;
   display: inline-block;
   vertical-align: top;
-  background: #37474F;
+  background: #263238;
   left: 0; }
   .search-container i {
     width: 15%;
     height: 60px;
     color: #ECEFF1;
-    background: #455A64;
+    background: #37474F;
     padding-top: 21px;
     text-align: center;
     font-size: 16px;
@@ -567,7 +567,7 @@ svg rect {
 /* Animated Hamburger Toggle */
 /*#nav-toggle { position: absolute; left: 50%; top: 50%; }
 
-#nav-toggle {
+#nav-toggle { 
 	cursor: pointer;
 	margin-left: -13px;
 	margin-top: 0px;
@@ -583,7 +583,7 @@ svg rect {
   content: '';
 }
 #nav-toggle span:before {
-  top: -10px;
+  top: -10px; 
 }
 #nav-toggle span:after {
   bottom: -10px;
@@ -812,6 +812,9 @@ svg rect {
     vertical-align: top;
     color: #37474F; }
 
+.school-map {
+  margin-top: 10px; }
+
 .food-avatar,
 .hotel-avatar {
   display: inline-block;
@@ -875,8 +878,7 @@ svg rect {
   width: 100%;
   background: #37474F;
   display: inline-block;
-  height: 130px;
-  border-bottom: 1px solid #263238; }
+  height: auto; }
   .school-heading img {
     width: 100%;
     height: auto;
@@ -901,52 +903,60 @@ svg rect {
     display: none; }
 
 .school-options {
-  width: 75%;
+  width: 100%;
+  height: 60px;
   background: #263238;
   border-bottom: 1px solid #455A64;
-  margin-top: -70px;
   z-index: 1000;
-  padding: 0 20px;
-  /*	li:nth-child(1),
+  padding: 0px;
+  margin-top: 0px;
+  /*	li:nth-child(1), 
   	li:nth-child(4) {
   		border-left: 0;
   	}
-
-  	li:nth-child(1),
+  
+  	li:nth-child(1), 
   	li:nth-child(2),
   	li:nth-child(3) {
   		border-top:0;
   	}
-
-  	li:nth-child(4),
+  
+  	li:nth-child(4), 
   	li:nth-child(5),
   	li:nth-child(6) {
   		border-bottom:0;
   	}
-
+  
   	li:nth-child(3n) {
   		border-right: 0;
   	}*/ }
   .school-options li {
     width: 20%;
+    height: 60px;
     display: inline-block;
     background: #263238;
     color: #ECEFF1;
     font-size: 0px;
     text-align: center;
-    padding: 10px 0;
+    padding: 22.5px 0;
     font-weight: 300;
     border-right: 1px solid #000;
     border-left: 1px solid #37474F;
     /*		border-bottom: 1px solid #263238;
-    		border-top: 1px solid #455A64;*/ }
+    		border-top: 1px solid #455A64;*/
+    cursor: pointer; }
+  .school-options p {
+    font-size: 12px;
+    color: #ECEFF1;
+    font-weight: 500; }
   .school-options img {
     text-align: center;
     display: block;
     width: 30px;
     height: auto;
     margin: 0 auto;
-    padding-bottom: 5px; }
+    padding-bottom: 5px;
+    display: none; }
   .school-options li:last-child {
     border-right: 0; }
   .school-options li:first-child {

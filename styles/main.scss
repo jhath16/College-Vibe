@@ -383,14 +383,14 @@ header {
 	text-align: right;
 	display: inline-block;
 	vertical-align: top;
-	background:#37474F;
+	background: $primary-color-dark;
 	left: 0;
 
 	i {
 		width: 15%;
 		height: 60px;
 		color: $primary-color-light;
-		background: #455A64;
+		background: $primary-color-medium;
 		padding-top: 21px;
 		text-align: center;
 		font-size: 16px;
@@ -1022,6 +1022,10 @@ svg rect{
 	}
 }
 
+.school-map {
+	margin-top: 10px;
+}
+
 .food-avatar, 
 .hotel-avatar {
 	display: inline-block;
@@ -1102,8 +1106,7 @@ svg rect{
 	width: 100%;
   	background:#37474F;
   	display: inline-block;
-  	height:130px;
-  	border-bottom:1px solid $primary-color-dark;
+  	height: auto;
 
 	img {
 		width: 100%;
@@ -1137,26 +1140,35 @@ svg rect{
 }
 
 .school-options {
-	width: 75%;
+	width: 100%;
+	height: 60px;
 	background:$primary-color-dark;
 	border-bottom:1px solid #455A64;
-	margin-top:-70px;
 	z-index: 1000;
-	padding: 0 20px;
+	padding: 0px;
+	margin-top: 0px;
 
 	li {
 		width: 20%;
+		height: 60px;
 		display: inline-block;
 		background: $primary-color-dark;
 		color:$primary-color-light;
 		font-size: 0px;
 		text-align: center;
-		padding: 10px 0;
+		padding: 22.5px 0;
 		font-weight: 300;
 		border-right: 1px solid #000;
 		border-left: 1px solid $primary-color-medium;
 /*		border-bottom: 1px solid #263238;
 		border-top: 1px solid #455A64;*/
+		cursor: pointer;
+	}
+
+	p {
+		font-size: 12px;
+		color: $primary-color-light;
+		font-weight: 500;
 	}
 
 	img {
@@ -1166,6 +1178,7 @@ svg rect{
 		height: auto;
 		margin: 0 auto;
 		padding-bottom:5px;
+		display: none;
 	}
 
 	li:last-child {
