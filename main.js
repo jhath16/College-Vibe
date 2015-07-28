@@ -198,6 +198,12 @@ CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.currentTemplate = _.template($('#statistics-view').text()); //initial template
     this.render(); //needs to be before isRenderedToPage
+    // $(function(){
+    //   $("#slides").slidesjs({
+    //     width: 940,
+    //     height: 528
+    //   });
+    // });
   },
 
   events: {
@@ -222,6 +228,14 @@ CollegeVibe.Views.School = Parse.View.extend({
       render will render it onto the page
       update will just be called on a tab switch */
     this.$el.html(this.currentTemplate(this.model));
+    if(this.currentTemplate = _.template($('#statistics-view').text())) {
+      $(function(){
+        $("#slides").slidesjs({
+          width: 940,
+          height: 528
+        });
+      });
+    }
     this.partial.removeRenderedView();
     this.partial = new CollegeVibe.Partials.SearchDropdown();
   },
@@ -389,12 +403,6 @@ var Router = Backbone.Router.extend({
   }
 });
 
-    $(function(){
-      $("#slides").slidesjs({
-        width: 940,
-        height: 528
-      });
-    });
 //Glue Code
 
 $(document).ready(function () {
