@@ -218,9 +218,9 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   update: function () {
-    //basically separate the functionality between render and update
-    //render will render it onto the page
-    //update will just be called on a tab switch
+    /*basically separate the functionality between render and update
+      render will render it onto the page
+      update will just be called on a tab switch */
     this.$el.html(this.currentTemplate(this.model));
     this.partial.removeRenderedView();
     this.partial = new CollegeVibe.Partials.SearchDropdown();
@@ -246,7 +246,6 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
   },
 
   render: function () {
-    renderedViews.push(this);
     this.$el.html(this.template);
     return this;
   },
@@ -332,7 +331,10 @@ CollegeVibe.Models.User = Parse.Object.extend({
 CollegeVibe.Collections.Colleges = Parse.Collection.extend({
   model:CollegeVibe.Models.College,
 
-  query: new Parse.Query("Colleges").select('schoolname').limit(1000), //only bring the list of schoolnames back
+  query: new Parse.Query("Colleges")
+        .select('schoolname')
+        .select('abbreviation')
+        .limit(1000), //only bring the list of schoolnames back
 
   initialize: function () {
     console.log('Colleges Collection has been created and fetched');
@@ -368,7 +370,6 @@ var Router = Backbone.Router.extend({
        collegeCollection to be fetched beforehand */
     var query = new Parse.Query("Colleges").equalTo("schoolname",modelName);
     query.first().then(function (e) {
-      console.log(e);
       new CollegeVibe.Views.School({model:e});
     });
   },
