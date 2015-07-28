@@ -389,6 +389,12 @@ var Router = Backbone.Router.extend({
   }
 });
 
+    $(function(){
+      $("#slides").slidesjs({
+        width: 940,
+        height: 528
+      });
+    });
 //Glue Code
 
 $(document).ready(function () {
@@ -398,6 +404,9 @@ $(document).ready(function () {
   Backbone.history.start(); //start watching hash changes
 });
 /*
+
+
+
 
 ********  To Do / Questions  **************
 
