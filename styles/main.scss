@@ -625,6 +625,47 @@ svg rect{
 	right:-350px;
 }
 
+.slidesjs-previous, 
+.slidesjs-next,
+.slidesjs-play, 
+.slidesjs-stop {
+	font-size: 0px;
+	padding-right: 5px;
+	text-decoration: none;
+	color: $primary-color-dark;
+	padding-top:5px;
+}
+
+.slidesjs-pagination {
+	font-size: 0px;
+    width: 100%;
+    text-align: center; 
+    height: 30px; 
+    display: inline-block;
+    vertical-align:top;
+    float: right;
+    padding-top: 10px;
+
+}
+
+.slidesjs-navigation {
+	width: 100%;
+	text-align: center;
+}
+
+.slidesjs-pagination-item {
+	font-size: 0px;
+    background-color: $primary-color-dark;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-left:3px;
+}
+
+.slidejs-pagination-item .active {
+	background:$primary-color-medium;
+}
 
 
 .register-container {
@@ -1023,7 +1064,7 @@ svg rect{
 }
 
 .school-map {
-	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .food-avatar, 
@@ -1104,9 +1145,11 @@ svg rect{
 
 .school-heading {
 	width: 100%;
-  	background:#37474F;
   	display: inline-block;
   	height: auto;
+  	margin-top:0px;
+  	/*background:$primary-color-light;*/
+  	padding:0px;
 
 	img {
 		width: 100%;
@@ -1152,14 +1195,14 @@ svg rect{
 		width: 20%;
 		height: 60px;
 		display: inline-block;
-		background: $primary-color-dark;
-		color:$primary-color-light;
+		background: $primary-color-light;
+		color:$primary-color-dark;
 		font-size: 0px;
 		text-align: center;
 		padding: 22.5px 0;
 		font-weight: 300;
-		border-right: 1px solid #000;
-		border-left: 1px solid $primary-color-medium;
+		border-right: 1px solid #dfdfdf;
+		border-left: 1px solid #fff;
 /*		border-bottom: 1px solid #263238;
 		border-top: 1px solid #455A64;*/
 		cursor: pointer;
@@ -1167,7 +1210,7 @@ svg rect{
 
 	p {
 		font-size: 12px;
-		color: $primary-color-light;
+		color: $primary-color-dark;
 		font-weight: 500;
 	}
 
