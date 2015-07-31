@@ -106,7 +106,7 @@ header {
 	display: inline-block;
 
 	img {
-		width: 40px; 
+		width: 40px;
 		height: auto;
 		display: inline-block;
 		vertical-align: top;
@@ -346,7 +346,7 @@ header {
 	position: fixed;
 }
 
-.homepage-right, 
+.homepage-right,
 .header-right {
 	width: 350px;
 	margin: 0 auto;
@@ -501,10 +501,10 @@ header {
 /*
   Set the color of the icon
 */
-svg path,
-svg rect{
-  fill: #263238;
-}
+// svg path,
+// svg rect{
+//   fill: #263238;
+// }
 
 .banner-footer {
 	width: 100%;
@@ -593,7 +593,7 @@ svg rect{
 		width: 100%;
 		margin-bottom: 10px;
 		margin-top: 5px;
-		background: #FFF; 
+		background: #FFF;
 		border: 1px solid #dfdfdf;
 		outline: 0;
 		font-size: 16px;
@@ -640,7 +640,7 @@ svg rect{
 		width: 100%;
 		margin-bottom: 10px;
 		margin-top:5px;
-		background: #FFF; 
+		background: #FFF;
 		border: 1px solid #dfdfdf;
 		outline: 0;
 		font-size: 16px;
@@ -671,7 +671,7 @@ svg rect{
 	right:0;
 }
 
-.register-btn, 
+.register-btn,
 .login-btn {
 	font-size:14px;
 	padding-top:10px;
@@ -720,7 +720,7 @@ svg rect{
 
 /*#nav-toggle { position: absolute; left: 50%; top: 50%; }
 
-#nav-toggle { 
+#nav-toggle {
 	cursor: pointer;
 	margin-left: -13px;
 	margin-top: 0px;
@@ -736,7 +736,7 @@ svg rect{
   content: '';
 }
 #nav-toggle span:before {
-  top: -10px; 
+  top: -10px;
 }
 #nav-toggle span:after {
   bottom: -10px;
@@ -893,7 +893,7 @@ svg rect{
 
 /* Profile and School Templates */
 
-.profile-body, 
+.profile-body,
 .school-body {
 	width: 960px;
 	margin: 0 auto;
@@ -902,7 +902,7 @@ svg rect{
 	margin-bottom: 50px;
 }
 
-.profile-right-col, 
+.profile-right-col,
 .school-right-col {
 	display: inline-block;
 	width: 350px;
@@ -910,7 +910,7 @@ svg rect{
 	vertical-align: top;
 }
 
-.profile-small-col, 
+.profile-small-col,
 .school-small-col {
 	display: inline-block;
 	width: 240px;
@@ -933,7 +933,7 @@ svg rect{
 
 
 
-.profile-left-col, 
+.profile-left-col,
 .school-left-col {
 	display: inline-block;
 	width: 600px;
@@ -944,9 +944,9 @@ svg rect{
 }
 
 
-.profile-info-evenrow, 
-.profile-info-oddrow, 
-.school-info-evenrow, 
+.profile-info-evenrow,
+.profile-info-oddrow,
+.school-info-evenrow,
 .school-info-oddrow {
 	background:$primary-color-light;
 	width: 100%;
@@ -991,7 +991,7 @@ svg rect{
 
 }
 
-.school-food, 
+.school-food,
 .school-hotel {
 	width: 100%;
 	background:$primary-color-light;
@@ -1026,7 +1026,7 @@ svg rect{
 	margin-top: 10px;
 }
 
-.food-avatar, 
+.food-avatar,
 .hotel-avatar {
 	display: inline-block;
 	width: 40px;
@@ -1038,7 +1038,7 @@ svg rect{
 	}
 }
 
-.food-name, 
+.food-name,
 .hotel-name {
 	width: 60%;
 	display: inline-block;
@@ -1058,7 +1058,7 @@ svg rect{
 	}
 }
 
-.food-radius, 
+.food-radius,
 .hotel-radius {
 	width: 25%;
 	display: inline-block;
@@ -1098,7 +1098,7 @@ svg rect{
 	img {
 		width: 100%;
 		height: 96px;
-	} 
+	}
 
 }
 
@@ -1189,18 +1189,18 @@ svg rect{
 		border-left:0;
 	}
 
-/*	li:nth-child(1), 
+/*	li:nth-child(1),
 	li:nth-child(4) {
 		border-left: 0;
 	}
 
-	li:nth-child(1), 
+	li:nth-child(1),
 	li:nth-child(2),
 	li:nth-child(3) {
 		border-top:0;
 	}
 
-	li:nth-child(4), 
+	li:nth-child(4),
 	li:nth-child(5),
 	li:nth-child(6) {
 		border-bottom:0;
@@ -1264,7 +1264,7 @@ svg rect{
 	margin-bottom: 25px;
 
 	a {
-		font-size: 16px; 
+		font-size: 16px;
 		color: $primary-color-dark;
 
 		font-weight: 300;
@@ -1281,7 +1281,7 @@ svg rect{
 	margin-bottom: 25px;
 
 	a {
-		font-size: 16px; 
+		font-size: 16px;
 		color: $secondary-color-light;
 		text-decoration: none;
 		font-weight: 300;
@@ -1361,7 +1361,7 @@ svg rect{
 		/* vertical-align: bottom; */
 		margin-top: -23px;
 	}
-	
+
 }
 
 .school-photos {
@@ -1451,18 +1451,18 @@ svg rect{
 		top: 0;
 	}
 
-	.header-search, 
+	.header-search,
 	.homepage-search {
 		width: 100%;
 	}
 
-	.header-search span, 
+	.header-search span,
 	.homepage-search span {
 		width: 15%;
 		right: 85%;
 	}
 
-	.header-search input, 
+	.header-search input,
 	.homepage-search input {
 		width: 85%;
 	}
@@ -1477,14 +1477,14 @@ svg rect{
 
 	/* Profile and School Template */
 
-	.profile-body, 
+	.profile-body,
 	.school-body {
 		width: 100%;
 		margin-top: 50px;
 	}
 
-	.profile-left-col, 
-	.school-left-col, 
+	.profile-left-col,
+	.school-left-col,
 	.school-right-col,
 	.profile-right-col {
 		display: block;

@@ -14,6 +14,232 @@ Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3
   CollegeVibe.Router = {}; //global functions
 })();
 
+function d3Stuff() {
+
+  var wrapper = $(".wrapper"),
+        opening = $("#opening"),
+        brand_logo = $(".brand"),
+        down_arrow_map = $("#down_arrow_map"),
+        map_contain = $("#map-contain"),
+        map_search = $(".map-search"),
+        map_zoom = "",
+        map_wrapper = $("#map-wrapper"),
+        description = $("#info-bar"),
+        searchPosition = $("#search").offset(),
+        mapWrapperPosition = map_wrapper.offset(),
+          descPosition = description.offset(),
+          pageWidth = window.innerWidth;
+
+  var width = 960,
+      height = 640.4,
+      positions = [],
+      centered;
+
+  var c = "";
+  var bodyNode = d3.select('#Map').node();
+  var bubble = $("#bubble");
+  var list = $('.school-list').each(function(i){});
+  var svg = d3.select("#Map");
+  var contain = d3.select("#map-contain");
+  var states = d3.selectAll("polygon")
+           .on("click", stateZoom);
+  var paths = d3.selectAll("path")
+          .on("click", stateZoom);
+  var circles = svg.append("svg:g")
+            .attr("id", "circles");
+
+  var g = d3.selectAll("g");
+
+  d3.csv("schools.csv",function(schools){
+
+    schools = schools.filter(function(schools){
+    var location = [+schools.longitude, +schools.latitude];
+    return true;
+    })
+  circles.selectAll("circles")
+    .data(schools)
+    .enter().append("svg:a")
+    .attr("xlink:href", function(d) { return '#schools/' + d.url; })
+    .append("svg:circle")
+    .attr("school", function(d, i) { return d.name; })
+    .attr("id", function(d,i) { return d.id; })
+    .attr("cx", function(d,i) { return d.longitude; })
+    .attr("cy", function(d,i) { return d.latitude; })
+    .attr("r", function(d,i) { return 6; })
+    .attr("i", function(d,i) { return i; })
+    .attr("class", "icon")
+    .on("mouseover", function(d){
+        // console.log(d);  ****This is all the data - ie: Name, lat, long, index, state, etc..
+        return mapSearch(d.id);
+    }).on("mouseout", function(){
+        return hide_bubble();
+    })
+
+  var	mapSearch = function(id) {
+      var school_data = '';
+        c = d3.selectAll("circle")
+              .filter(function(d) {
+              if (d.id == id) {
+                school_data = d;
+                return school_data;
+               }
+              });
+      if (school_data) {
+        var pNode = c.node().parentNode;
+        pNode.setAttribute("class", "hover");
+        // get location on page of school on map
+        var bcr = c.node().getBoundingClientRect();
+
+        var bubbleTop = "",
+          bubbleLeft = "";
+
+          if (!zoomed) {
+            bubbleTop = bcr.top - 70 + 'px',
+            bubbleLeft = bcr.left - 69 + 'px';
+          } else {
+            bubbleTop = bcr.top - 70 + 'px',
+            bubbleLeft = bcr.left - 52 + 'px';
+          }
+
+            bubble.css({
+                        "left": bubbleLeft,
+                        "top": bubbleTop
+                    });
+
+        bubble.html("<h1>" + school_data.name + "</h1>" + "<p>" + school_data.city + ", " + school_data.state + "</p>")
+            .attr("class", function(d) { return school_data.letter; });
+        bubble.addClass("active");
+      }
+    }
+
+    var	hide_bubble = function() {
+        c = d3.selectAll("circle");
+        c.each(function(e) {
+          $(this).parent().attr("class", "");
+        })
+        bubble.removeClass("active");
+      }
+      });
+
+    // SVG Functions outside of CSV
+    var zoomed = false;
+    var positionX = 0;
+    var positionY = 0;
+
+    function stateZoom(d) {
+      var absoluteMousePos = d3.mouse(bodyNode);
+
+      if (zoomed) {
+        // Zoom out of state
+        zoomed = false;
+
+        // revert cursor style to +
+        states.attr("style", "");
+        paths.attr("style", "");
+
+        if (map_zoom == "laptop"){
+          g.transition()
+            .duration(750)
+            .attr("transform", "translate(" + 0 + "," + 0 + ")scale(" + 0.9 + ")translate(" + 0 + "," + 0 +")");
+        } else {
+          g.transition()
+               .duration(750)
+               .attr("transform", "translate(" + 0 + "," + 0 + ")scale(" + 1 + ")translate(0,0)");
+        }
+      } else {
+        // Zoom in to the state
+        zoomed = true;
+
+        // change cursor style to -
+        states.attr("style", "cursor: -webkit-zoom-out; cursor: -moz-zoom-out");
+        paths.attr("style", "cursor: -webkit-zoom-out; cursor: -moz-zoom-out");
+
+        var newWidth = width / 5;
+        var newHeight = height / 5;
+        positionX = newWidth - absoluteMousePos[0] - 120;
+        positionY = newHeight - absoluteMousePos[1] - 85;
+
+        if (map_zoom != "ipad") {
+          g.transition()
+                 .duration(750)
+                 .attr("transform", "translate(" + newWidth + "," + newHeight + ")scale(" + 4 + ")translate(" + positionX + "," + positionY +")");
+        }
+      }
+    }
+//
+    function mapZoom() {
+      var g = d3.selectAll("g");
+
+      if (map_zoom == "laptop") {
+
+        var newWidth = width / 5;
+        var newHeight = height / 5;
+
+        g.transition()
+               .duration(0)
+               .attr("transform", "translate(" + newWidth + "," + newHeight + ")scale(" + 0.9 + ")translate(" + -192 + "," + -128 +")");
+
+      } else if (map_zoom == "ipad") {
+        var newWidth = width / 5;
+        var newHeight = height / 5;
+
+        g.transition()
+               .duration(0)
+               .attr("transform", "translate(" + newWidth + "," + newHeight + ")scale(" + 0.8 + ")translate(" + -250 + "," + -100 +")");
+      } else if (map_zoom == "mobile") {
+
+        var newWidth = width / 5;
+        var newHeight = height / 5;
+
+        g.transition()
+               .duration(0)
+               .attr("transform", "translate(" + newWidth + "," + newHeight + ")scale(" + 0.37 + ")translate(" + -520 + "," + -200 +")");
+      }
+    }
+// --- End SVG ---
+
+
+/* Map Hover */
+
+var swapMap = function(image) {
+  var path = temp + '/map/images/';
+  $('#College-Vibe-Map').attr('src', path+image);
+}
+  // Map hover for scrolling list
+  $('.school-list').each( function() {
+    var schoolName = $(this).text().replace(/[ ]/g,'_');
+    $(this).hover(
+      function() {
+        swapMap('map_'+schoolName+'.png');
+      }, function() {
+        swapMap('map.png');
+      }
+    );
+  });
+
+  var map = $("#map");
+  $(map).find('area').each( function() {
+    var altVal = $(this).attr('alt').replace(/[ ]/g,'_');
+    var href = $(this).attr('href');
+      $(this).hover(
+      function() {
+        swapMap('map_'+altVal+'.png');
+      }, function() {
+        swapMap('map.png');
+         }
+      );
+      $(this).on( 'click', function() {
+        if (href)
+        {
+          $(this).unbind('hover');
+          window.location = href;
+        }
+        return false;
+      });
+  });
+  console.log("I ran!");
+}
+
 //Removes a view from the global renderedViews array
 //Also removes all subviews
 
@@ -408,16 +634,17 @@ var Router = Backbone.Router.extend({
     new CollegeVibe.Views.Index();
     new CollegeVibe.Partials.SearchDropdown();
     new CollegeVibe.Views.Login();
+    d3Stuff();
   },
 
   schoolRoute: function (schoolname) {
     removeAllViews();
-    var modelName = schoolname.replace(/-/g, ' ');
+    var modelName = schoolname.replace(/-/g, ' ').toLowerCase();
     console.log('schoolRoute fired with the model: ' + modelName);
     /* This will take the modelName and query parse for the first object
-       that matches its name. Doesn't depend on the global collection of
+       that matches its slug name. Doesn't depend on the global collection of
        collegeCollection to be fetched beforehand */
-    var query = new Parse.Query("Colleges").equalTo("schoolname",modelName);
+    var query = new Parse.Query("Colleges").equalTo("slug",modelName);
     query.first().then(function (e) {
       new CollegeVibe.Views.School({model:e});
     });
@@ -472,3 +699,8 @@ all dynamic templates to.
 Possibly query parse, then add that array as new 'College' models to the
 collegeCollection to maintain the model defaults?
 */
+
+//This is the code taken directly from the script.js on the main page
+//Should hold all the functionality for the map
+
+// --- Start SVG ---

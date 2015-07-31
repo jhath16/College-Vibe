@@ -392,9 +392,9 @@ header {
 /*
   Set the color of the icon
 */
-svg path,
+/*svg path,
 svg rect {
-  fill: #263238; }
+  fill: #263238; }*/
 
 .banner-footer {
   width: 100%;
@@ -567,7 +567,7 @@ svg rect {
 /* Animated Hamburger Toggle */
 /*#nav-toggle { position: absolute; left: 50%; top: 50%; }
 
-#nav-toggle { 
+#nav-toggle {
 	cursor: pointer;
 	margin-left: -13px;
 	margin-top: 0px;
@@ -583,7 +583,7 @@ svg rect {
   content: '';
 }
 #nav-toggle span:before {
-  top: -10px; 
+  top: -10px;
 }
 #nav-toggle span:after {
   bottom: -10px;
@@ -910,23 +910,23 @@ svg rect {
   z-index: 1000;
   padding: 0px;
   margin-top: 0px;
-  /*	li:nth-child(1), 
+  /*	li:nth-child(1),
   	li:nth-child(4) {
   		border-left: 0;
   	}
-  
-  	li:nth-child(1), 
+
+  	li:nth-child(1),
   	li:nth-child(2),
   	li:nth-child(3) {
   		border-top:0;
   	}
-  
-  	li:nth-child(4), 
+
+  	li:nth-child(4),
   	li:nth-child(5),
   	li:nth-child(6) {
   		border-bottom:0;
   	}
-  
+
   	li:nth-child(3n) {
   		border-right: 0;
   	}*/ }
