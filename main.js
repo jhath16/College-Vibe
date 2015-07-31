@@ -639,12 +639,11 @@ var Router = Backbone.Router.extend({
 
   schoolRoute: function (schoolname) {
     removeAllViews();
-    var modelName = schoolname.replace(/-/g, ' ').toLowerCase();
-    console.log('schoolRoute fired with the model: ' + modelName);
+    console.log('schoolRoute fired with the model: ' + schoolname);
     /* This will take the modelName and query parse for the first object
        that matches its slug name. Doesn't depend on the global collection of
        collegeCollection to be fetched beforehand */
-    var query = new Parse.Query("Colleges").equalTo("slug",modelName);
+    var query = new Parse.Query("Colleges").equalTo("slug",schoolname);
     query.first().then(function (e) {
       new CollegeVibe.Views.School({model:e});
     });
