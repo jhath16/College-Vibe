@@ -1,0 +1,105 @@
+name,longitude,latitude,city,state,url,letter,id
+Appalachian State University,757,287,Boone,NC,appalachian-state-university,,4525
+Arizona State University,243,347,Tempe,AZ,arizona-state-university,,2840
+Auburn University,709,362,Auburn,AL,auburn-university,,2622
+Baylor University,508,399,Waco,TX,baylor-university,x,3833
+Boston College,906,114,Chestnut Hill,MA,boston-college,dx,390
+Boston University,914,107,Boston,MA,boston-university,dz,1573
+Brigham Young University,260,212,Provo,UT,brigham-young-university,bc,4464
+Brown University,908,125,Providence,RI,brown-university,dw,311
+Clemson University,758,310,Clemson,SC,clemson-university,c,83
+College of Charleston,803,342,Charleston,SC,college-of-charleston,a,1098
+College of William & Mary,838,229,Williamsburg,VA,college-of-william-mary,cx,1133
+Colorado State University,370,209,Fort Collins,CO,colorado-state-university,be,4600
+Columbia University,880,144,New York,NY,columbia-university,dr,562
+Cornell University,827,126,Ithaca,NY,cornell-university,ds,3745
+Dartmouth College,892,88,Hanover,NH,dartmouth-college,ec,2899
+DePaul University,648,168,Chicago,IL,depaul-university,br,1682
+Duke University,812,267,Durham,NC,duke-university,cs,52
+Florida Atlantic University,828,471,Boca Raton,FL,florida-atlantic-university,k,2698
+FIU,828,481,Miami,FL,florida-international-university,l,2541
+Florida State University,743,404,Tallahassee,FL,florida-state-university,g,1789
+George Mason University,825,211,Fairfax,VA,george-mason-university,db,1488
+George Washington University,830,201,Washington,DC,george-washington-university,dd,1255
+Georgetown University,824,197,Washington,DC,georgetown-university,dc,353
+Georgia Tech,724,338,Atlanta,GA,georgia-institute-of-technology,ff,1524
+Georgia State University,732,333,Atlanta,GA,georgia-state-university,e,2571
+Harvard University,905,108,Cambridge,MA,harvard-university,ea,273
+Indiana University,679,223,Bloomington,IN,indiana-university,bv,599
+James Madison University,809,214,Harrisonburg,VA,james-madison-university,da,1728
+Johns Hopkins University,837,194,Baltimore,MD,johns-hopkins-university,df,911
+Kansas State University,506,233,Manhattan,KS,kansas-state-university,bg,3204
+Louisiana State University,617,422,Baton Rouge,LA,louisiana-state-university,tt,1022
+MIT,915,116,Cambridge,MA,massachusetts-institute-of-technology,dy,240
+Michigan State University,698,140,East Lansing,MI,michigan-state-university,by,739
+Mississippi State University,650,348,Mississippi State,MS,mississippi-state-university,q,3559
+New York University,874,149,New York,NY,new-york-university,dq,1950
+NC State University,825,275,Raleigh,NC,north-carolina-state-university,ct,2661
+Northwestern University,642,159,Evanston,IL,northwestern-university,bq,635
+Ohio State University,740,198,Columbus,OH,ohio-state-university,cc,490
+Oklahoma State University,511,298,Stillwater,OK,oklahoma-state-university,bi,3928
+Penn State University,811,172,University Park,PA,pennsylvania-state-university,dm,772
+Princeton University,864,166,Princeton,NJ,princeton-university,do,805
+Purdue University,667,193,West Lafayette,IN,purdue-university,bw,2470
+Rutgers University,869,160,New Brunswick,NJ,rutgers-university,dp,871
+San Diego State University,150,347,San Diego,CA,san-diego-state-university,ai,4563
+San Jose State University,81,238,San Jose,CA,san-jose-state-university,aq,4802
+Stanford University,72,237,Stanford,CA,stanford-university,ar,3053
+Syracuse University,833,109,Syracuse,NY,syracuse-university,dt,3675
+Temple University,854,166,Philadelphia,PA,temple-university,dk,1898
+Texas A&M University,517,416,College Station,TX,texas-am-university,w,2983
+Texas Tech University,412,348,Lubbock,TX,texas-tech-university,ac,3176
+Towson University,839,188,Towson,MD,towson-university,dg,4112
+Tulane University,634,428,New Orleans,LA,tulane-university,s,1339
+University of Akron,750,169,Akron,OH,university-of-akron,cb,4314
+University of Alabama,672,350,Tuscaloosa,AL,university-of-alabama,pp,706
+University of Arizona,258,380,Tucson,AZ,university-of-arizona,af,3596
+University of Arkansas,557,303,Fayetteville,AR,university-of-arkansas,bk,3713
+UC Berkeley,79,230,Berkeley,CA,university-of-california-berkeley,as,2871
+UCLA,124,318,Los Angeles,CA,university-of-california-los-angeles,al,2924
+UC Santa Barbara,105,304,Santa Barbara,CA,university-of-california-santa-barbara,ao,4434
+University of Central Florida,802,439,Orlando,FL,university-of-central-florida,ii,2032
+University of Chicago,650,176,Chicago,IL,university-of-chicago,bs,4064
+University of Cincinnati,713,221,Cincinnati,OH,university-of-cincinnati,ch,1212
+University of Colorado,360,224,Boulder,CO,university-of-colorado,bd,3638
+University of Connecticut,896,127,Storrs,CT,university-of-connecticut,dv,2957
+University of Florida,781,416,Gainesville,FL,university-of-florida,h,2509
+University of Georgia,746,324,Athens,GA,university-of-georgia,d,2099
+University of Hawaii,499,622,Honolulu,HI,university-of-hawaii,ed,3979
+University of Houston,532,436,Houston,TX,university-of-houston,v,3294
+University of Illinois,645,208,Champaign,IL,university-of-illinois,bu,527
+University of Iowa,587,177,Iowa City,IA,university-of-iowa,bm,3796
+University of Kansas,529,245,Lawrence,KS,university-of-kansas,bh,3146
+University of Kentucky,715,249,Lexington,KY,university-of-kentucky,cj,2335
+University of Louisville,693,245,Louisville,KY,university-of-louisville,ci,1989
+University of Maryland,838,200,College Park,MD,university-of-maryland,de,1607
+University of Memphis,636,309,Memphis,TN,university-of-memphis,ck,982
+University of Miami,827,491,Coral Gables,FL,university-of-miami,m,1862
+University of Michigan,713,152,Ann Arbor,MI,university-of-michigan,bz,670
+University of Minnesota,559,118,Minneapolis,MN,university-of-minnesota,bn,3014
+University of Mississippi,640,333,University,MS,university-of-mississippi,r,2145
+University of Missouri,579,233,Columbia,MO,university-of-missouri,bl,3893
+University of Nebraska,506,199,Lincoln,NE,university-of-nebraska,bf,3263
+University of North Carolina,802,278,Chapel Hill,NC,university-of-north-carolina,cr,1827
+University of North Texas,506,361,Denton,TX,university-of-north-texas,y,4271
+University of Notre Dame,671,176,Notre Dame,IN,university-of-notre-dame,bx,427
+University of Oklahoma,502,325,Norman,OK,university-of-oklahoma,bj,3233
+University of Oregon,90,100,Eugene,OR,university-of-oregon,au,3085
+University of Pennsylvania,856,174,Philadelphia,PA,university-of-pennsylvania,dj,1059
+University of Pittsburgh,783,182,Pittsburgh,PA,university-of-pittsburgh,dn,837
+University of South Carolina,785,322,Columbia,SC,university-of-south-carolina,b,1179
+University of South Florida,782,447,Tampa,FL,university-of-south-florida,j,2061
+USC,129,324,Los Angeles,CA,university-of-southern-california,ak,3114
+University of Tennessee,733,281,Knoxville,TN,university-of-tennessee,cn,944
+University of Texas,491,418,Austin,TX,university-of-texas,z,2808
+University of Utah,256,194,Salt Lake City,UT,university-of-utah,bb,4651
+University of Virginia,817,225,Charlottesville,VA,university-of-virginia,cz,1423
+University of Washington,117,32,Seattle,WA,university-of-washington-seattle,ax,4230
+University of Wisconsin,614,136,Madison,WI,university-of-wisconsin,bo,457
+Vanderbilt University,679,288,Nashville,TN,vanderbilt-university,cl,2418
+Villanova University,847,169,Villanova,PA,villanova-university,dl,1645
+VCU,824,235,Richmond,VA,virginia-commonwealth-university,cy,4379
+Virginia Tech,784,248,Blacksburg,VA,virginia-tech,cv,1454
+Wake Forest University,782,274,Winston-Salem,NC,wake-forest-university,cp,2373
+West Virginia University,780,204,Morgantown,WV,west-virginia-university,gb,1306
+Yale University,890,135,New Haven,CT,yale-university,du,1378
