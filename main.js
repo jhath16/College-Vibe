@@ -52,20 +52,6 @@ function d3Stuff() {
 
   d3.csv("schools.csv",function(schools){
 
-    _.each(schools, function (csvSchool) {
-      var latitude = csvSchool.latitude;
-      var longitude = csvSchool.longitude;
-
-      var query = new Parse.Query('Colleges').equalTo("slug", csvSchool.url);
-      query.first().then(function (parseSchool){
-        parseSchool.set('latitude', latitude);
-        parseSchool.set('longitude', longitude);
-        console.log("Set latitude and longitude of " + parseSchool.get('schoolname') + " to (" + parseSchool.get('latitude') + ", " + parseSchool.get('longitude') + ")")
-        parseSchool.save();
-        console.log("save called");
-      })
-    })
-
     schools = schools.filter(function(schools){
     var location = [+schools.longitude, +schools.latitude];
     return true;
