@@ -50,30 +50,30 @@ function d3Stuff() {
 
   var g = d3.selectAll("g");
 
-  d3.csv("schools.csv",function(schools){
-
-    schools = schools.filter(function(schools){
-    var location = [+schools.longitude, +schools.latitude];
-    return true;
-    })
-  circles.selectAll("circles")
-    .data(schools)
-    .enter().append("svg:a")
-    .attr("xlink:href", function(d) { return '#schools/' + d.url; })
-    .append("svg:circle")
-    .attr("school", function(d, i) { return d.name; })
-    .attr("id", function(d,i) { return d.id; })
-    .attr("cx", function(d,i) { return d.longitude; })
-    .attr("cy", function(d,i) { return d.latitude; })
-    .attr("r", function(d,i) { return 6; })
-    .attr("i", function(d,i) { return i; })
-    .attr("class", "icon")
-    .on("mouseover", function(d){
-        // console.log(d);  ****This is all the data - ie: Name, lat, long, index, state, etc..
-        return mapSearch(d.id);
-    }).on("mouseout", function(){
-        return hide_bubble();
-    })
+  var query = new Parse.Query('Colleges').limit(1000);
+  query.select(["schoolname", "slug","mapLat", "mapLon"]);
+  query.find().then(function (schools) {
+      //append the circles! \(O.O)/
+      circles.selectAll("circles")
+        .data(schools)
+        .enter().append("svg:a")
+        .attr("xlink:href", function(d) { return '#schools/' + d.attributes.slug; })
+        .append("svg:circle")
+        .attr("school", function(d, i) { return d.attributes.schoolname; })
+        .attr("cx", function(d,i) { return d.attributes.mapLon; })
+        .attr("cy", function(d,i) { return d.attributes.mapLat; })
+        .attr("r", 6)
+        .attr("class", "icon")
+        .on("mouseover", function(d){
+            // console.log(d);  ****This is all the data - ie: Name, lat, long, index, state, etc..
+            // return mapSearch(d.id);
+        }).on("mouseout", function(){
+            // return hide_bubble();
+        })
+        console.log(circles);
+        _.each(circles[0][0], function (circle) {
+          console.log(circle.cx);
+        })
 
   var	mapSearch = function(id) {
       var school_data = '';
@@ -119,7 +119,7 @@ function d3Stuff() {
         })
         bubble.removeClass("active");
       }
-      });
+  })
 
     // SVG Functions outside of CSV
     var zoomed = false;
@@ -166,7 +166,7 @@ function d3Stuff() {
         }
       }
     }
-//
+
     function mapZoom() {
       var g = d3.selectAll("g");
 
