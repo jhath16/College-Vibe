@@ -13,7 +13,7 @@ a {
   text-decoration: none; }
 
 body {
-  background: #CFD8DC;
+  background: #ECEFF1;
   z-index: 1;
   position: relative; }
 
@@ -89,7 +89,8 @@ header {
   display: inline-block;
   vertical-align: top;
   float: right;
-  text-align: right; }
+  text-align: right;
+  padding-top: 12px; }
   .header-top-right ul {
     list-style: none;
     padding-left: 0; }
@@ -102,7 +103,7 @@ header {
     font-size: 24px;
     color: #37474F; }
   .header-top-right p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     color: #37474F;
     display: block;
@@ -279,7 +280,7 @@ header {
   height: 60px;
   display: inline-block;
   vertical-align: top;
-  background: #37474F;
+  background: transparent;
   margin-right: 10px; }
 
 .header-banner {
@@ -347,7 +348,8 @@ header {
   position: relative;
   margin: 0 auto;
   top: 150px;
-  text-align: center; }
+  text-align: center;
+  padding-bottom: 200px; }
   .banner-container img {
     margin-bottom: 0px; }
 
@@ -392,10 +394,6 @@ header {
 /*
   Set the color of the icon
 */
-/*svg path,
-svg rect {
-  fill: #263238; }*/
-
 .banner-footer {
   width: 100%;
   height: 10px;
@@ -429,8 +427,8 @@ svg rect {
     border-top: 1px solid #fff;
     text-align: left; }
     .college-search div:hover {
-      background: #CFD8DC;
-      border-top: 1px solid #CFD8DC; }
+      background: #fff;
+      border-top: 1px solid #fff; }
   .college-search p span {
     position: absolute;
     padding: 0;
@@ -826,7 +824,7 @@ svg rect {
 .school-food,
 .school-hotel {
   width: 100%;
-  background: #ECEFF1; }
+  background: #f8f8f8; }
   .school-food ul,
   .school-hotel ul {
     list-style: none;
@@ -837,8 +835,7 @@ svg rect {
     display: inline-block;
     width: 100%;
     padding: 25px;
-    border-bottom: 1px solid #dfdfdf;
-    border-top: 1px solid #fff; }
+    border-bottom: 1px solid #dfdfdf; }
   .school-food span,
   .school-hotel span {
     width: 5%;
@@ -869,14 +866,15 @@ svg rect {
   padding-left: 10px; }
   .food-name h1,
   .hotel-name h1 {
-    font-size: 14px;
+    font-size: 16px;
     color: #263238; }
   .food-name p,
   .hotel-name p {
     font-size: 12px;
-    font-style: italic;
+    /*font-style: italic;*/
     display: block;
-    color: #37474F; }
+    color: #37474F;
+    font-weight: 300; }
 
 .food-radius,
 .hotel-radius {
@@ -952,19 +950,19 @@ svg rect {
   	li:nth-child(4) {
   		border-left: 0;
   	}
-
+  
   	li:nth-child(1),
   	li:nth-child(2),
   	li:nth-child(3) {
   		border-top:0;
   	}
-
+  
   	li:nth-child(4),
   	li:nth-child(5),
   	li:nth-child(6) {
   		border-bottom:0;
   	}
-
+  
   	li:nth-child(3n) {
   		border-right: 0;
   	}*/ }
@@ -972,7 +970,7 @@ svg rect {
     width: 20%;
     height: 60px;
     display: inline-block;
-    background: #ECEFF1;
+    background: #f8f8f8;
     color: #263238;
     font-size: 0px;
     text-align: center;
@@ -1129,6 +1127,10 @@ svg rect {
     width: 100%;
     height: auto; }
 
+#Map {
+  padding-left: 100px;
+  padding-right: 100px; }
+
 /* Footer */
 /* Media Queries */
 @media screen and (min-width: 350px) and (max-width: 500px) {
@@ -1151,8 +1153,7 @@ svg rect {
 
   .banner-container {
     width: 100%;
-    background: #263238;
-    height: 500px; }
+    height: 200px; }
 
   .section {
     height: auto !important; }
@@ -1250,6 +1251,10 @@ svg rect {
       margin-bottom: -23px;
       padding-top: 15px;
       text-align: center;
-      display: none; } }
+      display: none; }
+
+  #Map {
+    padding-left: 0;
+    padding-right: 0; } }
 
 /*# sourceMappingURL=main.css.map */

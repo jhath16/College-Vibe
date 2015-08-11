@@ -32,7 +32,7 @@ a {
 }
 
 body {
-	background:#CFD8DC;
+	background: $primary-color-light;
 	z-index: 1;
 	position: relative;
 }
@@ -131,6 +131,7 @@ header {
 	vertical-align: top;
 	float: right;
 	text-align:right;
+	padding-top:12px;
 
 	ul {
 		list-style: none;
@@ -150,7 +151,7 @@ header {
 	}
 
 	p {
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 300;
 		color: $primary-color-medium;
 		display: block;
@@ -360,7 +361,7 @@ header {
 	height: 60px;
 	display: inline-block;
 	vertical-align: top;
-	background: $primary-color-medium;
+	background: transparent;
 	margin-right: 10px;
 }
 
@@ -445,6 +446,7 @@ header {
 	margin: 0 auto;
 	top:150px;
 	text-align: center;
+	padding-bottom:200px;
 
 	img {
 		margin-bottom: 0px;
@@ -547,8 +549,8 @@ header {
   		text-align: left;
 
   		&:hover {
-  			background:#CFD8DC;
-  			border-top:1px solid #CFD8DC;
+  			background:#fff;
+  			border-top:1px solid #fff;
   		}
 	}
 
@@ -1035,7 +1037,7 @@ header {
 .school-food,
 .school-hotel {
 	width: 100%;
-	background:$primary-color-light;
+	background:#f8f8f8;
 
 
 	ul {
@@ -1050,7 +1052,6 @@ header {
 		width: 100%;
 		padding: 25px;
 		border-bottom:1px solid #dfdfdf;
-		border-top: 1px solid #fff;
 	}
 
 	span {
@@ -1087,15 +1088,16 @@ header {
 	padding-left:10px;
 
 	h1 {
-		font-size: 14px;
+		font-size: 16px;
 		color: $primary-color-dark;
 	}
 
 	p {
 		font-size: 12px;
-		font-style: italic;
+		/*font-style: italic;*/
 		display: block;
 		color: $primary-color-medium;
+		font-weight: 300;
 	}
 }
 
@@ -1195,7 +1197,7 @@ header {
 		width: 20%;
 		height: 60px;
 		display: inline-block;
-		background: $primary-color-light;
+		background:#f8f8f8;
 		color:$primary-color-dark;
 		font-size: 0px;
 		text-align: center;
@@ -1430,6 +1432,10 @@ header {
 	}
 }
 
+#Map {
+	padding-left:100px;
+	padding-right: 100px;
+}
 
 
 
@@ -1463,8 +1469,7 @@ header {
 
 	.banner-container {
 		width: 100%;
-		background:#263238;
-		height: 500px;
+		height: 200px;
 	}
 
 	.banner-slogan img {
@@ -1599,5 +1604,10 @@ header {
 			text-align:center;
 			display:none;
   		}
+	}
+
+	#Map {
+		padding-left:0;
+		padding-right: 0;
 	}
 }
