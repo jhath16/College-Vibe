@@ -3128,20 +3128,9 @@
 
         <div class="school-hotel">
           <ul>
-            <li>
-              <span class="fa fa-angle-right"></span>
-              <div class="hotel-name">
-                <h1>Ramada at Clemson</h1>
-                <p>555 Clemson Avenue</p>
-                <p>Clemson, SC 29607</p>
-              </div>
-              <div class="hotel-radius">
-                <p>1.2 miles away</p>
-                <p>864-555-8989</p>
-                <p>www.example.com</p>
-              </div>
-            </li>
-
+            <!-- Optional: Put a spinner in this place while it's loading.
+                Probably not necessary because the loading is so quick-->
+            <!-- <i style="font-size:20px;" class="fa fa-spin  fa-spinner"></i> -->
           </ul>
         </div>
 
@@ -3157,6 +3146,24 @@
     </div>
 
   </script>
+
+  <!-- Hotel Module -->
+  <script type="text/template" id='hotel-template'>
+    <li>
+      <span class="fa fa-angle-right"></span>
+      <div class="hotel-name">
+        <h1><%=name%></h1>
+        <p><%=address%></p>
+        <p><%=locality%>, <%=region%> <%=postcode%></p>
+      </div>
+      <div class="hotel-radius">
+        <p><%=($distance/1000).toFixed(1)%> Km.</p>
+        <p>864-555-8989</p>
+        <p>www.example.com</p>
+      </div>
+    </li>
+  </script>
+
 
   <!-- Sports View -->
 

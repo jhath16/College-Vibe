@@ -62,7 +62,7 @@ function d3Stuff() {
         .attr("school", function(d, i) { return d.attributes.schoolname; })
         .attr("cx", function(d,i) { return d.attributes.mapLon; })
         .attr("cy", function(d,i) { return d.attributes.mapLat; })
-        .attr("r", 6)
+        .attr("r", 4)
         .attr("class", "icon")
         .on("mouseover", function(d){
             // console.log(d);  ****This is all the data - ie: Name, lat, long, index, state, etc..
@@ -424,6 +424,8 @@ CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.currentTemplate = _.template($('#statistics-view').text()); //initial template
     this.render(); //needs to be before isRenderedToPage
+    this.hotelInformation = null;
+    this.currentView = null;
     $(function(){
       $("#slides").slidesjs({
         // width: 320,
@@ -508,6 +510,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     /*basically separate the functionality between render and update
       render will render it onto the page
       update will just be called on a tab switch */
+    var self = this;
     this.$el.html(this.currentTemplate(this.model));
     if(this.currentTemplate = _.template($('#statistics-view').text())) {
       $(function(){
@@ -536,6 +539,31 @@ CollegeVibe.Views.School = Parse.View.extend({
     }
     this.partial.remove();//re-instantiate the partial
     this.partial = new CollegeVibe.Partials.SearchDropdown();
+
+    //The hotel tab
+    if(this.currentTemplate = _.template($('#hotel-view').text())) {
+      //Check to see if there is any hotel information on the client
+      var hotelList = $('.school-hotel ul')[0];
+      var hotelTemplate = _.template($('#hotel-template').text());
+
+      function appendHotelInfo() {
+        _.each(self.hotelInformation, function (hotel) {
+          $(hotelList).append(hotelTemplate(hotel));
+        });
+      };
+
+      if(!this.hotelInformation) { //if we don't have the info yet
+
+        Parse.Cloud.run('findNearHotels', {latitude:this.model.get('latitude'), longitude:this.model.get('longitude')})
+        .then(function (e) {
+          console.log(e);
+          self.hotelInformation = e;
+          appendHotelInfo();
+        });
+      } else { //if we already have the hotel info for the client
+        appendHotelInfo();
+      }
+    }
   },
 
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
@@ -545,6 +573,19 @@ CollegeVibe.Views.School = Parse.View.extend({
       this.isRenderedToPage = false;
     })
 });
+
+CollegeVibe.Views.Hotels = Parse.View.extend({
+  initialize: function () {
+    this.render();
+  },
+
+  template: _.template($("#hotel-view").text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    $('#application').append(this.el);
+  }
+})
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
 
 CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
