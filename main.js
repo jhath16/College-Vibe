@@ -542,7 +542,6 @@ CollegeVibe.Views.School = Parse.View.extend({
 
     //The hotel tab
     if(this.currentTemplate = _.template($('#hotel-view').text())) {
-      //Check to see if there is any hotel information on the client
       var hotelList = $('.school-hotel ul')[0];
       var hotelTemplate = _.template($('#hotel-template').text());
 
@@ -557,7 +556,7 @@ CollegeVibe.Views.School = Parse.View.extend({
         Parse.Cloud.run('findNearHotels', {latitude:this.model.get('latitude'), longitude:this.model.get('longitude')})
         .then(function (e) {
           console.log(e);
-          self.hotelInformation = e;
+          self.hotelInformation = _.sortBy(e,function(hotel){return hotel.$distance});
           appendHotelInfo();
         });
       } else { //if we already have the hotel info for the client
