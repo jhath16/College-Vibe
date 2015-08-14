@@ -555,8 +555,6 @@ CollegeVibe.Views.School = Parse.View.extend({
 
         Parse.Cloud.run('findNearHotels', {latitude:this.model.get('latitude'), longitude:this.model.get('longitude')})
         .then(function (e) {
-          console.log(e);
-          self.hotelInformation = _.sortBy(e,function(hotel){return hotel.$distance});
           appendHotelInfo();
         });
       } else { //if we already have the hotel info for the client
