@@ -490,7 +490,8 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   events: {
-    'click .school-options li': 'tabSwitch'
+    'click .school-options li': 'tabSwitch',
+    'click .view-all' : 'nextTen'
   },
 
   tabSwitch: function (e) {
@@ -506,12 +507,18 @@ CollegeVibe.Views.School = Parse.View.extend({
     return this;
   },
 
+  nextTen: function () {
+    console.log('next-ten');
+  },
+
   update: function () {
     /*basically separate the functionality between render and update
       render will render it onto the page
       update will just be called on a tab switch */
     var self = this;
     this.$el.html(this.currentTemplate(this.model));
+
+    //The statistics tab
     if(this.currentTemplate = _.template($('#statistics-view').text())) {
       $(function(){
         $("#slides").slidesjs({
@@ -545,20 +552,24 @@ CollegeVibe.Views.School = Parse.View.extend({
       var hotelList = $('.school-hotel ul')[0];
       var hotelTemplate = _.template($('#hotel-template').text());
 
-      function appendHotelInfo() {
-        _.each(self.hotelInformation, function (hotel) {
+      function appendHotelInfo(min,max) {
+        $(hotelList).empty();
+        for (var i = min; i < max; i++) {
+          var hotel = self.hotelInformation[i];
           $(hotelList).append(hotelTemplate(hotel));
-        });
+        }
       };
 
       if(!this.hotelInformation) { //if we don't have the info yet
 
         Parse.Cloud.run('findNearHotels', {latitude:this.model.get('latitude'), longitude:this.model.get('longitude')})
         .then(function (e) {
-          appendHotelInfo();
+          self.hotelInformation = e;
+          console.log(e);
+          appendHotelInfo(0,10);
         });
       } else { //if we already have the hotel info for the client
-        appendHotelInfo();
+        appendHotelInfo(0,10);
       }
     }
   },
