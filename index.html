@@ -3133,9 +3133,14 @@
         </div>
 
         <div class="view-all">
-          <a>View Next Ten</a>
-        </div>
+          <div class="first-ten">
+            <a>1</a>
+          </div>
 
+          <div class="second-ten">
+            <a>2</a>
+          </div>
+        </div>
       </div>
 
       <div class="school-right-col">
@@ -3155,7 +3160,7 @@
         <p><%=locality%>, <%=region%> <%=postcode%></p>
       </div>
       <div class="hotel-radius">
-        <p><%=($distance/1000).toFixed(1)%> Km.</p>
+        <p><%=(($distance/1000) * 0.621371).toFixed(1)%> mi.</p>
         <p>864-555-8989</p>
         <p>www.example.com</p>
       </div>

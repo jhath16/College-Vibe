@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 //Initialize Parse
 
@@ -426,6 +426,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.render(); //needs to be before isRenderedToPage
     this.hotelInformation = null;
     this.currentView = null;
+
     $(function(){
       $("#slides").slidesjs({
         // width: 320,
@@ -491,12 +492,40 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   events: {
     'click .school-options li': 'tabSwitch',
-    'click .view-all' : 'nextTen'
+    'click .first-ten' : 'firstTen',
+    'click .second-ten' : 'secondTen'
   },
 
   tabSwitch: function (e) {
     this.currentTemplate = _.template($('#' + e.currentTarget.id + '-view').text());
     this.update();
+  },
+
+  appendHotelInfo: function (min, max) {
+    var displayString = "Displaying results " + min + "-" + max;
+    console.log(displayString);
+    var hotelList = $('.school-hotel ul')[0];
+    var hotelTemplate = _.template($('#hotel-template').text());
+    var self = this;
+
+    $(hotelList).empty();
+    $(hotelList).append('<div><h1 style="font-size:20px;">' + displayString + '</h1></div>');
+    for (var i = min; i < max; i++) {
+      var hotel = self.hotelInformation[i - 1];
+      $(hotelList).append(hotelTemplate(hotel));
+    }
+  },
+
+  firstTen: function () {
+    this.appendHotelInfo(1,10);
+    $('.second-ten').removeClass('active');
+    $('.first-ten').addClass('active');
+  },
+
+  secondTen: function () {
+    $('.first-ten').removeClass('active');
+    $('.second-ten').addClass('active');
+    this.appendHotelInfo(11,20);
   },
 
   render: function () {
@@ -505,10 +534,6 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('#application').append(this.el); //and put it on the page
     this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
     return this;
-  },
-
-  nextTen: function () {
-    console.log('next-ten');
   },
 
   update: function () {
@@ -549,16 +574,6 @@ CollegeVibe.Views.School = Parse.View.extend({
 
     //The hotel tab
     if(this.currentTemplate = _.template($('#hotel-view').text())) {
-      var hotelList = $('.school-hotel ul')[0];
-      var hotelTemplate = _.template($('#hotel-template').text());
-
-      function appendHotelInfo(min,max) {
-        $(hotelList).empty();
-        for (var i = min; i < max; i++) {
-          var hotel = self.hotelInformation[i];
-          $(hotelList).append(hotelTemplate(hotel));
-        }
-      };
 
       if(!this.hotelInformation) { //if we don't have the info yet
 
@@ -566,10 +581,10 @@ CollegeVibe.Views.School = Parse.View.extend({
         .then(function (e) {
           self.hotelInformation = e;
           console.log(e);
-          appendHotelInfo(0,10);
+          self.firstTen();
         });
       } else { //if we already have the hotel info for the client
-        appendHotelInfo(0,10);
+        self.firstTen();
       }
     }
   },
