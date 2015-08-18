@@ -70,10 +70,6 @@ function d3Stuff() {
         }).on("mouseout", function(){
             // return hide_bubble();
         })
-        console.log(circles);
-        _.each(circles[0][0], function (circle) {
-          console.log(circle.cx);
-        })
 
   var	mapSearch = function(id) {
       var school_data = '';
@@ -237,7 +233,6 @@ var swapMap = function(image) {
         return false;
       });
   });
-  console.log("I ran!");
 }
 
 //Removes a view from the global renderedViews array
@@ -429,7 +424,187 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.restaurantInformation = null;
     this.sportsInformation = null;
     this.subViews = {};
+  },
 
+  render: function () {
+    this.$el.html(this.template(this.model)); //render the html with the new template to this.$el
+    renderedViews.push(this); //put it in the renderedViews array
+    $('#application').append(this.el); //and put it on the page
+    this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
+    return this;
+  },
+
+  events: {
+    'click .school-options li' : 'clearSubviews',
+    'click #statistics' : 'statisticsTab',
+    'click #food' : 'restaurantsTab',
+    'click #hotel' : 'hotelsTab',
+    'click #sports' : 'sportsTab',
+    'click #gallery' : 'galleryTab'
+  },
+
+  clearSubviews: function () {
+    _.each(this.subViews, function (i) {
+      i.remove();
+    })
+    this.subViews = {};
+  },
+
+  //Pass the (this.)options of this school view so it can act as a controller
+  //for the subviews/modules being appended to it. It will store
+  //all of the data collected so we don't send out unnecessary requests.
+  //this.options gives access to the this.hotelInformation, etc...
+
+  statisticsTab: function () {
+    this.subViews.statisticsView = new CollegeVibe.Views.Statistics(this.options);
+  },
+
+  restaurantsTab: function () {
+    this.subViews.foodView = new CollegeVibe.Views.Restaurants(this.options);
+  },
+
+  hotelsTab: function () {
+    this.subViews.hotelView = new CollegeVibe.Views.Hotels(this.options);
+  },
+
+  sportsTab: function () {
+    this.subViews.sportsView = new CollegeVibe.Views.Sports(this.options);
+  },
+
+  galleryTab: function () {
+    this.subViews.galleryView = new CollegeVibe.Views.Gallery(this.options);
+  },
+
+  remove: _.wrap(Parse.View.prototype.removeRenderedView,
+    function (originalFunction) {
+      originalFunction.apply(this);
+      this.partial.remove();
+    })
+});
+
+CollegeVibe.Views.Hotels = Parse.View.extend({
+  initialize: function (schoolView) {
+    var self = this;
+    this.render();
+    this.schoolView = schoolView; //grab a reference to the parent
+
+    if(!this.schoolView.hotelInformation) { //if we don't have the info yet
+
+      Parse.Cloud.run('findNearHotels', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
+      .then(function (e) {
+        self.schoolView.hotelInformation = e; //give the info back to the parent
+        console.log(e);
+        self.firstTen();
+      });
+    } else { //if we already have the hotel info for the client
+      self.firstTen();
+    }
+  },
+
+  template: _.template($("#hotel-view").text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    $('.school-left-col').append(this.el);
+  },
+
+  events: {
+    'click .first-ten' : 'firstTen',
+    'click .second-ten' : 'secondTen'
+  },
+
+  appendHotelInfo: function (min, max) {
+    var displayString = "Displaying results " + min + "-" + max;
+    var hotelList = $('.school-hotel ul')[0];
+    var hotelTemplate = _.template($('#hotel-template').text());
+    var self = this;
+
+    $(hotelList).empty();
+    $(hotelList).append('<div><h1 style="font-size:20px;margin-left:20px;">' + displayString + '</h1></div>');
+    for (var i = min; i <= max; i++) {
+      var hotel = this.schoolView.hotelInformation[i - 1];
+      $(hotelList).append(hotelTemplate(hotel));
+    }
+  },
+
+  firstTen: function () {
+    this.appendHotelInfo(1,10);
+    $('.second-ten').removeClass('active');
+    $('.first-ten').addClass('active');
+  },
+
+  secondTen: function () {
+    $('.first-ten').removeClass('active');
+    $('.second-ten').addClass('active');
+    this.appendHotelInfo(11,20);
+  },
+});
+
+CollegeVibe.Views.Restaurants = Parse.View.extend({
+  initialize: function (schoolView) {
+    var self = this;
+    this.render();
+    this.schoolView = schoolView; //grab a reference to the parent
+
+    if(!this.schoolView.restaurantInformation) { //if we don't have the info yet
+
+      Parse.Cloud.run('findNearRestaurants', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
+      .then(function (e) {
+        self.schoolView.restaurantInformation = e; //give the info back to the parent
+        console.log(e);
+        self.firstTen();
+      });
+    } else { //if we already have the hotel info for the client
+      self.firstTen();
+    }
+  },
+
+  template: _.template($("#food-view").text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    $('.school-left-col').append(this.el);
+  },
+
+  events: {
+    'click .first-ten' : 'firstTen',
+    'click .second-ten' : 'secondTen'
+  },
+
+  appendRestaurantInfo: function (min, max) {
+    var displayString = "Displaying results " + min + "-" + max;
+    var foodList = $('.school-food ul')[0];
+    var restaurantTemplate = _.template($('#food-template').text());
+    var self = this;
+
+    $(foodList).empty();
+    $(foodList).append('<div><h1 style="font-size:20px;margin-left:20px;">' + displayString + '</h1></div>');
+    for (var i = min; i <= max; i++) {
+      var hotel = this.schoolView.restaurantInformation[i - 1];
+      $(foodList).append(restaurantTemplate(hotel));
+    }
+  },
+
+  firstTen: function () {
+    this.appendRestaurantInfo(1,10);
+    $('.second-ten').removeClass('active');
+    $('.first-ten').addClass('active');
+  },
+
+  secondTen: function () {
+    $('.first-ten').removeClass('active');
+    $('.second-ten').addClass('active');
+    this.appendRestaurantInfo(11,20);
+  },
+});
+
+CollegeVibe.Views.Statistics = Parse.View.extend({
+  template: _.template($('#statistics-view').text()),
+
+  initialize: function () {
+    this.render();
+
+    //slidesJS
     $(function(){
       $("#slides").slidesjs({
         // width: 320,
@@ -493,176 +668,35 @@ CollegeVibe.Views.School = Parse.View.extend({
     });
   },
 
-  render: function () {
-    this.$el.html(this.template(this.model)); //render the html with the new template to this.$el
-    renderedViews.push(this); //put it in the renderedViews array
-    $('#application').append(this.el); //and put it on the page
-    this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
-    return this;
-  },
-
-  events: {
-    'click .school-options li' : 'clearSubviews',
-    'click #statistics' : 'statisticsTab',
-    'click #food' : 'restaurantsTab',
-    'click #hotel' : 'hotelsTab',
-    'click #sports' : 'sportsTab',
-    'click #gallery' : 'galleryTab'
-  },
-
-  clearSubviews: function () {
-    _.each(this.subViews, function (i) {
-      i.remove();
-    })
-    this.subViews = {};
-  },
-
-  statisticsTab: function () {
-
-  },
-
-  restaurantsTab: function () {
-    this.subViews.foodView = new CollegeVibe.Views.Restaurants(this.options);
-  },
-
-  hotelsTab: function () {
-      //Pass the (this.)options of this school view so it can act as a controller
-      //for the subviews/modules being appended to it. It will store
-      //all of the data collected so we don't send out unnecessary requests.
-      //this.options gives access to the this.hotelInformation, etc...
-      this.subViews.hotelView = new CollegeVibe.Views.Hotels(this.options);
-  },
-
-  sportsTab: function () {
-
-  },
-
-  galleryTab: function () {
-
-  },
-
-  remove: _.wrap(Parse.View.prototype.removeRenderedView,
-    function (originalFunction) {
-      originalFunction.apply(this);
-      this.partial.remove();
-    })
-});
-
-CollegeVibe.Views.Hotels = Parse.View.extend({
-  initialize: function (schoolView) {
-    var self = this;
-    this.render();
-    this.schoolView = schoolView; //grab a reference to the parent
-
-    if(!this.schoolView.hotelInformation) { //if we don't have the info yet
-
-      Parse.Cloud.run('findNearHotels', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
-      .then(function (e) {
-        self.schoolView.hotelInformation = e; //give the info back to the parent
-        console.log(e);
-        self.firstTen();
-      });
-    } else { //if we already have the hotel info for the client
-      self.firstTen();
-    }
-  },
-
-  template: _.template($("#hotel-view").text()),
-
-  render: function () {
+  render: function() {
     this.$el.html(this.template(this.model));
     $('.school-left-col').append(this.el);
   },
+});
 
-  events: {
-    'click .first-ten' : 'firstTen',
-    'click .second-ten' : 'secondTen'
+CollegeVibe.Views.Sports = Parse.View.extend({
+  template: _.template($('#sports-view').text()),
+
+  initialize: function () {
+    this.render();
   },
 
-  appendHotelInfo: function (min, max) {
-    var displayString = "Displaying results " + min + "-" + max;
-    console.log(displayString);
-    var hotelList = $('.school-hotel ul')[0];
-    var hotelTemplate = _.template($('#hotel-template').text());
-    var self = this;
-
-    $(hotelList).empty();
-    $(hotelList).append('<div><h1 style="font-size:20px;margin-left:20px;">' + displayString + '</h1></div>');
-    for (var i = min; i <= max; i++) {
-      var hotel = this.schoolView.hotelInformation[i - 1];
-      $(hotelList).append(hotelTemplate(hotel));
-    }
-  },
-
-  firstTen: function () {
-    this.appendHotelInfo(1,10);
-    $('.second-ten').removeClass('active');
-    $('.first-ten').addClass('active');
-  },
-
-  secondTen: function () {
-    $('.first-ten').removeClass('active');
-    $('.second-ten').addClass('active');
-    this.appendHotelInfo(11,20);
+  render: function() {
+    this.$el.html(this.template(this.model));
+    $('.school-right-col').append(this.el);
   },
 });
 
-CollegeVibe.Views.Restaurants = Parse.View.extend({
-  initialize: function (schoolView) {
-    var self = this;
+CollegeVibe.Views.Gallery = Parse.View.extend({
+  template: _.template($('#gallery-view').text()),
+
+  initialize: function () {
     this.render();
-    this.schoolView = schoolView; //grab a reference to the parent
-
-    if(!this.schoolView.restaurantInformation) { //if we don't have the info yet
-
-      Parse.Cloud.run('findNearRestaurants', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
-      .then(function (e) {
-        self.schoolView.restaurantInformation = e; //give the info back to the parent
-        console.log(e);
-        self.firstTen();
-      });
-    } else { //if we already have the hotel info for the client
-      self.firstTen();
-    }
   },
 
-  template: _.template($("#food-view").text()),
-
-  render: function () {
+  render: function() {
     this.$el.html(this.template(this.model));
     $('.school-left-col').append(this.el);
-  },
-
-  events: {
-    'click .first-ten' : 'firstTen',
-    'click .second-ten' : 'secondTen'
-  },
-
-  appendRestaurantInfo: function (min, max) {
-    var displayString = "Displaying results " + min + "-" + max;
-    console.log(displayString);
-    var foodList = $('.school-food ul')[0];
-    var restaurantTemplate = _.template($('#food-template').text());
-    var self = this;
-
-    $(foodList).empty();
-    $(foodList).append('<div><h1 style="font-size:20px;margin-left:20px;">' + displayString + '</h1></div>');
-    for (var i = min; i <= max; i++) {
-      var hotel = this.schoolView.restaurantInformation[i - 1];
-      $(foodList).append(restaurantTemplate(hotel));
-    }
-  },
-
-  firstTen: function () {
-    this.appendRestaurantInfo(1,10);
-    $('.second-ten').removeClass('active');
-    $('.first-ten').addClass('active');
-  },
-
-  secondTen: function () {
-    $('.first-ten').removeClass('active');
-    $('.second-ten').addClass('active');
-    this.appendRestaurantInfo(11,20);
   },
 });
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
