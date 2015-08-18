@@ -247,11 +247,11 @@ function removeViewFromRenderedViews (view) {
   var cid = view.cid;
   var index = _.findIndex(renderedViews, function (n) {return n.cid === cid});
   renderedViews.splice(index,1); //remove from the array
-  if (view.subviews) {
-    _.each(view.subviews, function (i) { //remove the subviews
+  if (view.subViews) {
+    _.each(view.subViews, function (i) { //remove the subViews
       i.remove();
     });
-    view.subviews = [];
+    view.subViews = [];
   }
   if (view.partial) {
     view.partial.removeRenderedView(); //remove the partial(s);
@@ -428,6 +428,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.hotelInformation = null;
     this.restaurantInformation = null;
     this.sportsInformation = null;
+    this.subViews = {};
 
     $(function(){
       $("#slides").slidesjs({
@@ -501,11 +502,19 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   events: {
+    'click .school-options li' : 'clearSubviews',
     'click #statistics' : 'statisticsTab',
     'click #food' : 'restaurantsTab',
     'click #hotel' : 'hotelsTab',
     'click #sports' : 'sportsTab',
-    'click #gallery' : 'galleryTab',
+    'click #gallery' : 'galleryTab'
+  },
+
+  clearSubviews: function () {
+    _.each(this.subViews, function (i) {
+      i.remove();
+    });
+    this.subViews = {};
   },
 
   statisticsTab: function () {
@@ -517,8 +526,12 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   hotelsTab: function () {
-    var self = this;
-    new CollegeVibe.Views.Hotels(this.options);
+    if (!this.subViews.hotelView) {
+      //Pass the (this.)options of this school view so it can act as a controller
+      //for the subviews/modules being appended to it. It will store
+      //all of the data collected so we don't send out unnecessary requests
+      this.subViews.hotelView = new CollegeVibe.Views.Hotels(this.options);
+    }
   },
 
   sportsTab: function () {
@@ -558,9 +571,7 @@ CollegeVibe.Views.Hotels = Parse.View.extend({
   template: _.template($("#hotel-view").text()),
 
   render: function () {
-    debugger;
     this.$el.html(this.template(this.model));
-    debugger;
     $('.school-left-col').append(this.el);
   },
 
