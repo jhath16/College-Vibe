@@ -2982,7 +2982,7 @@
       </div>
 
       <div class="school-right-col">
-        
+
       </div>
 
     </div>
@@ -3013,28 +3013,41 @@
 
           <div class="school-food">
             <ul>
-              <li>
-                <span class="fa fa-angle-right"></span>
-                <div class="hotel-name">
-                  <h1>TDs Food and Drink</h1>
-                  <p>555 Clemson Avenue</p>
-                  <p>Clemson, SC 29607</p>
-                </div>
-                <div class="hotel-radius">
-                  <p>1.2 miles away</p>
-                  <p>864-555-8989</p>
-                  <p>www.example.com</p>
-                </div>
-              </li>
-
+              <!-- Potentially put a spinner -->
             </ul>
           </div>
 
           <div class="view-all">
-            <a>View All</a>
+            <div class="first-ten">
+              <a>1</a>
+            </div>
+
+            <div class="second-ten">
+              <a>2</a>
+            </div>
           </div>
       </div>
 
+  </script>
+
+  <script type='text/template' id='food-template'>
+    <li>
+      <span class="fa fa-angle-right"></span>
+      <div class="hotel-name">
+        <h1><%=name%></h1>
+        <p><%=address%></p>
+        <p><%=locality%>, <%=region%> <%=postcode%></p>
+      </div>
+      <div class="hotel-radius">
+        <p><%=(($distance/1000) * 0.621371).toFixed(1)%> mi.</p>
+        <% if(typeof tel !== 'undefined') { %>
+          <p><%= tel %></p>
+        <% } %>
+        <% if(typeof website !== 'undefined') { %>
+          <a href=<%= website %> ><p><%= website %></p></a>
+        <% } %>
+      </div>
+    </li>
   </script>
 
   <!-- Hotel View -->
