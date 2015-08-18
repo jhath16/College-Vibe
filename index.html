@@ -3044,7 +3044,7 @@
           <p><%= tel %></p>
         <% } %>
         <% if(typeof website !== 'undefined') { %>
-          <a target="_blank" href=<%= website %> ><p><%= website.split(/http[s]?:\/\/[www.]*/)[1].split('/')[0] %></p></a>
+          <a target="_blank" href=<%= website %> ><p><%= website.split(/http[s]?:\/\/[www.]{0,4}/)[1].split('/')[0] %></p></a>
         <% } %>
       </div>
     </li>
