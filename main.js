@@ -421,11 +421,13 @@ CollegeVibe.Views.SchoolMap = Parse.View.extend({
 });
 
 CollegeVibe.Views.School = Parse.View.extend({
+  template: _.template($('#school-view').text()),
+
   initialize: function () {
-    this.currentTemplate = _.template($('#statistics-view').text()); //initial template
-    this.render(); //needs to be before isRenderedToPage
+    this.render();
     this.hotelInformation = null;
-    this.currentView = null;
+    this.restaurantInformation = null;
+    this.sportsInformation = null;
 
     $(function(){
       $("#slides").slidesjs({
@@ -490,15 +492,81 @@ CollegeVibe.Views.School = Parse.View.extend({
     });
   },
 
-  events: {
-    'click .school-options li': 'tabSwitch',
-    'click .first-ten' : 'firstTen',
-    'click .second-ten' : 'secondTen'
+  render: function () {
+    this.$el.html(this.template(this.model)); //render the html with the new template to this.$el
+    renderedViews.push(this); //put it in the renderedViews array
+    $('#application').append(this.el); //and put it on the page
+    this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
+    return this;
   },
 
-  tabSwitch: function (e) {
-    this.currentTemplate = _.template($('#' + e.currentTarget.id + '-view').text());
-    this.update();
+  events: {
+    'click #statistics' : 'statisticsTab',
+    'click #food' : 'restaurantsTab',
+    'click #hotel' : 'hotelsTab',
+    'click #sports' : 'sportsTab',
+    'click #gallery' : 'galleryTab',
+  },
+
+  statisticsTab: function () {
+
+  },
+
+  restaurantsTab: function () {
+
+  },
+
+  hotelsTab: function () {
+    var self = this;
+    new CollegeVibe.Views.Hotels(this.options);
+  },
+
+  sportsTab: function () {
+
+  },
+
+  galleryTab: function () {
+
+  },
+
+  remove: _.wrap(Parse.View.prototype.removeRenderedView,
+    function (originalFunction) {
+      originalFunction.apply(this);
+      this.partial.remove();
+    })
+});
+
+CollegeVibe.Views.Hotels = Parse.View.extend({
+  initialize: function (schoolView) {
+    var self = this;
+    this.render();
+    this.schoolView = schoolView; //grab a reference to the parent
+
+    if(!this.schoolView.hotelInformation) { //if we don't have the info yet
+
+      Parse.Cloud.run('findNearHotels', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
+      .then(function (e) {
+        self.schoolView.hotelInformation = e; //give the info back to the parent
+        console.log(e);
+        self.firstTen();
+      });
+    } else { //if we already have the hotel info for the client
+      self.firstTen();
+    }
+  },
+
+  template: _.template($("#hotel-view").text()),
+
+  render: function () {
+    debugger;
+    this.$el.html(this.template(this.model));
+    debugger;
+    $('.school-left-col').append(this.el);
+  },
+
+  events: {
+    'click .first-ten' : 'firstTen',
+    'click .second-ten' : 'secondTen'
   },
 
   appendHotelInfo: function (min, max) {
@@ -511,7 +579,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     $(hotelList).empty();
     $(hotelList).append('<div><h1 style="font-size:20px;">' + displayString + '</h1></div>');
     for (var i = min; i < max; i++) {
-      var hotel = self.hotelInformation[i - 1];
+      var hotel = this.schoolView.hotelInformation[i - 1];
       $(hotelList).append(hotelTemplate(hotel));
     }
   },
@@ -527,87 +595,6 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('.second-ten').addClass('active');
     this.appendHotelInfo(11,20);
   },
-
-  render: function () {
-    this.$el.html(this.currentTemplate(this.model)); //render the html with the new template to this.$el
-    renderedViews.push(this); //put it in the renderedViews array
-    $('#application').append(this.el); //and put it on the page
-    this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
-    return this;
-  },
-
-  update: function () {
-    /*basically separate the functionality between render and update
-      render will render it onto the page
-      update will just be called on a tab switch */
-    var self = this;
-    this.$el.html(this.currentTemplate(this.model));
-
-    //The statistics tab
-    if(this.currentTemplate = _.template($('#statistics-view').text())) {
-      $(function(){
-        $("#slides").slidesjs({
-          // width: 320,
-          // height: 420,
-          play: {
-            active: true,
-              // [boolean] Generate the play and stop buttons.
-              // You cannot use your own buttons. Sorry.
-            effect: "fade",
-              // [string] Can be either "slide" or "fade".
-            interval: 5000,
-              // [number] Time spent on each slide in milliseconds.
-            auto: true,
-              // [boolean] Start playing the slideshow on load.
-            swap: true,
-              // [boolean] show/hide stop and play buttons
-            pauseOnHover: true,
-              // [boolean] pause a playing slideshow on hover
-            restartDelay: 2500
-              // [number] restart delay on inactive slideshow
-          },
-        });
-      });
-    }
-    this.partial.remove();//re-instantiate the partial
-    this.partial = new CollegeVibe.Partials.SearchDropdown();
-
-    //The hotel tab
-    if(this.currentTemplate = _.template($('#hotel-view').text())) {
-
-      if(!this.hotelInformation) { //if we don't have the info yet
-
-        Parse.Cloud.run('findNearHotels', {latitude:this.model.get('latitude'), longitude:this.model.get('longitude')})
-        .then(function (e) {
-          self.hotelInformation = e;
-          console.log(e);
-          self.firstTen();
-        });
-      } else { //if we already have the hotel info for the client
-        self.firstTen();
-      }
-    }
-  },
-
-  remove: _.wrap(Parse.View.prototype.removeRenderedView,
-    function (originalFunction) {
-      originalFunction.apply(this);
-      this.partial.remove();
-      this.isRenderedToPage = false;
-    })
-});
-
-CollegeVibe.Views.Hotels = Parse.View.extend({
-  initialize: function () {
-    this.render();
-  },
-
-  template: _.template($("#hotel-view").text()),
-
-  render: function () {
-    this.$el.html(this.template(this.model));
-    $('#application').append(this.el);
-  }
 })
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
 
