@@ -1,4 +1,4 @@
-// 'use strict';
+// 'use strict'; why use this?
 
 //Initialize Parse
 
@@ -552,10 +552,10 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
       .then(function (e) {
         self.schoolView.restaurantInformation = e; //give the info back to the parent
         console.log(e);
-        self.firstTen();
+        self.appendRestaurantInfo(1,10);
       });
     } else { //if we already have the hotel info for the client
-      self.firstTen();
+      self.appendRestaurantInfo(1,10);
     }
   },
 
@@ -567,8 +567,17 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   },
 
   events: {
-    'click .first-ten' : 'firstTen',
-    'click .second-ten' : 'secondTen'
+    'click .page-number' : 'pageSwitch',
+  },
+
+  pageSwitch: function (e) {
+    var target = e.target;
+    var pageNumber = target.innerText;
+    $('.page-number').removeClass('active');
+    $(target).addClass('active');
+    var max = pageNumber * 10;
+    var min = max - 9;
+    this.appendRestaurantInfo(min,max);
   },
 
   appendRestaurantInfo: function (min, max) {
@@ -583,19 +592,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
       var hotel = this.schoolView.restaurantInformation[i - 1];
       $(foodList).append(restaurantTemplate(hotel));
     }
-  },
-
-  firstTen: function () {
-    this.appendRestaurantInfo(1,10);
-    $('.second-ten').removeClass('active');
-    $('.first-ten').addClass('active');
-  },
-
-  secondTen: function () {
-    $('.first-ten').removeClass('active');
-    $('.second-ten').addClass('active');
-    this.appendRestaurantInfo(11,20);
-  },
+  }
 });
 
 CollegeVibe.Views.Statistics = Parse.View.extend({
@@ -858,8 +855,8 @@ var Router = Backbone.Router.extend({
 //Glue Code
 
 $(document).ready(function () {
-  window.renderedViews = [];
-  window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Make the collection global
+  window.renderedViews = []; //Put into namespacing...
+  window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
   CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
 });
