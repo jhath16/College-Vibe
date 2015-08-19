@@ -2948,11 +2948,10 @@
 	   <header>
       <div class="header-top">
         <div class="header-top-left">
-          <img src="assets/images/clemson-logo.png">
+          <img src="assets/images/collegevibe-logo-reverse.png">
 
           <div>
-            <h1><%= attributes.schoolname %></h1>
-            <p><%= attributes.address %></p>
+            <h1>CollegeVibe.com</h1>
           </div>
         </div>
 
@@ -2982,7 +2981,14 @@
       </div>
 
       <div class="school-right-col">
+      	<div class="school-info">
+          <img src="assets/images/clemson-logo.png">
 
+          <div>
+            <h1><%= attributes.schoolname %></h1>
+            <p><%= attributes.address %></p>
+          </div>
+      	</div>
       </div>
 
     </div>
@@ -3008,7 +3014,7 @@
   <script type="text/template" id="food-view">
 
           <div class="module-header status-header">
-            <p>Food and Drink</p>
+            <p>Restaurants near <%= attributes.schoolname %></p>
           </div>
 
           <div class="school-food">
@@ -3032,20 +3038,22 @@
 
   <script type='text/template' id='food-template'>
     <li>
-      <span class="fa fa-angle-right"></span>
+	<div class="hotel-radius">
+		<span><%=(($distance/1000) * 0.621371).toFixed(1)%></></span><h3>mi</h3>
+	</div>
       <div class="hotel-name">
-        <h1><%=name%></h1>
-        <p><%=address%></p>
-        <p><%=locality%>, <%=region%> <%=postcode%></p>
-      </div>
-      <div class="hotel-radius">
-        <p><%=(($distance/1000) * 0.621371).toFixed(1)%> mi.</p>
-        <% if(typeof tel !== 'undefined') { %>
-          <p><%= tel %></p>
-        <% } %>
+        <h2><%=name%></h2>
+        <p><%=address%>, <%=locality%>, <%=region%> <%=postcode%></p>
         <% if(typeof website !== 'undefined') { %>
           <a target="_blank" href=<%= website %> ><p><%= website.split(/http[s]?:\/\/[www.]*/)[1].split('/')[0] %></p></a>
         <% } %>
+      </div>
+      <div class="hotel-phone">
+        
+        <% if(typeof tel !== 'undefined') { %>
+          <h4><%= tel %></h4>
+        <% } %>
+        
       </div>
     </li>
   </script>
@@ -3055,7 +3063,7 @@
   <script type="text/template" id="hotel-view">
 
         <div class="module-header status-header">
-          <p>Hotels</p>
+          <p>Hotels near <%= attributes.schoolname %></p>
         </div>
 
         <div class="school-hotel">
@@ -3082,17 +3090,15 @@
   <!-- Hotel Module -->
   <script type="text/template" id='hotel-template'>
     <li>
-      <span class="fa fa-angle-right"></span>
+
+    <div class="hotel-radius">
+		<span><%=(($distance/1000) * 0.621371).toFixed(1)%></></span><h3>mi</h3>
+	</div>
       <div class="hotel-name">
-        <h1><%=name%></h1>
-        <p><%=address%></p>
-        <p><%=locality%>, <%=region%> <%=postcode%></p>
+        <h2><%=name%></h2>
+        <p><%=address%>, <%=locality%>, <%=region%> <%=postcode%></p>
       </div>
-      <div class="hotel-radius">
-        <p><%=(($distance/1000) * 0.621371).toFixed(1)%> mi.</p>
-        <p>864-555-8989</p>
-        <p>www.example.com</p>
-      </div>
+
     </li>
   </script>
 

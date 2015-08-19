@@ -27,9 +27,10 @@ body {
 header {
   width: 100%;
   height: 80px;
-  background: #fff;
+  background: #f8f8f8;
   position: fixed;
   z-index: 50;
+  border-bottom: 1px solid #dfdfdf;
   /*	h1 {
   		color: $primary-color-light;
   		font-size: 30px;
@@ -72,9 +73,10 @@ header {
 
 .header-top-left {
   display: inline-block;
-  width: 50%; }
+  width: 50%;
+  padding-top: 20px; }
   .header-top-left img {
-    width: 80px;
+    width: 35px;
     height: auto;
     display: inline-block;
     vertical-align: top;
@@ -83,14 +85,19 @@ header {
     display: inline-block;
     vertical-align: top;
     padding-left: 5px;
-    padding-top: 5px; }
+    padding-top: 0px; }
   .header-top-left h1 {
     font-family: 'Lobster', cursive;
     font-size: 28px;
-    color: #37474F;
+    color: #263238;
+    font-weight: normal;
     display: inline-block;
     vertical-align: top;
-    padding-top: 10px; }
+    padding-top: 0px;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
   .header-top-left p {
     display: block;
     font-size: 12px;
@@ -810,6 +817,39 @@ header {
   height: 500px;
   position: relative; }
 
+.school-info {
+  background: #f8f8f8;
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #dfdfdf;
+  padding: 15px; }
+  .school-info img {
+    width: 60px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0px; }
+  .school-info div {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5px;
+    padding-top: 5px; }
+  .school-info h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 20px;
+    color: #37474F;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 225px; }
+  .school-info p {
+    display: block;
+    font-size: 12px;
+    font-weight: 300; }
+
 .profile-heading {
   width: 100%;
   padding: 25px 30px 6px;
@@ -841,7 +881,9 @@ header {
 .school-food,
 .school-hotel {
   width: 100%;
-  background: #fff; }
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-bottom: 0; }
   .school-food ul,
   .school-hotel ul {
     list-style: none;
@@ -851,28 +893,46 @@ header {
   .school-hotel li {
     display: inline-block;
     width: 100%;
-    padding: 25px;
-    border-bottom: 1px solid #dfdfdf; }
+    padding: 20px;
+    border-bottom: 1px solid #f8f8f8;
+    /*border-right:1px solid #f8f8f8;*/
+    height: 95px; }
   .school-food span,
   .school-hotel span {
-    width: 5%;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     display: inline-block;
     vertical-align: top;
-    color: #37474F; }
+    color: #37474F;
+    font-weight: 300; }
+  .school-food h1,
+  .school-hotel h1 {
+    font-size: 12px !important;
+    padding-top: 15px;
+    font-weight: 300 !important; }
+  .school-food h3,
+  .school-hotel h3 {
+    font-size: 8px;
+    padding-top: 9.5px;
+    padding-left: 2px;
+    text-transform: lowercase;
+    display: inline-block;
+    vertical-align: top;
+    font-weight: 300;
+    color: #999; }
 
 .school-map {
   margin-bottom: 10px;
   margin-top: 0px; }
 
-.food-avatar,
-.hotel-avatar {
+.food-radius,
+.hotel-radius {
   display: inline-block;
-  width: 40px;
-  height: 40px; }
-  .food-avatar img,
-  .hotel-avatar img {
+  width: 10%;
+  height: 40px;
+  text-align: center; }
+  .food-radius img,
+  .hotel-radius img {
     width: 100%;
     height: 40px; }
 
@@ -882,28 +942,39 @@ header {
   display: inline-block;
   vertical-align: top;
   padding-left: 10px; }
-  .food-name h1,
-  .hotel-name h1 {
-    font-size: 16px;
-    color: #263238; }
+  .food-name h2,
+  .hotel-name h2 {
+    font-size: 14px;
+    color: #37474F;
+    font-weight: normal;
+    padding-bottom: 2px; }
   .food-name p,
   .hotel-name p {
     font-size: 12px;
+    line-height: 18px;
     /*font-style: italic;*/
     display: block;
     color: #37474F;
     font-weight: 300; }
 
-.food-radius,
-.hotel-radius {
-  width: 25%;
+.food-phone,
+.hotel-phone {
+  width: 30%;
   display: inline-block;
   vertical-align: top;
   text-align: right; }
-  .food-radius p,
-  .hotel-radius p {
-    font-size: 12px;
-    color: #37474F; }
+  .food-phone h4,
+  .hotel-phone h4 {
+    font-size: 12px !important;
+    /*font-style: italic;*/
+    display: block;
+    color: #0277BD;
+    font-weight: 300; }
+  .food-phone p,
+  .hotel-phone p {
+    font-size: 10px;
+    color: #37474F;
+    font-weight: 300; }
 
 /* School Instagram Gallery */
 .school-instagram-gallery {
@@ -959,13 +1030,13 @@ header {
 .school-options {
   width: 50%;
   height: 80px;
-  background: #263238;
-  border-bottom: 1px solid #455A64;
+  background: #f8f8f8;
   z-index: 1000;
   padding: 0px;
   margin-top: 0px;
   display: inline-block;
   vertical-align: top;
+  border-bottom: 1px solid #dfdfdf;
   /*	li:nth-child(1),
   	li:nth-child(4) {
   		border-left: 0;
@@ -988,23 +1059,21 @@ header {
   	}*/ }
   .school-options li {
     width: 20%;
-    height: 80px;
+    height: 78px;
     display: inline-block;
-    background: #fff;
+    background: transparent;
     color: #263238;
     font-size: 0px;
     text-align: center;
     padding: 32.5px 0;
     font-weight: 300;
-    border-right: 1px solid #dfdfdf;
     border-left: 1px solid #fff;
-    /*		border-bottom: 1px solid #263238;
-    		border-top: 1px solid #455A64;*/
+    border-right: 1px solid #f0f0f0;
     cursor: pointer; }
   .school-options p {
     font-size: 12px;
     color: #263238;
-    font-weight: 500; }
+    font-weight: 300; }
   .school-options img {
     text-align: center;
     display: block;
@@ -1027,9 +1096,10 @@ header {
 
 .module-header {
   width: 100%;
-  background: #fff;
+  background: #f8f8f8;
   padding: 15px 15px;
-  border-bottom: 1px solid #dfdfdf;
+  border: 1px solid #dfdfdf;
+  border-bottom: 0;
   margin-top: 0px; }
   .module-header img {
     height: 25px;
@@ -1039,13 +1109,13 @@ header {
     vertical-align: top; }
   .module-header p {
     color: #263238;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 300;
     display: inline-block;
     vertical-align: top;
     padding-top: 3px; }
   .module-header a {
-    color: #ECEFF1;
+    color: #03A9F4;
     font-size: 14px;
     text-decoration: none;
     float: right;
@@ -1054,8 +1124,9 @@ header {
 
 .view-all {
   width: 100%;
-  border-top: 1px solid #fff;
-  background: #ECEFF1;
+  border: 1px solid #dfdfdf;
+  border-top: 0;
+  background: #fff;
   text-align: center;
   padding: 15px 0;
   margin-bottom: 25px; }
@@ -1064,6 +1135,10 @@ header {
     color: #263238;
     font-weight: 300;
     text-decoration: none; }
+  .view-all div {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px; }
 
 .view-all-dark {
   width: 100%;
@@ -1074,7 +1149,7 @@ header {
   margin-bottom: 25px; }
   .view-all-dark a {
     font-size: 16px;
-    color: #ECEFF1;
+    color: #03A9F4;
     text-decoration: none;
     font-weight: 300; }
 
