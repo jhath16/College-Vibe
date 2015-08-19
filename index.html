@@ -2989,6 +2989,8 @@
             <p><%= attributes.address %></p>
           </div>
       	</div>
+
+
       </div>
 
     </div>
@@ -3013,9 +3015,14 @@
 
   <script type="text/template" id="food-view">
 
-          <div class="module-header status-header">
-            <p>Restaurants near <%= attributes.schoolname %></p>
-          </div>
+        <div class="restaurant-search">
+			<span class="fa fa-search"></span>
+			<input placeholder="Filter restaurants by keyword" type='text'>
+		</div>
+
+		<div class="module-header status-header">
+			<p>Restaurants near <%= attributes.schoolname %></p>
+		</div>
 
           <div class="school-food">
             <ul>
@@ -3054,10 +3061,10 @@
 
         <% if (typeof rating != 'undefined') { %>
           <% for (var i = 0; i < Math.floor(rating); i++) { %>
-            <i style='font-size:20px' class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
           <% } %>
           <% if((rating/.5) % 2 != 0) { %>
-            <i style='font-size:20px' class="fa fa-star-half-o"></i>
+            <i class="fa fa-star-half-o"></i>
           <% } %>
         <% } %>
       </div>
@@ -3103,6 +3110,18 @@
       <div class="hotel-name">
         <h2><%=name%></h2>
         <p><%=address%>, <%=locality%>, <%=region%> <%=postcode%></p>
+      </div>
+
+      <div class="hotel-phone">
+
+        <% if (typeof rating != 'undefined') { %>
+          <% for (var i = 0; i < Math.floor(rating); i++) { %>
+            <i class="fa fa-star"></i>
+          <% } %>
+          <% if((rating/.5) % 2 != 0) { %>
+            <i class="fa fa-star-half-o"></i>
+          <% } %>
+        <% } %>
       </div>
 
     </li>
