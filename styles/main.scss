@@ -1150,6 +1150,7 @@ header {
 	h1 {
 		font-size:12px !important;
 		padding-top:15px;
+		padding-left:15px;
 		font-weight: 300 !important;
 	}
 
@@ -1220,13 +1221,19 @@ header {
 		font-size: 12px !important;
 		/*font-style: italic;*/
 		display: block;
-		color: $secondary-color-medium;
-		font-weight: 300;
+		color: $primary-color-dark;
+		font-weight: 500;
 	}
 	p {
 		font-size: 10px;
 		color:$primary-color-medium;
 		font-weight: 300;
+	}
+
+	i {
+		font-size: 14px;
+		color: #FFC107;
+		margin-top:3px;
 	}
 }
 /* School Instagram Gallery */
@@ -1389,6 +1396,13 @@ header {
 	border-bottom:0;
 	margin-top: 0px;
 
+	input {
+		height:60px;
+		background:ccc;
+		border:0;
+		width:100%;
+	}
+
 	img {
 		height: 25px;
 		width: auto;
@@ -1413,6 +1427,40 @@ header {
 		float: right;
 		padding-top:5px;
 		font-weight: 300;
+	}
+}
+
+.restaurant-search {
+	background:#f8f8f8;
+	border:1px solid #dfdfdf;
+	height: 50px;
+	width: 100%;
+	margin-top:15px;
+
+	span {
+		display:inline-block;
+		width: 10%;
+		text-align: right;
+		font-size: 16px;
+		padding-top:15px;
+		color: #999;
+		padding-right:5px;
+	}
+
+	input {
+		display: inline-block;
+		vertical-align: top;
+		font-size:16px;
+		height: 48px;
+		font-weight:300;
+		text-indent: 10px;
+		width: 90%;
+		border:0;
+		background:#f8f8f8;
+
+		&:focus {
+			outline:0;
+		}
 	}
 }
 
