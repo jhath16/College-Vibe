@@ -587,7 +587,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var self = this;
 
     $(foodList).empty();
-    $(foodList).append('<div><h1 style="font-size:20px;margin-left:20px;">' + displayString + '</h1></div>');
+    $(foodList).append('<div><h1>' + displayString + '</h1></div>');
     for (var i = min; i <= max; i++) {
       var hotel = this.schoolView.restaurantInformation[i - 1];
       $(foodList).append(restaurantTemplate(hotel));
