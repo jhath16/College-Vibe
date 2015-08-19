@@ -424,6 +424,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.restaurantInformation = null;
     this.sportsInformation = null;
     this.subViews = {};
+    this.statisticsTab();
   },
 
   render: function () {
@@ -568,6 +569,17 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
   events: {
     'click .page-number' : 'pageSwitch',
+    'keypress input' : 'categorySearch',
+  },
+
+  categorySearch: function (e) {
+    var category = e.target.value.toLowerCase(); //may not be right
+    var latitude = this.schoolView.model.get('latitude');
+    var longitude = this.schoolView.model.get('longitude');
+    Parse.Cloud.run('restaurantCategorySearch', {latitude:longitude, latitude:latitude,category:category})
+    .then(function (e) {
+      console.log(e);
+    });
   },
 
   pageSwitch: function (e) {
