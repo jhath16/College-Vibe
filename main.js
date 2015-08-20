@@ -506,7 +506,7 @@ CollegeVibe.Views.Hotels = Parse.View.extend({
 
   render: function () {
     this.$el.html(this.template(this.model));
-    $('.school-left-col').append(this.el);
+    $('.school-body').append(this.el);
   },
 
   events: {
@@ -564,7 +564,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
   render: function () {
     this.$el.html(this.template(this.model));
-    $('.school-left-col').append(this.el);
+    $('.school-body').append(this.el);
   },
 
   events: {
@@ -682,7 +682,7 @@ CollegeVibe.Views.Statistics = Parse.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model));
-    $('.school-left-col').append(this.el);
+    $('.school-body').append(this.el);
   },
 });
 
@@ -695,7 +695,7 @@ CollegeVibe.Views.Sports = Parse.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model));
-    $('.school-right-col').append(this.el);
+    $('.school-body').append(this.el);
   },
 });
 
@@ -708,7 +708,7 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model));
-    $('.school-left-col').append(this.el);
+    $('.school-body').append(this.el);
   },
 });
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
