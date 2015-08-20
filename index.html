@@ -2976,9 +2976,63 @@
 
     <div class="school-body">
 
-      <div class="school-left-col">
 
-      </div>
+
+    </div>
+  </script>
+
+<!-- Statistics View -->
+
+  <script type="text/template" id="statistics-view">
+    <div class="school-left-col">
+        <div class="school-heading">
+          <div id="slides">
+            <img src="assets/images/campus-1.jpg">
+            <img src="assets/images/campus-2.jpg">
+            <img src="assets/images/campus-3.jpg">
+          </div>
+        </div>
+
+
+	</div>
+
+	<div class="school-right-col">
+        <div class="school-info">
+          <img src="assets/images/clemson-logo.png">
+
+          <div>
+            <h1><%= attributes.schoolname %></h1>
+            <p><%= attributes.address %></p>
+          </div>
+      	</div>
+	</div>
+
+  </script>
+
+
+<!-- Food View -->
+
+  <script type="text/template" id="food-view">
+
+        <div class="school-left-col">
+			<div class="module-header status-header">
+				<p>Restaurants near <%= attributes.schoolname %></p>
+			</div>
+
+			<div class="school-food">
+				<ul>
+				  <!-- Potentially put a spinner -->
+				</ul>
+			</div>
+
+			<div class="view-all">
+				<a class='page-number'>1</a>
+				<a class='page-number'>2</a>
+				<a class='page-number'>3</a>
+				<a class='page-number'>4</a>
+				<a class='page-number'>5</a>
+			</div>
+		</div>
 
       <div class="school-right-col">
       	<div class="school-info">
@@ -2990,32 +3044,7 @@
           </div>
       	</div>
 
-
-      </div>
-
-    </div>
-  </script>
-
-<!-- Statistics View -->
-
-  <script type="text/template" id="statistics-view">
-
-        <div class="school-heading">
-          <div id="slides">
-            <img src="assets/images/campus-1.jpg">
-            <img src="assets/images/campus-2.jpg">
-            <img src="assets/images/campus-3.jpg">
-          </div>
-        </div>
-
-  </script>
-
-
-<!-- Food View -->
-
-  <script type="text/template" id="food-view">
-
-        <div class="restaurant-search">
+      	<div class="restaurant-search">
 			<span class="fa fa-search"></span>
 			<input placeholder="Filter restaurants by keyword" type='text'>
 			<div class="clear-filter hidden">
@@ -3023,24 +3052,11 @@
 			</div>
 		</div>
 
-		<div class="module-header status-header">
-			<p>Restaurants near <%= attributes.schoolname %></p>
-		</div>
-
-          <div class="school-food">
-            <ul>
-              <!-- Potentially put a spinner -->
-            </ul>
-          </div>
-
-          <div class="view-all">
-            <a class='page-number'>1</a>
-            <a class='page-number'>2</a>
-            <a class='page-number'>3</a>
-            <a class='page-number'>4</a>
-            <a class='page-number'>5</a>
-          </div>
       </div>
+
+
+
+
 
   </script>
 
@@ -3078,28 +3094,42 @@
 
   <script type="text/template" id="hotel-view">
 
-        <div class="module-header status-header">
-          <p>Hotels near <%= attributes.schoolname %></p>
+        <div class="school-left-col">
+
+	        <div class="module-header status-header">
+	          <p>Hotels near <%= attributes.schoolname %></p>
+	        </div>
+
+	        <div class="school-hotel">
+	          <ul>
+	            <!-- Optional: Put a spinner in this place while it's loading.
+	                Probably not necessary because the loading is so quick-->
+	            <!-- <i style="font-size:20px;" class="fa fa-spin  fa-spinner"></i> -->
+	          </ul>
+	        </div>
+
+	        <div class="view-all">
+	          <div class="first-ten">
+	            <a>1</a>
+	          </div>
+
+	          <div class="second-ten">
+	            <a>2</a>
+	          </div>
+	        </div>
         </div>
 
-        <div class="school-hotel">
-          <ul>
-            <!-- Optional: Put a spinner in this place while it's loading.
-                Probably not necessary because the loading is so quick-->
-            <!-- <i style="font-size:20px;" class="fa fa-spin  fa-spinner"></i> -->
-          </ul>
-        </div>
+        <div class="school-right-col">
 
-        <div class="view-all">
-          <div class="first-ten">
-            <a>1</a>
-          </div>
+	        <div class="school-info">
+	          <img src="assets/images/clemson-logo.png">
 
-          <div class="second-ten">
-            <a>2</a>
-          </div>
+	          <div>
+	            <h1><%= attributes.schoolname %></h1>
+	            <p><%= attributes.address %></p>
+	          </div>
+	      	</div>
         </div>
-      </div>
 
   </script>
 
