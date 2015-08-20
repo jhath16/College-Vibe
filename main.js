@@ -573,13 +573,16 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   },
 
   categorySearch: function (e) {
-    var category = e.target.value.toLowerCase(); //may not be right
-    var latitude = this.schoolView.model.get('latitude');
-    var longitude = this.schoolView.model.get('longitude');
-    Parse.Cloud.run('restaurantCategorySearch', {latitude:longitude, latitude:latitude,category:category})
-    .then(function (e) {
-      console.log(e);
-    });
+    if (e.which == 13) {
+      var category = e.target.value.toLowerCase();
+      console.log(category);
+      var latitude = this.schoolView.model.get('latitude');
+      var longitude = this.schoolView.model.get('longitude');
+      Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
+      .then(function (e) {
+        console.log(e);
+      });
+    }
   },
 
   pageSwitch: function (e) {
