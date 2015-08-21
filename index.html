@@ -3070,7 +3070,7 @@
 	</div>
       <div class="hotel-name">
         <h2><%=name%></h2>
-        <p><%=address%>, <%=locality%>, <%=region%> <%=postcode%></p>
+        <p><%=address%>, <%=locality%>, <%=region%> <% if(typeof postcode != 'undefined') %><%=postcode%></p>
         <% if(typeof website !== 'undefined') { %>
           <a target="_blank" href=<%= website %> ><p><%= website.split(/http[s]?:\/\/[www.]{0,4}/)[1].split('/')[0] %></p></a>
         <% } %>
