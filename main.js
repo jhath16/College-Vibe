@@ -546,6 +546,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var self = this;
     this.render();
     this.schoolView = schoolView; //grab a reference to the parent
+    this.categoryInformation = null
 
     if(!this.schoolView.restaurantInformation) { //if we don't have the info yet
 
@@ -573,14 +574,18 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   },
 
   categorySearch: function (e) {
+    var self = this;
     if (e.which == 13) {
-      var category = e.target.value.toLowerCase();
-      console.log(category);
-      var latitude = this.schoolView.model.get('latitude');
-      var longitude = this.schoolView.model.get('longitude');
+      var category = e.target.value.toLowerCase(); //unsure if this is necessary
+      var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
+      var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
       Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
       .then(function (e) {
         console.log(e);
+        var foodList = $('.school-food ul')[0];
+        $(foodlist).empty();
+
+
       });
     }
   },
