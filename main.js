@@ -546,7 +546,8 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var self = this;
     this.render();
     this.schoolView = schoolView; //grab a reference to the parent
-    this.categoryInformation = null
+    this.categoryResults = null;
+    this.categorySearchIsActive = false;
 
     if(!this.schoolView.restaurantInformation) { //if we don't have the info yet
 
@@ -554,7 +555,8 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
       .then(function (e) {
         self.schoolView.restaurantInformation = e; //give the info back to the parent
         console.log(e);
-        self.appendRestaurantInfo(1,10);
+        self.addPageNumbers();
+        self.appendPage(1);
       });
     } else { //if we already have the hotel info for the client
       self.appendRestaurantInfo(1,10);
@@ -571,21 +573,66 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   events: {
     'click .page-number' : 'pageSwitch',
     'keypress input' : 'categorySearch',
+    'click .clear-filter' : 'clearFilter'
+  },
+
+  clearFilter: function (e) {
+    this.categorySearchIsActive = false;
+    $(e.currentTarget).addClass('hidden');
+    $('#category-searchbox').val('');
+    var foodList = $('.school-food ul')[0];
+    $(foodList).empty();
+    this.appendPage(1);
+    this.addPageNumbers();
+  },
+
+  addPageNumbers: function () {
+    var results;
+    if (this.categorySearchIsActive == false) {
+      results = this.schoolView.restaurantInformation;
+    } else {
+      results = this.categoryResults;
+    }
+    var amountOfPages = Math.ceil(results.length/10);
+    var pageNumberContainer = $(".view-all");
+    $(pageNumberContainer).empty();
+    for (var i = 1; i <= amountOfPages; i++) {
+      $(pageNumberContainer).append("<a class='page-number'>" + (i) +"</a>")
+    }
   },
 
   categorySearch: function (e) {
     var self = this;
     if (e.which == 13) {
+      this.categorySearchIsActive = true;
+      var foodList = $('.school-food ul')[0];
+      $(foodList).empty();
+      //append circle spinner
+      $('.clear-filter').removeClass('hidden'); //show the x in the search box
+      var pageNumberContainer = $(".view-all");
+      $(pageNumberContainer).empty();
+      $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
+      // ^^ This gets appended properly but never appears on page (CSS?) ^^
+
       var category = e.target.value.toLowerCase(); //unsure if this is necessary
       var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
       var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
       Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
       .then(function (e) {
+        $(foodList).empty();
         console.log(e);
-        var foodList = $('.school-food ul')[0];
-        $(foodlist).empty();
+        self.categoryResults = e; //store the information in this view
+        var results = e; //for easier reference here
 
-
+        if (results.length == 0) {
+          //display 0 results found...
+          //!!! Need to figure out what to do when no results are found !!!
+        } else {
+          //Put the numbers at the bottom
+          self.addPageNumbers();
+          // Put the first page of information in there.
+          self.appendPage(1);
+        }
       });
     }
   },
@@ -595,22 +642,31 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var pageNumber = target.innerText;
     $('.page-number').removeClass('active');
     $(target).addClass('active');
-    var max = pageNumber * 10;
-    var min = max - 9;
-    this.appendRestaurantInfo(min,max);
+    var foodList = $('.school-food ul')[0];
+    $(foodList).empty();
+    this.appendPage(pageNumber);
   },
 
-  appendRestaurantInfo: function (min, max) {
-    var displayString = "Displaying results " + min + "-" + max;
+  appendPage: function (page) {
+    var data;
+    if (this.categorySearchIsActive == false) {
+      data = this.schoolView.restaurantInformation;
+    } else {
+      data = this.categoryResults;
+    }
+    var defaultMax = page * 10;
+    var min = defaultMax - 9;
+    var realMax = defaultMax - data.length <= 0 ? defaultMax : data.length;
     var foodList = $('.school-food ul')[0];
-    var restaurantTemplate = _.template($('#food-template').text());
-    var self = this;
 
-    $(foodList).empty();
+    var foodList = $('.school-food ul')[0];
+    var displayString = "Displaying results " + min + "-" + realMax;
     $(foodList).append('<div><h1>' + displayString + '</h1></div>');
-    for (var i = min; i <= max; i++) {
-      var hotel = this.schoolView.restaurantInformation[i - 1];
-      $(foodList).append(restaurantTemplate(hotel));
+    var restaurantTemplate = _.template($('#food-template').text());
+
+    for (var i = min-1; i < realMax; i++) {
+      var restaurant = data[i];
+      $(foodList).append(restaurantTemplate(restaurant));
     }
   }
 });
