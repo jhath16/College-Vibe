@@ -559,7 +559,8 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
         self.appendPage(1);
       });
     } else { //if we already have the hotel info for the client
-      self.appendRestaurantInfo(1,10);
+      self.addPageNumbers();
+      self.appendPage(1);
     }
   },
 
