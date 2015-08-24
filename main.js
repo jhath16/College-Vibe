@@ -625,8 +625,8 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
         var results = e; //for easier reference here
 
         if (results.length == 0) {
-          //display 0 results found...
-          //!!! Need to figure out what to do when no results are found !!!
+          $(foodList).append("<div class='no-results'>No results found</div>");
+          self.categorySearchIsActive = false;
         } else {
           //Put the numbers at the bottom
           self.addPageNumbers();
