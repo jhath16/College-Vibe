@@ -584,6 +584,8 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     $('#category-searchbox').val('');
     var foodList = $('.school-food ul')[0];
     $(foodList).empty();
+    var moduleHeader = $('.module-header p')[0];
+    $(moduleHeader).html("Restaurants near " + this.schoolView.model.get('schoolname'));
     this.appendPage(1);
     this.addPageNumbers();
   },
@@ -605,7 +607,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
   categorySearch: function (e) {
     var self = this;
-    if (e.which == 13) {
+    if (e.which == 13 && e.target.value) {
       this.categorySearchIsActive = true;
       var foodList = $('.school-food ul')[0];
       $(foodList).empty();
@@ -615,8 +617,13 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
       $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
       // ^^ This gets appended properly but never appears on page (CSS?) ^^
 
+      var moduleHeader = $('.module-header p')[0];
+      var schoolName = this.schoolView.model.get('schoolname');
+
       var category = e.target.value.toLowerCase(); //unsure if this is necessary
-      this.categoryKeyword = category; //store this in the view so it can be accessed by other functions
+      var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
+      $(moduleHeader).html(categoryString);
+
       var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
       var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
       Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
@@ -661,17 +668,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var min = defaultMax - 9;
     var realMax = defaultMax - data.length <= 0 ? defaultMax : data.length;
     var foodList = $('.school-food ul')[0];
-    var moduleHeader = $('.module-header p')[0];
-    var schoolName = this.schoolView.model.get('schoolname');
 
-
-    if (this.categorySearchIsActive) {
-      var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + this.categoryKeyword + "</strong> restaurants near " + schoolName;
-      $(moduleHeader).html(categoryString);
-    } else {
-      var defaultModuleHeaderString = "Restaurants near " + schoolName;
-      $(moduleHeader).html(defaultModuleHeaderString);
-    }
 
     var displayString = "Displaying results " + min + "-" + realMax;
     $(foodList).append('<div><h1>' + displayString + '</h1></div>');
