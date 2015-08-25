@@ -548,6 +548,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.schoolView = schoolView; //grab a reference to the parent
     this.categoryResults = null;
     this.categorySearchIsActive = false;
+    this.categoryKeyword = null;
 
     if(!this.schoolView.restaurantInformation) { //if we don't have the info yet
 
@@ -608,7 +609,6 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
       this.categorySearchIsActive = true;
       var foodList = $('.school-food ul')[0];
       $(foodList).empty();
-      //append circle spinner
       $('.clear-filter').removeClass('hidden'); //show the x in the search box
       var pageNumberContainer = $(".view-all");
       $(pageNumberContainer).empty();
@@ -616,6 +616,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
       // ^^ This gets appended properly but never appears on page (CSS?) ^^
 
       var category = e.target.value.toLowerCase(); //unsure if this is necessary
+      this.categoryKeyword = category; //store this in the view so it can be accessed by other functions
       var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
       var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
       Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
@@ -625,7 +626,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
         self.categoryResults = e; //store the information in this view
         var results = e; //for easier reference here
 
-        if (results.length == 0) {
+        if (results.length == 0) { //if the search doesn't bring anything back
           $(foodList).append("<div class='no-results'>No results found</div>");
           self.categorySearchIsActive = false;
         } else {
@@ -650,6 +651,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
   appendPage: function (page) {
     var data;
+    var categoryKeyword = this.categoryKeyword;
     if (this.categorySearchIsActive == false) {
       data = this.schoolView.restaurantInformation;
     } else {
@@ -659,8 +661,18 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var min = defaultMax - 9;
     var realMax = defaultMax - data.length <= 0 ? defaultMax : data.length;
     var foodList = $('.school-food ul')[0];
+    var moduleHeader = $('.module-header p')[0];
+    var schoolName = this.schoolView.model.get('schoolname');
 
-    var foodList = $('.school-food ul')[0];
+
+    if (this.categorySearchIsActive) {
+      var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + this.categoryKeyword + "</strong> restaurants near " + schoolName;
+      $(moduleHeader).html(categoryString);
+    } else {
+      var defaultModuleHeaderString = "Restaurants near " + schoolName;
+      $(moduleHeader).html(defaultModuleHeaderString);
+    }
+
     var displayString = "Displaying results " + min + "-" + realMax;
     $(foodList).append('<div><h1>' + displayString + '</h1></div>');
     var restaurantTemplate = _.template($('#food-template').text());
