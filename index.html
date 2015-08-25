@@ -3007,7 +3007,7 @@
       	</div>
       	<div class="school-info-list">
       		<ul>
-      			<li><span class="fa fa-phone"></span><p><%= attributes.phoneNumber %></p><i class="fa fa-ellipsis-h"></i></li>
+      			<li><span class="fa fa-phone"></span><p><a style='font-size:14px; color:inherit' href='tel:<%= getNumbers(attributes.phoneNumber) %>'><%= attributes.phoneNumber %></a></p><i class="fa fa-ellipsis-h"></i></li>
       			<li><span class="fa fa-globe"></span><p><%= attributes.website %></p><i class="fa fa-ellipsis-h"></i></li>
       			<li><span class="fa fa-linkedin"></span><p>LinkedIn</p><i class="fa fa-ellipsis-h"></i></li>
       			<li><span class="fa fa-twitter"></span><p>Twitter</p><i class="fa fa-ellipsis-h"></i></li>

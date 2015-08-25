@@ -4,6 +4,16 @@
 
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
 
+function getNumbers (phoneNumber) {
+  var numbers = [];
+  for (var i = 0; i < 14; i++) {
+    if (!isNaN(Number(phoneNumber.charAt(i)))) {
+      numbers.push(phoneNumber.charAt(i));
+    }
+  }
+  return numbers.join('').replace(' ', '');
+}
+
 //Establish the namespacing
 (function () {
   window.CollegeVibe = {};
