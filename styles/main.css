@@ -895,8 +895,7 @@ header {
     width: 100%;
     padding: 20px;
     border-bottom: 1px solid #f8f8f8;
-    /*border-right:1px solid #f8f8f8;*/
-    height: 95px; }
+    /*border-right:1px solid #f8f8f8;*/ }
   .school-food span,
   .school-hotel span {
     text-align: center;
@@ -956,6 +955,13 @@ header {
     /*font-style: italic;*/
     display: block;
     color: #37474F;
+    font-weight: 300; }
+  .food-name a,
+  .hotel-name a {
+    color: #03A9F4;
+    font-size: 12px;
+    line-height: 18px;
+    display: block;
     font-weight: 300; }
 
 .food-phone,
@@ -1136,13 +1142,13 @@ header {
 .restaurant-search {
   background: #fff;
   border: 1px solid #dfdfdf;
-  border-top: 0;
+  /*border-bottom:0;*/
   width: 100%;
-  margin-top: 0px;
-  margin-bottom: 15px; }
+  margin-top: 15px;
+  /*margin-bottom:15px;*/ }
   .restaurant-search span {
     display: inline-block;
-    width: 10%;
+    width: 12%;
     text-align: right;
     font-size: 16px;
     padding-top: 20px;
@@ -1154,9 +1160,9 @@ header {
     font-size: 16px;
     height: 65px;
     font-weight: 300;
-    text-indent: 15px;
+    text-indent: 5px;
     background: transparent;
-    width: 70%;
+    width: 68%;
     border: 0; }
     .restaurant-search input:focus {
       outline: 0; }
@@ -1183,10 +1189,11 @@ header {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  background: #fff;
-  color: #dfdfdf;
-  text-align: left;
-  padding: 0 20px 20px; }
+  background: #f8f8f8;
+  border-top: 1px solid #dfdfdf;
+  text-align: center;
+  padding: 15px 20px;
+  cursor: pointer; }
   .clear-filter i {
     display: inline-block;
     vertical-align: top;
@@ -1194,7 +1201,7 @@ header {
     font-size: 12px;
     padding-left: 5px; }
   .clear-filter p {
-    font-size: 12px;
+    font-size: 14px;
     display: inline-block;
     vertical-align: top;
     color: #263238;

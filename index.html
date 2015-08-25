@@ -3041,37 +3041,31 @@
       	</div>
 
       	<div class="restaurant-search">
-    			<span class="fa fa-search"></span>
-    			<input placeholder="Filter restaurants by keyword" type='text' id='category-searchbox'>
-    			<button type="submit">Filter</button>
-    			<div class="clear-filter hidden">
-    				<p>Keyword</p>
-    				<i class="fa fa-close"></i>
-    			</div>
-
-		    </div>
+			<span class="fa fa-search"></span>
+			<input placeholder="Filter restaurants by keyword" type='text' id='category-searchbox'>
+			<button type="submit">Filter</button>
+			<div class="clear-filter hidden">
+				<p>Clear Filter</p>
+			</div>
+		</div>
 
       </div>
-
-
-
-
 
   </script>
 
   <script type='text/template' id='food-template'>
     <li>
-	<div class="hotel-radius">
+	<div class="food-radius">
 		<span><%=(($distance/1000) * 0.621371).toFixed(1)%></></span><h3>mi</h3>
 	</div>
-      <div class="hotel-name">
+      <div class="food-name">
         <h2><%=name%></h2>
         <p><%=address%>, <%=locality%>, <%=region%> <% if(typeof postcode != 'undefined') %><%=postcode%></p>
         <% if(typeof website !== 'undefined') { %>
-          <a target="_blank" href=<%= website %> ><p><%= website.split(/http[s]?:\/\/[www.]{0,4}/)[1].split('/')[0] %></p></a>
+          <a target="_blank" href=<%= website %> ><%= website.split(/http[s]?:\/\/[www.]{0,4}/)[1].split('/')[0] %></a>
         <% } %>
       </div>
-      <div class="hotel-phone">
+      <div class="food-phone">
 
         <% if(typeof tel !== 'undefined') { %>
           <h4><%= tel %></h4>
