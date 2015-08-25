@@ -1075,6 +1075,57 @@ header {
 
 }
 
+.school-info-list {
+	width: 100%;
+	background: #fff;
+	border: 1px solid #dfdfdf;
+	border-top: 0;
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	li {
+		width: 100%;
+		padding: 20px 25px;
+		display: inline-block;
+		border-bottom: 1px solid #f8f8f8;
+		cursor: pointer;
+	}
+
+	li:last-child {
+		border-bottom: 0;
+	}
+
+	span {
+		display: inline-block;
+		color: $secondary-color-dark;
+		font-size: 14px;
+		width: 5%;
+		text-align: right;
+	}
+
+	p {
+		display: inline-block;
+		vertical-align: top;
+		padding-left: 10px;
+		font-size: 14px;
+		color: $primary-color-dark;
+		font-weight: 300;
+		width: 85%;
+	}
+
+	i {
+		display: inline-block;
+		vertical-align: top;
+		font-size: 14px;
+		text-align: right;
+		color: $green-light;
+		width: 10%;
+	}
+}
+
 .profile-heading {
 
 	width: 100%;
