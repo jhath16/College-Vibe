@@ -495,10 +495,12 @@ CollegeVibe.Views.Hotels = Parse.View.extend({
       .then(function (e) {
         self.schoolView.hotelInformation = e; //give the info back to the parent
         console.log(e);
-        self.firstTen();
+        self.addPageNumbers();
+        self.appendPage(1);
       });
     } else { //if we already have the hotel info for the client
-      self.firstTen();
+      self.addPageNumbers();
+      self.appendPage(1);
     }
   },
 
@@ -510,21 +512,45 @@ CollegeVibe.Views.Hotels = Parse.View.extend({
   },
 
   events: {
-    'click .first-ten' : 'firstTen',
-    'click .second-ten' : 'secondTen'
+    'click .page-number' : 'pageSwitch',
   },
 
-  appendHotelInfo: function (min, max) {
-    var displayString = "Displaying results " + min + "-" + max;
+  pageSwitch:function (e) {
+    var target = e.target;
+    var pageNumber = target.innerText;
+    $('.page-number').removeClass('active');
+    $(target).addClass('active');
+    var hotelList = $('.school-hotel ul')[0];
+    $(hotelList).empty();
+    this.appendPage(pageNumber);
+  },
+
+  appendPage: function (page) {
+    var data = this.schoolView.hotelInformation;
+    var defaultMax = page * 10;
+    var min = defaultMax - 9;
+    var realMax = defaultMax - data.length <= 0 ? defaultMax : data.length;
     var hotelList = $('.school-hotel ul')[0];
     var hotelTemplate = _.template($('#hotel-template').text());
-    var self = this;
 
-    $(hotelList).empty();
-    $(hotelList).append('<div><h1 style="font-size:20px;margin-left:20px;">' + displayString + '</h1></div>');
-    for (var i = min; i <= max; i++) {
-      var hotel = this.schoolView.hotelInformation[i - 1];
+
+    var displayString = "Displaying results " + min + "-" + realMax;
+    $(hotelList).append('<div><h1>' + displayString + '</h1></div>');
+    var restaurantTemplate = _.template($('#food-template').text());
+
+    for (var i = min-1; i < realMax; i++) {
+      var hotel = data[i];
       $(hotelList).append(hotelTemplate(hotel));
+    }
+  },
+
+  addPageNumbers: function () {
+    var results = this.schoolView.hotelInformation;
+    var amountOfPages = Math.ceil(results.length/10);
+    var pageNumberContainer = $(".view-all");
+    $(pageNumberContainer).empty();
+    for (var i = 1; i <= amountOfPages; i++) {
+      $(pageNumberContainer).append("<a class='page-number'>" + (i) +"</a>")
     }
   },
 
