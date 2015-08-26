@@ -809,8 +809,21 @@ CollegeVibe.Views.Sports = Parse.View.extend({
 CollegeVibe.Views.Gallery = Parse.View.extend({
   template: _.template($('#gallery-view').text()),
 
-  initialize: function () {
+  initialize: function (schoolView) {
     this.render();
+    this.schoolView = schoolView;
+    var latitude = this.schoolView.model.get('latitude');
+    var longitude = this.schoolView.model.get('longitude');
+    Parse.Cloud.run('instagramLocation', {latitude:latitude, longitude: longitude})
+    .then(function (e) {
+      _.each(e, function (i){
+        var imageElement = document.createElement('img');
+        $(imageElement).attr('src',i.images.low_resolution.url);
+        $('.instagram-gallery ul').append(imageElement);
+      });
+
+
+    });
   },
 
   render: function() {
