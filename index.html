@@ -2946,7 +2946,8 @@
 
   <script type="text/template" id="school-view">
 	   <header>
-      <div class="header-top">
+	   	<div class="header-container">
+
         <div class="header-top-left">
           <img src="assets/images/collegevibe-logo-reverse.png">
 
@@ -2955,23 +2956,14 @@
           </div>
         </div>
 
-        <div class="school-options">
-          <ul>
-            <li id='statistics'><img src="assets/images/icon-chart.png"><p>Statistics</p></li>
-            <li id='food'><img src="assets/images/icon-restaurant.png"></span><p>Restaurants</p></li>
-            <li id='hotel'><img src="assets/images/icon-open.png"><p>Hotels</p></li>
-            <li id='sports'><img src="assets/images/icon-comments.png"><p>Sports</p></li>
-            <li id='gallery'><img src="assets/images/icon-gallery.png"><p>Gallery</p></li>
-          </ul>
-        </div>
+      <div class="header-right">
+        <div class="search-box-partial"></div>
+      </div>
 
       </div>
     </header>
 
-    <div class="header-container">
-      <div class="header-right">
-        <div class="search-box-partial"></div>
-      </div>
+
     </div>
 
     <div class="school-body">
@@ -2997,6 +2989,22 @@
 	</div>
 
 	<div class="school-right-col">
+
+
+      	<div class="module-header">
+			<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
+		</div>
+
+      	<div class="school-options">
+          <ul>
+            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='gallery'><i class="fa fa-angle-right"></i><p>Gallery</p><span class="fa fa-ellipsis-h"></span></li>
+          </ul>
+        </div>
+
         <div class="school-info">
           <img src="assets/images/clemson-logo.png">
 
@@ -3005,6 +3013,7 @@
             <p><%= attributes.address %></p>
           </div>
       	</div>
+
       	<div class="school-info-list">
       		<ul>
       			<li><span class="fa fa-phone"></span><p><a style='font-size:14px; color:inherit' href='tel:<%= getNumbers(attributes.phoneNumber) %>'><%= attributes.phoneNumber %></a></p><i class="fa fa-ellipsis-h"></i></li>
@@ -3014,6 +3023,10 @@
       			<li><span class="fa fa-facebook"></span><p>Facebook</p><i class="fa fa-ellipsis-h"></i></li>
       		</ul>
       	</div>
+
+
+
+
 	</div>
 
   </script>
@@ -3040,23 +3053,19 @@
 		</div>
 
       <div class="school-right-col">
-      	<div class="school-info">
-          <img src="assets/images/clemson-logo.png">
-          <div>
-            <h1><%= attributes.schoolname %></h1>
-            <p><%= attributes.address %></p>
-          </div>
-      	</div>
+      	<div class="module-header">
+			<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Restaurants</p>
+		</div>
 
-      	<div class="school-info-list">
-      		<ul>
-      			<li><span class="fa fa-phone"></span><p><a style='font-size:14px; color:inherit' href='tel:<%= getNumbers(attributes.phoneNumber) %>'><%= attributes.phoneNumber %></a></p><i class="fa fa-ellipsis-h"></i></li>
-      			<li><span class="fa fa-globe"></span><p><%= attributes.website %></p><i class="fa fa-ellipsis-h"></i></li>
-      			<li><span class="fa fa-linkedin"></span><p>LinkedIn</p><i class="fa fa-ellipsis-h"></i></li>
-      			<li><span class="fa fa-twitter"></span><p>Twitter</p><i class="fa fa-ellipsis-h"></i></li>
-      			<li><span class="fa fa-facebook"></span><p>Facebook</p><i class="fa fa-ellipsis-h"></i></li>
-      		</ul>
-      	</div>
+      	<div class="school-options">
+          <ul>
+            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
+            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
+          </ul>
+        </div>
 
       	<div class="restaurant-search">
 			<span class="fa fa-search"></span>
@@ -3126,23 +3135,19 @@
 
         <div class="school-right-col">
 
-	        <div class="school-info">
-	          <img src="assets/images/clemson-logo.png">
+	      	<div class="module-header">
+				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Hotels</p>
+			</div>
 
-	          <div>
-	            <h1><%= attributes.schoolname %></h1>
-	            <p><%= attributes.address %></p>
-	          </div>
-	      	</div>
-	      	<div class="school-info-list">
-	      		<ul>
-	      			<li><span class="fa fa-phone"></span><p><a style='font-size:14px; color:inherit' href='tel:<%= getNumbers(attributes.phoneNumber) %>'><%= attributes.phoneNumber %></a></p><i class="fa fa-ellipsis-h"></i></li>
-	      			<li><span class="fa fa-globe"></span><p><%= attributes.website %></p><i class="fa fa-ellipsis-h"></i></li>
-	      			<li><span class="fa fa-linkedin"></span><p>LinkedIn</p><i class="fa fa-ellipsis-h"></i></li>
-	      			<li><span class="fa fa-twitter"></span><p>Twitter</p><i class="fa fa-ellipsis-h"></i></li>
-	      			<li><span class="fa fa-facebook"></span><p>Facebook</p><i class="fa fa-ellipsis-h"></i></li>
-	      		</ul>
-	      	</div>
+	      	<div class="school-options">
+	          <ul>
+	            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
+	          </ul>
+	        </div>
         </div>
 
   </script>
@@ -3179,24 +3184,32 @@
 
   <script type="text/template" id="sports-view">
 
-    <div class="module-header status-header">
-      <img src="images/icon-chart.png">
-      <p>Football Schedule</p>
-    </div>
 
-    <div class="sports-schedule">
-      <ul>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-        <li><h1>Sept 2</h1><p>Wofford</p><span>12:30 pm</span></li>
-      </ul>
-    </div>
+          <div class="school-left-col">
+		  	<div class="instagram-gallery">
+		  		<ul>
+		  			<!-- Here is where the instagram pictures will be appended  -->
+		  		</ul>
+		  	</div>
+        </div>
+
+        <div class="school-right-col">
+	      	<div class="module-header">
+				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Sports</p>
+			</div>
+
+	      	<div class="school-options">
+	          <ul>
+	            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
+	          </ul>
+	        </div>
+        </div>
+
+
 
   </script>
 
@@ -3216,7 +3229,19 @@
         </div>
 
         <div class="school-right-col">
+	      	<div class="module-header">
+				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Instagram</p>
+			</div>
 
+	      	<div class="school-options">
+	          <ul>
+	            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
+	            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
+	          </ul>
+	        </div>
         </div>
 
   </script>
