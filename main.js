@@ -812,18 +812,30 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
   initialize: function (schoolView) {
     this.render();
     this.schoolView = schoolView;
-    var latitude = this.schoolView.model.get('latitude');
-    var longitude = this.schoolView.model.get('longitude');
-    Parse.Cloud.run('instagramLocation', {latitude:latitude, longitude: longitude})
-    .then(function (e) {
-      _.each(e, function (i){
-        var imageElement = document.createElement('img');
-        $(imageElement).attr('src',i.images.low_resolution.url);
-        $('.instagram-gallery ul').append(imageElement);
-      });
-
-
+    var t1 = this.schoolView.model.get('instaHash1');
+    var t2 = this.schoolView.model.get('instaHash2');
+    var t3 = this.schoolView.model.get('instaHash3');
+    var tags = [t1,t2,t3];
+    var tags = tags.filter(function (e) {
+      return e ? true : false; //remove the falsy values(undefined in this case);
     });
+
+    console.log(tags);
+    console.log(t1);
+    console.log(t2);
+    console.log(t3);
+
+    if(tags.length > 0) {
+      Parse.Cloud.run('instagramTags', {tags:tags})
+      .then(function (e) {
+        console.log(e);
+        _.each(e, function (i){
+          var imageElement = document.createElement('img');
+          $(imageElement).attr('src',i.images.low_resolution.url);
+          $('.instagram-gallery ul').append(imageElement);
+        });
+      });
+    }
   },
 
   render: function() {
