@@ -611,8 +611,9 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
   events: {
     'click .page-number' : 'pageSwitch',
-    'keypress input' : 'categorySearch',
-    'click .clear-filter' : 'clearFilter'
+    'keypress input' : 'keypressCategorySearch',
+    'click .clear-filter' : 'clearFilter',
+    'click button' : 'categorySearch'
   },
 
   clearFilter: function (e) {
@@ -642,45 +643,47 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     }
   },
 
+  keypressCategorySearch: function (e) {
+    if (e.which == 13 && e.target.value) {
+      this.categorySearch(e);
+    }
+  },
+
   categorySearch: function (e) {
     var self = this;
-    if (e.which == 13 && e.target.value) {
-      this.categorySearchIsActive = true;
-      var foodList = $('.school-food ul')[0];
+    this.categorySearchIsActive = true;
+    var foodList = $('.school-food ul')[0];
+    $(foodList).empty();
+    $('.clear-filter').removeClass('hidden'); //show the x in the search box
+    var pageNumberContainer = $(".view-all");
+    $(pageNumberContainer).empty();
+    $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
+    // ^^ This gets appended properly but never appears on page (CSS?) ^^
+
+    var moduleHeader = $('.module-header p')[0];
+    var schoolName = this.schoolView.model.get('schoolname');
+
+    var category = $('#category-searchbox').val().toLowerCase(); //unsure if lowerCasing is necessary
+    var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
+    $(moduleHeader).html(categoryString);
+
+    var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
+    var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
+    Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
+    .then(function (e) {
       $(foodList).empty();
-      $('.clear-filter').removeClass('hidden'); //show the x in the search box
-      var pageNumberContainer = $(".view-all");
-      $(pageNumberContainer).empty();
-      $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
-      // ^^ This gets appended properly but never appears on page (CSS?) ^^
+      console.log(e);
+      self.categoryResults = e; //store the information in this view
+      var results = e; //for easier reference here
 
-      var moduleHeader = $('.module-header p')[0];
-      var schoolName = this.schoolView.model.get('schoolname');
-
-      var category = e.target.value.toLowerCase(); //unsure if this is necessary
-      var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
-      $(moduleHeader).html(categoryString);
-
-      var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
-      var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
-      Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
-      .then(function (e) {
-        $(foodList).empty();
-        console.log(e);
-        self.categoryResults = e; //store the information in this view
-        var results = e; //for easier reference here
-
-        if (results.length == 0) { //if the search doesn't bring anything back
-          $(foodList).append("<div class='no-results'>No results found</div>");
-          self.categorySearchIsActive = false;
-        } else {
-          //Put the numbers at the bottom
-          self.addPageNumbers();
-          // Put the first page of information in there.
-          self.appendPage(1);
-        }
-      });
-    }
+      if (results.length == 0) { //if the search doesn't bring anything back
+        $(foodList).append("<div class='no-results'>No results found</div>");
+        self.categorySearchIsActive = false;
+      } else {
+        self.addPageNumbers(); //Put the numbers at the bottom
+        self.appendPage(1); // Put the first page of information in there.
+      }
+    });
   },
 
   pageSwitch: function (e) {
