@@ -433,6 +433,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.hotelInformation = null;
     this.restaurantInformation = null;
     this.sportsInformation = null;
+    this.instagramInformation = null;
     this.subViews = {};
     this.statisticsTab();
   },
@@ -820,22 +821,30 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
       return e ? true : false; //remove the falsy values(undefined in this case);
     });
 
-    console.log(tags);
-    console.log(t1);
-    console.log(t2);
-    console.log(t3);
+    var self = this;
 
-    if(tags.length > 0) {
-      Parse.Cloud.run('instagramTags', {tags:tags})
-      .then(function (e) {
-        console.log(e);
-        _.each(e, function (i){
-          var imageElement = document.createElement('img');
-          $(imageElement).attr('src',i.images.low_resolution.url);
-          $('.instagram-gallery ul').append(imageElement);
-        });
+    function postInstaImages () {
+      _.each(self.schoolView.instagramInformation, function (i){
+        var imageElement = document.createElement('img');
+        $(imageElement).attr('src',i.images.low_resolution.url);
+        $('.instagram-gallery ul').append(imageElement);
       });
+    };
+
+    if(!this.schoolView.instagramInformation) {
+      console.log(tags);
+      if(tags.length > 0) {
+        Parse.Cloud.run('instagramTags', {tags:tags})
+        .then(function (e) {
+          console.log(e);
+          self.schoolView.instagramInformation = e;
+          postInstaImages();
+        });
+      }
+    } else {
+      postInstaImages();
     }
+
   },
 
   render: function() {
