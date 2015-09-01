@@ -106,6 +106,19 @@ header {
 	margin: 0 auto;
 }
 
+.top-header {
+	width: 960px;
+	margin: 0px auto 0;
+}
+
+.top-header-wrap {
+	position:relative;
+	width: 100%;
+	background: #555;
+	height: 57px;
+	margin-bottom: 20px;
+}
+
 .header-top-left {
 	display: inline-block;
 	width: 50%;
@@ -984,7 +997,6 @@ height: auto;
 	margin: 0 auto;
 	position: relative;
 	margin-bottom: 50px;
-	padding-top:20px;
 }
 
 .profile-right-col,
@@ -1315,10 +1327,16 @@ height: auto;
 	}
 
 	img {
-		width: 50%;
+		width: 300px;
 		display: inline-block;
 		vertical-align: top;
 		height: auto;
+		margin-right:30px;
+		margin-bottom:30px;
+	}
+
+	img:nth-child(3n) {
+		margin-right:0;
 	}
 }
 
@@ -1428,6 +1446,76 @@ height: auto;
 	}
 }
 
+
+
+.school-options1 {
+	width: 65%;
+	background:#444;
+	z-index: 1000;
+	padding: 0px;
+	margin-top: 0px;
+	display: inline-block;
+	vertical-align: top;
+	/*border:1px solid #dfdfdf;*/
+	/*border-top:0;*/
+	margin-bottom: 15px;
+
+	li {
+		width: 20%;
+		display: inline-block;
+		background:transparent;
+		color:$primary-color-dark;
+		text-align: left;
+		padding: 20px;
+		font-weight: 300;
+/*		border-left: 1px solid #fff;
+		border-right: 1px solid #f0f0f0;*/
+		cursor: pointer;
+		text-align: center;
+	}
+
+	li:hover {
+		background: #353535;
+	}
+
+	p {
+		font-size: 14px;
+		display: inline-block;
+		vertical-align: top;
+		color: $primary-color-light;
+		font-weight: 300;
+		padding-left: 0px;
+	}
+
+	i {
+		font-size: 8px;
+		display: inline-block;
+		vertical-align: top;
+		color: $secondary-color-dark;
+		width: 5%;
+		text-align: right;
+		padding-top:5px;
+	}
+
+	li:last-child {
+		border-bottom:0;
+	}
+
+	li:first-child {
+		/*border-left:0;*/
+	}
+
+	span {
+		display: inline-block;
+		vertical-align: top;
+		width: 20%;
+		text-align: right;
+		color: $green-light;
+		font-size:14px;
+	}
+}
+
+
 .school-options-mobile {
 	display: none;
 }
@@ -1469,6 +1557,43 @@ height: auto;
 		padding: 5px 10px 0;
 		font-size: 12px;
 		color: $secondary-color-dark;
+	}
+
+	a {
+		color:$secondary-color-light;
+		font-size: 14px;
+		text-decoration: none;
+		float: right;
+		padding-top:5px;
+		font-weight: 300;
+	}
+}
+
+.header-breadcrumbs {
+	width: 35%;
+	background: #333;
+	padding: 20px;
+	/*border: 1px solid #dfdfdf;*/
+	/*border-top: 0;*/
+	border-right: 0;
+	margin-top: 0px;
+	display: inline-block;
+	vertical-align: top;
+
+	p {
+		color:$primary-color-light;
+		font-size: 14px;
+		font-weight: 300;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	span {
+		display: inline-block;
+		vertical-align: top;
+		padding: 5px 10px 0;
+		font-size: 12px;
+		color: $secondary-color-light;
 	}
 
 	a {

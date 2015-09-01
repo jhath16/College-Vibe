@@ -2945,32 +2945,43 @@
 <!-- School View -->
 
   <script type="text/template" id="school-view">
-	   <header>
-	   	<div class="header-container">
+	<header>
+		<div class="header-container">
 
-        <div class="header-top-left">
-          <img src="assets/images/collegevibe-logo-reverse.png">
+			<div class="header-top-left">
+				<img src="assets/images/collegevibe-logo-reverse.png">
+				<div>
+					<h1>CollegeVibe.com</h1>
+				</div>
+			</div>
 
-          <div>
-            <h1>CollegeVibe.com</h1>
-          </div>
-        </div>
+			<div class="header-right">
+				<div class="search-box-partial"></div>
+			</div>
 
-      <div class="header-right">
-        <div class="search-box-partial"></div>
-      </div>
+		</div>
+	</header>
+	<div class="top-header-wrap">
+		<div class="top-header">
+		   	<div class="header-breadcrumbs">
+				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
+			</div>
 
-      </div>
-    </header>
-
-
+	      	<div class="school-options1">
+	          <ul>
+	            <li id='statistics'><p>Information</p></li>
+	            <li id='food'><p>Restaurants</p></li>
+	            <li id='hotel'><p>Hotels</p></li>
+	            <li id='sports'><p>Sports</p></li>
+	            <li id='gallery'><p>Gallery</p></li>
+	          </ul>
+	        </div>
+	    </div>
     </div>
 
-    <div class="school-body">
+	<div class="school-body">
+	</div>
 
-
-
-    </div>
   </script>
 
 <!-- Statistics View -->
@@ -2984,26 +2995,9 @@
             <img src="assets/images/campus-3.jpg">
           </div>
         </div>
-
-
 	</div>
 
 	<div class="school-right-col">
-
-
-      	<div class="module-header">
-			<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
-		</div>
-
-      	<div class="school-options">
-          <ul>
-            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='gallery'><i class="fa fa-angle-right"></i><p>Gallery</p><span class="fa fa-ellipsis-h"></span></li>
-          </ul>
-        </div>
 
         <div class="school-info">
           <img src="assets/images/clemson-logo.png">
@@ -3023,9 +3017,6 @@
       			<li><span class="fa fa-facebook"></span><p>Facebook</p><i class="fa fa-ellipsis-h"></i></li>
       		</ul>
       	</div>
-
-
-
 
 	</div>
 
@@ -3053,19 +3044,6 @@
 		</div>
 
       <div class="school-right-col">
-      	<div class="module-header">
-			<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Restaurants</p>
-		</div>
-
-      	<div class="school-options">
-          <ul>
-            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
-            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
-          </ul>
-        </div>
 
       	<div class="restaurant-search">
 			<span class="fa fa-search"></span>
@@ -3135,19 +3113,6 @@
 
         <div class="school-right-col">
 
-	      	<div class="module-header">
-				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Hotels</p>
-			</div>
-
-	      	<div class="school-options">
-	          <ul>
-	            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
-	          </ul>
-	        </div>
         </div>
 
   </script>
@@ -3194,19 +3159,7 @@
         </div>
 
         <div class="school-right-col">
-	      	<div class="module-header">
-				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Sports</p>
-			</div>
 
-	      	<div class="school-options">
-	          <ul>
-	            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
-	          </ul>
-	        </div>
         </div>
 
 
@@ -3221,29 +3174,17 @@
 
 
         <div class="school-left-col">
-		  	<div class="instagram-gallery">
-		  		<ul>
-		  			<!-- Here is where the instagram pictures will be appended  -->
-		  		</ul>
-		  	</div>
+
         </div>
 
         <div class="school-right-col">
-	      	<div class="module-header">
-				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Instagram</p>
-			</div>
 
-	      	<div class="school-options">
-	          <ul>
-	            <li id='statistics'><i class="fa fa-angle-right"></i><p>Information</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='food'><i class="fa fa-angle-right"></i><p>Restaurants</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='hotel'><i class="fa fa-angle-right"></i><p>Hotels</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='sports'><i class="fa fa-angle-right"></i><p>Sports</p><span class="fa fa-ellipsis-h"></span></li>
-	            <li id='gallery'><i class="fa fa-angle-right"></i><p>Instagram</p><span class="fa fa-ellipsis-h"></span></li>
-	          </ul>
-	        </div>
         </div>
-
+	  	<div class="instagram-gallery">
+	  		<ul>
+	  			<!-- Here is where the instagram pictures will be appended  -->
+	  		</ul>
+	  	</div>
   </script>
 
 
