@@ -100,12 +100,12 @@ header {
     padding-top: 0px; }
   .header-top-left h1 {
     font-family: 'Lobster', cursive;
-    font-size: 28px;
+    font-size: 24px;
     color: #263238;
     font-weight: normal;
     display: inline-block;
     vertical-align: top;
-    padding-top: 0px;
+    padding-top: 2px;
     padding-left: 5px;
     white-space: nowrap;
     overflow: hidden;
@@ -1052,12 +1052,12 @@ header {
     display: inline-block;
     vertical-align: top; }
   .instagram-gallery img {
-    width: 300px;
+    width: 310px;
     display: inline-block;
     vertical-align: top;
     height: auto;
-    margin-right: 30px;
-    margin-bottom: 30px; }
+    margin-right: 35px;
+    margin-bottom: 35px; }
   .instagram-gallery img:nth-child(3n) {
     margin-right: 0; }
 
@@ -1123,19 +1123,20 @@ header {
     color: #ECEFF1;
     font-weight: 300;
     padding-left: 0px; }
-  .school-options1 i {
+  .school-options1 span {
     font-size: 8px;
     display: inline-block;
     vertical-align: top;
-    color: #0277BD;
+    color: #03A9F4;
     width: 5%;
     text-align: right;
-    padding-top: 5px; }
+    padding-top: 5px;
+    padding-right: 15px; }
   .school-options1 li:last-child {
     border-bottom: 0; }
   .school-options1 li:first-child {
     /*border-left:0;*/ }
-  .school-options1 span {
+  .school-options1 i {
     display: inline-block;
     vertical-align: top;
     width: 20%;
