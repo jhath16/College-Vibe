@@ -434,7 +434,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     this.restaurantInformation = null;
     this.sportsInformation = null;
     this.instagramInformation = null;
-    this.subViews = {};
+    this.subView = null;
     this.statisticsTab();
   },
 
@@ -447,7 +447,7 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   events: {
-    'click .school-options li' : 'clearSubviews',
+    'click .school-options1 li' : 'clearSubviews',
     'click #statistics' : 'statisticsTab',
     'click #food' : 'restaurantsTab',
     'click #hotel' : 'hotelsTab',
@@ -456,10 +456,8 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   clearSubviews: function () {
-    _.each(this.subViews, function (i) {
-      i.remove();
-    })
-    this.subViews = {};
+    console.log('removing');
+    this.subView.remove();
   },
 
   //Pass the (this.)options of this school view so it can act as a controller
@@ -468,23 +466,23 @@ CollegeVibe.Views.School = Parse.View.extend({
   //this.options gives access to the this.hotelInformation, etc...
 
   statisticsTab: function () {
-    this.subViews.statisticsView = new CollegeVibe.Views.Statistics(this.options);
+    this.subView = new CollegeVibe.Views.Statistics(this.options);
   },
 
   restaurantsTab: function () {
-    this.subViews.foodView = new CollegeVibe.Views.Restaurants(this.options);
+    this.subView = new CollegeVibe.Views.Restaurants(this.options);
   },
 
   hotelsTab: function () {
-    this.subViews.hotelView = new CollegeVibe.Views.Hotels(this.options);
+    this.subView = new CollegeVibe.Views.Hotels(this.options);
   },
 
   sportsTab: function () {
-    this.subViews.sportsView = new CollegeVibe.Views.Sports(this.options);
+    this.subView = new CollegeVibe.Views.Sports(this.options);
   },
 
   galleryTab: function () {
-    this.subViews.galleryView = new CollegeVibe.Views.Gallery(this.options);
+    this.subView = new CollegeVibe.Views.Gallery(this.options);
   },
 
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
@@ -1018,17 +1016,17 @@ $(document).ready(function () {
   window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
   CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
-  var div = document.createElement('div');
-  div.id = 'map';
-  $('#application').append(div);
-  div.style.height = '500px';
-  div.style.width = '100%';
-  (function () {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center:{lat:-34.397, lng:150.644},
-      zoom:5
-    })
-  }())
+  // var div = document.createElement('div');
+  // div.id = 'map';
+  // $('#application').append(div);
+  // div.style.height = '500px';
+  // div.style.width = '100%';
+  // (function () {
+  //   map = new google.maps.Map(document.getElementById('map'), {
+  //     center:{lat:-34.397, lng:150.644},
+  //     zoom:5
+  //   })
+  // }())
 });
 /*
 
