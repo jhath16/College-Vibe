@@ -2963,9 +2963,7 @@
 	</header>
 	<div class="top-header-wrap">
 		<div class="top-header">
-		   	<div class="header-breadcrumbs">
-				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
-			</div>
+
 
 	      	<div class="school-options1">
 	          <ul>
@@ -2974,8 +2972,13 @@
 	            <li id='hotel'><p>Hotels</p></li>
 	            <li id='sports'><p>Sports</p></li>
 	            <li id='gallery'><p>Gallery</p></li>
+	           	<li id='map'><p>Map</p></li>
 	          </ul>
 	        </div>
+
+	        <div class="header-breadcrumbs">
+				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
+			</div>
 	    </div>
     </div>
 
@@ -3171,6 +3174,26 @@
   <!-- Gallery View -->
 
   <script type="text/template" id="gallery-view">
+
+
+        <div class="school-left-col">
+
+        </div>
+
+        <div class="school-right-col">
+
+        </div>
+	  	<div class="instagram-gallery">
+	  		<ul>
+	  			<!-- Here is where the instagram pictures will be appended  -->
+	  		</ul>
+	  	</div>
+  </script>
+
+
+<!-- Map View -->
+
+  <script type="text/template" id="map-view">
 
 
         <div class="school-left-col">

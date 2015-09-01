@@ -51,11 +51,12 @@ body {
 
 header {
 	width: 100%;
-	height: 80px;
-	background: #f8f8f8;
+	height: 60px;
+	/*background: #f8f8f8;*/
 	position:relative;
 	z-index:50;
-	border-bottom:1px solid #dfdfdf;
+	margin-top: 25px;
+	/*border-bottom:1px solid #dfdfdf;*/
 
 	ul {
 		list-style: none;
@@ -101,20 +102,20 @@ header {
 }
 
 .header-top {
-	width: 960px;
+	width: 1000px;
 	height: 50px;
 	margin: 0 auto;
 }
 
 .top-header {
-	width: 960px;
+	width: 1000px;
 	margin: 0px auto 0;
 }
 
 .top-header-wrap {
 	position:relative;
 	width: 100%;
-	background: #555;
+	/*background: #555;*/
 	height: 57px;
 	margin-bottom: 20px;
 }
@@ -122,7 +123,7 @@ header {
 .header-top-left {
 	display: inline-block;
 	width: 50%;
-	padding-top:20px;
+	padding-top:12px;
 
 
 	img {
@@ -207,11 +208,13 @@ header {
 }
 
 .header-container {
-	width: 960px;
+	width: 1000px;
 	height: 60px;
 	margin: 0 auto;
 	position: relative;
     z-index:500;
+    background: #f8f8f8;
+    padding: 0 0px 0 30px;
 
 }
 
@@ -262,7 +265,7 @@ header {
   position: absolute;
   height: 4px;
   width: 25px;
-  background: #999;
+  background: $secondary-color-dark;
   border-radius: 1px;
   opacity: 1;
   left: 10px;
@@ -398,7 +401,7 @@ header {
 	display: inline-block;
 	vertical-align: top;
 	border-radius: 0px 0px 4px 4px;
-	top:10px;
+	/*top:10px;*/
 
 }
 
@@ -431,14 +434,15 @@ header {
 	text-align: right;
 	display: inline-block;
 	vertical-align: top;
-	background: #f8f8f8;
+	background: #fff;
+	/*border-left: 1px solid #dfdfdf;*/
 	left: 0;
 
 	i {
 		width: 15%;
 		height: 60px;
 		color: #999;
-		background: #f8f8f8;
+		background: #fff;
 		padding-top: 21px;
 		text-align: right;
 		font-size: 16px;
@@ -574,39 +578,38 @@ header {
 /* SEARCH CONTAINER */
 
 .college-search {
-height: auto;
+	height: auto;
     width: 100%;
-    background: #fff;
+    background: #333;
     font-weight: 300;
     transition: 250ms;
     position: relative;
     right: 0;
-    top: 9px;
-    border: 1px solid #dfdfdf;
+    /*border: 1px solid #dfdfdf;*/
     border-top: 0;
     border-bottom: 0;
 
 	div a {
 		font-size: 16px;
-		color:#263238;
+		color:$primary-color-light;
 	}
 
 	div {
-		padding:20px 15px;
-		border-bottom: 1px solid #f8f8f8;
+		padding:18px 15px;
+		border-bottom: 1px solid #353535;
   		text-align: left;
 
   		&:hover {
-  			background:#f8f8f8;
+  			background:#252525;
   		}
 	}
 
 	div:first-child {
-		border-top:1px solid #dfdfdf;
+		border-top:1px solid #353535;
 	}
 
 	div:last-child {
-		border-bottom: 1px solid #dfdfdf;
+		border-bottom: 0px solid #dfdfdf;
 	}
 
 	p span {
@@ -911,7 +914,7 @@ height: auto;
 /*Homepage Gallery*/
 
 .homepage-gallery {
-	width: 960px;
+	width: 1000px;
 	margin: 0 auto;
 	padding-top:150px;
 
@@ -993,7 +996,7 @@ height: auto;
 
 .profile-body,
 .school-body {
-	width: 960px;
+	width: 1000px;
 	margin: 0 auto;
 	position: relative;
 	margin-bottom: 50px;
@@ -1002,7 +1005,7 @@ height: auto;
 .profile-right-col,
 .school-right-col {
 	display: inline-block;
-	width: 350px;
+	width: 35%;
 	position: relative;
 	vertical-align: top;
 }
@@ -1033,10 +1036,10 @@ height: auto;
 .profile-left-col,
 .school-left-col {
 	display: inline-block;
-	width: 590px;
+	width: 65%;
 	background: transparent;
 	vertical-align: top;
-	margin-right: 20px;
+	padding-right: 20px;
 }
 
 
@@ -1379,73 +1382,6 @@ height: auto;
 	}
 }
 
-.school-options {
-	width: 100%;
-	background:#fff;
-	z-index: 1000;
-	padding: 0px;
-	margin-top: 0px;
-	display: inline-block;
-	vertical-align: top;
-	border:1px solid #dfdfdf;
-	margin-bottom: 15px;
-
-	li {
-		width: 100%;
-		display: inline-block;
-		background:transparent;
-		color:$primary-color-dark;
-		text-align: left;
-		padding: 20px;
-		font-weight: 300;
-/*		border-left: 1px solid #fff;
-		border-right: 1px solid #f0f0f0;*/
-		border-bottom: 1px solid #f8f8f8;
-		cursor: pointer;
-	}
-
-	li:hover {
-		background: #fcfcfc;
-	}
-
-	p {
-		font-size: 14px;
-		display: inline-block;
-		vertical-align: top;
-		color: $primary-color-dark;
-		font-weight: 300;
-		width: 75%;
-		padding-left: 10px;
-	}
-
-	i {
-		font-size: 8px;
-		display: inline-block;
-		vertical-align: top;
-		color: $secondary-color-dark;
-		width: 5%;
-		text-align: right;
-		padding-top:5px;
-	}
-
-	li:last-child {
-		border-bottom:0;
-	}
-
-	li:first-child {
-		/*border-left:0;*/
-	}
-
-	span {
-		display: inline-block;
-		vertical-align: top;
-		width: 20%;
-		text-align: right;
-		color: $green-light;
-		font-size:14px;
-	}
-}
-
 
 
 .school-options1 {
@@ -1461,7 +1397,7 @@ height: auto;
 	margin-bottom: 15px;
 
 	li {
-		width: 20%;
+		width: 16.6666666%;
 		display: inline-block;
 		background:transparent;
 		color:$primary-color-dark;
@@ -1611,7 +1547,7 @@ height: auto;
 	border:1px solid #dfdfdf;
 	/*border-bottom:0;*/
 	width: 100%;
-	margin-top:15px;
+	/*margin-top:15px;*/
 	/*margin-bottom:15px;*/
 
 	span {
