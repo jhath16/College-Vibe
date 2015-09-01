@@ -645,7 +645,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
   keypressCategorySearch: function (e) {
     if (e.which == 13 && e.target.value) {
-      this.categorySearch(e);
+      this.categorySearch();
     }
   },
 
@@ -1018,6 +1018,17 @@ $(document).ready(function () {
   window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
   CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
+  var div = document.createElement('div');
+  div.id = 'map';
+  $('#application').append(div);
+  div.style.height = '500px';
+  div.style.width = '100%';
+  (function () {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center:{lat:-34.397, lng:150.644},
+      zoom:5
+    })
+  }())
 });
 /*
 
