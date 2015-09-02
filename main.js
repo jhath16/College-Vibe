@@ -301,16 +301,18 @@ CollegeVibe.Views.Index = Parse.View.extend({
 });
 
 CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
-  tagName:'div',
+  tagName:'a',
 
   initialize: function () {
     this.render();
   },
 
-  template: _.template($('#school-dropdown-view').text()),
+  template: _.template("<span class=“fa fa-angle-right”></span><h1><%=attributes.schoolname%></h1>"),
 
   render: function () {
     this.$el.html(this.template(this.model));
+    this.el.href = '#schools/' + this.model.get('slug');
+    // $(this).attr('href', '#' + this.model.get('slug')); //why can't I use attributes: {'href', '#' + this.model.get('slug')}?
     $('.college-search').append(this.el);
     return this;
   }
@@ -456,13 +458,13 @@ CollegeVibe.Views.School = Parse.View.extend({
   },
 
   clearSubviews: function () {
-    console.log('removing');
     this.subView.remove();
   },
 
-  //Pass the (this.)options of this school view so it can act as a controller
+  //Pass the (this.)options of this school view so the school view can act as a controller
   //for the subviews/modules being appended to it. It will store
-  //all of the data collected so we don't send out unnecessary requests.
+  //all of the data collected so we don't send out unnecessary requests by checking
+  //to see if we have information stored already.
   //this.options gives access to the this.hotelInformation, etc...
 
   statisticsTab: function () {
@@ -954,6 +956,7 @@ CollegeVibe.Collections.Colleges = Parse.Collection.extend({
   query: new Parse.Query("Colleges")
         .select('schoolname')
         .select('abbreviation')
+        .select('slug')
         .limit(1000), //only bring the list of schoolnames back
 
   initialize: function () {
