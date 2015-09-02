@@ -457,8 +457,10 @@ CollegeVibe.Views.School = Parse.View.extend({
     'click #gallery' : 'galleryTab'
   },
 
-  clearSubviews: function () {
+  clearSubviews: function (e) {
     this.subView.remove();
+    var tabName = e.target.innerText;
+    $('.header-breadcrumbs p')[1].innerText = tabName;
   },
 
   //Pass the (this.)options of this school view so the school view can act as a controller
