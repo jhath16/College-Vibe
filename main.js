@@ -307,7 +307,7 @@ CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
     this.render();
   },
 
-  template: _.template("<span class=“fa fa-angle-right”></span><h1><%=attributes.schoolname%></h1>"),
+  template: _.template("<li><span class=“fa fa-angle-right”></span><h1><%=attributes.schoolname%></h1></li>"),
 
   render: function () {
     this.$el.html(this.template(this.model));
