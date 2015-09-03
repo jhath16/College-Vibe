@@ -459,24 +459,25 @@ header {
   /*border: 1px solid #dfdfdf;*/
   border-top: 0;
   border-bottom: 0; }
-  .college-search div a {
-    font-size: 16px;
-    color: #ECEFF1; }
-  .college-search div {
-    padding: 18px 15px;
-    border-bottom: 1px solid #353535;
+  .college-search a li {
+    width: 100%;
+    padding: 19px;
     text-align: left; }
-    .college-search div:hover {
+    .college-search a li:hover {
       background: #252525; }
-  .college-search div:first-child {
-    border-top: 1px solid #353535; }
-  .college-search div:last-child {
-    border-bottom: 0px solid #dfdfdf; }
-  .college-search p span {
-    position: absolute;
-    padding: 0;
-    height: auto;
-    width: auto; }
+  .college-search a li span {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    color: #ECEFF1;
+    width: 10%; }
+  .college-search a li h1 {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    color: #ECEFF1;
+    width: 90%;
+    font-weight: 300; }
 
 /* Login Container */
 .slideout-container {
