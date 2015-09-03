@@ -307,12 +307,12 @@ CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
     this.render();
   },
 
-  template: _.template("<li><span class=“fa fa-angle-right”></span><h1><%=attributes.schoolname%></h1></li>"),
+  template: _.template("<li><span class='fa fa-angle-right'></span><h1><%=attributes.schoolname%></h1></li>"),
 
   render: function () {
     this.$el.html(this.template(this.model));
     this.el.href = '#schools/' + this.model.get('slug');
-    // $(this).attr('href', '#' + this.model.get('slug')); //why can't I use attributes: {'href', '#' + this.model.get('slug')}?
+    //why can't I use attributes: {'href', '#' + this.model.get('slug')}?
     $('.college-search').append(this.el);
     return this;
   }
