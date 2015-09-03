@@ -246,7 +246,7 @@ var swapMap = function(image) {
 }
 
 //Removes a view from the global renderedViews array
-//Also removes all subviews
+//Also removes all subviews and partials
 
 function removeViewFromRenderedViews (view) {
   var cid = view.cid;
@@ -410,23 +410,6 @@ CollegeVibe.Views.Profile = Parse.View.extend({
   }
 });
 
-CollegeVibe.Views.SchoolMap = Parse.View.extend({
-  tagName: 'li',
-
-  template: _.template($('#map-school-view').text()),
-
-  initialize:function () {
-    this.render();
-  },
-
-  render: function () {
-    renderedViews.push(this);
-    this.$el.html(this.template(this.model));
-    $('.map-school-list ul').append(this.el);
-    return this;
-  }
-});
-
 CollegeVibe.Views.School = Parse.View.extend({
   template: _.template($('#school-view').text()),
 
@@ -454,7 +437,8 @@ CollegeVibe.Views.School = Parse.View.extend({
     'click #food' : 'restaurantsTab',
     'click #hotel' : 'hotelsTab',
     'click #sports' : 'sportsTab',
-    'click #gallery' : 'galleryTab'
+    'click #gallery' : 'galleryTab',
+    'click #map' : 'mapTab'
   },
 
   clearSubviews: function (e) {
@@ -487,6 +471,10 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   galleryTab: function () {
     this.subView = new CollegeVibe.Views.Gallery(this.options);
+  },
+
+  mapTab: function () {
+    this.subView = new CollegeVibe.Views.Map(this.options);
   },
 
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
@@ -857,6 +845,49 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
     $('.school-body').append(this.el);
   },
 });
+
+CollegeVibe.Views.Map = Parse.View.extend({
+  template: _.template($('#map-view').text()),
+
+  initialize:function (schoolView) {
+    this.schoolView = schoolView;
+    this.render();
+  },
+
+  render: function () {
+    var self = this;
+    this.$el.html(this.template(this.model));
+    $('.school-body').append(this.el);
+    var map = document.getElementById('map-canvas');
+    map.style.height = '500px';
+    map.style.width = '100%';
+    this.map = new google.maps.Map(map, {
+      center: {lat: self.schoolView.model.get('latitude'), lng: self.schoolView.model.get('longitude')},
+      zoom: 14
+    });
+    new google.maps.Marker({
+      position: {lat: self.schoolView.model.get('latitude'), lng: self.schoolView.model.get('longitude')},
+      map: self.map,
+      title:self.schoolView.model.get('schoolname')
+    })
+  },
+
+  getRoute: function () {
+    var map = this.map;
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+    var request = {
+      origin:"greenville, sc",
+      destination:"columbus, ohio",
+      travelMode: google.maps.TravelMode.DRIVING //default
+    }
+
+    directionsService.route(request, function (result, status) {
+      directionsDisplay.setDirections(result);
+    });
+  }
+});
 /* * * * * * * *      PARTIALS      * * * * * * * * * * * * * * */
 
 CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
@@ -1021,17 +1052,6 @@ $(document).ready(function () {
   window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
   CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
-  // var div = document.createElement('div');
-  // div.id = 'map';
-  // $('#application').append(div);
-  // div.style.height = '500px';
-  // div.style.width = '100%';
-  // (function () {
-  //   map = new google.maps.Map(document.getElementById('map'), {
-  //     center:{lat:-34.397, lng:150.644},
-  //     zoom:5
-  //   })
-  // }())
 });
 /*
 
