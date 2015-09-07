@@ -852,6 +852,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
   initialize:function (schoolView) {
     this.schoolView = schoolView;
     this.render();
+    this.addMarkers();
   },
 
   render: function () {
@@ -870,6 +871,19 @@ CollegeVibe.Views.Map = Parse.View.extend({
       map: self.map,
       title:self.schoolView.model.get('schoolname')
     })
+  },
+
+  addMarkers: function () {
+    var self = this;
+    var businesses = this.schoolView.hotelInformation;
+
+    _.each(businesses, function (i) {
+      new google.maps.Marker({
+        position: {lat:i.latitude, lng: i.longitude},
+        map:self.map,
+        title:i.name
+      });
+    });
   },
 
   getRoute: function () {
