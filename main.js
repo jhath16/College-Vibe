@@ -416,7 +416,7 @@ CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.render();
     this.hotelInformation = null;
-    this.restaurantInformation = null;
+    this.foodInformation = null;
     this.sportsInformation = null;
     this.instagramInformation = null;
     this.subView = null;
@@ -577,11 +577,11 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.categorySearchIsActive = false;
     this.categoryKeyword = null;
 
-    if(!this.schoolView.restaurantInformation) { //if we don't have the info yet
+    if(!this.schoolView.foodInformation) { //if we don't have the info yet
 
       Parse.Cloud.run('findNearRestaurants', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
       .then(function (e) {
-        self.schoolView.restaurantInformation = e; //give the info back to the parent
+        self.schoolView.foodInformation = e; //give the info back to the parent
         console.log(e);
         self.addPageNumbers();
         self.appendPage(1);
@@ -621,7 +621,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   addPageNumbers: function () {
     var results;
     if (this.categorySearchIsActive == false) {
-      results = this.schoolView.restaurantInformation;
+      results = this.schoolView.foodInformation;
     } else {
       results = this.categoryResults;
     }
@@ -690,7 +690,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var data;
     var categoryKeyword = this.categoryKeyword;
     if (this.categorySearchIsActive == false) {
-      data = this.schoolView.restaurantInformation;
+      data = this.schoolView.foodInformation;
     } else {
       data = this.categoryResults;
     }
@@ -852,7 +852,32 @@ CollegeVibe.Views.Map = Parse.View.extend({
   initialize:function (schoolView) {
     this.schoolView = schoolView;
     this.render();
-    this.addMarkers();
+    this.foodMarkers = [];
+    this.hotelMarkers = [];
+
+    var self = this;
+
+    _.each(schoolView.hotelInformation, function (i) {
+      var newMarker = new google.maps.Marker({
+        position:{lat:i.latitude, lng: i.longitude},
+        map:null,
+        title:i.name
+      });
+      self.hotelMarkers.push(newMarker);
+    });
+
+    _.each(schoolView.foodInformation, function (i) {
+      var newMarker = new google.maps.Marker({
+        position:{lat:i.latitude, lng: i.longitude},
+        map:null,
+        title:i.name
+      });
+      self.foodMarkers.push(newMarker);
+    });
+  },
+
+  events: {
+    'change input[type="checkbox"]' : 'checkboxHandler'
   },
 
   render: function () {
@@ -873,16 +898,57 @@ CollegeVibe.Views.Map = Parse.View.extend({
     })
   },
 
-  addMarkers: function () {
+  checkboxHandler: function (e) {
     var self = this;
-    var businesses = this.schoolView.hotelInformation;
+    var targetName = e.target.name;
+    var markerArray = this[targetName + "Markers"];
+    var parseFunction;
 
-    _.each(businesses, function (i) {
-      new google.maps.Marker({
-        position: {lat:i.latitude, lng: i.longitude},
-        map:self.map,
-        title:i.name
+    if (e.target.name === 'hotel') {
+      parseFunction = "findNearHotels";
+    } else {
+      parseFunction = "findNearRestaurants";
+    }
+
+    if (markerArray.length === 0) {
+      Parse.Cloud.run(parseFunction, {latitude:self.schoolView.model.get('latitude'), longitude: self.schoolView.model.get('longitude')})
+      .then(function (e) {
+        console.log(e);
+        self.schoolView[targetName + "Information"] = e;
+
+        _.each(self.schoolView[targetName + "Information"], function (i) {
+          var marker = new google.maps.Marker({
+            position: {lat:i.latitude, lng:i.longitude},
+            map:self.map,
+            title:i.name
+          });
+          markerArray.push(marker);
+        });
       });
+
+
+    }
+
+    if(e.target.checked) {
+      this.addMarkers(markerArray);
+    } else {
+      this.removeMarkers(markerArray);
+    }
+  },
+
+  addMarkers: function (markerArray) {
+    var self = this;
+
+    _.each(markerArray, function (i) {
+      i.setMap(self.map);
+    });
+  },
+
+  removeMarkers: function (markerArray) {
+    var self = this;
+
+    _.each(markerArray, function (i) {
+      i.setMap(null);
     });
   },
 
