@@ -895,7 +895,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
       position: {lat: self.schoolView.model.get('latitude'), lng: self.schoolView.model.get('longitude')},
       map: self.map,
       title:self.schoolView.model.get('schoolname')
-    })
+    });
   },
 
   checkboxHandler: function (e) {
@@ -919,37 +919,29 @@ CollegeVibe.Views.Map = Parse.View.extend({
         _.each(self.schoolView[targetName + "Information"], function (i) {
           var marker = new google.maps.Marker({
             position: {lat:i.latitude, lng:i.longitude},
-            map:self.map,
-            title:i.name
+            title:i.name,
           });
           markerArray.push(marker);
         });
+        self[targetName+"MarkerClusterer"] = new MarkerClusterer(self.map, markerArray, {maxZoom:17});
       });
 
 
-    }
-
-    if(e.target.checked) {
-      this.addMarkers(markerArray);
     } else {
-      this.removeMarkers(markerArray);
+      if(e.target.checked) {
+        this.addMarkers(markerArray, targetName);
+      } else {
+        this.removeMarkers(markerArray, targetName);
+      }
     }
   },
 
-  addMarkers: function (markerArray) {
-    var self = this;
-
-    _.each(markerArray, function (i) {
-      i.setMap(self.map);
-    });
+  addMarkers: function (markerArray, targetName) {
+    this[targetName+"MarkerClusterer"] = new MarkerClusterer(this.map, markerArray, {maxZoom:17});
   },
 
-  removeMarkers: function (markerArray) {
-    var self = this;
-
-    _.each(markerArray, function (i) {
-      i.setMap(null);
-    });
+  removeMarkers: function (markerArray, targetName) {
+    this[targetName+"MarkerClusterer"].clearMarkers();
   },
 
   getRoute: function () {
