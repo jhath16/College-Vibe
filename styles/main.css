@@ -86,7 +86,7 @@ header {
 .header-top-left {
   display: inline-block;
   width: 50%;
-  padding-top: 12px; }
+  padding-top: 8px; }
   .header-top-left img {
     width: 35px;
     height: auto;
@@ -151,8 +151,7 @@ header {
   margin: 0 auto;
   position: relative;
   z-index: 500;
-  background: #f8f8f8;
-  padding: 0 0px 0 30px; }
+  padding: 0 0px 0 15px; }
 
 .logo {
   background: url("assets/images/logo_white_background.svg");
@@ -952,30 +951,12 @@ header {
     padding: 20px;
     border-bottom: 1px solid #f8f8f8;
     /*border-right:1px solid #f8f8f8;*/ }
-  .school-food span,
-  .school-hotel span {
-    text-align: center;
-    font-size: 18px;
-    display: inline-block;
-    vertical-align: top;
-    color: #37474F;
-    font-weight: 300; }
   .school-food h1,
   .school-hotel h1 {
     font-size: 12px !important;
     padding-top: 15px;
     padding-left: 15px;
     font-weight: 300 !important; }
-  .school-food h3,
-  .school-hotel h3 {
-    font-size: 8px;
-    padding-top: 9.5px;
-    padding-left: 2px;
-    text-transform: lowercase;
-    display: inline-block;
-    vertical-align: top;
-    font-weight: 300;
-    color: #999; }
 
 .school-map {
   margin-bottom: 10px;
@@ -986,11 +967,31 @@ header {
   display: inline-block;
   width: 10%;
   height: 40px;
-  text-align: center; }
+  text-align: center;
+  background: #444;
+  border-radius: 4px;
+  padding-top: 8px; }
   .food-radius img,
   .hotel-radius img {
     width: 100%;
     height: 40px; }
+  .food-radius h3,
+  .hotel-radius h3 {
+    font-size: 10px;
+    padding-left: 0px;
+    padding-top: 0px;
+    display: block;
+    vertical-align: top;
+    font-weight: 300;
+    color: #f0f0f0; }
+  .food-radius span,
+  .hotel-radius span {
+    text-align: center;
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: top;
+    color: #f0f0f0;
+    font-weight: 300; }
 
 .food-name,
 .hotel-name {
@@ -1104,7 +1105,7 @@ header {
   /*border-top:0;*/
   margin-bottom: 15px; }
   .school-options1 li {
-    width: 16.6666666%;
+    width: 16.66666667%;
     display: inline-block;
     background: transparent;
     color: #263238;
@@ -1125,14 +1126,14 @@ header {
     font-weight: 300;
     padding-left: 0px; }
   .school-options1 span {
-    font-size: 8px;
+    font-size: 20px;
     display: inline-block;
     vertical-align: top;
-    color: #03A9F4;
-    width: 5%;
+    color: #999;
+    /*width: 5%;*/
     text-align: right;
     padding-top: 5px;
-    padding-right: 15px; }
+    display: none; }
   .school-options1 li:last-child {
     border-bottom: 0; }
   .school-options1 li:first-child {
@@ -1394,127 +1395,83 @@ header {
 /* Footer */
 /* Media Queries */
 @media screen and (min-width: 350px) and (max-width: 500px) {
-  .slideout-container {
-    width: 100%;
-    right: -100%; }
-
-  .toggle-slideout {
-    right: 0; }
-
-  .register-container {
-    width: 100%;
-    right: -100%; }
-
-  .open-register {
-    right: 0; }
-
-  .close-login {
-    right: -100%; }
-
-  .banner-container {
-    width: 100%;
-    height: 200px; }
-
-  .section {
-    height: auto !important; }
-
-  /* Search Bar */
   header {
-    padding-top: 0;
-    height: 60px; }
-
-  .header-banner {
-    width: 100%; }
-
-  .homepage-banner {
-    width: 90%; }
+    margin-top: 0;
+    display: none; }
 
   .header-container {
     width: 100%;
-    top: 0; }
+    padding: 0; }
 
-  .header-search,
-  .homepage-search {
+  .header-top-left {
+    width: 100%;
+    padding-top: 30px;
+    text-align: center; }
+    .header-top-left img {
+      display: block;
+      width: 50px;
+      margin: 0 auto; }
+    .header-top-left div {
+      margin-top: 10px; }
+    .header-top-left h1 {
+      padding-left: 0; }
+
+  .header-right {
     width: 100%; }
 
-  .header-search span,
-  .homepage-search span {
-    width: 15%;
-    right: 85%; }
-
-  .header-search input,
-  .homepage-search input {
-    width: 85%; }
-
-  .header-toggle {
-    width: 20%; }
-    .header-toggle li {
-      width: 100%; }
-
-  /* Profile and School Template */
-  .profile-body,
-  .school-body {
+  .top-header-wrap {
+    position: fixed;
     width: 100%;
-    margin-top: 50px; }
+    top: 0;
+    z-index: 999;
+    /*top: 80px;*/ }
 
-  .profile-left-col,
-  .school-left-col,
-  .school-right-col,
-  .profile-right-col {
-    display: block;
+  .header-breadcrumbs {
+    width: 100%; }
+
+  .top-header {
+    width: 100%; }
+
+  .school-options1 {
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    margin-top: -40px; }
-
-  .school-body {
-    top: 0; }
-
-  .school-options li {
-    font-size: 0; }
-
-  .school-options-mobile {
-    display: block;
-    margin-bottom: 1px;
-    background: #37474F;
-    border-top: 1px solid #455A64;
-    border-bottom: 1px solid #455A64; }
-    .school-options-mobile li {
-      width: 33.3333%;
-      /*			border-right: 1px solid #455A64;
-      			border-left: 1px solid #607D8B;
-      			border-bottom: 1px solid #455A64;
-      			border-top: 1px solid #607D8B;*/ }
-
-  .school-heading {
-    padding: 29px 15px 6px;
-    background: #263238;
-    border-top: 1px solid #455A64; }
-    .school-heading img {
-      width: 60px;
-      height: 60px;
-      text-align: left; }
-    .school-heading p {
-      padding-left: 64px;
-      margin-top: -20px;
-      color: #ECEFF1;
-      text-align: left; }
-    .school-heading h1 {
-      padding-top: 4px;
-      color: #ECEFF1;
-      text-align: left; }
-    .school-heading span {
-      font-size: 36px;
-      color: #263238;
-      position: relative;
-      display: block;
-      z-index: 1000000;
-      vertical-align: bottom;
-      margin-bottom: -23px;
-      padding-top: 15px;
-      text-align: center;
+    margin-bottom: 0; }
+    .school-options1 span {
+      display: inline-block; }
+    .school-options1 p {
       display: none; }
 
-  #Map {
-    padding-left: 0;
-    padding-right: 0; } }
+  .search-container {
+    display: none; }
+
+  .school-body {
+    width: 100%;
+    top: 57px; }
+
+  .school-left-col {
+    width: 100%;
+    padding-right: 0; }
+
+  .school-right-col {
+    width: 100%; }
+
+  .food-name,
+  .hotel-name {
+    width: 55%; }
+
+  .food-radius,
+  .hotel-radius {
+    width: 15%; }
+
+  .instagram-gallery {
+    width: 100%;
+    padding-bottom: 15px; }
+    .instagram-gallery li {
+      width: 100%; }
+    .instagram-gallery img {
+      width: 100%;
+      margin: 0;
+      padding: 15px 15px 0; } }
 
 /*# sourceMappingURL=main.css.map */
