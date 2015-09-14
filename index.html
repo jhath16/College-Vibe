@@ -3047,12 +3047,10 @@
       	<section id="filter-accordion" data-accordion-group>
 
 	      <section data-accordion>
-	        <button data-control>
-	            <aside>
-	        		<h1>Filter Options</h1>
-	        	</aside>
-		        <span class="fa fa-ellipsis-h"></span>
-	        </button>
+	        <aside data-control>
+        		<h1>Keyword Search</h1>
+		        <i class="fa fa-ellipsis-h"></i>
+	        </aside>
 	        <div data-content>
 	          <article>
 		      	<div class="food-search">
@@ -3065,33 +3063,42 @@
 	      </section>
 
 	      <section data-accordion>
-	        <button data-control>
-
-	            <aside>
-	        		<h1>Filter Options</h1>
-	        	</aside>
-		        <span class="fa fa-ellipsis-h"></span>
-
-	        </button>
+	        <aside data-control>
+	        	<h1>Popular Searches</h1>
+		        <i class="fa fa-ellipsis-h"></i>
+	        </aside>
 	        <div data-content>
 	          <article>
 				<div class="food-popular-searches">
-					<h1>Popular Searches</h1>
 					<form>
-						<li>
-							<h1>Popular Searches</h1>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Night Life</p></div>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Coffee</p></div>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Mexican</p></div>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Italian</p></div>
-						</li>
-						<li>
-							<h1>Filters</h1>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Star Rating</p></div>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
 							<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
 
+				
+					</form>
+				</div>
+	          </article>
+	        </div>
+	      </section>
+
+	      <section data-accordion>
+	        <aside data-control>
+	        	<h1>Additional Filters</h1>
+		        <i class="fa fa-ellipsis-h"></i>
+	        </aside>
+	        <div data-content>
+	          <article>
+				<div class="food-filter">
+					<form>
+						<li>
+							<div><input type="radio" name="foodFilter" value="bars"><p>Distance From</p></div>
+							<div><input type="radio" name="foodFilter" value="bars"><p>Star Rating</p></div>
 						</li>
 				
 					</form>
@@ -3176,7 +3183,7 @@
     <li>
 
     <div class="hotel-radius">
-		<span><%=(($distance/1000) * 0.621371).toFixed(1)%></></span><h3>mi</h3>
+		<span><%=(($distance/1000) * 0.621371).toFixed(1)%></></span>
 	</div>
       <div class="hotel-name">
         <h2><%=name%></h2>
