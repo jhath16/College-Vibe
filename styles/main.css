@@ -1461,6 +1461,9 @@ header {
   #filter-accordion button:last-child {
     border-bottom: 1px solid #dfdfdf; }
 
+.filter-accordion-mobile {
+  display: none; }
+
 #submit-food-filter {
   width: 15%;
   height: 35px;
@@ -1513,6 +1516,9 @@ header {
   .top-header {
     width: 100%; }
 
+  .module-header {
+    border-top: 0; }
+
   .school-options1 {
     position: fixed;
     bottom: 0;
@@ -1553,6 +1559,12 @@ header {
     .instagram-gallery img {
       width: 100%;
       margin: 0;
-      padding: 15px 15px 0; } }
+      padding: 15px 15px 0; }
+
+  .filter-accordion-desktop {
+    display: none; }
+
+  .filter-accordion-mobile {
+    display: block; } }
 
 /*# sourceMappingURL=main.css.map */

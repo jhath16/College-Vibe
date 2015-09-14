@@ -2999,7 +2999,7 @@
 	<div class="school-right-col">
 
         <div class="school-info">
-          <img src="assets/images/clemson-logo.png">
+          <img>
 
           <div>
             <h1><%= attributes.schoolname %></h1>
@@ -3027,6 +3027,70 @@
   <script type="text/template" id="food-view">
 
         <div class="school-left-col">
+
+             	<section id="filter-accordion"  class="filter-accordion-mobile" data-accordion-group>
+			      <section data-accordion>
+			        <aside data-control>
+		        		<h1>Keyword Search</h1>
+				        <i class="fa fa-ellipsis-h"></i>
+			        </aside>
+			        <div data-content>
+			          <article>
+				      	<div class="food-search">
+							<span class="fa fa-search"></span>
+							<input placeholder="Burgers, Coffee, Italian..." type='text' id='category-searchbox'>
+							<button id="submit-food-filter" type="submit">Filter</button>
+						</div>
+			          </article>
+			        </div>
+			      </section>
+
+			      <section data-accordion>
+			        <aside data-control>
+			        	<h1>Popular Searches</h1>
+				        <i class="fa fa-ellipsis-h"></i>
+			        </aside>
+			        <div data-content>
+			          <article>
+						<div class="food-popular-searches">
+							<form>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Night Life</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Coffee</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Mexican</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Italian</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Star Rating</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
+									<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
+
+						
+							</form>
+						</div>
+			          </article>
+			        </div>
+			      </section>
+
+			      <section data-accordion>
+			        <aside data-control>
+			        	<h1>Additional Filters</h1>
+				        <i class="fa fa-ellipsis-h"></i>
+			        </aside>
+			        <div data-content>
+			          <article>
+						<div class="food-filter">
+							<form>
+								<li>
+									<div><input type="radio" name="foodFilter" value="bars"><p>Distance From</p></div>
+									<div><input type="radio" name="foodFilter" value="bars"><p>Star Rating</p></div>
+								</li>
+						
+							</form>
+						</div>
+			          </article>
+			        </div>
+			      </section>
+
+			    </section>
 			<div class="module-header status-header">
 				<p>Restaurants near <%= attributes.schoolname %></p>
 			</div>
@@ -3044,7 +3108,7 @@
 
       <div class="school-right-col">
 
-      	<section id="filter-accordion" data-accordion-group>
+      	<section id="filter-accordion" class="filter-accordion-desktop" data-accordion-group>
 
 	      <section data-accordion>
 	        <aside data-control>
