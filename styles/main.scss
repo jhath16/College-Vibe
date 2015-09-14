@@ -1874,6 +1874,10 @@ header {
 	}
 }
 
+.filter-accordion-mobile {
+	display: none;
+}
+
 #submit-food-filter {
 	width: 15%;
 	height: 35px;
@@ -1945,7 +1949,10 @@ header {
 	.top-header {
 		width: 100%;
 	}
-
+	.module-header {
+		border-top:0;
+	}
+	
 	.school-options1 {
 
 		position:fixed;
@@ -2003,6 +2010,14 @@ header {
 			margin: 0;
 			padding: 15px 15px 0;
 		}
+	}
+
+	.filter-accordion-desktop {
+		display: none;
+	}
+
+	.filter-accordion-mobile {
+		display: block;
 	}
 
 }
