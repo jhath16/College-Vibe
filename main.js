@@ -575,6 +575,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   initialize: function (schoolView) {
     var self = this;
     this.render();
+    $('#filter-accordion [data-accordion]').accordion();
     this.schoolView = schoolView; //grab a reference to the parent
     this.categoryResults = null;
     this.categorySearchIsActive = false;
@@ -606,7 +607,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     'click .page-number' : 'pageSwitch',
     'keypress input' : 'keypressCategorySearch',
     'click .clear-filter' : 'clearFilter',
-    'click button' : 'categorySearch'
+    'click #submit-food-filter' : 'categorySearch'
   },
 
   clearFilter: function (e) {
