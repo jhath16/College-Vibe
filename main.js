@@ -416,7 +416,6 @@ CollegeVibe.Views.School = Parse.View.extend({
   initialize: function () {
     this.render();
     this.instaLogoUrl = null;
-    this.instaLogo();
     this.hotelInformation = null;
     this.foodInformation = null;
     this.sportsInformation = null;
@@ -431,15 +430,6 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('#application').append(this.el); //and put it on the page
     this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
     return this;
-  },
-
-  instaLogo: function () {
-    var self = this;
-    Parse.Cloud.run('instaLogos', {id:this.model.get('instaId')})
-    .then(function (e) {
-      self.instaLogo = e;
-      $('.school-info img').attr('src', e);
-    });
   },
 
   events: {
@@ -463,7 +453,17 @@ CollegeVibe.Views.School = Parse.View.extend({
   //this.options gives access to the this.hotelInformation, etc...
 
   statisticsTab: function () {
+    var self = this;
     this.subView = new CollegeVibe.Views.Statistics(this.options);
+    if (this.instaLogoUrl === null) {
+      Parse.Cloud.run('instaLogos', {id: this.model.get('instaId')})
+      .then(function (e) {
+        self.instaLogoUrl = e;
+        $('.school-info img').attr('src', e);
+      });
+    } else {
+      $('.school-info img').attr('src', this.instaLogoUrl);
+    }
     $('.header-breadcrumbs p')[1].innerText = "Statistics";
   },
 
