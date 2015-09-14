@@ -415,6 +415,8 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   initialize: function () {
     this.render();
+    this.instaLogoUrl = null;
+    this.instaLogo();
     this.hotelInformation = null;
     this.foodInformation = null;
     this.sportsInformation = null;
@@ -431,6 +433,15 @@ CollegeVibe.Views.School = Parse.View.extend({
     return this;
   },
 
+  instaLogo: function () {
+    var self = this;
+    Parse.Cloud.run('instaLogos', {id:this.model.get('instaId')})
+    .then(function (e) {
+      self.instaLogo = e;
+      $('.school-info img').attr('src', e);
+    });
+  },
+
   events: {
     'click .school-options1 li' : 'clearSubviews',
     'click #statistics' : 'statisticsTab',
@@ -443,8 +454,6 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   clearSubviews: function (e) {
     this.subView.remove();
-    var tabName = e.target.innerText;
-    $('.header-breadcrumbs p')[1].innerText = tabName;
   },
 
   //Pass the (this.)options of this school view so the school view can act as a controller
@@ -455,26 +464,32 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   statisticsTab: function () {
     this.subView = new CollegeVibe.Views.Statistics(this.options);
+    $('.header-breadcrumbs p')[1].innerText = "Statistics";
   },
 
   restaurantsTab: function () {
     this.subView = new CollegeVibe.Views.Restaurants(this.options);
+    $('.header-breadcrumbs p')[1].innerText = "Restaurants";
   },
 
   hotelsTab: function () {
     this.subView = new CollegeVibe.Views.Hotels(this.options);
+    $('.header-breadcrumbs p')[1].innerText = "Hotels";
   },
 
   sportsTab: function () {
     this.subView = new CollegeVibe.Views.Sports(this.options);
+    $('.header-breadcrumbs p')[1].innerText = "Sports";
   },
 
   galleryTab: function () {
     this.subView = new CollegeVibe.Views.Gallery(this.options);
+    $('.header-breadcrumbs p')[1].innerText = "Gallery";
   },
 
   mapTab: function () {
     this.subView = new CollegeVibe.Views.Map(this.options);
+    $('.header-breadcrumbs p')[1].innerText = "Map";
   },
 
   remove: _.wrap(Parse.View.prototype.removeRenderedView,
@@ -553,19 +568,7 @@ CollegeVibe.Views.Hotels = Parse.View.extend({
     for (var i = 1; i <= amountOfPages; i++) {
       $(pageNumberContainer).append("<a class='page-number'>" + (i) +"</a>")
     }
-  },
-
-  firstTen: function () {
-    this.appendHotelInfo(1,10);
-    $('.second-ten').removeClass('active');
-    $('.first-ten').addClass('active');
-  },
-
-  secondTen: function () {
-    $('.first-ten').removeClass('active');
-    $('.second-ten').addClass('active');
-    this.appendHotelInfo(11,20);
-  },
+  }
 });
 
 CollegeVibe.Views.Restaurants = Parse.View.extend({
@@ -1062,7 +1065,7 @@ CollegeVibe.Collections.Colleges = Parse.Collection.extend({
         .select('schoolname')
         .select('abbreviation')
         .select('slug')
-        .limit(1000), //only bring the list of schoolnames back
+        .limit(1000), //only bring the list of schoolnames back with their abbreviation and slug
 
   initialize: function () {
     console.log('Colleges Collection has been created and fetched');
