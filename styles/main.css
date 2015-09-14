@@ -1217,14 +1217,14 @@ header {
     padding-top: 5px;
     font-weight: 300; }
 
-.restaurant-search {
+.food-search {
   background: #fff;
   border: 1px solid #dfdfdf;
   /*border-bottom:0;*/
   width: 100%;
   /*margin-top:15px;*/
   /*margin-bottom:15px;*/ }
-  .restaurant-search span {
+  .food-search span {
     display: inline-block;
     width: 12%;
     text-align: right;
@@ -1232,7 +1232,7 @@ header {
     padding-top: 20px;
     color: #999;
     padding-right: 5px; }
-  .restaurant-search input {
+  .food-search input {
     display: inline-block;
     vertical-align: top;
     font-size: 16px;
@@ -1242,9 +1242,9 @@ header {
     background: transparent;
     width: 68%;
     border: 0; }
-    .restaurant-search input:focus {
+    .food-search input:focus {
       outline: 0; }
-  .restaurant-search button {
+  .food-search button {
     width: 15%;
     height: 35px;
     background: #0277BD;
@@ -1255,6 +1255,32 @@ header {
     border: 0;
     border-radius: 4px;
     margin-top: 15px; }
+
+.food-popular-searches {
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-top: 0; }
+  .food-popular-searches li {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 0; }
+    .food-popular-searches li div {
+      display: block;
+      padding: 5px; }
+    .food-popular-searches li input {
+      margin-top: 5px; }
+    .food-popular-searches li h1 {
+      font-size: 16px;
+      font-weight: normal;
+      padding-bottom: 10px; }
+  .food-popular-searches p {
+    font-size: 14px;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+    font-weight: 300; }
 
 .no-results {
   font-size: 14px; }
@@ -1391,6 +1417,49 @@ header {
 
 .hidden {
   display: none; }
+
+#filter-accordion {
+  width: 100%; }
+  #filter-accordion section {
+    background: #f8f8f8; }
+  #filter-accordion article {
+    padding: 0 25px 25px;
+    /*border-top: 1px solid #f5f5f5;*/ }
+  #filter-accordion button {
+    font-size: 14px;
+    border: 0;
+    background: #f8f8f8;
+    width: 100%;
+    padding: 25px;
+    text-align: left;
+    outline: 0;
+    border: 0px solid #dfdfdf;
+    border-bottom: 0;
+    /*border-top:1px solid #f5f5f5;*/
+    font-weight: 300;
+    cursor: pointer;
+    color: #263238; }
+  #filter-accordion h1 {
+    font-size: 16px;
+    font-weight: normal; }
+  #filter-accordion button:hover {
+    background: #f8f8f8; }
+  #filter-accordion aside {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5px; }
+  #filter-accordion button:hover {
+    /*background: #fafafa;*/ }
+  #filter-accordion span {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 20px;
+    padding: 10px 10px 0;
+    color: #0277BD;
+    float: right; }
+  #filter-accordion button:last-child {
+    border-bottom: 1px solid #dfdfdf; }
 
 /* Footer */
 /* Media Queries */
