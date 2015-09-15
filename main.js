@@ -607,12 +607,14 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     'click .page-number' : 'pageSwitch',
     'keypress input' : 'keypressCategorySearch',
     'click .clear-filter' : 'clearFilter',
-    'click .submit-food-filter' : 'categorySearch'
+    'click .submit-food-filter' : 'categorySearch',
+    'change input[type="radio"]' : 'radioCategorySearch'
   },
 
   clearFilter: function (e) {
     this.categorySearchIsActive = false;
     $(e.currentTarget).addClass('hidden');
+    $("input[type='radio']").attr('checked', false);
     $('.category-searchbox').val('');
     var foodList = $('.school-food ul')[0];
     $(foodList).empty();
@@ -637,24 +639,71 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     }
   },
 
+  radioCategorySearch: function (e) {
+    var self = this;
+    var category = e.target.value;
+    var latitude = this.model.get('latitude');
+    var longitude = this.model.get('longitude');
+
+    this.categorySearchIsActive = true;
+    $('.clear-filter').removeClass('hidden'); //show the clear filters button
+
+    this.emptyFoodList();
+    this.emptyPageNumbers();
+    this.updateHeader(category, this.schoolView.model.get('schoolname'));
+
+    Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
+    .then(function (e) {
+      console.log(e);
+      self.categoryResults = e; //store the information in this view
+      var results = e; //for easier reference here
+
+      if (results.length == 0) { //if the search doesn't bring anything back
+        appendToFoodList("<div class='no-results'>No results found</div>");
+        self.categorySearchIsActive = false;
+      } else {
+        self.addPageNumbers(); //Put the numbers at the bottom
+        self.appendPage(1); // Put the first page of information in there.
+      }
+    });
+  },
+
   keypressCategorySearch: function (e) {
-    if (e.which == 13 && e.target.value) {
+    if (e.which === 13 && e.target.value) {
       this.categorySearch();
     }
+  },
+
+  appendToFoodList: function (text) {
+    var foodList = $('.school-food ul')[0];
+    $(foodList).append(text);
+  },
+
+  updateHeader: function (category, schoolName) {
+    var moduleHeader = $('.module-header p')[0];
+    var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
+    $(moduleHeader).html(categoryString);
+  },
+
+  emptyFoodList: function () {
+    var foodList = $('.school-food ul')[0];
+    $(foodList).empty();
+  },
+
+  emptyPageNumbers: function () {
+    var pageNumberContainer = $(".view-all");
+    $(pageNumberContainer).empty();
   },
 
   categorySearch: function (e) {
     var self = this;
     this.categorySearchIsActive = true;
-    var foodList = $('.school-food ul')[0];
-    $(foodList).empty();
+    this.emptyFoodList();
     $('.clear-filter').removeClass('hidden'); //show the clear filters button
-    var pageNumberContainer = $(".view-all");
-    $(pageNumberContainer).empty();
-    $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
-    // ^^ This gets appended properly but never appears on page (CSS?) ^^
 
-    var moduleHeader = $('.module-header p')[0];
+    // $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
+    // ^^ This gets appended properly but never appears on page (CSS?) ^^
+    this.emptyPageNumbers();
     var schoolName = this.schoolView.model.get('schoolname');
     var inputs = $('.category-searchbox').toArray();
 
@@ -666,24 +715,19 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
     var category = $(currentInput).val().toLowerCase(); //unsure if lowerCasing is necessary
 
-    //CURRENT ISSUE
-    //the .category-searchbox is on the page twice, so calling .val() on it only takes the value of the mobile version
-
-
-    var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
-    $(moduleHeader).html(categoryString);
+    this.updateHeader(category, schoolName);
 
     var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
     var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
     Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
     .then(function (e) {
-      $(foodList).empty();
+      self.emptyFoodList();
       console.log(e);
       self.categoryResults = e; //store the information in this view
       var results = e; //for easier reference here
 
       if (results.length == 0) { //if the search doesn't bring anything back
-        $(foodList).append("<div class='no-results'>No results found</div>");
+        self.appendToFoodList("<div class='no-results'>No results found</div>");
         self.categorySearchIsActive = false;
       } else {
         self.addPageNumbers(); //Put the numbers at the bottom
