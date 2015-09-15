@@ -607,13 +607,13 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     'click .page-number' : 'pageSwitch',
     'keypress input' : 'keypressCategorySearch',
     'click .clear-filter' : 'clearFilter',
-    'click #submit-food-filter' : 'categorySearch'
+    'click .submit-food-filter' : 'categorySearch'
   },
 
   clearFilter: function (e) {
     this.categorySearchIsActive = false;
     $(e.currentTarget).addClass('hidden');
-    $('#category-searchbox').val('');
+    $('.category-searchbox').val('');
     var foodList = $('.school-food ul')[0];
     $(foodList).empty();
     var moduleHeader = $('.module-header p')[0];
@@ -648,7 +648,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.categorySearchIsActive = true;
     var foodList = $('.school-food ul')[0];
     $(foodList).empty();
-    $('.clear-filter').removeClass('hidden'); //show the x in the search box
+    $('.clear-filter').removeClass('hidden'); //show the clear filters button
     var pageNumberContainer = $(".view-all");
     $(pageNumberContainer).empty();
     $(foodList).append("<i style='font-size:20px;' class=fa fa-spin fa-spinner></i>");
@@ -656,8 +656,20 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
     var moduleHeader = $('.module-header p')[0];
     var schoolName = this.schoolView.model.get('schoolname');
+    var inputs = $('.category-searchbox').toArray();
 
-    var category = $('#category-searchbox').val().toLowerCase(); //unsure if lowerCasing is necessary
+    var currentInput = inputs.filter(function (i) {
+      if ($(i).val() !== '') {
+        return true;
+      }
+    });
+
+    var category = $(currentInput).val().toLowerCase(); //unsure if lowerCasing is necessary
+
+    //CURRENT ISSUE
+    //the .category-searchbox is on the page twice, so calling .val() on it only takes the value of the mobile version
+
+
     var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
     $(moduleHeader).html(categoryString);
 
