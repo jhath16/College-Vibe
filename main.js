@@ -464,7 +464,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     } else {
       $('.school-info img').attr('src', this.instaLogoUrl);
     }
-    $('.header-breadcrumbs p')[1].innerText = "Statistics";
+    $('.header-breadcrumbs p')[1].innerText = "Info";
   },
 
   restaurantsTab: function () {
@@ -608,7 +608,13 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     'keypress input' : 'keypressCategorySearch',
     'click .clear-filter' : 'clearFilter',
     'click .submit-food-filter' : 'categorySearch',
-    'change input[type="radio"]' : 'radioCategorySearch'
+    'change input[name="popularSearch"]' : 'radioCategorySearch',
+    'change input[name="foodFilter"]' : 'reorderData'
+  },
+
+  reorderData: function () {
+    this.emptyFoodList();
+    this.appendPage(1);
   },
 
   clearFilter: function (e) {
@@ -616,8 +622,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     $(e.currentTarget).addClass('hidden');
     $("input[type='radio']").attr('checked', false);
     $('.category-searchbox').val('');
-    var foodList = $('.school-food ul')[0];
-    $(foodList).empty();
+    $('.school-food ul').empty();
     var moduleHeader = $('.module-header p')[0];
     $(moduleHeader).html("Restaurants near " + this.schoolView.model.get('schoolname'));
     this.appendPage(1);
@@ -754,6 +759,20 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     } else {
       data = this.categoryResults;
     }
+    //check to see if there is a foodFilter radio button pressed
+
+    var checkedInput = _.findWhere($('input[name="foodFilter"]').toArray(), {checked:true});
+
+    if (checkedInput) {
+      //re-order the data
+      var orderType = checkedInput.value;
+
+      if(orderType == "rating") {
+        data = _.sortBy(data, function (restaurant) {if(restaurant.rating)return restaurant.rating * -1});
+        console.log(data);
+      }
+    }
+
     var defaultMax = page * 10;
     var min = defaultMax - 9;
     var realMax = defaultMax - data.length <= 0 ? defaultMax : data.length;
