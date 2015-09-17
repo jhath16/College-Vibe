@@ -1109,14 +1109,12 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
       //  - this means that only the first six in array are appended now
       //maybe in the future, we could add a sorting rule before rendering views
 
-      var index = 0;
-      _.each(matchedQuery, function (i) {
-        index++;
-        if (index < 5) {
-          var newView = new CollegeVibe.Views.SchoolDropdown({model:i});
-          self.subViews.push(newView);
-        }
-      });
+
+      for (var i = 0; i < 5; i++) {
+        var newView = new CollegeVibe.Views.SchoolDropdown({model:matchedQuery[i]});
+        self.subViews.push(newView);
+      }
+      
 		}
   }
 });
