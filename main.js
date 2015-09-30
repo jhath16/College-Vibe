@@ -251,6 +251,9 @@ var swapMap = function(image) {
 function removeViewFromRenderedViews (view) {
   var cid = view.cid;
   var index = _.findIndex(renderedViews, function (n) {return n.cid === cid});
+  if(index === -1) {
+    throw new Error("ATTEMPTING TO REMOVE VIEW THAT DOESN'T EXIST!!!!!!!!!!!!");
+  }
   renderedViews.splice(index,1); //remove from the array
   if (view.subViews) {
     _.each(view.subViews, function (i) { //remove the subViews
