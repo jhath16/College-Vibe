@@ -580,6 +580,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.categoryResults = null;
     this.categorySearchIsActive = false;
     this.categoryKeyword = null;
+    this.subViews = []; //hold the restaurant views
 
     if(!this.schoolView.foodInformation) { //if we don't have the info yet
 
@@ -617,10 +618,11 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.appendPage(1);
   },
 
-  clearFilter: function (e) {
+  clearFilter: function () {
     this.categorySearchIsActive = false;
-    $(e.currentTarget).addClass('hidden');
+    $('.clear-filter').addClass('hidden');
     $("input[type='radio']").attr('checked', false);
+    $('input[name="distance-from"]').attr('checked', true);
     $('.category-searchbox').val('');
     $('.school-food ul').empty();
     var moduleHeader = $('.module-header p')[0];
@@ -680,24 +682,26 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   },
 
   appendToFoodList: function (text) {
-    var foodList = $('.school-food ul')[0];
-    $(foodList).append(text);
+    $('.school-food ul').append(text);
   },
 
   updateHeader: function (category, schoolName) {
-    var moduleHeader = $('.module-header p')[0];
+    var moduleHeader = $('.module-header p');
     var categoryString = "<strong style='font-size:14px; text-transform:Capitalize'>" + category + "</strong> near " + schoolName;
     $(moduleHeader).html(categoryString);
   },
 
   emptyFoodList: function () {
-    var foodList = $('.school-food ul')[0];
-    $(foodList).empty();
+    $('.school-food ul').empty();
+    _.each(this.subViews, function (i) {
+      i.removeRenderedView();
+    });
+
+    this.subViews = [];
   },
 
   emptyPageNumbers: function () {
-    var pageNumberContainer = $(".view-all");
-    $(pageNumberContainer).empty();
+    $(".view-all").empty();
   },
 
   categorySearch: function (e) {
@@ -746,8 +750,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var pageNumber = target.innerText;
     $('.page-number').removeClass('active');
     $(target).addClass('active');
-    var foodList = $('.school-food ul')[0];
-    $(foodList).empty();
+    this.emptyFoodList();
     this.appendPage(pageNumber);
   },
 
@@ -776,19 +779,40 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     var defaultMax = page * 10;
     var min = defaultMax - 9;
     var realMax = defaultMax - data.length <= 0 ? defaultMax : data.length;
-    var foodList = $('.school-food ul')[0];
+    var foodList = $('.school-food ul');
 
 
     var displayString = "Displaying results " + min + "-" + realMax;
-    $(foodList).append('<div><h1>' + displayString + '</h1></div>');
+    foodList.append('<div><h1>' + displayString + '</h1></div>');
     var restaurantTemplate = _.template($('#food-template').text());
 
     for (var i = min-1; i < realMax; i++) {
       var restaurant = data[i];
-      $(foodList).append(restaurantTemplate(restaurant));
+      // foodList.append(restaurantTemplate(restaurant));
+      new CollegeVibe.Views.Restaurant({model:restaurant, parent:this});
     }
   }
 });
+
+CollegeVibe.Views.Restaurant = Parse.View.extend({
+  initialize: function () {
+    this.parentSubViews = this.options.parent.subViews;
+    console.log(this.parentSubViews);
+    this.render();
+  },
+
+  template: _.template($('#food-template').text()),
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    $(".school-food ul").append(this.el);
+    this.parentSubViews.push(this);
+  },
+
+  events: {
+
+  },
+})
 
 CollegeVibe.Views.Statistics = Parse.View.extend({
   template: _.template($('#statistics-view').text()),
@@ -1109,12 +1133,12 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
       //  - this means that only the first six in array are appended now
       //maybe in the future, we could add a sorting rule before rendering views
 
-
-      for (var i = 0; i < 5; i++) {
+      var max = matchedQuery.length < 5 ? matchedQuery.length : 5;
+      for (var i = 0; i < max; i++) {
         var newView = new CollegeVibe.Views.SchoolDropdown({model:matchedQuery[i]});
         self.subViews.push(newView);
       }
-      
+
 		}
   }
 });
@@ -1167,13 +1191,13 @@ var Router = Backbone.Router.extend({
     d3Stuff();
   },
 
-  schoolRoute: function (schoolname) {
+  schoolRoute: function (slug) {
     removeAllViews();
-    console.log('schoolRoute fired with the model: ' + schoolname);
+    console.log('schoolRoute fired with the slug: ' + slug);
     /* This will take the modelName and query parse for the first object
        that matches its slug name. Doesn't depend on the global collection of
        collegeCollection to be fetched beforehand */
-    var query = new Parse.Query("Colleges").equalTo("slug",schoolname);
+    var query = new Parse.Query("Colleges").equalTo("slug",slug);
     query.first().then(function (e) {
       new CollegeVibe.Views.School({model:e});
     });
