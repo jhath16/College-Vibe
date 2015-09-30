@@ -426,8 +426,8 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   render: function () {
     this.$el.html(this.template(this.model)); //render the html with the new template to this.$el
-    renderedViews.push(this); //put it in the renderedViews array
     $('#application').append(this.el); //and put it on the page
+    renderedViews.push(this); //put it in the renderedViews array
     this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
     return this;
   },
@@ -492,11 +492,10 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('.header-breadcrumbs p')[1].innerText = "Map";
   },
 
-  remove: _.wrap(Parse.View.prototype.removeRenderedView,
-    function (originalFunction) {
-      originalFunction.apply(this);
+  remove: function () {
+      this.prototype.remove.apply(this);
       this.partial.remove();
-    })
+    }
 });
 
 CollegeVibe.Views.Hotels = Parse.View.extend({
@@ -694,7 +693,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
   emptyFoodList: function () {
     $('.school-food ul').empty();
     _.each(this.subViews, function (i) {
-      i.removeRenderedView();
+      i.remove();
     });
 
     this.subViews = [];
@@ -726,11 +725,11 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
     this.updateHeader(category, schoolName);
 
+
     var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
     var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
     Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
     .then(function (e) {
-      self.emptyFoodList();
       console.log(e);
       self.categoryResults = e; //store the information in this view
       var results = e; //for easier reference here
@@ -797,7 +796,6 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 CollegeVibe.Views.Restaurant = Parse.View.extend({
   initialize: function () {
     this.parentSubViews = this.options.parent.subViews;
-    console.log(this.parentSubViews);
     this.render();
   },
 
