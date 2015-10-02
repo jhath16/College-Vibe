@@ -1259,10 +1259,9 @@ header {
 
 .food-name,
 .hotel-name {
-	width: 60%;
+	width: 75%;
 	display: inline-block;
 	vertical-align: top;
-	padding-left:10px;
 
 	h2 {
 		font-size: 14px;
@@ -1271,11 +1270,21 @@ header {
 		padding-bottom:2px;
 	}
 
+	h4 {
+		font-size: 12px !important;
+		/*font-style: italic;*/
+		display: block;
+		color: $primary-color-dark;
+		font-weight: 500;
+		margin-top:3px;
+		margin-bottom: 3px;
+	}
+
 	p {
 		font-size: 12px;
 		line-height: 18px;
 		/*font-style: italic;*/
-		display: block;
+		display: inline-block;
 		color: $primary-color-medium;
 		font-weight: 300;
 	}
@@ -1287,32 +1296,54 @@ header {
 		display: block;
 		font-weight: 300;
 	}
+
+	img {
+		width: 20px;
+		height: auto;
+		padding-left: 5px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	div {
+		display: inline-block;
+		vertical-align: top;
+		cursor: pointer;
+	}
 }
 
 .food-phone,
 .hotel-phone {
-	width: 30%;
+	width: 25%;
 	display: inline-block;
 	vertical-align: top;
 	text-align: right;
 
-	h4 {
-		font-size: 12px !important;
-		/*font-style: italic;*/
-		display: block;
-		color: $primary-color-dark;
-		font-weight: 500;
-	}
+
 	p {
 		font-size: 10px;
 		color:$primary-color-medium;
 		font-weight: 300;
+		display: inline-block;
+		vertical-align: top;
+		padding-top:4px;
+		padding-left: 2px;
 	}
 
 	i {
 		font-size: 14px;
 		color: #FFC107;
 		margin-top:3px;
+	}
+
+	span {
+		font-size: 14px;
+		color: #333;
+		font-weight: 400;
+		display: inline-block;
+	}
+	div {
+		display: block;
 	}
 }
 /* School Instagram Gallery */
@@ -1878,7 +1909,7 @@ header {
 	display: none;
 }
 
-#submit-food-filter {
+.submit-food-filter {
 	width: 15%;
 	height: 35px;
 	background: $secondary-color-dark;
@@ -1989,7 +2020,7 @@ header {
 
 	.food-name, 
 	.hotel-name {
-		width: 55%;
+		width: 75%;
 	}
 
 	.food-radius, 
