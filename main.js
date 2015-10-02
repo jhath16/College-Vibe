@@ -250,8 +250,8 @@ var swapMap = function(image) {
 
 function removeViewFromRenderedViews (view) {
   var cid = view.cid;
-  var index = _.findIndex(renderedViews, function (n) {return n.cid === cid});
-  if(index === -1) {
+  var index = _.findIndex(renderedViews, function (n) {return n.cid == cid});
+  if(index < 0) {
     throw new Error("ATTEMPTING TO REMOVE VIEW THAT DOESN'T EXIST!!!!!!!!!!!!");
   }
   renderedViews.splice(index,1); //remove from the array
@@ -262,8 +262,9 @@ function removeViewFromRenderedViews (view) {
     view.subViews = [];
   }
   if (view.partial) {
-    view.partial.removeRenderedView(); //remove the partial(s);
+    view.partial.remove(); //remove the partial(s);
   }
+  view.partial = null;
 };
 
 // Goes through all of the views in renderedViews and
@@ -490,8 +491,8 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('.header-breadcrumbs p')[1].innerText = "Gallery";
   },
 
-  mapTab: function () {
-    this.subView = new CollegeVibe.Views.Map(this.options);
+  mapTab: function (e) {
+    this.subView = new CollegeVibe.Views.Map(this.options,e);
     $('.header-breadcrumbs p')[1].innerText = "Map";
   },
 
@@ -612,7 +613,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     'click .clear-filter' : 'clearFilter',
     'click .submit-food-filter' : 'categorySearch',
     'change input[name="popularSearch"]' : 'radioCategorySearch',
-    'change input[name="foodFilter"]' : 'reorderData'
+    'change input[name="foodFilter"]' : 'reorderData',
   },
 
   reorderData: function () {
@@ -786,11 +787,9 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
     var displayString = "Displaying results " + min + "-" + realMax;
     foodList.append('<div><h1>' + displayString + '</h1></div>');
-    var restaurantTemplate = _.template($('#food-template').text());
 
     for (var i = min-1; i < realMax; i++) {
       var restaurant = data[i];
-      // foodList.append(restaurantTemplate(restaurant));
       new CollegeVibe.Views.Restaurant({model:restaurant, parent:this});
     }
   }
@@ -798,6 +797,7 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
 CollegeVibe.Views.Restaurant = Parse.View.extend({
   initialize: function () {
+    this.parent = this.options.parent;
     this.parentSubViews = this.options.parent.subViews;
     this.render();
   },
@@ -811,8 +811,15 @@ CollegeVibe.Views.Restaurant = Parse.View.extend({
   },
 
   events: {
-
+    'click .display-on-map' : 'displayOnMap'
   },
+
+  displayOnMap: function () {
+    console.log(this);
+    console.log(CollegeVibe.SchoolView);
+    CollegeVibe.SchoolView.clearSubviews();
+    CollegeVibe.SchoolView.mapTab(new Parse.Object(this.model));
+  }
 })
 
 CollegeVibe.Views.Statistics = Parse.View.extend({
@@ -953,9 +960,14 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
 CollegeVibe.Views.Map = Parse.View.extend({
   template: _.template($('#map-view').text()),
 
-  initialize:function (schoolView) {
+  initialize:function (schoolView, e) {
+    console.log(e);
     this.schoolView = schoolView;
-    this.render();
+    if (e) {
+      this.render(e, 17);
+    } else {
+      this.render(schoolView.model, 14);
+    }
     this.foodMarkers = [];
     this.hotelMarkers = [];
 
@@ -984,7 +996,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
     'change input[type="checkbox"]' : 'checkboxHandler'
   },
 
-  render: function () {
+  render: function (e, zoom) {
     var self = this;
     this.$el.html(this.template(this.model));
     $('.school-body').append(this.el);
@@ -992,13 +1004,13 @@ CollegeVibe.Views.Map = Parse.View.extend({
     map.style.height = '500px';
     map.style.width = '100%';
     this.map = new google.maps.Map(map, {
-      center: {lat: self.schoolView.model.get('latitude'), lng: self.schoolView.model.get('longitude')},
-      zoom: 14
+      center: {lat: e.get('latitude'), lng: e.get('longitude')},
+      zoom: zoom
     });
     new google.maps.Marker({
-      position: {lat: self.schoolView.model.get('latitude'), lng: self.schoolView.model.get('longitude')},
+      position: {lat: e.get('latitude'), lng: e.get('longitude')},
       map: self.map,
-      title:self.schoolView.model.get('schoolname')
+      title:e.get('schoolname') || e.get('name')
     });
   },
 
@@ -1200,7 +1212,7 @@ var Router = Backbone.Router.extend({
        collegeCollection to be fetched beforehand */
     var query = new Parse.Query("Colleges").equalTo("slug",slug);
     query.first().then(function (e) {
-      new CollegeVibe.Views.School({model:e});
+      CollegeVibe.SchoolView = new CollegeVibe.Views.School({model:e});
     });
   },
 
