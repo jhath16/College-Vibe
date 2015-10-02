@@ -995,22 +995,30 @@ header {
 
 .food-name,
 .hotel-name {
-  width: 60%;
+  width: 75%;
   display: inline-block;
-  vertical-align: top;
-  padding-left: 10px; }
+  vertical-align: top; }
   .food-name h2,
   .hotel-name h2 {
     font-size: 14px;
     color: #37474F;
     font-weight: normal;
     padding-bottom: 2px; }
+  .food-name h4,
+  .hotel-name h4 {
+    font-size: 12px !important;
+    /*font-style: italic;*/
+    display: block;
+    color: #263238;
+    font-weight: 500;
+    margin-top: 3px;
+    margin-bottom: 3px; }
   .food-name p,
   .hotel-name p {
     font-size: 12px;
     line-height: 18px;
     /*font-style: italic;*/
-    display: block;
+    display: inline-block;
     color: #37474F;
     font-weight: 300; }
   .food-name a,
@@ -1020,30 +1028,48 @@ header {
     line-height: 18px;
     display: block;
     font-weight: 300; }
+  .food-name img,
+  .hotel-name img {
+    width: 20px;
+    height: auto;
+    padding-left: 5px;
+    display: inline-block;
+    vertical-align: top; }
+  .food-name div,
+  .hotel-name div {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer; }
 
 .food-phone,
 .hotel-phone {
-  width: 30%;
+  width: 25%;
   display: inline-block;
   vertical-align: top;
   text-align: right; }
-  .food-phone h4,
-  .hotel-phone h4 {
-    font-size: 12px !important;
-    /*font-style: italic;*/
-    display: block;
-    color: #263238;
-    font-weight: 500; }
   .food-phone p,
   .hotel-phone p {
     font-size: 10px;
     color: #37474F;
-    font-weight: 300; }
+    font-weight: 300;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 4px;
+    padding-left: 2px; }
   .food-phone i,
   .hotel-phone i {
     font-size: 14px;
     color: #FFC107;
     margin-top: 3px; }
+  .food-phone span,
+  .hotel-phone span {
+    font-size: 14px;
+    color: #333;
+    font-weight: 400;
+    display: inline-block; }
+  .food-phone div,
+  .hotel-phone div {
+    display: block; }
 
 /* School Instagram Gallery */
 .instagram-gallery {
@@ -1545,7 +1571,7 @@ header {
 
   .food-name,
   .hotel-name {
-    width: 55%; }
+    width: 75%; }
 
   .food-radius,
   .hotel-radius {
