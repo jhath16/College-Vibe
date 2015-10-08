@@ -491,8 +491,8 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('.header-breadcrumbs p')[1].innerText = "Gallery";
   },
 
-  mapTab: function (e) {
-    this.subView = new CollegeVibe.Views.Map(this.options,e);
+  mapTab: function () {
+    this.subView = new CollegeVibe.Views.Map(this.options);
     $('.header-breadcrumbs p')[1].innerText = "Map";
   },
 
@@ -815,8 +815,6 @@ CollegeVibe.Views.Restaurant = Parse.View.extend({
   },
 
   displayOnMap: function () {
-    console.log(this);
-    console.log(CollegeVibe.SchoolView);
     CollegeVibe.SchoolView.clearSubviews();
     CollegeVibe.SchoolView.mapTab(new Parse.Object(this.model));
   }
@@ -964,6 +962,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
   template: _.template($('#map-view').text()),
 
   initialize:function (schoolView, e) {
+    console.log(schoolView, e);
     var self = this;
     this.schoolView = schoolView;
     if (e) {
@@ -1013,6 +1012,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
   },
 
   render: function (e, zoom) {
+    console.log(e);
     var self = this;
     this.$el.html(this.template(this.model));
     $('.school-body').append(this.el);
