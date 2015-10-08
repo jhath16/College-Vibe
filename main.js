@@ -927,11 +927,14 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
 
     var self = this;
 
+    var imageTemplate = _.template($('#gallery-image-view').text());
+
     function postInstaImages () {
       _.each(self.schoolView.instagramInformation, function (i){
-        var imageElement = document.createElement('img');
-        $(imageElement).attr('src',i.images.low_resolution.url);
-        $('.instagram-gallery ul').append(imageElement);
+        // var imageElement = document.createElement('img');
+        // $(imageElement).attr('src',i.images.low_resolution.url);
+        // $('.instagram-gallery ul').append(imageElement);
+        $('.instagram-gallery ul').append(imageTemplate(i));
       });
     };
 
@@ -961,7 +964,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
   template: _.template($('#map-view').text()),
 
   initialize:function (schoolView, e) {
-    console.log(e);
+    var self = this;
     this.schoolView = schoolView;
     if (e) {
       this.render(e, 17);
@@ -971,13 +974,21 @@ CollegeVibe.Views.Map = Parse.View.extend({
     this.foodMarkers = [];
     this.hotelMarkers = [];
 
-    var self = this;
+
+    this.infoWindow = new google.maps.InfoWindow({
+      content:null
+    });
 
     _.each(schoolView.hotelInformation, function (i) {
       var newMarker = new google.maps.Marker({
         position:{lat:i.latitude, lng: i.longitude},
         map:null,
         title:i.name
+      });
+      newMarker.addListener('click', function () {
+        this.infoWindow.setPosition(i.latitude, i.longitude);
+        this.infoWindow.setContent("Hey");
+        this.infoWindow.open();
       });
       self.hotelMarkers.push(newMarker);
     });
@@ -987,6 +998,11 @@ CollegeVibe.Views.Map = Parse.View.extend({
         position:{lat:i.latitude, lng: i.longitude},
         map:null,
         title:i.name
+      });
+      newMarker.addListener('click', function () {
+        this.infoWindow.setPosition(i.latitude, i.longitude);
+        this.infoWindow.setContent("<div style='font-size:16px;'>Hey</div>");
+        this.infoWindow.open();
       });
       self.foodMarkers.push(newMarker);
     });
@@ -1007,10 +1023,14 @@ CollegeVibe.Views.Map = Parse.View.extend({
       center: {lat: e.get('latitude'), lng: e.get('longitude')},
       zoom: zoom
     });
-    new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: {lat: e.get('latitude'), lng: e.get('longitude')},
       map: self.map,
       title:e.get('schoolname') || e.get('name')
+    });
+    marker.addListener('click', function () {
+      self.infoWindow.setContent("Hey");
+      self.infoWindow.open(self.map, marker);
     });
   },
 

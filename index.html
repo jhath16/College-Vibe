@@ -3200,7 +3200,7 @@
       <div class="food-phone">
 		<div><span><%=(($distance/1000) * 0.621371).toFixed(1)%></></span><p>miles</p></div>
 
-        
+
 
         <% if (typeof rating != 'undefined') { %>
           <% for (var i = 0; i < Math.floor(rating); i++) { %>
@@ -3211,7 +3211,7 @@
           <% } %>
         <% } %>
       </div>
-      
+
     </li>
   </script>
 
@@ -3296,12 +3296,12 @@
 
 	<script type='text/template' id="gallery-image-view">
 	  <li>
-		  	<img src="">
+		  	<img src=<%= images.low_resolution.url %>>
 		  	<div class="instagram-overlay">
-		  		<h1>Username</h1>
-		  		<p>Like Count</p><span class="fa fa-star"></span>
-		  		<h2>Caption</h2>
-		  		<h3>Created At</h2>
+		  		<h1><%= caption.from.username %></h1>
+		  		<p><%= likes.count %></p><span class="fa fa-star"></span>
+		  		<h2><%= caption.text %></h2>
+		  		<h3><%= new moment(caption.created_time * 1000).fromNow() %></h2>
 		  	</div>
 	  </li>
 	</script>
@@ -3414,10 +3414,12 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.20&key=AIzaSyDmcX6i_j0pP2tW1B828tFJbIhQTKY8Xwk"></script>
 <script src='http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0.2/src/markerclusterer_compiled.js' type="text/javascript"></script>
 
+
 <script src="slideJS/jquery.slides.min.js"></script>
 <script src="jquery-accordion.js"></script>
 
 <script src='bower_components/chart.js/chart.js'></script>
+<script src='bower_components/moment/moment.js'></script>
 
 <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 <script src='main.js'></script>
