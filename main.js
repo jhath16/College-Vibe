@@ -491,6 +491,9 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('.header-breadcrumbs p')[1].innerText = "Gallery";
   },
 
+  //necessary because we are calling the mapTab method directly from the restaurant route
+  //From the restaurant tab, we were invoking it with the model as the parameter   (correct)
+  //From the schoolTab(clicking on the tab), we were invoking it with the jQuery event   (errors)
   mapHandler: function () {
     this.mapTab();
   },
