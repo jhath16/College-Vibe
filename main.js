@@ -443,7 +443,7 @@ CollegeVibe.Views.School = Parse.View.extend({
     'click #hotel' : 'hotelsTab',
     'click #sports' : 'sportsTab',
     'click #gallery' : 'galleryTab',
-    'click #map' : 'mapTab'
+    'click #map' : 'mapHandler'
   },
 
   clearSubviews: function (e) {
@@ -491,8 +491,12 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('.header-breadcrumbs p')[1].innerText = "Gallery";
   },
 
-  mapTab: function () {
-    this.subView = new CollegeVibe.Views.Map(this.options);
+  mapHandler: function () {
+    this.mapTab();
+  },
+
+  mapTab: function (e) {
+    this.subView = new CollegeVibe.Views.Map(this.options,e);
     $('.header-breadcrumbs p')[1].innerText = "Map";
   },
 
