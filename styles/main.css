@@ -1352,7 +1352,13 @@ header {
     font-size: 16px;
     color: #263238;
     font-weight: 300;
-    text-decoration: none; }
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid #f8f8f8;
+    border-left: 0;
+    cursor: pointer; }
+  .view-all a:first-child {
+    border-left: 1px solid #f8f8f8; }
   .view-all div {
     display: inline-block;
     padding-right: 5px;
