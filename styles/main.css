@@ -1072,22 +1072,65 @@ header {
     display: block; }
 
 /* School Instagram Gallery */
+.instagram-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 50px 30px;
+  text-align: center;
+  display: none; }
+  .instagram-overlay p,
+  .instagram-overlay span {
+    font-size: 16px;
+    color: #f0f0f0;
+    display: inline-block;
+    vertical-align: top; }
+  .instagram-overlay p {
+    padding-right: 3px; }
+  .instagram-overlay span {
+    padding-left: 3px;
+    padding-top: 2px;
+    color: #F44336; }
+  .instagram-overlay h1 {
+    font-size: 14px;
+    color: #f0f0f0;
+    margin-bottom: 10px; }
+  .instagram-overlay h2 {
+    font-size: 14px;
+    color: #f0f0f0;
+    font-weight: 300;
+    margin-top: 10px; }
+  .instagram-overlay h3 {
+    font-size: 12px;
+    color: #f0f0f0;
+    font-weight: 400;
+    margin-top: 10px; }
+
 .instagram-gallery {
   width: 100%; }
   .instagram-gallery li {
-    width: 25%;
+    width: 300px;
     height: auto;
-    display: inline-block;
-    vertical-align: top; }
-  .instagram-gallery img {
-    width: 310px;
     display: inline-block;
     vertical-align: top;
-    height: auto;
-    margin-right: 35px;
-    margin-bottom: 35px; }
+    margin-right: 50px;
+    margin-bottom: 50px;
+    position: relative; }
+  .instagram-gallery li:nth-child(3n) {
+    margin-right: 0px; }
+  .instagram-gallery img {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    height: auto; }
   .instagram-gallery img:nth-child(3n) {
     margin-right: 0; }
+
+.instagram-gallery li:hover .instagram-overlay {
+  display: inline-block; }
 
 .school-heading {
   width: 100%;
