@@ -2951,9 +2951,7 @@
 				</div>
 			</div>
 
-			<div class="header-right">
-				<div class="search-box-partial"></div>
-			</div>
+			
 
 		</div>
 	</header>
@@ -2963,18 +2961,19 @@
 
 	      	<div class="school-options1">
 	          <ul>
-	            <li id='statistics'><span class="fa fa-info-circle"></span><p>Info</p></li>
-	            <li id='food'><span class="fa fa-cutlery"></span><p>Restaurants</p></li>
-	            <li id='hotel'><span class="fa fa-bed"></span><p>Hotels</p></li>
-	           	<li id='sports'><span class="fa fa-futbol-o"></span><p>Sports</p></li>
-	            <li id='gallery'><span class="fa fa-picture-o"></span><p>Gallery</p></li>
-	           	<li id='map'><span class="fa fa-location-arrow"></span><p>Map</p></li>
+	            <li id='statistics'><span class="fa fa-info-circle"></span><p>Info</p><h1>School Statistics</h1></li>
+	            <li id='food'><span class="fa fa-cutlery"></span><p>Food &amp; Drink</p><h1>Places to Eat</h1></li>
+	            <li id='hotel'><span class="fa fa-bed"></span><p>Hotels</p><h1>Places to Stay</h1></li>
+	           	
+	            <li id='gallery'><span class="fa fa-picture-o"></span><p>Instagram</p><h1>Photo Gallery</h1></li>
+	           	<li id='map'><span class="fa fa-location-arrow"></span><p>Map</p><h1>Google View</h1></li>
 	          </ul>
 	        </div>
 
-	        <div class="header-breadcrumbs">
-				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
+	        <div class="header-right">
+				<div class="search-box-partial"></div>
 			</div>
+	        
 	    </div>
     </div>
 
@@ -2993,11 +2992,35 @@
             <img src="assets/images/campus-2.jpg">
             <img src="assets/images/campus-3.jpg">
           </div>
+
+          <section>
+            <h1><%= attributes.schoolname %></h1>
+            <p><%= attributes.address %></p>
+          </section>
+
+          <div class="school-stats">
+
+          	<li><h1>53%</h1><p>Male Enrollment</p></li>
+          	<li><h1>47%</h1><p>Female Enrollment</p></li>
+          	<li><h1>68%</h1><p>Acceptance Rate</p></li>
+
+          </div>
+
+          <div class="school-stats2">
+          	<li><h1>5,689</h1><p>Graduate Enrollment</p></li>
+          	<li><h1>14,468</h1><p>Undergrad Engrollment</p></li>
+          	<li><h1>95</h1><p>Majors</p></li>
+
+          </div>
         </div>
+
+
 	</div>
 
 	<div class="school-right-col">
-
+			<div class="header-breadcrumbs">
+				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
+			</div>
         <div class="school-info">
           <img>
 
@@ -3332,19 +3355,24 @@
 
 
         <div class="school-left-col">
-
+			<div id='map-canvas'></div>
         </div>
 
         <div class="school-right-col">
+			<div class="map-options">
+				<li>
+					<input type="checkbox" name="food" value="" id='food-checkbox' style='font-size:20px'>
+					<label for='food-checkbox'>Display Food</label>
+				</li>
 
+				<li>
+					<input type="checkbox" name="hotel" value="" id='hotel-checkbox' style='font-size:20px'>
+					<label for='hotel-checkbox'>Display Hotels</label>
+				</li>
+			</div>
         </div>
-	  	<div id='map-canvas'></div>
-      <div class="map-options">
-        <input type="checkbox" name="food" value="" id='food-checkbox' style='font-size:20px'>
-        <label for='food-checkbox' style='font-size:20px'>Display Food</label>
-        <input type="checkbox" name="hotel" value="" id='hotel-checkbox' style='font-size:20px'>
-        <label for='hotel-checkbox' style='font-size:20px'>Display Hotels</label>
-      </div>
+	  	
+      
   </script>
 
 

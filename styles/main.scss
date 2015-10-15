@@ -3,7 +3,7 @@
 
 /* Colors */
 
-$primary-color-light: #ECEFF1;
+$primary-color-light: #e5e5e5;
 $primary-color-medium: #37474F;
 $primary-color-dark: #263238;
 
@@ -115,9 +115,8 @@ header {
 .top-header-wrap {
 	position:relative;
 	width: 100%;
-	/*background: #555;*/
-	height: 57px;
-	margin-bottom: 20px;
+	margin-top: 5px;
+
 }
 
 .header-top-left {
@@ -262,9 +261,9 @@ header {
 #nav-icon1 span {
   display: block;
   position: absolute;
-  height: 4px;
-  width: 25px;
-  background: $secondary-color-dark;
+  height: 3px;
+  width: 20px;
+  background: #d8d8d8;
   border-radius: 1px;
   opacity: 1;
   left: 10px;
@@ -394,14 +393,12 @@ header {
 .header-right {
 	width: 350px;
 	height: 60px;
+	background: #444;
 	float:right;
 	margin: 0 auto;
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
-	border-radius: 0px 0px 4px 4px;
-	/*top:10px;*/
-
 }
 
 .header-left {
@@ -427,21 +424,22 @@ header {
 }
 
 .search-container {
-	position: absolute;
+	position: relative;
 	width: 100%;
 	margin: 0 auto;
 	text-align: right;
 	display: inline-block;
 	vertical-align: top;
-	background: #fff;
+	background: #555;
 	/*border-left: 1px solid #dfdfdf;*/
 	left: 0;
+	z-index: 99999;
 
 	i {
 		width: 15%;
 		height: 60px;
-		color: #999;
-		background: #fff;
+		color: $secondary-color-light;
+		background: #555;
 		padding-top: 21px;
 		text-align: right;
 		font-size: 16px;
@@ -454,7 +452,7 @@ header {
 		height: 60px;
 		padding: 15px 0;
 		background: transparent;
-		color: #555;
+		color: #f8f8f8;
 		font-size: 18px;
 		border: 0;
 		outline: 0;
@@ -467,7 +465,7 @@ header {
 	}
 
 	input::-webkit-input-placeholder {
-		color: #999;
+		color: #d8d8d8;
 	}
 
 	li {
@@ -701,6 +699,7 @@ header {
     vertical-align:top;
     float: right;
     padding-top: 10px;
+    display: none;
 
 }
 
@@ -1004,6 +1003,8 @@ header {
 	width: 35%;
 	position: relative;
 	vertical-align: top;
+	/*padding-left: 15px;*/
+
 }
 
 .profile-small-col,
@@ -1035,7 +1036,7 @@ header {
 	width: 65%;
 	background: transparent;
 	vertical-align: top;
-	padding-right: 20px;
+	/*padding-top:15px;*/
 }
 
 
@@ -1053,7 +1054,7 @@ header {
 	background:#f8f8f8;
 	display: inline-block;
 	width: 100%;
-	border:1px solid #dfdfdf;
+	/*border:1px solid #dfdfdf;*/
 	padding:15px;
 
 
@@ -1068,8 +1069,7 @@ header {
 	div {
 		display: inline-block;
 		vertical-align: top;
-		padding-left: 5px;
-		padding-top:5px;
+		padding-left: 10px;
 	}
 
 	h1 {
@@ -1097,7 +1097,7 @@ header {
 .school-info-list {
 	width: 100%;
 	background: #fff;
-	border: 1px solid #dfdfdf;
+	/*border: 1px solid #dfdfdf;*/
 	border-top: 0;
 
 	ul {
@@ -1186,7 +1186,7 @@ header {
 .school-hotel {
 	width: 100%;
 	background:#fff;
-	border: 1px solid #dfdfdf;
+	/*border: 1px solid #dfdfdf;*/
 	border-bottom:0;
 
 
@@ -1438,8 +1438,8 @@ header {
   	display: inline-block;
   	height: auto;
   	margin-top:0px;
-  	/*background:$primary-color-light;*/
-  	padding:0px;
+  	background:#f0f0f0;
+  	padding:10px;
 
 	img {
 		width: 100%;
@@ -1447,7 +1447,38 @@ header {
 		display: inline-block;
 	}
 
-	h1 {
+	section {
+		position: absolute;
+		top: 285px;
+		z-index: 99999;
+		left: 40px;
+
+		h1 {
+			font-family: 'Lobster', cursive;
+			font-size: 24px;
+			color: #f8f8f8;
+			display: inline-block;
+			vertical-align: top;
+			padding-top:10px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width:325px;
+			text-shadow: 1px 1px 5px #000;
+
+
+		}
+
+		p {
+			display: block;
+			font-size: 12px;
+			font-weight: 300;
+			color: #f0f0f0;
+			text-shadow: 1px 1px 5px #000;
+		}
+	}
+
+/*	h1 {
 		color: $primary-color-light;
 		font-size: 30px;
 		font-weight: 300;
@@ -1465,13 +1496,54 @@ header {
 		vertical-align: top;
 		padding-left: 114px;
 		margin-top: -59px;
-	}
+	}*/
 
 	span {
 		display:none;
 	}
 }
 
+.school-stats, 
+.school-stats2 {
+	width: 100%;
+	font-size: 0;
+	background: #fff;
+	/*margin-top: 10px;*/
+	border-bottom: 1px solid #d8d8d8;
+
+	li {
+		width: 33.33333%;
+		text-align: center;
+		display: inline-block;
+		vertical-align: top;
+		padding: 25px 30px;
+
+		h1 {
+			display: block;
+			font-size: 24px;
+			font-weight: 700;
+			width: 100%;
+			color: #333;
+		}
+
+		p {
+			width: 100%;
+			font-size: 12px;
+			font-weight: 300;
+			color: #333;
+			margin-top: 5px;
+			line-height: 18px;
+		}
+	}
+}
+
+.school-stats {
+	margin-top: 10px;
+}
+
+.school-stats2 {
+	border-bottom: 0;
+}
 
 
 .school-options1 {
@@ -1479,20 +1551,18 @@ header {
 	background:#444;
 	z-index: 1000;
 	padding: 0px;
-	margin-top: 0px;
+	/*margin-bottom: 15px;*/
 	display: inline-block;
 	vertical-align: top;
-	/*border:1px solid #dfdfdf;*/
-	/*border-top:0;*/
-	margin-bottom: 15px;
 
 	li {
-		width: 16.66666667%;
+		width: 20%;
 		display: inline-block;
 		background:transparent;
 		color:$primary-color-dark;
 		text-align: left;
-		padding: 20px;
+		padding: 15px 10px;
+		height: 60px;
 		font-weight: 300;
 /*		border-left: 1px solid #fff;
 		border-right: 1px solid #f0f0f0;*/
@@ -1505,12 +1575,21 @@ header {
 	}
 
 	p {
-		font-size: 14px;
+		font-size: 12px;
 		display: inline-block;
 		vertical-align: top;
+		text-transform: uppercase;
 		color: $primary-color-light;
+		font-weight: 700;
+	}
+
+	h1 {
+		font-size: 10px;
 		font-weight: 300;
-		padding-left: 0px;
+		line-height: 16px;
+		color: $primary-color-light;
+		margin-top: 3px;
+		/*text-transform: uppercase;*/
 	}
 
 	span {
@@ -1549,9 +1628,9 @@ header {
 
 .module-header {
 	width: 100%;
-	background: #f8f8f8;
+	background: #fafafa;
 	padding: 20px;
-	border: 1px solid #dfdfdf;
+	/*border: 1px solid #dfdfdf;*/
 	border-bottom: 0;
 	margin-top: 0px;
 
@@ -1573,7 +1652,7 @@ header {
 	p {
 		color:$primary-color-dark;
 		font-size: 14px;
-		font-weight: 300;
+		font-weight: 700;
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -1597,14 +1676,14 @@ header {
 }
 
 .header-breadcrumbs {
-	width: 35%;
+	width: 100%;
 	background: #333;
 	padding: 20px;
 	/*border: 1px solid #dfdfdf;*/
 	/*border-top: 0;*/
 	border-right: 0;
 	margin-top: 0px;
-	display: inline-block;
+	display: none;
 	vertical-align: top;
 
 	p {
@@ -1635,7 +1714,7 @@ header {
 
 .food-search {
 	background:#fff;
-	border:1px solid #dfdfdf;
+	/*border:1px solid #dfdfdf;*/
 	border-bottom:0;
 	width: 100%;
 	/*margin-top:15px;*/
@@ -1685,7 +1764,7 @@ header {
 .food-filter {
 	padding: 15px 25px;
 	background: #fff;
-	border:1px solid #dfdfdf;
+	/*border:1px solid #dfdfdf;*/
 	border-bottom:0;
 
 	div {
@@ -1759,9 +1838,9 @@ header {
 
 .view-all {
 	width: 100%;
-	border:1px solid #dfdfdf;
+	/*border:1px solid #dfdfdf;*/
 	border-top:0;
-	background: #fff;
+	background: #f0f0f0;
 	text-align: center;
 	padding: 15px 0;
 	margin-bottom: 25px;
@@ -1902,6 +1981,23 @@ header {
 	}
 }
 
+.map-options {
+	background: #444;
+	padding: 10px;
+
+	li {
+		width: 100%;
+		padding: 10px 15px;
+	}
+
+	label {
+		padding-left: 10px;
+		color: $primary-color-light;
+		font-size: 12px;
+		font-weight: 400;
+	}
+}
+
 #Map {
 	padding-left:100px;
 	padding-right: 100px;
@@ -1913,11 +2009,10 @@ header {
 
 #filter-accordion {
 	width: 100%;
-	border-bottom: 1px solid #dfdfdf;
 
 
 	section {
-		background: #f8f8f8
+		background: #f8f8f8;
 	}
 
 	article {
@@ -1928,17 +2023,20 @@ header {
 	aside {
 		font-size: 14px;
 		border: 0;
-		background: #f8f8f8;
+		background: #f0f0f0;
 		width: 100%;
 		padding: 25px;
 		text-align: left;
 		outline:0;
-		border:1px solid #dfdfdf;
-		border-bottom:0;
+		/*border-bottom:1px solid #d8d8d8;*/
 		/*border-top:1px solid #f5f5f5;*/
 		font-weight:300;
 		cursor: pointer;
 		color: $primary-color-dark;
+	}
+
+	aside:last-child {
+		border-bottom: 0;
 	}
 
 	i {
@@ -1968,7 +2066,7 @@ header {
 
 
 	button:last-child {
-		border-bottom: 1px solid #dfdfdf;
+		/*border-bottom: 1px solid #dfdfdf;*/
 	}
 }
 
