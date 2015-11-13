@@ -418,19 +418,20 @@ header {
 }
 
 .homepage-banner {
-	width: 360px;
+	width: 1000px;
 	margin: 0 auto;
 	position:relative;
+	text-align: center;
 }
 
 .search-container {
-	position: relative;
-	width: 100%;
 	margin: 0 auto;
+	position: relative;
+	width: 350px;
 	text-align: right;
 	display: inline-block;
 	vertical-align: top;
-	background: #555;
+	background: rgba(0,0,0,.7);
 	/*border-left: 1px solid #dfdfdf;*/
 	left: 0;
 	z-index: 99999;
@@ -439,7 +440,7 @@ header {
 		width: 15%;
 		height: 60px;
 		color: $secondary-color-light;
-		background: #555;
+		background: transparent;
 		padding-top: 21px;
 		text-align: right;
 		font-size: 16px;
@@ -490,22 +491,70 @@ header {
 
 .banner-container {
 	width: 100%;
-	position:relative;
-	margin: 0 auto;
-	top:150px;
-	text-align: center;
-	padding-bottom:200px;
-
+    height: 100vh;
+    position: relative;
+    padding-top: 50px;
+    margin: 0 auto;
+    top: 0;
+    text-align: center;
+ background: url('../assets/images/campus-2.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 	img {
 		margin-bottom: 0px;
 	}
 }
 
+.banner-header {
+	width: 1000px;
+    margin: 0 auto;
+    height: 50px;
+    padding-top: 20px;
+    text-align: right;
+    margin-bottom: 100px;
+
+	nav {
+		float: right;
+
+		ul {
+			padding-left: 0;
+			list-style: none;
+		}
+
+		li {
+			display: inline-block;
+			vertical-align: top;
+			padding-left: 30px;
+
+			p {
+				font-size: 18px;
+				font-weight: 100;
+				color: #fff;
+				text-shadow: 1px 1px 3px #000;
+			}
+
+			span {
+				display: inline-block;
+				vertical-align: top;
+				font-size: 18px;
+				color: #fff;
+				width: 30px;
+				height: 30px;
+				padding-top: 3px;
+			}
+		}
+	}
+}
+
 .banner-slogan {
-	width: 400px;
+	position: relative;
+	width: 1000px;
 	margin: 0 auto;
 	text-align:center;
 	padding-bottom: 15px;
+	margin-top: 25px;
 
 	p {
 		font-size:18px;
@@ -518,22 +567,28 @@ header {
 
 	h1 {
 		font-size: 28px;
+		line-height: 42px;
 		font-weight: 300;
 		font-style: italic;
 		color:$primary-color-light;
-		display: block;
+		display: inline-block;
 		vertical-align: top;
+		text-transform: uppercase;
 		padding-bottom: 15px;
 		padding-top:0px;
+		text-shadow: 1px 1px 8px #000;
+		padding-left: 25px;
+		width: 80%;
 	}
 
 	img {
-		display: block;
-		width: 150px;
-		height: 150px;
+		display: inline-block;
+		width: 75px;
+		height: 75px; 
 		vertical-align: top;
-		margin: 0 auto;
 		margin-bottom: 25px;
+		/*opacity: 0.8;
+	    filter: alpha(opacity=80); /* For IE8 and earlier */
 	}
 }
 
@@ -577,7 +632,6 @@ header {
 .college-search {
 	height: auto;
     width: 100%;
-    background: #333;
     font-weight: 300;
     transition: 250ms;
     position: relative;
@@ -1402,6 +1456,7 @@ header {
 
 .instagram-gallery {
 	width: 100%;
+	padding-top: 30px;
 
 	li {
 		width: 300px;
@@ -1988,6 +2043,7 @@ header {
 	li {
 		width: 100%;
 		padding: 10px 15px;
+
 	}
 
 	label {
@@ -1998,9 +2054,156 @@ header {
 	}
 }
 
+.map-sidebar {
+	width: 20%;
+	display: none;
+	vertical-align: top;
+	background: #333;
+	height: 100vh;
+	overflow: scroll;
+	padding-top: 10px;
+
+	li {
+		text-align: center;
+		padding: 10px;
+		p {
+			font-size: 14px;
+			color: #fff;
+		}
+	}
+}
+
+.home-about {
+	width: 100%;
+	padding: 30px 200px 100px;
+	text-align: center; 
+
+	h1 {
+		font-size: 28px;
+		color: #333;
+	}
+
+	p {
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 28px;
+		margin-top: 10px;
+		color: #333;
+	}
+}
+
+.school-previews {
+	width: 100%;
+
+
+	li {
+		width: 50%;
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		height: 600px;
+		  -webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;
+		  transition: 250ms;
+
+		  section {
+		  	width: 100%;
+		  	height: 100%;
+		  	text-align: center;
+		  	padding: 100px 50px 0;
+		  	opacity: 0;
+		  	transition: 500ms;
+		  	background: rgba(0,0,0,.5);
+
+		  	h1 {
+		  		font-size: 28px;
+		  		font-weight: 400;
+		  		color: #fff;
+		  	}
+		  	h2 {
+		  		font-size: 20px;
+		  		font-weight: 300;
+		  		margin-top: 5px;
+		  		color: #fff;
+		  	}
+
+		  	p {
+		  		font-size: 16px;
+		  		line-height: 24px;
+		  		font-weight: 300;
+		  		color: #fff;
+		  		margin-top: 15px;
+		  		margin-bottom: 30px;
+		  	}
+
+		  	a {
+		  		margin-top: 15px;
+		  		text-transform: uppercase;
+		  		color: #FFF;
+		  		border-top: 3px solid #4EAE8F;
+		  		border-bottom: 3px solid #4EAE8F;
+		  		font-size: 20px;
+		  		font-family: serif;
+		  		padding: 5px 15px;
+		  	}
+
+		  }
+	}
+
+	/*li::after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		content: "";
+		background: rgba(0,0,0,.5);
+		display: none;
+	}*/
+
+	li:hover section {
+		opacity: 1;
+	}
+
+	li:first-child {
+		background: url('../assets/images/campus-1.jpg') no-repeat center center; 
+
+	}
+
+	li:nth-child(2) {
+		 background: url('../assets/images/campus-2.jpg') no-repeat center center; 
+
+	}
+
+	li:nth-child(3) {
+		 background: url('../assets/images/campus-3.jpg') no-repeat center center; 
+
+	}
+
+	li:nth-child(4) {
+		 background: url('../assets/images/campus-1.jpg') no-repeat center center; 
+
+	}
+}
+
+#map-contain {
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 100px 30px;
+}
+
+#circles, #circles a:visited {
+    fill: #58AE8C;
+    fill-opacity: .8;
+    stroke: #fff;
+    opacity: 1;
+}
+
 #Map {
-	padding-left:100px;
-	padding-right: 100px;
+
 }
 
 .hidden {

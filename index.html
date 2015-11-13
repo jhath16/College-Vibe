@@ -48,22 +48,46 @@
 
   <!-- Index Route -->
   <script type='text/template' id='index-route'>
+
     <div class="banner-container">
 
-      <div class="banner-slogan">
-        <img src="assets/images/collegevibe-logo-reverse.png">
-      </div>
+    	<div class="banner-header">
+    		<nav>
+    			<ul>
+    				<li><p>Colleges</p></li>
+    				<li><p>About</p></li>
+    				<li><p>Contact</p></li>
+    				<li><span class="fa fa-instagram"></span><span class="fa fa-facebook"></span><span class="fa fa-twitter"></span></li>
 
-      <div class="homepage-banner">
-        <div class="search-box-partial"></div>
-      </div>
+    			</ul>
+    		</nav>
+    	</div>
+		
+		<div class="banner-slogan">
+	        <h1>Providing a one-stop hub for events and establishments in college towns across America</h1> 
+		</div>
+
+		<div class="homepage-banner">
+			<div class="search-box-partial"></div>
+		</div>
+
+    </div>
+    <div class="map-sidebar">
+    	<ul>
+    		<li><p>Clemson University</p></li>
+    		<li><p>Clemson University</p></li>
+    		<li><p>Clemson University</p></li>
+    		<li><p>Clemson University</p></li>
+    		<li><p>Clemson University</p></li>
+    		<li><p>Clemson University</p></li>
+
+    	</ul>
     </div>
     <div id="map-contain">
       <!-- Start map-wrapper -->
 	<a name="map" id="map"></a>
-	<div id="map-wrapper" style='margin-top:300px;'>
+	<div id="map-wrapper">
 
-		<div id="map-contain" class="active">
 
 			<!-- Generate Map -->
 				<svg version="1.1" id="Map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%"
@@ -2915,10 +2939,27 @@
 
 	</svg>			<!-- #Generate Map -->
 
-		</div>
 
 	</div>
 	<!--#map-wrapper-->
+    </div>
+
+    <div class="home-about">
+    	<h1>What We Do</h1>
+    	<p>At CollegeVibe, we strive to paint a vivid picture of what it’s like in every college town in the nation. Accomplishing this requires going well beyond number crunching and basic research, which, believe us, we’ve done plenty of as well. In order to create a website worthy of your time, we’ve really had to "dig deep". This has included spending countless hours traveling and immersing ourselves in towns, even states, that we’ve never been to. We’re just getting started, but we’ve got some pretty awesome plans for the future. At CollegeVibe, we sincerely hope that our information, as well as experiences, will make us your one-stop hub for information on universities and college towns across America.</p>
+    </div>
+
+    <div class="school-previews">
+    	<ul>
+    		<li><section><h1>Princeton University</h1><h2>Princeton, NJ</h2><p>One of the original nine colonial colleges founded prior to the American Revolution, Princeton University was established as a private institution of higher learning in 1746. Formally the College of New Jersey, Princeton moved to its current location in the small iconic town of Princeton, New Jersey in 1756. Less than an hour away from New York City and Philadelphia, Princeton is surrounded by county parks, lakes, and scenic roads. Princeton is consistently recognized as one of the most prestigious universities in the country –and world.</p><a>View School</a></section>
+    		</li>
+    		<li><section><h1>Princeton University</h1><h2>Princeton, NJ</h2><p>One of the original nine colonial colleges founded prior to the American Revolution, Princeton University was established as a private institution of higher learning in 1746. Formally the College of New Jersey, Princeton moved to its current location in the small iconic town of Princeton, New Jersey in 1756. Less than an hour away from New York City and Philadelphia, Princeton is surrounded by county parks, lakes, and scenic roads. Princeton is consistently recognized as one of the most prestigious universities in the country –and world.</p><a>View School</a></section>
+    		</li>
+    		<li><section><h1>Princeton University</h1><h2>Princeton, NJ</h2><p>One of the original nine colonial colleges founded prior to the American Revolution, Princeton University was established as a private institution of higher learning in 1746. Formally the College of New Jersey, Princeton moved to its current location in the small iconic town of Princeton, New Jersey in 1756. Less than an hour away from New York City and Philadelphia, Princeton is surrounded by county parks, lakes, and scenic roads. Princeton is consistently recognized as one of the most prestigious universities in the country –and world.</p><a>View School</a></section>
+    		</li>
+    		<li><section><h1>Princeton University</h1><h2>Princeton, NJ</h2><p>One of the original nine colonial colleges founded prior to the American Revolution, Princeton University was established as a private institution of higher learning in 1746. Formally the College of New Jersey, Princeton moved to its current location in the small iconic town of Princeton, New Jersey in 1756. Less than an hour away from New York City and Philadelphia, Princeton is surrounded by county parks, lakes, and scenic roads. Princeton is consistently recognized as one of the most prestigious universities in the country –and world.</p><a>View School</a></section>
+    		</li>
+    	</ul>
     </div>
   </script>
 
@@ -3426,8 +3467,6 @@
 
 
   <script type="text/template" id="map-school-view">
-    <!-- Didn't want to touch the CSS but need to remove anchor and pseudo
-    classes of anchor tag colors off (a, a:visited, etc.)-->
     <a href="#schools/<%= id %>">
       <span><i class="fa fa-angle-right"></i></span>
       <%= attributes.schoolname %>
