@@ -1642,17 +1642,7 @@ header {
     color: #333; }
 
 .school-previews {
-  width: 100%;
-  /*li::after {
-  	position: absolute;
-  	top: 0;
-  	left: 0;
-  	bottom: 0;
-  	right: 0;
-  	content: "";
-  	background: rgba(0,0,0,.5);
-  	display: none;
-  }*/ }
+  width: 100%; }
   .school-previews li {
     width: 50%;
     position: relative;
@@ -1700,9 +1690,9 @@ header {
   .school-previews li:hover section {
     opacity: 1; }
   .school-previews li:first-child {
-    background: url("../assets/images/campus-1.jpg") no-repeat center center; }
-  .school-previews li:nth-child(2) {
     background: url("../assets/images/campus-2.jpg") no-repeat center center; }
+  .school-previews li:nth-child(2) {
+    background: url("../assets/images/Duke-University-Duke-Chapel.jpg") no-repeat center center; }
   .school-previews li:nth-child(3) {
     background: url("../assets/images/campus-3.jpg") no-repeat center center; }
   .school-previews li:nth-child(4) {
@@ -1831,9 +1821,6 @@ header {
     .school-options1 p {
       display: none; }
 
-  .search-container {
-    display: none; }
-
   .school-body {
     width: 100%;
     top: 57px; }
@@ -1867,6 +1854,52 @@ header {
     display: none; }
 
   .filter-accordion-mobile {
-    display: block; } }
+    display: block; }
+
+  .school-previews li {
+    width: 100%;
+    height: 400px; }
+    .school-previews li p {
+      display: none; }
+    .school-previews li h2 {
+      margin-bottom: 25px; }
+
+  .home-about {
+    padding: 100px 20px 30px;
+    text-align: left; }
+
+  #map-contain {
+    padding: 30px 0px; }
+
+  .banner-slogan,
+  .banner-header,
+  .homepage-banner {
+    width: 100%; }
+
+  .search-container {
+    width: 100%;
+    margin: 0 auto; }
+
+  .homepage-banner {
+    padding: 0 20px; }
+
+  .banner-slogan h1 {
+    font-size: 24px;
+    display: none; }
+
+  .banner-container {
+    background: url("../assets/images/campus-3.jpg") no-repeat center center;
+    padding-top: 1px; }
+
+  .banner-header {
+    text-align: center;
+    display: none; }
+    .banner-header nav {
+      text-align: center;
+      float: none; }
+      .banner-header nav li {
+        padding: 0 15px; }
+    .banner-header nav li:last-child {
+      display: none; } }
 
 /*# sourceMappingURL=main.css.map */
