@@ -644,6 +644,7 @@ header {
     	width: 100%;
     	padding: 19px;
     	text-align: left;
+    	background: #222;
 
     	&:hover {
     		background: #252525;
@@ -656,6 +657,8 @@ header {
     	font-size: 14px;
     	color: $primary-color-light;
     	width: 10%;
+		padding-top: 3px;
+		text-align: center;
     }
 
     a li h1 {
@@ -1057,7 +1060,7 @@ header {
 	width: 35%;
 	position: relative;
 	vertical-align: top;
-	/*padding-left: 15px;*/
+	padding-top: 10px;
 
 }
 
@@ -1090,7 +1093,8 @@ header {
 	width: 65%;
 	background: transparent;
 	vertical-align: top;
-	/*padding-top:15px;*/
+	padding-top:10px;
+	padding-right: 10px;
 }
 
 
@@ -1493,8 +1497,8 @@ header {
   	display: inline-block;
   	height: auto;
   	margin-top:0px;
-  	background:#f0f0f0;
-  	padding:10px;
+  	/*background:#f0f0f0;*/
+  	/*padding:10px;*/
 
 	img {
 		width: 100%;
@@ -1518,7 +1522,7 @@ header {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			width:325px;
+			width:100%;
 			text-shadow: 1px 1px 5px #000;
 
 
@@ -1603,9 +1607,9 @@ header {
 
 .school-options1 {
 	width: 65%;
-	background:#444;
+	/*background:#444;*/
 	z-index: 1000;
-	padding: 0px;
+	/*padding-right: 10px;*/
 	/*margin-bottom: 15px;*/
 	display: inline-block;
 	vertical-align: top;
@@ -1613,7 +1617,7 @@ header {
 	li {
 		width: 20%;
 		display: inline-block;
-		background:transparent;
+		background: #111;
 		color:$primary-color-dark;
 		text-align: left;
 		padding: 15px 10px;
@@ -2327,6 +2331,7 @@ header {
 		width: 100%;
 		top:0;
 		z-index:999;
+		margin-top: 0;
 		/*top: 80px;*/
 	}
 
@@ -2353,6 +2358,10 @@ header {
 		}
 
 		p {
+			display: none;
+		}
+
+		h1 {
 			display: none;
 		}
 	}
@@ -2422,7 +2431,7 @@ header {
 
 	.home-about {
 		padding: 100px 20px 30px;
-		text-align: left;
+		text-align: center;
 	}
 
 	#map-contain {
@@ -2469,6 +2478,13 @@ header {
 
 		nav li:last-child {
 			display: none;
+		}
+	}
+
+	.school-heading {
+
+		section {
+			top: 150px;
 		}
 	}
 

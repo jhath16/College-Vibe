@@ -503,7 +503,8 @@ header {
   .college-search a li {
     width: 100%;
     padding: 19px;
-    text-align: left; }
+    text-align: left;
+    background: #222; }
     .college-search a li:hover {
       background: #252525; }
   .college-search a li span {
@@ -511,7 +512,9 @@ header {
     vertical-align: top;
     font-size: 14px;
     color: #e5e5e5;
-    width: 10%; }
+    width: 10%;
+    padding-top: 3px;
+    text-align: center; }
   .college-search a li h1 {
     display: inline-block;
     vertical-align: top;
@@ -842,7 +845,7 @@ header {
   width: 35%;
   position: relative;
   vertical-align: top;
-  /*padding-left: 15px;*/ }
+  padding-top: 10px; }
 
 .profile-small-col,
 .school-small-col {
@@ -867,7 +870,8 @@ header {
   width: 65%;
   background: transparent;
   vertical-align: top;
-  /*padding-top:15px;*/ }
+  padding-top: 10px;
+  padding-right: 10px; }
 
 .profile-info-evenrow,
 .profile-info-oddrow,
@@ -1181,8 +1185,8 @@ header {
   display: inline-block;
   height: auto;
   margin-top: 0px;
-  background: #f0f0f0;
-  padding: 10px;
+  /*background:#f0f0f0;*/
+  /*padding:10px;*/
   /*	h1 {
   		color: $primary-color-light;
   		font-size: 30px;
@@ -1221,7 +1225,7 @@ header {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 325px;
+      width: 100%;
       text-shadow: 1px 1px 5px #000; }
     .school-heading section p {
       display: block;
@@ -1270,16 +1274,16 @@ header {
 
 .school-options1 {
   width: 65%;
-  background: #444;
+  /*background:#444;*/
   z-index: 1000;
-  padding: 0px;
+  /*padding-right: 10px;*/
   /*margin-bottom: 15px;*/
   display: inline-block;
   vertical-align: top; }
   .school-options1 li {
     width: 20%;
     display: inline-block;
-    background: transparent;
+    background: #111;
     color: #263238;
     text-align: left;
     padding: 15px 10px;
@@ -1800,6 +1804,7 @@ header {
     width: 100%;
     top: 0;
     z-index: 999;
+    margin-top: 0;
     /*top: 80px;*/ }
 
   .header-breadcrumbs {
@@ -1819,6 +1824,8 @@ header {
     .school-options1 span {
       display: inline-block; }
     .school-options1 p {
+      display: none; }
+    .school-options1 h1 {
       display: none; }
 
   .school-body {
@@ -1866,7 +1873,7 @@ header {
 
   .home-about {
     padding: 100px 20px 30px;
-    text-align: left; }
+    text-align: center; }
 
   #map-contain {
     padding: 30px 0px; }
@@ -1900,6 +1907,9 @@ header {
       .banner-header nav li {
         padding: 0 15px; }
     .banner-header nav li:last-child {
-      display: none; } }
+      display: none; }
+
+  .school-heading section {
+    top: 150px; } }
 
 /*# sourceMappingURL=main.css.map */
