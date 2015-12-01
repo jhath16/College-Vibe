@@ -434,6 +434,10 @@ CollegeVibe.Views.School = Parse.View.extend({
     renderedViews.push(this); //put it in the renderedViews array
     this.partial = new CollegeVibe.Partials.SearchDropdown(); //instantiate the new partial
     return this;
+
+    $('#nav-toggle').click(function(){
+      $('.school-right-col').toggleClass('school-right-col-shift');
+    });
   },
 
   events: {
@@ -900,7 +904,15 @@ CollegeVibe.Views.Statistics = Parse.View.extend({
   render: function() {
     this.$el.html(this.template(this.model));
     $('.school-body').append(this.el);
+
+    $('#nav-toggle').click(function(){
+      $('.school-right-col').toggleClass('school-right-col-shift');
+      // $('.school-body').toggleClass('school-body-shift');
+
+    });
   },
+
+
 });
 
 CollegeVibe.Views.Sports = Parse.View.extend({

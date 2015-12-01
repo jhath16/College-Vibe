@@ -6,7 +6,7 @@
   <meta name="description" content="CollegeVibe is your one-stop guide to the college town. Whether you're looking for information on the college or the town itself, we've got you covered!">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="favicon" href="assets/images/collegevibe-logo-white.png">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" type='text/css' href="styles/main.css">
 </head>
 <body>
@@ -3008,7 +3008,7 @@
 	            <li id='food'><span class="fa fa-cutlery"></span><p>Food &amp; Drink</p><h1>Places to Eat</h1></li>
 	            <li id='hotel'><span class="fa fa-bed"></span><p>Hotels</p><h1>Places to Stay</h1></li>
 	           	
-	            <li id='gallery'><span class="fa fa-picture-o"></span><p>Instagram</p><h1>Photo Gallery</h1></li>
+	            <li id='gallery'><span class="fa fa-instagram"></span><p>Instagram</p><h1>Photo Gallery</h1></li>
 	           	<li id='map'><span class="fa fa-location-arrow"></span><p>Map</p><h1>Google View</h1></li>
 	          </ul>
 	        </div>
@@ -3023,140 +3023,81 @@
 	<div class="school-body">
 	</div>
 
+	<div class="copyright-info">
+          <h1>English (US) · Privacy · Terms · Cookies · Advertising</h1>
+          <p>College Vibe®, LLC</p>
+    </div>
+
   </script>
 
 <!-- Statistics View -->
 
   <script type="text/template" id="statistics-view">
-    <div class="school-left-col">
-        <div class="school-heading">
-          <div id="slides">
-            <img src="assets/images/campus-1.jpg">
-            <img src="assets/images/campus-2.jpg">
-            <img src="assets/images/campus-3.jpg">
-          </div>
+  	<div class="school-wrap-1">
+		<div class="school-container">
+		    <div class="school-left-col">
 
-          <section>
-            <h1><%= attributes.schoolname %></h1>
-            <p><%= attributes.address %></p>
-          </section>
+		        <div class="school-heading">
+		          <div id="slides">
+		            <img src="assets/images/campus-1.jpg">
+		            <img src="assets/images/campus-2.jpg">
+		            <img src="assets/images/campus-3.jpg">
+		          </div>
 
-          <div class="school-stats">
+		          <section>
+		            <h1><%= attributes.schoolname %></h1>
+		            <p><%= attributes.address %></p>
+		          </section>
+		        </div>
+				
 
-          	<li><h1><%= attributes.percentMale %></h1><p>Male Enrollment</p></li>
-          	<li><h1><%= attributes.percentFemale %></h1><p>Female Enrollment</p></li>
-          	<li><h1><%= attributes.acceptanceRate %></h1><p>Acceptance Rate</p></li>
-
-          </div>
-
-          <div class="school-stats2">
-          	<li><h1><%= attributes.ugEnrollement %></h1><p>Undergrad Enrollment</p></li>
-          	<li><h1><%= attributes.gradEnrollment %></h1><p>Graduate Engrollment</p></li>
-          	<li><h1><%= attributes.stfRatio %></h1><p>Student to Faculty</p></li>
-
-          </div>
-        </div>
-
-
-	</div>
-
-	<div class="school-right-col">
-			<div class="header-breadcrumbs">
-				<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
 			</div>
-        <div class="school-info">
-          <img>
 
-          <div>
-            <h1><%= attributes.schoolname %></h1>
-            <p><%= attributes.address %></p>
-          </div>
-      	</div>
+			<div class="school-right-col">
 
-      	<div class="school-info-list">
-      		<ul>
-      			<li><span class="fa fa-phone"></span><p><a style='font-size:14px; color:inherit' href='tel:<%= getNumbers(attributes.phoneNumber) %>'><%= attributes.phoneNumber %></a></p><i class="fa fa-ellipsis-h"></i></li>
-      			<a target="_blank" href="https://www.<%= attributes.website %>"><li><span class="fa fa-globe"></span><p><%= attributes.website %></p><i class="fa fa-ellipsis-h"></i></li></a>
-      			<a target="_blank" href="<%= attributes.linkedIn %>"><li><span class="fa fa-linkedin"></span><p>LinkedIn</p><i class="fa fa-ellipsis-h"></i></li></a>
-      			<a target="_blank" href="<%= attributes.twitter %>"><li><span class="fa fa-twitter"></span><p>Twitter</p><i class="fa fa-ellipsis-h"></i></li></a>
-      			<a target="_blank" href="<%= attributes.facebook %>"><li><span class="fa fa-facebook"></span><p>Facebook</p><i class="fa fa-ellipsis-h"></i></li></a>
-      		</ul>
-      	</div>
+				<div class="header-breadcrumbs">
+					<p><%= attributes.schoolname %></p><span class="fa fa-angle-right"></span><p>Information</p>
+				</div>
+				<div class="school-info-header">
+					<h1>Contact Us</h1>
+				</div>
 
+		      	<div class="school-info-list">
+		      		<ul>
+		      			<li><span class="fa fa-phone"></span><p><a style='font-size:14px; color:inherit' href='tel:<%= getNumbers(attributes.phoneNumber) %>'><%= attributes.phoneNumber %></a></p><i class="fa fa-ellipsis-h"></i></li>
+		      			<a target="_blank" href="https://www.<%= attributes.website %>"><li><span class="fa fa-globe"></span><p><%= attributes.website %></p><i class="fa fa-ellipsis-h"></i></li></a>
+		      			<a target="_blank" href="<%= attributes.linkedIn %>"><li><span class="fa fa-linkedin"></span><p>LinkedIn</p><i class="fa fa-ellipsis-h"></i></li></a>
+		      			<a target="_blank" href="<%= attributes.twitter %>"><li><span class="fa fa-twitter"></span><p>Twitter</p><i class="fa fa-ellipsis-h"></i></li></a>
+		      			<a target="_blank" href="<%= attributes.facebook %>"><li><span class="fa fa-facebook"></span><p>Facebook</p><i class="fa fa-ellipsis-h"></i></li></a>
+		      		</ul>
+		      	</div>
+
+			</div>
+		</div>
 	</div>
 
+	<div class="school-wrap-2">
+
+		<div class="school-full-column">
+
+			<div class="school-stats">
+
+	          	<li><aside><span class="fa fa-pie-chart"></span></aside><section><h1>Percentages</h1><p>Percentage Male: <%= attributes.percentMale %></p><p>Percentage Female: <%= attributes.percentFemale %></p><p>Acceptance Rate: <%= attributes.acceptanceRate %></p></section></li>
+	          	<li><aside><span class="fa fa-bar-chart-o"></span></aside><section><h1>By the Numbers</h1><p>Undergrad Enrollment: <%= attributes.ugEnrollement %></p><p>Graduate Engrollment: <%= attributes.gradEnrollment %></p><p>Student to Faculty: <%= attributes.stfRatio %></p></section></li>
+	          	<li><aside><span class="fa fa-money"></span></aside><section><h1>Costs</h1><p>In-State Tuition: <%= attributes.inStateTuition %></p><p>Out-of-State Tuition: <%= attributes.outOfStateTuition %></p></section></li>
+	         </div>
+		</div>
+	</div>
   </script>
 
 
 <!-- Food View -->
 
   <script type="text/template" id="food-view">
-
+  	<div class="school-wrap-1">
         <div class="school-left-col">
 
-             	<section id="filter-accordion"  class="filter-accordion-mobile" data-accordion-group>
-			      <section data-accordion>
-			        <aside data-control>
-		        		<h1>Keyword Search</h1>
-				        <i class="fa fa-ellipsis-h"></i>
-			        </aside>
-			        <div data-content>
-			          <article>
-				      	<div class="food-search">
-							<span class="fa fa-search"></span>
-							<input placeholder="Burgers, Coffee, Italian..." type='text' class='category-searchbox'>
-							<button class="submit-food-filter" type="submit">Filter</button>
-						</div>
-			          </article>
-			        </div>
-			      </section>
-
-			      <section data-accordion>
-			        <aside data-control>
-			        	<h1>Popular Searches</h1>
-				        <i class="fa fa-ellipsis-h"></i>
-			        </aside>
-			        <div data-content>
-			          <article>
-						<div class="food-popular-searches">
-							<form>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Night Life</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Coffee</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Mexican</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Italian</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Star Rating</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
-									<div><input type="radio" name="popularSearch" value="bars"><p>Bars</p></div>
-
-
-							</form>
-						</div>
-			          </article>
-			        </div>
-			      </section>
-
-			      <section data-accordion>
-			        <aside data-control>
-			        	<h1>Sort By</h1>
-				        <i class="fa fa-ellipsis-h"></i>
-			        </aside>
-			        <div data-content>
-			          <article>
-						<div class="food-filter">
-							<form>
-								<li>
-									<div><input type="radio" name="distance-from" checked="checked" value="bars"><p>Distance From</p></div>
-									<div><input type="radio" name="foodFilter" value="bars"><p>Star Rating</p></div>
-								</li>
-
-							</form>
-						</div>
-			          </article>
-			        </div>
-			      </section>
-
-			    </section>
+          
 			<div class="module-header status-header">
 				<p>Restaurants near <%= attributes.schoolname %></p>
 			</div>
@@ -3243,10 +3184,11 @@
 
 
 		<div class="clear-filter hidden">
-			<p>Clear Filters</p>
+			<i class="fa fa-close"></i>
+			<p>Clear Filter</p>
 		</div>
       </div>
-
+  </div>
   </script>
 
   <script type='text/template' id='food-template'>
@@ -3284,6 +3226,7 @@
   <!-- Hotel View -->
 
   <script type="text/template" id="hotel-view">
+  	<div class="school-wrap-1">
 
         <div class="school-left-col">
 
@@ -3307,6 +3250,7 @@
         <div class="school-right-col">
 
         </div>
+    </div>
 
   </script>
 
@@ -3362,13 +3306,14 @@
 
 	<script type='text/template' id="gallery-image-view">
 	  <li>
+
 		  	<img src=<%= images.low_resolution.url %>>
-		  	<div class="instagram-overlay">
+		  	<section>
 		  		<h1><%= caption.from.username %></h1>
 		  		<p><%= likes.count %></p><span class="fa fa-heart"></span>
 		  		<h2><%= caption.text %></h2>
 		  		<h3><%= new moment(caption.created_time * 1000).fromNow() %></h2>
-		  	</div>
+		  	</section>
 	  </li>
 	</script>
 
@@ -3376,6 +3321,7 @@
 
   <script type="text/template" id="gallery-view">
 
+  	<div class="school-wrap-1">
 
         <div class="school-left-col">
 
@@ -3389,6 +3335,7 @@
 	  			<!-- Here is where the instagram pictures will be appended  -->
 	  		</ul>
 	  	</div>
+  	</div>
   </script>
 
 
@@ -3396,6 +3343,7 @@
 
   <script type="text/template" id="map-view">
 
+  	<div class="school-wrap-1">
 
         <div class="school-left-col">
 			<div id='map-canvas'></div>
@@ -3414,6 +3362,7 @@
 				</li>
 			</div>
         </div>
+    </div>
 	  	
       
   </script>
