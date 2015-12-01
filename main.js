@@ -992,11 +992,16 @@ CollegeVibe.Views.Map = Parse.View.extend({
     console.log(schoolView, e);
     var self = this;
     this.schoolView = schoolView;
+
+    //render method will load the map with the center on the position of the object passed to it. Also has a marker
+    //loaded of the object and a pop up listener loaded with it.
+
     if (e) {
       this.render(e, 17);
     } else {
       this.render(schoolView.model, 14);
     }
+
     this.foodMarkers = [];
     this.hotelMarkers = [];
 
@@ -1012,9 +1017,9 @@ CollegeVibe.Views.Map = Parse.View.extend({
         title:i.name
       });
       newMarker.addListener('click', function () {
-        this.infoWindow.setPosition(i.latitude, i.longitude);
-        this.infoWindow.setContent("Hey");
-        this.infoWindow.open();
+        self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
+        self.infoWindow.setContent("Hey");
+        self.infoWindow.open(self.map);
       });
       self.hotelMarkers.push(newMarker);
     });
@@ -1025,10 +1030,11 @@ CollegeVibe.Views.Map = Parse.View.extend({
         map:null,
         title:i.name
       });
+
       newMarker.addListener('click', function () {
-        this.infoWindow.setPosition(i.latitude, i.longitude);
-        this.infoWindow.setContent("<div style='font-size:16px;'>Hey</div>");
-        this.infoWindow.open();
+        self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
+        self.infoWindow.setContent("<div style='font-size:16px;'>Hey</div>");
+        self.infoWindow.open(self.map);
       });
       self.foodMarkers.push(newMarker);
     });
@@ -1055,9 +1061,11 @@ CollegeVibe.Views.Map = Parse.View.extend({
       map: self.map,
       title:e.get('schoolname') || e.get('name')
     });
+
     marker.addListener('click', function () {
-      self.infoWindow.setContent("Hey");
-      self.infoWindow.open(self.map, marker);
+      self.infoWindow.setPosition({lat:e.get('latitude'), lng:e.get('longitude')});
+      self.infoWindow.setContent(e.get('name') || e.get('schoolname')); //get the name of whatever it is we are passed
+      self.infoWindow.open(self.map);
     });
   },
 
@@ -1084,6 +1092,13 @@ CollegeVibe.Views.Map = Parse.View.extend({
             position: {lat:i.latitude, lng:i.longitude},
             title:i.name,
           });
+
+          marker.addListener('click', function () {
+            self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
+            self.infoWindow.setContent(i.name); 
+            self.infoWindow.open(self.map);
+          });
+
           markerArray.push(marker);
         });
         self[targetName+"MarkerClusterer"] = new MarkerClusterer(self.map, markerArray, {maxZoom:17});
