@@ -54,7 +54,6 @@
 
     	<div class="banner-logo">
 				<a href="/">
-					<img src="assets/images/collegevibe-logo-reverse.png">
 					<div>
 						<h1>CollegeVibe.com</h1>
 					</div>
@@ -68,6 +67,8 @@
 		<div class="homepage-banner">
 			<div class="search-box-partial"></div>
 		</div>
+
+
 
     </div>
     <div class="map-sidebar">
@@ -2963,6 +2964,9 @@
 
   <script type="text/template" id='search-box-view'>
     <div class="search-container">
+
+      <aside><img src="assets/images/collegevibe-logo-green.png"></aside>
+
       <i class="fa fa-search search-span"></i>
       <input placeholder="College or University" type='text'>
 	    <li id="nav-toggle">
@@ -2970,9 +2974,19 @@
 			  <span>toggle menu</span>
 			</button>
 	    </li>
-      <div class="college-search search-dropdown"></div>
+      <div class="college-search search-dropdown">
+      </div>
     </div>
 
+  </script>
+
+  <script type="text/template" id='search-results-view'>
+  	<aside>
+		  <img src="assets/images/default-avatar.png">
+	</aside>
+	<section>
+		<h1><%=attributes.schoolname%></h1>
+	</section>
   </script>
 
 <!-- School View -->
@@ -2981,13 +2995,20 @@
 	<header>
 		<div class="header-container">
 
-			<div class="header-top-left">
+			<div class="header-left">
 				<a href="/">
 					<img src="assets/images/collegevibe-logo-reverse.png">
 					<div>
 						<h1>CollegeVibe.com</h1>
 					</div>
 				</a>
+			</div>
+
+			<div class="header-right">
+				<div class="school-options-dropdown">
+					<section><h1>Home</h1></section>
+					<aside><i class="fa fa-caret-down"></i></aside>
+				</div>
 			</div>
 
 			
@@ -3009,7 +3030,7 @@
 	          </ul>
 	        </div>
 
-	        <div class="header-right">
+	        <div class="homepage-right">
 				<div class="search-box-partial"></div>
 			</div>
 	        
@@ -3372,6 +3393,7 @@
       <div class="header-container">
         <div class="header-banner">
           <div class="search-container">
+          	<img src="assets/images/collegevibe-logo-green.png">
             <i class="fa fa-search search-span"></i>
             <input placeholder="College or University" type='text'>
             <li id="nav-toggle">

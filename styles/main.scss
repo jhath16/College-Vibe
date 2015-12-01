@@ -125,7 +125,7 @@ header {
 
 }
 
-.header-top-left {
+.header-left {
 	display: inline-block;
 	width: 50%;
 	padding-top: 8px;
@@ -304,8 +304,7 @@ header {
 	position: fixed;
 }
 
-.homepage-right,
-.header-right {
+.homepage-right {	
 	width: 350px;
 	height: 60px;
 	background: #222;
@@ -316,7 +315,15 @@ header {
 	vertical-align: top;
 }
 
-.header-left {
+.header-right {
+	float: right;
+	height: 40px;
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+}
+
+/*.header-left {
 	width: 600px;
 	height: 60px;
 	display: inline-block;
@@ -325,7 +332,7 @@ header {
 	margin-right: 10px;
 	display: none;
 }
-
+*/
 .header-banner {
 	position: absolute;
   	right: 0;
@@ -357,9 +364,28 @@ header {
 		padding-top: 21px;
 		text-align: right;
 		font-size: 16px;
-		display: inline-block;
+		display: none;
 		transition: 250ms;
 	}
+
+	aside {
+		width: 15%;
+		height: 60px;
+		background: rgba(0,0,0,.8);
+		padding-top: 18px;
+		/*padding-right: 5px;*/
+		text-align: right;
+		font-size: 16px;
+		display: inline-block;
+		transition: 250ms;
+
+		img {
+			width: 25px;
+			height: 25px;
+		}
+	}
+
+	
 
 	input {
 		width: 70%;
@@ -394,6 +420,16 @@ header {
 .search-dropdown {
 	width: 380px;
 	left:0;
+	postion: relative;
+
+	i {
+    	position: absolute;
+    	top: -5px;
+    	left: 15px;
+    	font-size: 16px;
+    	color: #f8f8f8;
+    }
+
 }
 
 
@@ -463,14 +499,14 @@ header {
 
 .banner-slogan {
 	position: relative;
-	width: 1000px;
+	width: 800px;
 	margin: 0 auto;
 	text-align:center;
 	padding-bottom: 15px;
 	margin-top: 25px;
 
 	p {
-		font-size:18px;
+		font-size:16px;
 		line-height: 30px;
 		font-weight: 100;
 		color: $primary-color-light;
@@ -479,7 +515,7 @@ header {
 	}
 
 	h1 {
-		font-size: 28px;
+		font-size: 24px;
 		line-height: 42px;
 		font-weight: 300;
 		font-style: italic;
@@ -536,6 +572,7 @@ header {
 		padding-top:2px;
 		padding-left:5px;
 		text-shadow: 1px 1px 5px #555;
+		opacity: .8;
 
 	}
 
@@ -582,6 +619,7 @@ header {
 	border-top:0;
 	text-align: center;
 	background: transparent;
+	margin-bottom: 50px;
 
 	h1 {
 		font-size: 12px;
@@ -598,6 +636,31 @@ header {
 	}
 }
 
+.copyright-info-light {
+	width: 600px;
+	margin: 0 auto;
+	padding: 30px;
+	border-top:0;
+	text-align: center;
+	background: transparent;
+	margin-bottom: 50px;
+
+	h1 {
+		font-size: 12px;
+		color: #f0f0f0;
+		font-weight: 300;
+	}
+
+	p {
+		display: block;
+		font-size: 12px;
+		color: #f0f0f0;	
+		font-weight: 400;
+		padding-top:10px;
+	}
+}
+
+
 
 /* SEARCH CONTAINER */
 
@@ -605,42 +668,76 @@ header {
 	height: auto;
     width: 100%;
     font-weight: 300;
-    transition: 250ms;
     position: relative;
     right: 0;
     border-top: 0;
-    border-bottom: 0;
-    margin-top: 10px;
+    /*border-bottom: 2px solid #000;*/
+    box-shadow: 0 0 30px -15px #000;
 
-    a li {
-    	width: 100%;
-    	padding: 19px;
-    	text-align: left;
-    	background: #222;
+    a aside, 
+    a section {
+    	display: inline-block;
+    	vertical-align: top;
+    	height: 60px;
+    	background: #f8f8f8;
+    	transition: 250ms;
+    }
 
-    	&:hover {
-    		background: #252525;
+    a aside:nth-child(odd), 
+    a section:nth-child(odd) {
+    }
+
+    a:hover aside, 
+    a:hover section {
+    	background: $secondary-color-medium;
+
+    	h1 {
+    		color: #fff;
     	}
     }
 
-    a li span {
-    	display: inline-block;
-    	vertical-align: top;
-    	font-size: 14px;
-    	color: $primary-color-light;
-    	width: 10%;
-		padding-top: 3px;
-		text-align: center;
+    a aside {
+    	width: 15%;
+    	padding: 10px;
+    	background: #f8f8f8;
+
+    	img {
+    		width: 40px;
+    		height: 40px;
+    	}
+
+    	&:hover {
+    		/*background: $secondary-color-medium;*/
+    	}
     }
 
-    a li h1 {
-    	display: inline-block;
-    	vertical-align: top;
-    	font-size: 16px;
-    	color: $primary-color-light;
-    	width: 90%;
-    	font-weight: 300;
+    a section {
+    	width: 85%;
+    	padding: 15px 10px;
+    	text-align: left;
+
+    	span {
+	    	display: inline-block;
+	    	vertical-align: top;
+	    	font-size: 14px;
+	    	color: $primary-color-light;
+	    	width: 10%;
+			padding-top: 3px;
+			text-align: center;
+	    }
+
+	   	h1 {
+	    	display: inline-block;
+	    	vertical-align: top;
+	    	font-size: 14px;
+	    	color: #333;
+	    	width: 90%;
+	    	font-weight: 400;
+	    }
     }
+
+
+    
 }
 
 /* Login Container */
@@ -1210,7 +1307,7 @@ header {
 	padding: 20px 0 0;
 
 	h1 {
-		font-size: 16px;
+		font-size: 14px;
 		color: #333;
 		font-weight: 700;
 		text-transform: uppercase;
@@ -1225,7 +1322,7 @@ header {
 	background: #fff;
 	/*border: 1px solid #dfdfdf;*/
 	border-top: 0;
-	height: 308px;
+	height: 310px;
 
 	ul {
 		list-style: none;
@@ -1236,8 +1333,13 @@ header {
 		width: 100%;
 		padding: 20px 25px;
 		display: inline-block;
+		background: #fff;
 		/*border-bottom: 1px solid #f8f8f8;*/
 		cursor: pointer;
+	}
+
+	li:nth-child(even) {
+		background: #f8f8f8 !important;
 	}
 
 	li:last-child {
@@ -1680,6 +1782,41 @@ header {
 	border-bottom: 0;
 }
 
+.school-options-dropdown {
+	background: #fff;
+	border-radius: 3px;
+	border: 1px solid #dfdfdf;
+
+	section, 
+	aside {
+		display: inline-block;
+		vertical-align: top;
+		height: 35px;
+	}
+
+	section {
+		text-align: left;
+		padding: 7px 15px 0;
+
+		h1 {
+			font-size: 14px;
+			font-weight: 400;
+			color: #333;
+		}
+	}
+
+	aside {
+		padding: 10px 15px 0;
+		background: #f8f8f8;
+		/*border-left: 1px solid #d8d8d8;*/
+		border-radius: 0 3px 3px 0px;
+
+		i {
+			font-size: 14px;
+			color: #ccc;
+		}
+	}
+}
 
 .school-options1 {
 	width: 65%;
@@ -2372,7 +2509,7 @@ header {
 
 /* Media Queries */
 
-@media screen and (min-width : 350px) and (max-width : 500px) {
+@media screen and (min-width : 350px) and (max-width : 700px) {
 
 	header {
 		margin-top: 0;
@@ -2384,7 +2521,7 @@ header {
 		padding: 0;
 	}
 
-	.header-top-left {
+	.header-left {
 		width: 100%;
 		padding-top: 30px;
 		text-align: center;
@@ -2404,7 +2541,8 @@ header {
 		}
 	}
 
-	.header-right {
+	.header-right, 
+	.homepage-right {
 		width:100%;
 	}
 
@@ -2575,8 +2713,9 @@ header {
 
 	.school-stats {
 		width: 100%;
-		padding: 30px 20px 100px;
+		padding: 30px 20px 30px;
 		margin-top: -10px;
+		margin-bottom: 50px;
 
 		li {
 			width: 100%;
@@ -2649,6 +2788,11 @@ header {
 		div {
 			display: block;
 		}
+	}
+
+	.copyright-info {
+		width: 100%;
+		padding-bottom: 100px;
 	}
 
 }

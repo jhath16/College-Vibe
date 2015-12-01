@@ -318,8 +318,7 @@ CollegeVibe.Views.SchoolDropdown = Parse.View.extend({
     this.render();
   },
 
-  template: _.template("<li><span class='fa fa-angle-right'></span><h1><%=attributes.schoolname%></h1></li>"),
-
+  template: _.template($('#search-results-view').text()),
   render: function () {
     this.$el.html(this.template(this.model));
     this.el.href = '#schools/' + this.model.get('slug');
@@ -1166,7 +1165,7 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
 
   toggleSlideout: function () {
     $('.slideout-container').toggleClass('toggle-slideout');
-    $('#nav-toggle').toggleClass('active');
+    $('#nav-toggle').toggleClass('is-active');
   },
 
   clearDropdown: function () {
