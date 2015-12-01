@@ -81,22 +81,22 @@ header {
   width: 100%;
   margin-top: 5px; }
 
-.header-top-left {
+.header-left {
   display: inline-block;
   width: 50%;
   padding-top: 8px; }
-  .header-top-left img {
+  .header-left img {
     width: 35px;
     height: auto;
     display: inline-block;
     vertical-align: top;
     margin-top: 0px; }
-  .header-top-left div {
+  .header-left div {
     display: inline-block;
     vertical-align: top;
     padding-left: 5px;
     padding-top: 0px; }
-  .header-top-left h1 {
+  .header-left h1 {
     font-family: 'Lobster', cursive;
     font-size: 24px;
     color: #263238;
@@ -108,7 +108,7 @@ header {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; }
-  .header-top-left p {
+  .header-left p {
     display: block;
     font-size: 12px;
     font-weight: 300; }
@@ -219,8 +219,7 @@ header {
   z-index: 400;
   position: fixed; }
 
-.homepage-right,
-.header-right {
+.homepage-right {
   width: 350px;
   height: 60px;
   background: #222;
@@ -230,15 +229,23 @@ header {
   display: inline-block;
   vertical-align: top; }
 
-.header-left {
-  width: 600px;
-  height: 60px;
+.header-right {
+  float: right;
+  height: 40px;
+  position: relative;
   display: inline-block;
-  vertical-align: top;
-  background: transparent;
-  margin-right: 10px;
-  display: none; }
+  vertical-align: top; }
 
+/*.header-left {
+	width: 600px;
+	height: 60px;
+	display: inline-block;
+	vertical-align: top;
+	background: transparent;
+	margin-right: 10px;
+	display: none;
+}
+*/
 .header-banner {
   position: absolute;
   right: 0;
@@ -267,8 +274,21 @@ header {
     padding-top: 21px;
     text-align: right;
     font-size: 16px;
+    display: none;
+    transition: 250ms; }
+  .search-container aside {
+    width: 15%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.8);
+    padding-top: 18px;
+    /*padding-right: 5px;*/
+    text-align: right;
+    font-size: 16px;
     display: inline-block;
     transition: 250ms; }
+    .search-container aside img {
+      width: 25px;
+      height: 25px; }
   .search-container input {
     width: 70%;
     height: 60px;
@@ -294,7 +314,14 @@ header {
 /* Search Dropdown */
 .search-dropdown {
   width: 380px;
-  left: 0; }
+  left: 0;
+  postion: relative; }
+  .search-dropdown i {
+    position: absolute;
+    top: -5px;
+    left: 15px;
+    font-size: 16px;
+    color: #f8f8f8; }
 
 .search-span {
   background: #fff;
@@ -348,20 +375,20 @@ header {
 
 .banner-slogan {
   position: relative;
-  width: 1000px;
+  width: 800px;
   margin: 0 auto;
   text-align: center;
   padding-bottom: 15px;
   margin-top: 25px; }
   .banner-slogan p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 30px;
     font-weight: 100;
     color: #e5e5e5;
     display: block;
     vertical-align: top; }
   .banner-slogan h1 {
-    font-size: 28px;
+    font-size: 24px;
     line-height: 42px;
     font-weight: 300;
     font-style: italic;
@@ -407,7 +434,8 @@ header {
     vertical-align: top;
     padding-top: 2px;
     padding-left: 5px;
-    text-shadow: 1px 1px 5px #555; }
+    text-shadow: 1px 1px 5px #555;
+    opacity: .8; }
   .banner-logo p {
     display: block;
     font-size: 12px;
@@ -436,7 +464,8 @@ header {
   padding: 30px;
   border-top: 0;
   text-align: center;
-  background: transparent; }
+  background: transparent;
+  margin-bottom: 50px; }
   .copyright-info h1 {
     font-size: 12px;
     color: #555;
@@ -448,39 +477,76 @@ header {
     font-weight: 400;
     padding-top: 10px; }
 
+.copyright-info-light {
+  width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  border-top: 0;
+  text-align: center;
+  background: transparent;
+  margin-bottom: 50px; }
+  .copyright-info-light h1 {
+    font-size: 12px;
+    color: #f0f0f0;
+    font-weight: 300; }
+  .copyright-info-light p {
+    display: block;
+    font-size: 12px;
+    color: #f0f0f0;
+    font-weight: 400;
+    padding-top: 10px; }
+
 /* SEARCH CONTAINER */
 .college-search {
   height: auto;
   width: 100%;
   font-weight: 300;
-  transition: 250ms;
   position: relative;
   right: 0;
   border-top: 0;
-  border-bottom: 0;
-  margin-top: 10px; }
-  .college-search a li {
-    width: 100%;
-    padding: 19px;
-    text-align: left;
-    background: #222; }
-    .college-search a li:hover {
-      background: #252525; }
-  .college-search a li span {
+  /*border-bottom: 2px solid #000;*/
+  box-shadow: 0 0 30px -15px #000; }
+  .college-search a aside,
+  .college-search a section {
     display: inline-block;
     vertical-align: top;
-    font-size: 14px;
-    color: #e5e5e5;
-    width: 10%;
-    padding-top: 3px;
-    text-align: center; }
-  .college-search a li h1 {
-    display: inline-block;
-    vertical-align: top;
-    font-size: 16px;
-    color: #e5e5e5;
-    width: 90%;
-    font-weight: 300; }
+    height: 60px;
+    background: #f8f8f8;
+    transition: 250ms; }
+  .college-search a:hover aside,
+  .college-search a:hover section {
+    background: #0277BD; }
+    .college-search a:hover aside h1,
+    .college-search a:hover section h1 {
+      color: #fff; }
+  .college-search a aside {
+    width: 15%;
+    padding: 10px;
+    background: #f8f8f8; }
+    .college-search a aside img {
+      width: 40px;
+      height: 40px; }
+    .college-search a aside:hover {
+      /*background: $secondary-color-medium;*/ }
+  .college-search a section {
+    width: 85%;
+    padding: 15px 10px;
+    text-align: left; }
+    .college-search a section span {
+      display: inline-block;
+      vertical-align: top;
+      font-size: 14px;
+      color: #e5e5e5;
+      width: 10%;
+      padding-top: 3px;
+      text-align: center; }
+    .college-search a section h1 {
+      display: inline-block;
+      vertical-align: top;
+      font-size: 14px;
+      color: #333;
+      width: 90%;
+      font-weight: 400; }
 
 /* Login Container */
 .slideout-container {
@@ -937,7 +1003,7 @@ header {
   background: #f8f8f8;
   padding: 20px 0 0; }
   .school-info-header h1 {
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
     font-weight: 700;
     text-transform: uppercase;
@@ -949,7 +1015,7 @@ header {
   background: #fff;
   /*border: 1px solid #dfdfdf;*/
   border-top: 0;
-  height: 308px; }
+  height: 310px; }
   .school-info-list ul {
     list-style: none;
     padding-left: 0; }
@@ -957,8 +1023,11 @@ header {
     width: 100%;
     padding: 20px 25px;
     display: inline-block;
+    background: #fff;
     /*border-bottom: 1px solid #f8f8f8;*/
     cursor: pointer; }
+  .school-info-list li:nth-child(even) {
+    background: #f8f8f8 !important; }
   .school-info-list li:last-child {
     border-bottom: 0; }
   .school-info-list span {
@@ -1303,6 +1372,31 @@ header {
 
 .school-stats2 {
   border-bottom: 0; }
+
+.school-options-dropdown {
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #dfdfdf; }
+  .school-options-dropdown section,
+  .school-options-dropdown aside {
+    display: inline-block;
+    vertical-align: top;
+    height: 35px; }
+  .school-options-dropdown section {
+    text-align: left;
+    padding: 7px 15px 0; }
+    .school-options-dropdown section h1 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #333; }
+  .school-options-dropdown aside {
+    padding: 10px 15px 0;
+    background: #f8f8f8;
+    /*border-left: 1px solid #d8d8d8;*/
+    border-radius: 0 3px 3px 0px; }
+    .school-options-dropdown aside i {
+      font-size: 14px;
+      color: #ccc; }
 
 .school-options1 {
   width: 65%;
@@ -1812,7 +1906,7 @@ header {
 
 /* Footer */
 /* Media Queries */
-@media screen and (min-width: 350px) and (max-width: 500px) {
+@media screen and (min-width: 350px) and (max-width: 700px) {
   header {
     margin-top: 0;
     display: none; }
@@ -1821,20 +1915,21 @@ header {
     width: 100%;
     padding: 0; }
 
-  .header-top-left {
+  .header-left {
     width: 100%;
     padding-top: 30px;
     text-align: center; }
-    .header-top-left img {
+    .header-left img {
       display: block;
       width: 50px;
       margin: 0 auto; }
-    .header-top-left div {
+    .header-left div {
       margin-top: 10px; }
-    .header-top-left h1 {
+    .header-left h1 {
       padding-left: 0; }
 
-  .header-right {
+  .header-right,
+  .homepage-right {
     width: 100%; }
 
   .top-header-wrap {
@@ -1954,8 +2049,9 @@ header {
 
   .school-stats {
     width: 100%;
-    padding: 30px 20px 100px;
-    margin-top: -10px; }
+    padding: 30px 20px 30px;
+    margin-top: -10px;
+    margin-bottom: 50px; }
     .school-stats li {
       width: 100%; }
       .school-stats li section {
@@ -2008,6 +2104,10 @@ header {
       height: auto;
       margin-bottom: 15px; }
     .banner-logo div {
-      display: block; } }
+      display: block; }
+
+  .copyright-info {
+    width: 100%;
+    padding-bottom: 100px; } }
 
 /*# sourceMappingURL=main.css.map */
