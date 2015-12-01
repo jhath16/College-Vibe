@@ -1009,35 +1009,6 @@ CollegeVibe.Views.Map = Parse.View.extend({
     this.infoWindow = new google.maps.InfoWindow({
       content:null
     });
-
-    _.each(schoolView.hotelInformation, function (i) {
-      var newMarker = new google.maps.Marker({
-        position:{lat:i.latitude, lng: i.longitude},
-        map:null,
-        title:i.name
-      });
-      newMarker.addListener('click', function () {
-        self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
-        self.infoWindow.setContent("Hey");
-        self.infoWindow.open(self.map);
-      });
-      self.hotelMarkers.push(newMarker);
-    });
-
-    _.each(schoolView.foodInformation, function (i) {
-      var newMarker = new google.maps.Marker({
-        position:{lat:i.latitude, lng: i.longitude},
-        map:null,
-        title:i.name
-      });
-
-      newMarker.addListener('click', function () {
-        self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
-        self.infoWindow.setContent("<div style='font-size:16px;'>Hey</div>");
-        self.infoWindow.open(self.map);
-      });
-      self.foodMarkers.push(newMarker);
-    });
   },
 
   events: {
@@ -1064,7 +1035,9 @@ CollegeVibe.Views.Map = Parse.View.extend({
 
     marker.addListener('click', function () {
       self.infoWindow.setPosition({lat:e.get('latitude'), lng:e.get('longitude')});
-      self.infoWindow.setContent(e.get('name') || e.get('schoolname')); //get the name of whatever it is we are passed
+      var name = e.get('name') || e.get('schoolname');
+      e.set('name',name);
+      self.infoWindow.setContent(_.template($('#map-popup-view').text())(e.attributes)); //get the name of whatever it is we are passed
       self.infoWindow.open(self.map);
     });
   },
@@ -1095,7 +1068,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
 
           marker.addListener('click', function () {
             self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
-            self.infoWindow.setContent(i.name); 
+            self.infoWindow.setContent(_.template($('#map-popup-view').text())(i)); 
             self.infoWindow.open(self.map);
           });
 
