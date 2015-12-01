@@ -1109,6 +1109,26 @@ header {
   margin-bottom: 10px;
   margin-top: 0px; }
 
+.d3-map-popup section h1 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  display: block; }
+.d3-map-popup section p {
+  font-size: 12px;
+  font-weight: 300;
+  color: #333; }
+
+.google-map-popup section h1 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  display: block; }
+.google-map-popup section p {
+  font-size: 12px;
+  font-weight: 300;
+  color: #333; }
+
 .food-radius,
 .hotel-radius {
   display: inline-block;
