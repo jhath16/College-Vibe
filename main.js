@@ -301,6 +301,13 @@ CollegeVibe.Views.Index = Parse.View.extend({
     this.$el.html(this.template());
     $('#application').append(this.el);
     return this;
+
+    function toggleHandler(toggle) {
+        toggle.addEventListener( "click", function(e) {
+          e.preventDefault();
+          (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+        });
+      }
   }
 });
 
@@ -438,6 +445,8 @@ CollegeVibe.Views.School = Parse.View.extend({
     $('#nav-toggle').click(function(){
       $('.school-right-col').toggleClass('school-right-col-shift');
     });
+
+
   },
 
   events: {
@@ -1130,6 +1139,24 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
   render: function () {
     this.$el.html(this.template);
     return this;
+
+
+
+      var toggles = document.querySelectorAll(".c-hamburger");
+
+      for (var i = toggles.length - 1; i >= 0; i--) {
+        var toggle = toggles[i];
+        toggleHandler(toggle);
+      };
+
+      function toggleHandler(toggle) {
+        toggle.addEventListener( "click", function(e) {
+          e.preventDefault();
+          (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+        });
+      }
+
+
   },
 
   events: {
