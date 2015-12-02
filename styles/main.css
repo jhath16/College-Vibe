@@ -1858,7 +1858,8 @@ header {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  padding: 100px 30px; }
+  padding: 100px 30px;
+  position:relative; }
 
 #circles, #circles a:visited {
   fill: #58AE8C;
@@ -2129,5 +2130,55 @@ header {
   .copyright-info {
     width: 100%;
     padding-bottom: 100px; } }
+
+    #bubble {
+    position: absolute;
+    background: url('http://www.collegevibe.com/wp-content/themes/vibe/img/homepage/bubble.svg') no-repeat;
+    display: block;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    opacity: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 49;
+    -webkit-transform: translateZ(0);
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    }
+
+    #bubble.active {
+      opacity: 1;
+      z-index: 51;
+      width: 151px;
+      height: 70px;
+    }
+
+    #bubble.active h1,
+    #bubble.active p {
+      opacity: 1;
+      display: block;
+    }
+
+    #bubble h1 p {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translate(-50%);
+      -moz-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+      transform: translate(-50%);
+    }
+
+    #bubble h1 {
+      font: 12px/1em "Gotham SSm A", "Gotham SSm B";
+      font-weight: 800;
+      font-style: normal;
+      text-transform: uppercase;
+      margin-top: 7px;
+      color: #333333;
+      display: none;
+    }
 
 /*# sourceMappingURL=main.css.map */

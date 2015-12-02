@@ -76,9 +76,9 @@ function d3Stuff() {
         .attr("class", "icon")
         .on("mouseover", function(d){
             // console.log(d);  ****This is all the data - ie: Name, lat, long, index, state, etc..
-            // return mapSearch(d.id);
+            return mapSearch(d.id);
         }).on("mouseout", function(){
-            // return hide_bubble();
+            return hide_bubble();
         })
 
   var	mapSearch = function(id) {
@@ -112,7 +112,7 @@ function d3Stuff() {
                         "top": bubbleTop
                     });
 
-        bubble.html("<h1>" + school_data.name + "</h1>" + "<p>" + school_data.city + ", " + school_data.state + "</p>")
+        bubble.html("<h1>" + school_data.get('schoolname') + "</h1>" + "<p>" + school_data.get('city') + ", " + school_data.get('state') + "</p>")
             .attr("class", function(d) { return school_data.letter; });
         bubble.addClass("active");
       }
