@@ -58,6 +58,12 @@ function d3Stuff() {
   var circles = svg.append("svg:g")
             .attr("id", "circles");
 
+  var mouseX,mouseY;
+  document.addEventListener('mousemove', function (i) {
+    mouseX = i.x + document.body.scrollLeft;
+    mouseY = i.y + document.body.scrollTop;
+  });
+
   var g = d3.selectAll("g");
 
   var query = new Parse.Query('Colleges').limit(1000);
@@ -74,7 +80,7 @@ function d3Stuff() {
         .attr("cy", function(d,i) { return d.attributes.mapLat; })
         .attr("r", 4)
         .attr("class", "icon")
-        .on("mouseover", function(d){
+        .on("mouseover", function(d,e,f){
             // console.log(d);  ****This is all the data - ie: Name, lat, long, index, state, etc..
             return mapSearch(d.id);
         }).on("mouseout", function(){
@@ -94,26 +100,26 @@ function d3Stuff() {
         var pNode = c.node().parentNode;
         pNode.setAttribute("class", "hover");
         // get location on page of school on map
-        var bcr = c.node().getBoundingClientRect();
 
-        var bubbleTop = "",
-          bubbleLeft = "";
+        var offset = $(c.node()).offset();
+        var bubbleLeft,
+            bubbleTop
 
           if (!zoomed) {
-            bubbleTop = bcr.top - 70 + 'px',
-            bubbleLeft = bcr.left - 69 + 'px';
+            bubbleTop = offset.top - 70 + 'px';
+            bubbleLeft = offset.left - 69 + 'px';
           } else {
-            bubbleTop = bcr.top - 70 + 'px',
-            bubbleLeft = bcr.left - 52 + 'px';
+            bubbleTop = offset.top - 70 + 'px',
+            bubbleLeft = offset.left - 52 + 'px';
           }
+
 
             bubble.css({
                         "left": bubbleLeft,
                         "top": bubbleTop
                     });
 
-        bubble.html("<h1>" + school_data.get('schoolname') + "</h1>" + "<p>" + school_data.get('city') + ", " + school_data.get('state') + "</p>")
-            .attr("class", function(d) { return school_data.letter; });
+        bubble.html("<h1>" + school_data.get('schoolname') + "</h1>" + "<p>" + school_data.get('city') + ", " + school_data.get('state') + "</p>");
         bubble.addClass("active");
       }
     }
@@ -204,45 +210,7 @@ function d3Stuff() {
     }
 // --- End SVG ---
 
-
-/* Map Hover */
-
-var swapMap = function(image) {
-  var path = temp + '/map/images/';
-  $('#College-Vibe-Map').attr('src', path+image);
-}
-  // Map hover for scrolling list
-  $('.school-list').each( function() {
-    var schoolName = $(this).text().replace(/[ ]/g,'_');
-    $(this).hover(
-      function() {
-        swapMap('map_'+schoolName+'.png');
-      }, function() {
-        swapMap('map.png');
-      }
-    );
-  });
-
-  var map = $("#map");
-  $(map).find('area').each( function() {
-    var altVal = $(this).attr('alt').replace(/[ ]/g,'_');
-    var href = $(this).attr('href');
-      $(this).hover(
-      function() {
-        swapMap('map_'+altVal+'.png');
-      }, function() {
-        swapMap('map.png');
-         }
-      );
-      $(this).on( 'click', function() {
-        if (href)
-        {
-          $(this).unbind('hover');
-          window.location = href;
-        }
-        return false;
-      });
-  });
+ 
 }
 
 //Removes a view from the global renderedViews array
