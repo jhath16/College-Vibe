@@ -110,7 +110,7 @@ function d3Stuff() {
             bubbleLeft = offset.left - 69 + 'px';
           } else {
             bubbleTop = offset.top - 70 + 'px',
-            bubbleLeft = offset.left - 52 + 'px';
+            bubbleLeft = offset.left - 54 + 'px';
           }
 
 
