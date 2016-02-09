@@ -1,7 +1,7 @@
 // 'use strict'; why use this?
 
 //Initialize Parse
-
+var FirebaseRef = new Firebase("https://college-vibe.firebaseio.com/");
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
 
 function getNumbers (phoneNumber) {
@@ -210,7 +210,7 @@ function d3Stuff() {
     }
 // --- End SVG ---
 
- 
+
 }
 
 //Removes a view from the global renderedViews array
@@ -448,27 +448,22 @@ CollegeVibe.Views.School = Parse.View.extend({
     } else {
       $('.school-info img').attr('src', this.instaLogoUrl);
     }
-    $('.header-breadcrumbs p')[1].innerText = "Info";
   },
 
   restaurantsTab: function () {
     this.subView = new CollegeVibe.Views.Restaurants(this.options);
-    $('.header-breadcrumbs p')[1].innerText = "Restaurants";
   },
 
   hotelsTab: function () {
     this.subView = new CollegeVibe.Views.Hotels(this.options);
-    $('.header-breadcrumbs p')[1].innerText = "Hotels";
   },
 
   sportsTab: function () {
     this.subView = new CollegeVibe.Views.Sports(this.options);
-    $('.header-breadcrumbs p')[1].innerText = "Sports";
   },
 
   galleryTab: function () {
     this.subView = new CollegeVibe.Views.Gallery(this.options);
-    $('.header-breadcrumbs p')[1].innerText = "Gallery";
   },
 
   //necessary because we are calling the mapTab method directly from the restaurant route
@@ -480,7 +475,6 @@ CollegeVibe.Views.School = Parse.View.extend({
 
   mapTab: function (e) {
     this.subView = new CollegeVibe.Views.Map(this.options,e);
-    $('.header-breadcrumbs p')[1].innerText = "Map";
   },
 
   remove: function () {
@@ -1036,7 +1030,7 @@ CollegeVibe.Views.Map = Parse.View.extend({
 
           marker.addListener('click', function () {
             self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
-            self.infoWindow.setContent(_.template($('#map-popup-view').text())(i)); 
+            self.infoWindow.setContent(_.template($('#map-popup-view').text())(i));
             self.infoWindow.open(self.map);
           });
 
@@ -1180,8 +1174,8 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
 
 /* * * * * * * * *     MODELS       * * * * * * * * * * * * * */
 
-CollegeVibe.Models.College = Parse.Object.extend({
-  className: 'testCollege',
+CollegeVibe.Models.College = Backbone.Model.extend({
+  defaults: {schoolname:'No school name given.'}
 });
 
 CollegeVibe.Models.User = Parse.Object.extend({
@@ -1190,18 +1184,13 @@ CollegeVibe.Models.User = Parse.Object.extend({
 
 /* * * * * * * *         COLLECTIONS        * * * * * * * * */
 
-CollegeVibe.Collections.Colleges = Parse.Collection.extend({
+CollegeVibe.Collections.Colleges = Backbone.Firebase.Collection.extend({
   model:CollegeVibe.Models.College,
 
-  query: new Parse.Query("Colleges")
-        .select('schoolname')
-        .select('abbreviation')
-        .select('slug')
-        .limit(1000), //only bring the list of schoolnames back with their abbreviation and slug
+  url:'https://college-vibe.firebaseio.com/Colleges',
 
   initialize: function () {
     console.log('Colleges Collection has been created and fetched');
-    this.fetch(this.query);
   }
 });
 
