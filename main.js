@@ -439,15 +439,15 @@ CollegeVibe.Views.School = Parse.View.extend({
   statisticsTab: function () {
     var self = this;
     this.subView = new CollegeVibe.Views.Statistics(this.options);
-    if (this.instaLogoUrl === null) {
-      Parse.Cloud.run('instaLogos', {id: this.model.get('instaId')})
-      .then(function (e) {
-        self.instaLogoUrl = e;
-        $('.school-info img').attr('src', e);
-      });
-    } else {
-      $('.school-info img').attr('src', this.instaLogoUrl);
-    }
+    // if (this.instaLogoUrl === null) {
+    //   Parse.Cloud.run('instaLogos', {id: this.model.get('instaId')})
+    //   .then(function (e) {
+    //     self.instaLogoUrl = e;
+    //     $('.school-info img').attr('src', e);
+    //   });
+    // } else {
+    //   $('.school-info img').attr('src', this.instaLogoUrl);
+    // }
   },
 
   restaurantsTab: function () {
@@ -1134,7 +1134,6 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
 
     //this entire conditional only has the overall job of appending to the dropdown
 		if (queryString != '') {
-      var dataArray = collegeCollection;
 			//Define the filter callback
 
 			function filterFunction (i) {
@@ -1152,7 +1151,7 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
 
 			//filter through the data provided
 
-			var matchedQuery = collegeCollection.filter(filterFunction);
+			var matchedQuery = CollegeVibe.collegeCollection.filter(filterFunction);
 
 			//matchedQuery now has the array of matching objects
 
@@ -1174,13 +1173,7 @@ CollegeVibe.Partials.SearchDropdown = Parse.View.extend({
 
 /* * * * * * * * *     MODELS       * * * * * * * * * * * * * */
 
-CollegeVibe.Models.College = Backbone.Model.extend({
-  defaults: {schoolname:'No school name given.'}
-});
-
-CollegeVibe.Models.User = Parse.Object.extend({
-  className: 'User',
-})
+CollegeVibe.Models.College = Backbone.Model;
 
 /* * * * * * * *         COLLECTIONS        * * * * * * * * */
 
@@ -1217,13 +1210,27 @@ var Router = Backbone.Router.extend({
   schoolRoute: function (slug) {
     removeAllViews();
     console.log('schoolRoute fired with the slug: ' + slug);
-    /* This will take the modelName and query parse for the first object
-       that matches its slug name. Doesn't depend on the global collection of
-       collegeCollection to be fetched beforehand */
-    var query = new Parse.Query("Colleges").equalTo("slug",slug);
-    query.first().then(function (e) {
-      CollegeVibe.SchoolView = new CollegeVibe.Views.School({model:e});
-    });
+
+    function initializeRoute() {
+      var matchedSchool = CollegeVibe.collegeCollection.filter(function (school) {
+        return school.get('slug') === slug;
+      })[0];
+      console.log(matchedSchool);
+      CollegeVibe.SchoolView = new CollegeVibe.Views.School({model:matchedSchool});
+    }
+
+    /* Debouncing this function lets us listen to the add event and fire this
+    initialization function 1ms after the last one is loaded */
+    
+    var debouncedInitializeRoute = _.debounce(initializeRoute, 1);
+
+    if (CollegeVibe.collegeCollection.length === 0) { // if we don't have the data yet
+      this.listenTo(CollegeVibe.collegeCollection, 'add', function (e) {
+        debouncedInitializeRoute();
+      });
+    } else {
+      initializeRoute();
+    }
   },
 
   businessRoute : function (id) {
@@ -1245,7 +1252,7 @@ var Router = Backbone.Router.extend({
 
 $(document).ready(function () {
   window.renderedViews = []; //Put into namespacing...
-  window.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
+  CollegeVibe.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
   CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
 });
