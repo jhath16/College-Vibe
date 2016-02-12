@@ -1,6 +1,6 @@
 // 'use strict'; why use this?
 
-//Initialize Parse
+//Initialize Firebase
 var FirebaseRef = new Firebase("https://college-vibe.firebaseio.com/");
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
 
@@ -340,12 +340,9 @@ CollegeVibe.Views.Login = Parse.View.extend({
   login: function () {
     var email = $('.login-container input')[0].value;
     var password = $('.login-container input')[1].value;
-    Parse.User.logIn(email, password, {
-      success: function (data) {
-        //Successfully logged in! Go do things
-      },
-      error: function (user, error) {
-        alert(error.message);
+    FirebaseRef.authWithPassword({email:email, password:password}, function (error, authData) {
+      if (error) {
+        alert('Error logging in.');
       }
     });
   },
@@ -357,15 +354,19 @@ CollegeVibe.Views.Login = Parse.View.extend({
     var confirmPassword = $('.register-container input')[3].value;
 
     if (password === confirmPassword) {
-      Parse.User.signUp(email, password, {email: email, name: name},
-      {
-        success: function (data) {
-          //successfully registered new user, now go about the app.
-        },
-        error: function (user, error) {
-          alert(error.message);
+      FirebaseRef.createUser({email:email, password:password}, function (error, authData) {
+        if(error) {
+          console.log(error);
+          alert("Error signing up");
+        } else {
+          FirebaseRef.authWithPassword({email:email, password:password}, function (error, authData) {
+            if (error) {
+              alert("Error signing in");
+              console.log(error);
+            }
+          });
         }
-      })
+      });
     } else {
       alert('The two passwords do not match');
     }
@@ -1215,13 +1216,12 @@ var Router = Backbone.Router.extend({
       var matchedSchool = CollegeVibe.collegeCollection.filter(function (school) {
         return school.get('slug') === slug;
       })[0];
-      console.log(matchedSchool);
       CollegeVibe.SchoolView = new CollegeVibe.Views.School({model:matchedSchool});
     }
 
     /* Debouncing this function lets us listen to the add event and fire this
     initialization function 1ms after the last one is loaded */
-    
+
     var debouncedInitializeRoute = _.debounce(initializeRoute, 1);
 
     if (CollegeVibe.collegeCollection.length === 0) { // if we don't have the data yet
