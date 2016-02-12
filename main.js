@@ -1248,11 +1248,22 @@ var Router = Backbone.Router.extend({
   }
 });
 
-//Glue Code
+//Initialize Code
 
 $(document).ready(function () {
   window.renderedViews = []; //Put into namespacing...
-  CollegeVibe.collegeCollection = new CollegeVibe.Collections.Colleges(); //Put into namespacing...
+  CollegeVibe.collegeCollection = new CollegeVibe.Collections.Colleges();
+  CollegeVibe.currentUser = FirebaseRef.getAuth();
+  FirebaseRef.onAuth(function (authData) {
+    console.log("Auth has changed");
+    if(authData) {
+      console.log('User is now logged in');
+      CollegeVibe.currentUser = authData;
+    } else {
+      console.log('User is no longer logged in');
+      CollegeVibe.currentUser = null;
+    }
+  });
   CollegeVibe.Router = new Router(); //instantiate the router
   Backbone.history.start(); //start watching hash changes
 });
