@@ -2,3 +2,4 @@
 # So we can keep our API key secret from GitHub
 parse/
 .sass-cache/*
+lambda/*

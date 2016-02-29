@@ -220,7 +220,7 @@ function removeViewFromRenderedViews (view) {
   var cid = view.cid;
   var index = _.findIndex(renderedViews, function (n) {return n.cid == cid});
   if(index < 0) {
-    throw new Error("ATTEMPTING TO REMOVE VIEW THAT DOESN'T EXIST!!!!!!!!!!!!");
+    throw new Error("ATTEMPTING TO REMOVE VIEW THAT DOESN'T EXIST!");
   }
   renderedViews.splice(index,1); //remove from the array
   if (view.subViews) {
@@ -905,13 +905,6 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
   initialize: function (schoolView) {
     this.render();
     this.schoolView = schoolView;
-    var t1 = this.schoolView.model.get('instaHash1');
-    var t2 = this.schoolView.model.get('instaHash2');
-    var t3 = this.schoolView.model.get('instaHash3');
-    var tags = [t1,t2,t3];
-    var tags = tags.filter(function (e) {
-      return e ? true : false; //remove the falsy values(undefined in this case);
-    });
 
     var self = this;
 
@@ -919,23 +912,20 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
 
     function postInstaImages () {
       _.each(self.schoolView.instagramInformation, function (i){
-        // var imageElement = document.createElement('img');
-        // $(imageElement).attr('src',i.images.low_resolution.url);
-        // $('.instagram-gallery ul').append(imageElement);
         $('.instagram-gallery ul').append(imageTemplate(i));
       });
     };
 
     if(!this.schoolView.instagramInformation) {
-      console.log(tags);
-      if(tags.length > 0) {
-        Parse.Cloud.run('instagramTags', {tags:tags})
-        .then(function (e) {
-          console.log(e);
-          self.schoolView.instagramInformation = e;
-          postInstaImages();
-        });
-      }
+      FirebaseRef.child('Instagram/' + schoolView.model.get('schoolname')).once('value', function (snapshot) {
+        self.schoolView.instagramInformation = snapshot.val().data;
+        postInstaImages();
+      });
+      // Parse.Cloud.run('instagramTags', {tags:tags})
+      // .then(function (e) {
+      //   self.schoolView.instagramInformation = e;
+      //   postInstaImages();
+      // });
     } else {
       postInstaImages();
     }
