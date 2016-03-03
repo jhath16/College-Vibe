@@ -1,5 +1,13 @@
 // 'use strict'; why use this?
 
+AWS.config.update({
+  accessKeyId: 'AKIAJGH4RKBKTFJGA6RA',
+  secretAccessKey: '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',
+  region:'us-west-2'
+});
+
+var lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
+
 //Initialize Firebase
 var FirebaseRef = new Firebase("https://college-vibe.firebaseio.com/");
 Parse.initialize("iqRd6LODNgTmbMv1fMMsmSblC2qWK6LFJCkgeyF2", "NItnQMZsdy9LiQlla3OZFgiQQ1TYrBCncyhIrp52");
@@ -492,12 +500,19 @@ CollegeVibe.Views.Hotels = Parse.View.extend({
 
     if(!this.schoolView.hotelInformation) { //if we don't have the info yet
 
-      Parse.Cloud.run('findNearHotels', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
-      .then(function (e) {
-        self.schoolView.hotelInformation = e; //give the info back to the parent
-        console.log(e);
-        self.addPageNumbers();
-        self.appendPage(1);
+      var coords = {
+        latitude: this.schoolView.model.get('latitude'),
+        longitude: this.schoolView.model.get('longitude')
+      };
+
+      lambda.invoke({FunctionName: "pullLocalHotels", Payload: JSON.stringify(coords)}, function(err, data) {
+        if(!err) {
+          console.log(JSON.parse(data.Payload));
+          var hotelData = JSON.parse(data.Payload);
+          self.schoolView.hotelInformation = hotelData;
+          self.addPageNumbers();
+          self.appendPage(1);
+        }
       });
     } else { //if we already have the hotel info for the client
       self.addPageNumbers();
@@ -569,12 +584,19 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
 
     if(!this.schoolView.foodInformation) { //if we don't have the info yet
 
-      Parse.Cloud.run('findNearRestaurants', {latitude:this.schoolView.model.get('latitude'), longitude:this.schoolView.model.get('longitude')})
-      .then(function (e) {
-        self.schoolView.foodInformation = e; //give the info back to the parent
-        console.log(e);
-        self.addPageNumbers();
-        self.appendPage(1);
+      var coords = {
+        latitude: this.schoolView.model.get('latitude'),
+        longitude: this.schoolView.model.get('longitude')
+      };
+
+      lambda.invoke({FunctionName: "pullNearRestaurants", Payload: JSON.stringify(coords)}, function(err, data) {
+        if(!err) {
+          console.log(JSON.parse(data.Payload));
+          var restaurantData = JSON.parse(data.Payload);
+          self.schoolView.foodInformation = restaurantData;
+          self.addPageNumbers();
+          self.appendPage(1);
+        }
       });
     } else { //if we already have the hotel info for the client
       self.addPageNumbers();
@@ -644,18 +666,25 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.emptyPageNumbers();
     this.updateHeader(category, this.schoolView.model.get('schoolname'));
 
-    Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
-    .then(function (e) {
-      console.log(e);
-      self.categoryResults = e; //store the information in this view
-      var results = e; //for easier reference here
+    var options = {
+      latitude: latitude,
+      longitude: longitude,
+      category: category
+    };
 
-      if (results.length == 0) { //if the search doesn't bring anything back
-        appendToFoodList("<div class='no-results'>No results found</div>");
-        self.categorySearchIsActive = false;
-      } else {
-        self.addPageNumbers(); //Put the numbers at the bottom
-        self.appendPage(1); // Put the first page of information in there.
+    lambda.invoke({FunctionName: "restaurantCategorySearch", Payload: JSON.stringify(options)}, function(err, data) {
+      if(!err) {
+        var results = JSON.parse(data.Payload);
+        console.log(results);
+        self.categoryResults = results; //store the information in this view
+
+        if (results.length == 0) { //if the search doesn't bring anything back
+          appendToFoodList("<div class='no-results'>No results found</div>");
+          self.categorySearchIsActive = false;
+        } else {
+          self.addPageNumbers(); //Put the numbers at the bottom
+          self.appendPage(1); // Put the first page of information in there.
+        }
       }
     });
   },
@@ -712,20 +741,28 @@ CollegeVibe.Views.Restaurants = Parse.View.extend({
     this.updateHeader(category, schoolName);
 
 
-    var latitude = this.schoolView.model.get('latitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('latitude'))
-    var longitude = this.schoolView.model.get('longitude'); //should make this accessible throughout the whole view (this.latitude = this.schoolView.model.get('longitude'))
-    Parse.Cloud.run('restaurantCategorySearch', {latitude:latitude, longitude:longitude,category:category})
-    .then(function (e) {
-      console.log(e);
-      self.categoryResults = e; //store the information in this view
-      var results = e; //for easier reference here
+    var latitude = this.schoolView.model.get('latitude');
+    var longitude = this.schoolView.model.get('longitude');
 
-      if (results.length == 0) { //if the search doesn't bring anything back
-        self.appendToFoodList("<div class='no-results'>No results found</div>");
-        self.categorySearchIsActive = false;
-      } else {
-        self.addPageNumbers(); //Put the numbers at the bottom
-        self.appendPage(1); // Put the first page of information in there.
+    var options = {
+      latitude: latitude,
+      longitude: longitude,
+      category: category
+    };
+
+    lambda.invoke({FunctionName: "restaurantCategorySearch", Payload: JSON.stringify(options)}, function(err, data) {
+      if(!err) {
+        var results = JSON.parse(data.Payload);
+        console.log(results);
+        self.categoryResults = results; //store the information in this view
+
+        if (results.length == 0) { //if the search doesn't bring anything back
+          appendToFoodList("<div class='no-results'>No results found</div>");
+          self.categorySearchIsActive = false;
+        } else {
+          self.addPageNumbers(); //Put the numbers at the bottom
+          self.appendPage(1); // Put the first page of information in there.
+        }
       }
     });
   },
@@ -921,15 +958,9 @@ CollegeVibe.Views.Gallery = Parse.View.extend({
         self.schoolView.instagramInformation = snapshot.val().data;
         postInstaImages();
       });
-      // Parse.Cloud.run('instagramTags', {tags:tags})
-      // .then(function (e) {
-      //   self.schoolView.instagramInformation = e;
-      //   postInstaImages();
-      // });
     } else {
       postInstaImages();
     }
-
   },
 
   render: function() {
@@ -1002,34 +1033,40 @@ CollegeVibe.Views.Map = Parse.View.extend({
     var parseFunction;
 
     if (e.target.name === 'hotel') {
-      parseFunction = "findNearHotels";
+      parseFunction = "pullLocalHotels";
     } else {
-      parseFunction = "findNearRestaurants";
+      parseFunction = "pullNearRestaurants";
     }
 
-    if (markerArray.length === 0) {
-      Parse.Cloud.run(parseFunction, {latitude:self.schoolView.model.get('latitude'), longitude: self.schoolView.model.get('longitude')})
-      .then(function (e) {
-        console.log(e);
-        self.schoolView[targetName + "Information"] = e;
+    if (markerArray.length == 0) {
+      var coords = {
+        latitude: self.schoolView.model.get('latitude'),
+        longitude: self.schoolView.model.get('longitude')
+      };
 
-        _.each(self.schoolView[targetName + "Information"], function (i) {
-          var marker = new google.maps.Marker({
-            position: {lat:i.latitude, lng:i.longitude},
-            title:i.name,
+      lambda.invoke({FunctionName: parseFunction, Payload: JSON.stringify(coords)}, function (err, data) {
+        if(!err) {
+          var results = JSON.parse(data.Payload);
+          console.log(results);
+          self.schoolView[targetName + "Information"] = results;
+
+          _.each(results, function (i) {
+            var marker = new google.maps.Marker({
+              position: {lat:i.latitude, lng:i.longitude},
+              title:i.name,
+            });
+
+            marker.addListener('click', function () {
+              self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
+              self.infoWindow.setContent(_.template($('#map-popup-view').text())(i));
+              self.infoWindow.open(self.map);
+            });
+
+            markerArray.push(marker);
           });
-
-          marker.addListener('click', function () {
-            self.infoWindow.setPosition({lat:i.latitude, lng:i.longitude});
-            self.infoWindow.setContent(_.template($('#map-popup-view').text())(i));
-            self.infoWindow.open(self.map);
-          });
-
-          markerArray.push(marker);
-        });
-        self[targetName+"MarkerClusterer"] = new MarkerClusterer(self.map, markerArray, {maxZoom:17});
+          self[targetName+"MarkerClusterer"] = new MarkerClusterer(self.map, markerArray, {maxZoom:17});
+        }
       });
-
 
     } else {
       if(e.target.checked) {
