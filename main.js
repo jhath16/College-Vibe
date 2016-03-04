@@ -1239,25 +1239,16 @@ var Router = Backbone.Router.extend({
     removeAllViews();
     console.log('schoolRoute fired with the slug: ' + slug);
 
-    function initializeRoute() {
-      var matchedSchool = CollegeVibe.collegeCollection.filter(function (school) {
-        return school.get('slug') === slug;
-      })[0];
-      CollegeVibe.SchoolView = new CollegeVibe.Views.School({model:matchedSchool});
-    }
 
-    /* Debouncing this function lets us listen to the add event and fire this
-    initialization function 1ms after the last one is loaded */
-
-    var debouncedInitializeRoute = _.debounce(initializeRoute, 1);
-
-    if (CollegeVibe.collegeCollection.length === 0) { // if we don't have the data yet
-      this.listenTo(CollegeVibe.collegeCollection, 'add', function (e) {
-        debouncedInitializeRoute();
-      });
-    } else {
-      initializeRoute();
-    }
+    FirebaseRef.child('Colleges').orderByChild('slug').equalTo(slug).once('value', function (snapshot) {
+      var e = snapshot.val();
+      // essentially grabs the one nested object inside the wrapper object
+      // because the snapshot.val() is in this format:
+      // object {14: object} where '14' could be any number (corresponding to its index in Firebase)
+      var schoolObject = e[Object.keys(e)];
+      var schoolModel = new Backbone.Model(schoolObject);
+      CollegeVibe.SchoolView = new CollegeVibe.Views.School({model:schoolModel});
+    });
   },
 
   businessRoute : function (id) {
