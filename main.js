@@ -1210,6 +1210,7 @@ CollegeVibe.Collections.Colleges = Backbone.Firebase.Collection.extend({
 
   url:'https://college-vibe.firebaseio.com/Colleges',
 
+  // any way to just query for the 'slug' key?
   initialize: function () {
     console.log('Colleges Collection has been created and fetched');
   }
